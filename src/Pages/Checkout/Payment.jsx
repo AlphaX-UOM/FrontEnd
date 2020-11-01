@@ -1,9 +1,11 @@
 import React from "react";
+import CheckoutCardList from './ChekoutCardList';
 
-function payment() {
+function payment(props) {
+   
     return (
         <div>
-            This is the payment Page!
+            <CheckoutCardList data={props.location.data} />
         </div>
     );
 }

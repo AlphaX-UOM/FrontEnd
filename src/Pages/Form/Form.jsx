@@ -68,7 +68,7 @@ function form() {
                                 <span className="input-group-text" id="basic-addon1">Budget</span>
                             </div>
                             <input type="number" className="form-control" aria-label="Username"
-                                aria-describedby="basic-addon1" min="0.01" step="0.01" placeholder="0.00" />
+                                aria-describedby="basic-addon1" min="0" step="1" placeholder="0" />
                         </div>
                     </div>
                     <div className="col-lg-5"></div>
