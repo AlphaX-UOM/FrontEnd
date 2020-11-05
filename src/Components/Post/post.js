@@ -51,6 +51,7 @@ const post=()=>{
 
                     </div>
                     <div className="col-sm">
+                        <Link to="/post-tourguide" className="link textdec">
                         <div className="card cbground" style={{width: "15rem"}}>
 
                             <img src={Logo2} className="card-img-top" alt=""/>
@@ -63,8 +64,10 @@ const post=()=>{
                                 </p>
                             </div>
                         </div>
+                        </Link>
                     </div>
                     <div className="col-sm">
+                        <Link to="/post-event" className="link textdec">
                         <div className="card cbground " style={{width: "15rem"}}>
 
                             <img src={Logo3} className="card-img-top chotel" alt=""/>
@@ -77,9 +80,11 @@ const post=()=>{
                                 </p>
                             </div>
                         </div>
+                        </Link>
                     </div>
 
                 <div className="col-sm">
+                    <Link to="/post-hotel" className="link textdec">
                     <div className="card cbground" style={{width: "15rem"}}>
 
                         <img src={Logo4} className="card-img-top chotel" alt=""/>
@@ -92,6 +97,7 @@ const post=()=>{
                             </p>
                         </div>
                     </div>
+                    </Link>
                 </div>
                 </div>
             </div>
