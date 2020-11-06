@@ -15,7 +15,7 @@ function App() {
       <BrowserRouter>
       <Header />
       <Switch> 
-      <Route path='/result'> <ResultList /> </Route> 
+      <Route path='/result' component={ResultList} />
       <Route path='/thank'> <Thank /> </Route> 
       <Route path='/detailedresult' component={DetailedResult} />
       <Route path='/payment' component={Payment} />

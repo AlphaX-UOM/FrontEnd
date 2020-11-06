@@ -14,8 +14,8 @@ function chekoutCard(props) {
               </div>
               <div className="col-10">
               <h6>Name: {props.name}</h6>
-              <small>{props.description}</small><br/>
-              <h7>Price : {props.price}$</h7>
+              <h9>Units : {props.units}</h9><br/>
+              <h7>Total Price : {props.price}$</h7>
               </div>
           </div>
       </li>

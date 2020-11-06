@@ -78,7 +78,7 @@ function DetailedResultPage(props) {
                          </Card.Text>
                         </Card.Body>
                         <Card.Footer className="text-center">
-                        <Rating name="read-only" value={4} readOnly />
+                        <Rating name="read-only" value={5} readOnly />
     </Card.Footer>
                     </Card>
                     <Card>
@@ -91,7 +91,7 @@ function DetailedResultPage(props) {
                         </Card.Body>
                         <Card.Footer className="text-center">
                           
-                                   <Rating name="read-only" value={4} readOnly />
+                                   <Rating name="read-only" value={5} readOnly />
                             
                          </Card.Footer>
                     </Card>
@@ -104,7 +104,7 @@ function DetailedResultPage(props) {
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer className="text-center">
-                        <Rating name="read-only" value={4} readOnly />
+                        <Rating name="read-only" value={5} readOnly />
                         </Card.Footer>
                     </Card>
                     <Card bg="primary" text="purple" className="text-center p-3">
@@ -162,7 +162,7 @@ function DetailedResultPage(props) {
                             
                         </blockquote>
                         <Card.Footer className="text-center">
-                        <Rating name="read-only" value={4} readOnly />
+                        <Rating name="read-only" value={5} readOnly />
     </Card.Footer>
                     </Card>
                     <Card>
@@ -174,7 +174,7 @@ function DetailedResultPage(props) {
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer className="text-center">
-                        <Rating name="read-only" value={4} readOnly />
+                        <Rating name="read-only" value={5} readOnly />
     </Card.Footer>
                     </Card>
                 </CardColumns>

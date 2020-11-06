@@ -3,8 +3,8 @@ import React from 'react';
 function thank() {
     return (
         <div>
-            <div className="container-fluid" style={{ backgroundColor: "grey" }}>
-                <div class="card" style={{ height: '550px', width: '1000px',backgroundColor: "blue" }}>
+            <div className="container-fluid" style={{ backgroundColor: "#15ff00f" }}>
+                <div class="card shadow-lg" style={{ height: '550px', width: '1000px',backgroundColor: "#3277dd" }}>
                     <div className="row">
                         <div className="col-7">
                             <img class="card-img" src="http://exemplaryvoyages.com/images/srilanka-map.png" alt="Cardupper" style={{ height: '500px', width: '400px' }} />

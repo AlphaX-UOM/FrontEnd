@@ -11,6 +11,8 @@ function CheckoutCardList(props) {
     let event01Id = props.data.event01PlanId;
     let event02Id = props.data.event02PlanId;
     let hotelId = props.data.hotelPlanId;
+    let travellers = props.data.travellers;
+    let days = props.data.days;
 
     // console.log(tranId);
 
@@ -67,7 +69,7 @@ function CheckoutCardList(props) {
    }, [hotelId]);
 
 
-   let cart = (myevent01List.price+myevent02List.price+mytransportList.costPerDistance+mytourguideList.costPerDay);
+   let cart = ((myevent01List.price * travellers)+(myevent02List.price * travellers)+(mytransportList.costPerDistance)+(mytourguideList.costPerDay * days)+(myhotelList.price * days));
    let total = cart+20;
 
     return (
@@ -81,21 +83,24 @@ function CheckoutCardList(props) {
                                 key={myevent01List.eventId}
                                 name={myevent01List.eventName}
                                 description={myevent01List.otherDetails}
-                                price={myevent01List.price}
+                                price={(myevent01List.price * travellers)}
+                                units={travellers}
                                 />
 
                                 <CheckoutCard
                                 key={myevent02List.eventId}
                                 name={myevent02List.eventName}
                                 description={myevent02List.otherDetails}
-                                price={myevent02List.price}
+                                price={(myevent02List.price * travellers)}
+                                units={travellers}
                                  />
 
                                 <CheckoutCard 
                                 key={myhotelList.hotelId}
                                 name={myhotelList.hotelName}
                                 description={myhotelList.features}
-                                price={myhotelList.price}
+                                price={(myhotelList.price * days)}
+                                units={days}
                                 />
 
                                 <CheckoutCard 
@@ -103,13 +108,15 @@ function CheckoutCardList(props) {
                                 name={mytransportList.name}
                                 description={mytransportList.description}
                                 price={mytransportList.costPerDistance}
+                                units={'1 KM'}
                                 />
 
                                 <CheckoutCard 
                                 key={mytourguideList.guideId}
                                 name={mytourguideList.name}
                                 description={mytourguideList.languages}
-                                price={mytourguideList.costPerDay}
+                                price={(mytourguideList.costPerDay * days)}
+                                units={days}
                                 />
 
                             </ul>
@@ -120,26 +127,26 @@ function CheckoutCardList(props) {
                             <Card.Header className="text-center">Checkout</Card.Header>
                            <div className="container">
                                <div className="row">
-                                   <div className="col-9">
+                                   <div className="col-8">
                                        Cart -:
                                    </div>
-                                   <div className="col-3">
+                                   <div className="col-4">
                                         {cart}$
                                    </div>
                                </div>
                                <div className="row">
-                                   <div className="col-9">
+                                   <div className="col-8">
                                        Charges -:
                                    </div>
-                                   <div className="col-3">
+                                   <div className="col-4">
                                        20$
                                    </div>
                                </div>
                                <div className="row">
-                                   <div className="col-9">
+                                   <div className="col-8">
                                        Total -:
                                    </div>
-                                   <div className="col-3">
+                                   <div className="col-4">
                                        <hr/>
                                       {total}$
                                        <hr/>

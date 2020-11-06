@@ -4,7 +4,13 @@ import './ResultComponents.css';
 import ResultSlider from './ResultSlider';
 import { Carousel,Card } from 'react-bootstrap';
 
-function resultList() {
+function resultList(props) {
+
+    let travellers = props.location.data.travelers;
+    let budget = props.location.data.budget;
+    let days = props.location.data.days;
+    console.log(travellers);
+    
 
     return (
 
@@ -21,7 +27,7 @@ function resultList() {
                         <br />
                         <br />
                         <br />
-                        <Card style={{ width: '18rem'}}>
+                        <Card className="shadow-lg" style={{ width: '18rem'}}>
                             <Card.Body style={{background:'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',borderRadius: '3',border: '0',color: 'white',boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)'}}>
                                 <Card.Text className="text-center">
                                   <h6>Explore Suggestions!</h6>
@@ -37,13 +43,13 @@ function resultList() {
                     <div className="col-9">
                         <Carousel>
                             <Carousel.Item interval={10000}>
-                                <ResultSlider id={1} />
+                                <ResultSlider id={1} travellers={travellers} budget={budget} days={days} />
                             </Carousel.Item>
                             <Carousel.Item interval={10000}>
-                                <ResultSlider id={2} />
+                                <ResultSlider id={2} travellers={travellers} budget={budget} days={days}/>
                             </Carousel.Item>
                             <Carousel.Item interval={10000}>
-                                <ResultSlider id={3} />
+                                <ResultSlider id={3} travellers={travellers} budget={budget} days={days}/>
                             </Carousel.Item>
                         </Carousel>
                     </div>
