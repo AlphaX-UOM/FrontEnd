@@ -28,7 +28,7 @@ const TransportInput=()=>{
                             </div>
                             <input type="location" min="0" className="form-control" aria-label="Username"
                                    aria-describedby="basic-addon1"
-                                   ref={register({ required: true })}
+                                   ref={register({ required: false })}
                                    name="destination"
                             />
 
@@ -43,14 +43,14 @@ const TransportInput=()=>{
                             <div className="input-group-prepend">
                                 <span className="input-group-text">Pickup Date</span>
                             </div>
-                            <input type="date" name="pickupdate" className="form-control" ref={register({ required: true })}/>
+                            <input type="date" name="pickupdate" className="form-control" ref={register({ required: false })}/>
 
                         </div>
                     </div>
                     <div className="col-lg-2">
                         <div className="input-group mb-3">
 
-                            <input type="time" name="pickuptime" className="form-control" ref={register({ required: true })}/>
+                            <input type="time" name="pickuptime" className="form-control" ref={register({ required: false })}/>
 
                         </div>
                     </div>
@@ -59,14 +59,14 @@ const TransportInput=()=>{
                             <div className="input-group-prepend">
                                 <span className="input-group-text">Drop Off Date</span>
                             </div>
-                            <input type="date" name="dropoffdate" className="form-control"ref={register({ required: true })}/>
+                            <input type="date" name="dropoffdate" className="form-control"ref={register({ required: false })}/>
 
                         </div>
                     </div>
                     <div className="col-lg-2">
                         <div className="input-group mb-3">
 
-                            <input type="time" name="dropofftime" aria-label="First name" className="form-control" ref={register({ required: true })}/>
+                            <input type="time" name="dropofftime" aria-label="First name" className="form-control" ref={register({ required: false })}/>
 
                         </div>
                     </div>
@@ -81,7 +81,7 @@ const TransportInput=()=>{
                                 <span className="input-group-text" id="basic-addon1" >No. Of Travellers</span>
                             </div>
                             <input type="number" min="0" className="form-control" name="no.travelers"
-                                   aria-describedby="basic-addon1" ref={register({ required: true })}/>
+                                   aria-describedby="basic-addon1" ref={register({ required: false })}/>
                         </div>
                     </div>
                     <div className="col-lg-5"></div>

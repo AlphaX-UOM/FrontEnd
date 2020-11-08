@@ -4,6 +4,7 @@ import Navbar from "../Components/navbar/nav-bar";
 
 import Post from "../Components/Post/post";
 import Login from "../Components/Login/login";
+import ServiceProvider from "../Components/Userpanels/ServiceProviderUI/Serviceprovider";
 import Transportinput from "../Components/servicemodules/transport/Transport-input/Transport-input";
 import Transportproviderlist from "../Containers/Transportproviderlist/transportproviderlist";
 import Listitemdetails from "../Components/servicemodules/transport/Listitemdetails/listitemdetails";
@@ -26,6 +27,7 @@ class Layoutt extends Component {
                     <Switch>
                         {<Route path="/post" component={Post}/>}
                         <Route path="/login"><Login/></Route>
+                        <Route path="/serviceprovider" component={ServiceProvider}/>
                         <Route path="/transport"><Transportinput/></Route>
                         <Route path="/post-transportprovider"component={ PostTransportProviderForm}/>
                         <Route path="/post-tourguide"component={ PostguideForm}/>

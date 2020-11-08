@@ -1,10 +1,29 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom'
 
 const login=()=>{
     return(
         <div>
-            <h3>login</h3>
+            <div className="container">
+                <div className="row">
+
+                    <div className="col-sm">
+                        <button type="button" className="btn btn-primary">Admin</button>
+                    </div>
+                    <div className="col-sm">
+                        <button type="button" className="btn btn-primary">Customer</button>
+                    </div>
+                    <div className="col-sm">
+                        <Link to="/serviceprovider">
+                            <button type="button" className="btn btn-primary">Service Provider</button>
+                        </Link>
+
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
     )
 };

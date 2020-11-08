@@ -10,7 +10,7 @@ const footer=()=>{
             </div>
 
 
-            <footer className="footer-bs">
+            <footer className="footer-bs ">
                 <div className="row">
                     <div className="col-md-3 footer-brand animated fadeInLeft">
                         <h2>Tour Planner</h2>

@@ -1,9 +1,8 @@
 import React,{Component, useEffect, useState }  from 'react';
 import Listitem from '../../Components/servicemodules/transport/Listitem/listitem'
-import Listitemdetails from "../../Components/servicemodules/transport/Listitemdetails/listitemdetails";
+
 import {BrowserRouter,Route,Switch} from 'react-router-dom';
-import axios from 'axios';
-import {Link} from 'react-router-dom'
+
 import {useHistory} from 'react-router-dom'
 
 class transportproviderlist extends Component{
