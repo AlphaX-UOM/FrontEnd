@@ -14,7 +14,7 @@ const login=()=>{
                         <button type="button" className="btn btn-primary">Customer</button>
                     </div>
                     <div className="col-sm">
-                        <Link to="/serviceprovider">
+                        <Link to={'/serviceprovider/myaccountsp'}>
                             <button type="button" className="btn btn-primary">Service Provider</button>
                         </Link>
 

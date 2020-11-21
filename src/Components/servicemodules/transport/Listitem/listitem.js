@@ -35,8 +35,8 @@ const listitem=(props)=>{
                                         <h5 className="card-title"> {props.vtype}</h5>
                                         <p className="card-text">Price per day: {props.price}</p>
 
-
                                     </div>
+
                                     <div className="col-4">
                                         <span className="badge badge-success">Ratings: {props.rating}</span>
                                     </div>

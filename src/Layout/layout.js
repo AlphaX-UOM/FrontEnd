@@ -14,7 +14,11 @@ import PosthotelForm from "../Components/Post/post-hotels/post-hotels";
 import PostTransportProviderForm from "../Components/Post/post-transportprovider/post-tprovider-form";
 import Home from "../Components/home/home";
 import Footer from "../Components/footer/footer";
-
+import Adtransportlist from "../Components/Userpanels/ServiceProviderUI/Ad-Trasnport/Ad-Transport-list/Adtransportlist";
+import HotelMain from '../Components/servicemodules/hotel/Component/HotelMain';
+import Result from '../Components/servicemodules/hotel/Result/Result';
+import Details from '../Components/servicemodules/hotel/Details/Details';
+import HotelList from '../Components/servicemodules/hotel/Component/HotelList';
 
 
 class Layoutt extends Component {
@@ -25,17 +29,21 @@ class Layoutt extends Component {
                     <Navbar/>
 
                     <Switch>
-                        {<Route path="/post" component={Post}/>}
+                        <Route path="/hotelList"><HotelList/></Route>
+                        <Route path="/result"><Result /></Route>
+                        <Route path="/details"><Details /></Route>
+                        <Route path="/hotel"><HotelMain /></Route>
+
+                        <Route path="/post/post-tourguide"component={ PostguideForm}/>
+                        <Route path="/post/post-event"component={ PosteventForm}/>
+                        <Route path="/post/post-hotel"component={ PosthotelForm}/>
+                        <Route path="/post/post-transportprovider"component={ PostTransportProviderForm}/>
+                        <Route path="/post" component={Post}></Route>
                         <Route path="/login"><Login/></Route>
                         <Route path="/serviceprovider" component={ServiceProvider}/>
                         <Route path="/transport"><Transportinput/></Route>
-                        <Route path="/post-transportprovider"component={ PostTransportProviderForm}/>
-                        <Route path="/post-tourguide"component={ PostguideForm}/>
-                        <Route path="/post-event"component={ PosteventForm}/>
-                        <Route path="/post-hotel"component={ PosthotelForm}/>
                         <Route path="/transportproviderlist/:id"  component={Listitemdetails}/>
                         <Route path="/transportproviderlist"><Transportproviderlist/></Route>
-
                         <Route path="/" exact component={Home}/>
                         <Redirect to="/"/>
                     </Switch>

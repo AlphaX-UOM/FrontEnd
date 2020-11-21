@@ -6,7 +6,7 @@ import Logo3 from '../../images/post-card/event.jfif';
 import Logo4 from '../../images/post-card/hotel.jfif';
 import {Link} from 'react-router-dom'
 
-const post=()=>{
+const post=(props)=>{
     return(
 
             <div className="container">
@@ -33,7 +33,7 @@ const post=()=>{
                 </div>
                 <div className="row">
                     <div className="col-sm">
-                        <Link to="/post-transportprovider" className="link textdec" >
+                        <Link to={props.match.url + '/post-transportprovider'} className="link textdec" >
                             <div className="card cbground  " style={{width: "15rem"}}>
                                 <img src={Logo1} className="card-img-top" alt=""/>
                                 <div className="card-body">
@@ -51,7 +51,7 @@ const post=()=>{
 
                     </div>
                     <div className="col-sm">
-                        <Link to="/post-tourguide" className="link textdec">
+                        <Link to={props.match.url +"/post-tourguide"} className="link textdec">
                         <div className="card cbground" style={{width: "15rem"}}>
 
                             <img src={Logo2} className="card-img-top" alt=""/>
@@ -67,7 +67,7 @@ const post=()=>{
                         </Link>
                     </div>
                     <div className="col-sm">
-                        <Link to="/post-event" className="link textdec">
+                        <Link to={props.match.url +"/post-event"} className="link textdec">
                         <div className="card cbground " style={{width: "15rem"}}>
 
                             <img src={Logo3} className="card-img-top chotel" alt=""/>
@@ -84,7 +84,7 @@ const post=()=>{
                     </div>
 
                 <div className="col-sm">
-                    <Link to="/post-hotel" className="link textdec">
+                    <Link to={props.match.url +"/post-hotel"} className="link textdec">
                     <div className="card cbground" style={{width: "15rem"}}>
 
                         <img src={Logo4} className="card-img-top chotel" alt=""/>
