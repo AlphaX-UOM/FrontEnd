@@ -1,0 +1,58 @@
+import React, { Component } from 'react';
+import {BrowserRouter,Route,Switch,Redirect} from 'react-router-dom';
+import Navbar from "../Components/navbar/nav-bar";
+
+import Post from "../Components/Post/post";
+import Login from "../Components/Login/login";
+import ServiceProvider from "../Components/Userpanels/ServiceProviderUI/Serviceprovider";
+import Transportinput from "../Components/servicemodules/transport/Transport-input/Transport-input";
+import Transportproviderlist from "../Containers/Transportproviderlist/transportproviderlist";
+import Listitemdetails from "../Components/servicemodules/transport/Listitemdetails/listitemdetails";
+import PostguideForm from "../Components/Post/post-tourguide/post-guide";
+import PosteventForm from "../Components/Post/post-events/post-events";
+import PosthotelForm from "../Components/Post/post-hotels/post-hotels";
+import PostTransportProviderForm from "../Components/Post/post-transportprovider/post-tprovider-form";
+import Home from "../Components/home/home";
+import Footer from "../Components/footer/footer";
+import Adtransportlist from "../Components/Userpanels/ServiceProviderUI/Ad-Trasnport/Ad-Transport-list/Adtransportlist";
+import HotelMain from '../Components/servicemodules/hotel/Component/HotelMain';
+import Result from '../Components/servicemodules/hotel/Result/Result';
+import Details from '../Components/servicemodules/hotel/Details/Details';
+import HotelList from '../Components/servicemodules/hotel/Component/HotelList';
+
+
+class Layoutt extends Component {
+    render () {
+        return (
+
+                <div>
+                    <Navbar/>
+
+                    <Switch>
+                        <Route path="/hotelList"><HotelList/></Route>
+                        <Route path="/result"><Result /></Route>
+                        <Route path="/details"><Details /></Route>
+                        <Route path="/hotel"><HotelMain /></Route>
+
+                        <Route path="/post/post-tourguide"component={ PostguideForm}/>
+                        <Route path="/post/post-event"component={ PosteventForm}/>
+                        <Route path="/post/post-hotel"component={ PosthotelForm}/>
+                        <Route path="/post/post-transportprovider"component={ PostTransportProviderForm}/>
+                        <Route path="/post" component={Post}></Route>
+                        <Route path="/login"><Login/></Route>
+                        <Route path="/serviceprovider" component={ServiceProvider}/>
+                        <Route path="/transport"><Transportinput/></Route>
+                        <Route path="/transportproviderlist/:id"  component={Listitemdetails}/>
+                        <Route path="/transportproviderlist"><Transportproviderlist/></Route>
+                        <Route path="/" exact component={Home}/>
+                        <Redirect to="/"/>
+                    </Switch>
+
+                    <Footer/>
+                </div>
+
+        );
+    }
+}
+
+export default Layoutt;
