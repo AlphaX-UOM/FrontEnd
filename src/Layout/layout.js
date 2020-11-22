@@ -20,6 +20,10 @@ import Result from '../Components/servicemodules/hotel/Result/Result';
 import Details from '../Components/servicemodules/hotel/Details/Details';
 import HotelList from '../Components/servicemodules/hotel/Component/HotelList';
 
+import Form from '../Components/servicemodules/guide/components/Form';
+import NameList from '../Components/servicemodules/guide/components/NameList/NameList';
+import FormSearch from '../Components/servicemodules/guide/components/formsearch';
+import PostGuideForm from '../Components/servicemodules/guide/components/post-guide'
 
 class Layoutt extends Component {
     render () {
@@ -29,6 +33,11 @@ class Layoutt extends Component {
                     <Navbar/>
 
                     <Switch>
+                        <Route path='/PostGuideForm' component={PostGuideForm}/>
+                        <Route path='/FormSearch' component={FormSearch}/>
+                        <Route path='/NameList' component={NameList}/>
+                        <Route path='/guide'>  <Form /> </Route>
+
                         <Route path="/hotelList"><HotelList/></Route>
                         <Route path="/result"><Result /></Route>
                         <Route path="/details"><Details /></Route>
