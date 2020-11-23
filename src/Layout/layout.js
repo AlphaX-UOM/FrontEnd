@@ -24,7 +24,7 @@ import Form from '../Components/servicemodules/guide/components/Form';
 import NameList from '../Components/servicemodules/guide/components/NameList/NameList';
 import FormSearch from '../Components/servicemodules/guide/components/formsearch';
 import PostGuideForm from '../Components/servicemodules/guide/components/post-guide'
-
+import Events from '../Components/servicemodules/event/Component/Main'
 class Layoutt extends Component {
     render () {
         return (
@@ -33,6 +33,8 @@ class Layoutt extends Component {
                     <Navbar/>
 
                     <Switch>
+                        <Route path='/events' component={Events}/>
+
                         <Route path='/PostGuideForm' component={PostGuideForm}/>
                         <Route path='/FormSearch' component={FormSearch}/>
                         <Route path='/NameList' component={NameList}/>
