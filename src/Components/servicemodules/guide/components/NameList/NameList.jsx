@@ -7,7 +7,7 @@ import NameListMenu from '../SidemenuFilter/Namelist/NameSideMenu'
 
 function NameList(props){
     
- let language = props.location.data.language;
+ const language = props.location.data.language;
  //console.log(language);
 
     const [nameList,setNameList]=useState(null);

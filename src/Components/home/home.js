@@ -51,7 +51,7 @@ const home=()=>{
                     </div>
 
                     <div className="col-lg-2">
-                        <Link  to="/"className="link textdec">
+                        <Link  to="/events"className="link textdec">
                             <div className="card  text-center text-c">
                                 <div className="card-body ct">
                                     <div>
