@@ -201,7 +201,7 @@ class TransportInput extends Component{
                     </div>
                 </form>
                 <br/>
-                <div className="container-fluid bcolor">
+                <div className="container-fluid becolor">
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-4">

@@ -25,6 +25,11 @@ import NameList from '../Components/servicemodules/guide/components/NameList/Nam
 import FormSearch from '../Components/servicemodules/guide/components/formsearch';
 import PostGuideForm from '../Components/servicemodules/guide/components/post-guide'
 import Events from '../Components/servicemodules/event/Component/Main'
+
+import ResultList from '../Components/servicemodules/suggestor/Pages/ResultList/ResultList';
+import DetailedResult from '../Components/servicemodules/suggestor/Pages/DetailedResult/DetailedResult';
+import Payment from '../Components/servicemodules/suggestor/Pages/Checkout/Payment';
+import Thank from '../Components/servicemodules/suggestor/Pages/ThankYou/Thank';
 class Layoutt extends Component {
     render () {
         return (
@@ -33,6 +38,12 @@ class Layoutt extends Component {
                     <Navbar/>
 
                     <Switch>
+                        <Route path='/result' component={ResultList} />
+                        <Route path='/thank'> <Thank /> </Route>
+                        <Route path='/detailedresult' component={DetailedResult} />
+                        <Route path='/payment' component={Payment} />
+
+
                         <Route path='/events' component={Events}/>
 
                         <Route path='/PostGuideForm' component={PostGuideForm}/>
