@@ -22,7 +22,7 @@ function resultComponent(props) {
 
             <Card  className="shadow-lg" style={{ width: '18rem', display:'inline-block' }}>
                 <Card.Img variant="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ2LGg2aZv5E73_NS4xWL9rqarvdMtFEEV3wQ&usqp=CAU" />
-                <Card.Body >
+                <Card.Body className="card-body-suggestor">
                     <Card.Text >
                        <h6>{props.type}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<Badge variant="warning">{props.price}$</Badge></h6> 
                     </Card.Text>

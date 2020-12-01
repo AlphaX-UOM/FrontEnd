@@ -27,7 +27,7 @@ export default function flavour() {
           {option.title}
         </React.Fragment>
       )}
-      style={{ width: 400 }}
+      style={{ width: 360 }}
       renderInput={(params) => (
         <TextField {...params} variant="outlined" label="Flavours" placeholder="Flavours" />
       )}
