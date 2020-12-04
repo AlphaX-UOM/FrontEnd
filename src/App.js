@@ -6,7 +6,7 @@ import Form from './Pages/Form/Form';
 import ResultList from './Pages/ResultList/ResultList';
 import DetailedResult from './Pages/DetailedResult/DetailedResult';
 import Payment from './Pages/Checkout/Payment';
-import Thank from './Pages/ThankYou/Thank';
+import Paypal from './Pages/Checkout/Paypal'
 
 
 function App() {
@@ -15,10 +15,10 @@ function App() {
       <BrowserRouter>
       <Header />
       <Switch> 
-      <Route path='/result' component={ResultList} />
-      <Route path='/thank'> <Thank /> </Route> 
+      <Route path='/result' component={ResultList} /> 
       <Route path='/detailedresult' component={DetailedResult} />
       <Route path='/payment' component={Payment} />
+      <Route path='/paypal' component={Paypal} />
       <Route path='/'>  <Form /> </Route>
       </Switch>
       <Footer />

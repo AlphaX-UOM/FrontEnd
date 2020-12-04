@@ -19,7 +19,7 @@ function DetailedResultPage(props) {
 
 
   useEffect( () => {
-    fetch(`https://localhost:44394/api/transportproviders/${tranId}`).then((response) => {
+    fetch(`https://alphax-api.azurewebsites.net/api/transportproviders/${tranId}`).then((response) => {
        return response.json();
      }).then(responseData => {
         setmyTransportList(responseData);
@@ -28,7 +28,7 @@ function DetailedResultPage(props) {
    
  
    useEffect(() => {
-     fetch(`https://localhost:44394/api/tourguides/${guideId}`).then((response) => {
+     fetch(`https://alphax-api.azurewebsites.net/api/tourguides/${guideId}`).then((response) => {
        return response.json();
      }).then(responseData => {
         setmytourguideList(responseData);
@@ -38,7 +38,7 @@ function DetailedResultPage(props) {
    
  
    useEffect(() => {
-     fetch(`https://localhost:44394/api/eventplanners/${event01Id}`).then((response) => {
+     fetch(`https://alphax-api.azurewebsites.net/api/eventplanners/${event01Id}`).then((response) => {
        return response.json();
      }).then(responseData => {
         setmyevent01List(responseData);
@@ -47,7 +47,7 @@ function DetailedResultPage(props) {
 
  
    useEffect(() => {
-    fetch(`https://localhost:44394/api/eventplanners/${event02Id}`).then((response) => {
+    fetch(`https://alphax-api.azurewebsites.net/api/eventplanners/${event02Id}`).then((response) => {
       return response.json();
     }).then(responseData => {
        setmyevent02List(responseData);
@@ -56,7 +56,7 @@ function DetailedResultPage(props) {
 
 
    useEffect(() => {
-     fetch(`https://localhost:44394/api/hotels/${hotelId}`).then((response) => {
+     fetch(`https://alphax-api.azurewebsites.net/api/hotels/${hotelId}`).then((response) => {
        return response.json();
      }).then(responseData => {
         setmyhotelList(responseData);

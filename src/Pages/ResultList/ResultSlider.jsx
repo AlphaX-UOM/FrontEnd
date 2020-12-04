@@ -22,7 +22,7 @@ function ResultSlider(props) {
   
 
   useEffect( () => {
-   fetch(`https://localhost:44394/api/transportproviders?transvalue=${transBudget}`).then((response) => {
+   fetch(`https://alphax-api.azurewebsites.net/api/transportproviders?transvalue=${transBudget}`).then((response) => {
       return response.json();
     }).then(responseData => {
        setTransportList(responseData);
@@ -31,7 +31,7 @@ function ResultSlider(props) {
   
 
   useEffect(() => {
-    fetch(`https://localhost:44394/api/tourguides?guideValue=${guideBudget}`).then((response) => {
+    fetch(`https://alphax-api.azurewebsites.net/api/tourguides?guideValue=${guideBudget}`).then((response) => {
       return response.json();
     }).then(responseData => {
       settourguideList(responseData);
@@ -41,7 +41,7 @@ function ResultSlider(props) {
   
 
   useEffect(() => {
-    fetch(`https://localhost:44394/api/eventplanners?eventValue=${eventBudget}`).then((response) => {
+    fetch(`https://alphax-api.azurewebsites.net/api/eventplanners?eventValue=${eventBudget}`).then((response) => {
       return response.json();
     }).then(responseData => {
       seteventList(responseData);
@@ -49,7 +49,7 @@ function ResultSlider(props) {
   }, []);
 
   useEffect(() => {
-    fetch(`https://localhost:44394/api/hotels?hotelValue=${hotelBudget}`).then((response) => {
+    fetch(`https://alphax-api.azurewebsites.net/api/hotels?hotelValue=${hotelBudget}`).then((response) => {
       return response.json();
     }).then(responseData => {
       sethotelList(responseData);

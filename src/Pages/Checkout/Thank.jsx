@@ -1,6 +1,7 @@
 import React from 'react';
 
-function thank() {
+function thank(props) {
+    console.log(props);
     return (
         <div>
             <div className="container-fluid" style={{ backgroundColor: "#15ff00f" }}>
