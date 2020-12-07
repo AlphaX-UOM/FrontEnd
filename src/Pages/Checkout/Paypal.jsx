@@ -70,7 +70,7 @@ function Paypal(props) {
     //    let total = cart+20;
 
        const product = {
-        price: 20,
+        price: props.location.data.sum,
         description: 'Payment for Smart Travel System'
       };
       console.log(props.location);
