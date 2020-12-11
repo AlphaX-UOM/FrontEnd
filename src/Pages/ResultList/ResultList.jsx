@@ -3,13 +3,11 @@ import './ResultComponents.css';
 // import { Carousel } from 'react-bootstrap';
 import ResultSlider from './ResultSlider';
 import { Carousel,Card } from 'react-bootstrap';
+import { connect } from 'react-redux'
 
 function resultList(props) {
 
-    let travellers = props.location.data.travelers;
-    let budget = props.location.data.budget;
-    let days = props.location.data.days;
-    console.log(travellers);
+    
     
 
     return (
@@ -43,13 +41,13 @@ function resultList(props) {
                     <div className="col-9">
                         <Carousel>
                             <Carousel.Item interval={10000}>
-                                <ResultSlider id={1} travellers={travellers} budget={budget} days={days} />
+                                <ResultSlider idss={1} />
                             </Carousel.Item>
                             <Carousel.Item interval={10000}>
-                                <ResultSlider id={2} travellers={travellers} budget={budget} days={days}/>
+                                <ResultSlider idss={2} />
                             </Carousel.Item>
                             <Carousel.Item interval={10000}>
-                                <ResultSlider id={3} travellers={travellers} budget={budget} days={days}/>
+                                <ResultSlider idss={3} />
                             </Carousel.Item>
                         </Carousel>
                     </div>
@@ -59,5 +57,11 @@ function resultList(props) {
     )
 }
 
-export default resultList;
+const mapStateToProps = (state) => {
+    return {
+        formdata: state.formdata
+    }
+}
+
+export default connect(mapStateToProps)(resultList);
 

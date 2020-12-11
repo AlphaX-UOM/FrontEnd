@@ -2,6 +2,7 @@ import React from "react";
 import './ResultComponent.css';
 import { Card,ListGroup,ListGroupItem,Badge } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
 
 
 function resultComponent(props) {
@@ -15,6 +16,10 @@ function resultComponent(props) {
         travellers:props.travellers,
         budget:props.budget,
         days:props.days
+    }
+
+    const handleFormData = () => {
+        props.addIdData(selectId);
     }
 
     return (
@@ -36,8 +41,8 @@ function resultComponent(props) {
                  <ListGroupItem>Transport Provider(Included 1st KM) :- {props.transport}</ListGroupItem>
                 </ListGroup>
                 <Card.Body className="text-center">
-                    <Link to={{pathname: '/detailedresult',data:selectId}}>
-                        <button class="btn btn-warning">Select This</button>
+                    <Link to='/detailedresult'>
+                        <button class="btn btn-warning" onClick={handleFormData} >Select This</button>
                      </Link>
                 </Card.Body>
             </Card>
@@ -46,4 +51,10 @@ function resultComponent(props) {
     );
 }
 
-export default resultComponent;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addIdData: (selectId) => { dispatch({type: 'ADD_SELECTED_DATA', selectId: selectId} )}
+    }
+}
+
+export default connect(null, mapDispatchToProps)(resultComponent);

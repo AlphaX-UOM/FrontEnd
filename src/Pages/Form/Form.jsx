@@ -8,9 +8,11 @@ import { enGB } from 'date-fns/locale'
 import { DateRangePickerCalendar, START_DATE } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
 import moment from 'moment';
+import { connect } from 'react-redux'
 
 
-function Form() {
+function Form(props) {
+    console.log(props);
 
     const [travellers, setTravelers] = useState()
     const [budget, setBudget] = useState()
@@ -47,6 +49,10 @@ function Form() {
         budget: budget,
         travelers: travellers,
         days: noOdDates
+    }
+
+    const handleFormData = () => {
+        props.addFormData(formdata);
     }
 
     return (
@@ -90,7 +96,7 @@ function Form() {
                             </div>
                        
                       <br/>
-                           <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tab"></span>&nbsp;&nbsp;<span class="tab"></span>&nbsp;&nbsp;<Link to={{ pathname: "/result", data: formdata }} ><button type="button" className="btn btn-warning rounded">Give me a plan</button></Link></p>
+                           <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tab"></span>&nbsp;&nbsp;<span class="tab"></span>&nbsp;&nbsp;<Link to="/result" ><button type="button" className="btn btn-warning rounded" onClick={handleFormData}>Give me a plan</button></Link></p>
                         
                 
                         </div>
@@ -104,4 +110,17 @@ function Form() {
     )
 };
 
-export default Radium(Form);
+
+const mapStateToProps = (state) => {
+    return {
+        formdata: state.formdata
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addFormData: (formdata) => { dispatch({type: 'ADD_FORM_DATA', formdata: formdata} )}
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Radium(Form));

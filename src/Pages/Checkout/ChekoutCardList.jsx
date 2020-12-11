@@ -1,184 +1,167 @@
-import React, { useState, useEffect } from 'react';
-import CheckoutCard from './CheckoutCard';
-import { Card } from 'react-bootstrap';
-import CreditCard from './CreditCard';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import CheckoutCard from "./CheckoutCard";
+import { Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 function CheckoutCardList(props) {
+  let [cart, setCart] = useState([]);
+  console.log("cart-> " + props.reservations);
 
+  let localCart = localStorage.getItem("cart");
 
-  let tranId = props.data.transportId;
-  let guideId = props.data.guidePlanId;
-  let event01Id = props.data.event01PlanId;
-  let event02Id = props.data.event02PlanId;
-  let hotelId = props.data.hotelPlanId;
-  let travellers = props.data.travellers;
-  let days = props.data.days;
+  let value = cart.reduce(function (prev, cur) {
+    return prev + cur.unitTotal;
+  }, 0);
 
-  // console.log(tranId);
+  let total = value + 20;
 
-  const [mytransportList, setmyTransportList] = useState([]);
-  const [mytourguideList, setmytourguideList] = useState([]);
-  const [myevent01List, setmyevent01List] = useState([]);
-  const [myevent02List, setmyevent02List] = useState([]);
-  const [myhotelList, setmyhotelList] = useState([]);
+  const addItem = (item) => {
+    //create a copy of our cart state, avoid overwritting existing state
+    let cartCopy = [...cart];
 
+    //assuming we have an ID field in our item
+    let { id } = item;
 
+    //look for item in cart array
+    let existingItem = cartCopy.find((cartItem) => cartItem.id == id);
+
+    //if item already exists
+    if (existingItem) {
+      existingItem.units += item.units; //update item
+    } else {
+      //if item doesn't exist, simply add it
+      cartCopy.push(item);
+    }
+
+    //update app state
+    setCart(cartCopy);
+
+    //make cart a string and store in local space
+    let stringCart = JSON.stringify(cartCopy);
+    localStorage.setItem("cart", stringCart);
+  };
+
+  const editItem = (id, units) => {
+    let cartCopy = [...cart];
+
+    //find if item exists, just in case
+    let existentItem = cartCopy.find((item) => item.id == id);
+
+    //if it doesnt exist simply return
+    if (!existentItem) return;
+
+    //continue and update quantity
+    existentItem.units += units;
+
+    //validate result
+    if (existentItem.units <= 0) {
+      //remove item  by filtering it from cart array
+      cartCopy = cartCopy.filter((item) => item.id != id);
+    }
+
+    //again, update state and localState
+    setCart(cartCopy);
+
+    let cartString = JSON.stringify(cartCopy);
+    localStorage.setItem("cart", cartString);
+  };
+
+  const removeItem = (id) => {
+    //create cartCopy
+    let cartCopy = [...cart];
+
+    cartCopy = cartCopy.filter((item) => item.id != id);
+
+    //update state and local
+    setCart(cartCopy);
+
+    let cartString = JSON.stringify(cartCopy);
+    localStorage.setItem("cart", cartString);
+  };
+
+  //this is called on component mount
   useEffect(() => {
-    fetch(`https://alphax-api.azurewebsites.net/api/transportproviders/${tranId}`).then((response) => {
-      return response.json();
-    }).then(responseData => {
-      setmyTransportList(responseData);
+    //turn it into js
+    localCart = JSON.parse(localCart);
+    //load persisted cart into state if it exists
+    if (localCart) setCart(localCart);
+    
+  }, []); //the empty array ensures useEffect only runs once
+
+
+
+  const nameListComponent = () => {
+    return cart.map((aReserve) => {
+      return (
+        <CheckoutCard
+          key={aReserve.id}
+          name={aReserve.name}
+          price={aReserve.price}
+          units={aReserve.units}
+          unitTotal={aReserve.unitTotal}
+        />
+      );
     });
-  }, [tranId]);
-
-
-
-
-  useEffect(() => {
-    fetch(`https://alphax-api.azurewebsites.net/api/tourguides/${guideId}`).then((response) => {
-      return response.json();
-    }).then(responseData => {
-      setmytourguideList(responseData);
-    });
-  }, [guideId]);
-
-
-
-  useEffect(() => {
-    fetch(`https://alphax-api.azurewebsites.net/api/eventplanners/${event01Id}`).then((response) => {
-      return response.json();
-    }).then(responseData => {
-      setmyevent01List(responseData);
-    });
-  }, [event01Id]);
-
-
-  useEffect(() => {
-    fetch(`https://alphax-api.azurewebsites.net/api/eventplanners/${event02Id}`).then((response) => {
-      return response.json();
-    }).then(responseData => {
-      setmyevent02List(responseData);
-    });
-  }, [event02Id]);
-
-
-  useEffect(() => {
-    fetch(`https://alphax-api.azurewebsites.net/api/hotels/${hotelId}`).then((response) => {
-      return response.json();
-    }).then(responseData => {
-      setmyhotelList(responseData);
-    });
-  }, [hotelId]);
-
-
-  let cart = ((myevent01List.price * travellers) + (myevent02List.price * travellers) + (mytransportList.costPerDistance) + (mytourguideList.costPerDay * days) + (myhotelList.price * days));
-  let total = cart + 20;
-
-  let myData = {
-   trandId : props.data.transportId,
-   guidedId : props.data.guidePlanId,
-   eventd01Id : props.data.event01PlanId,
-   eventd02Id : props.data.event02PlanId,
-   hoteldId : props.data.hotelPlanId,
-   sum : total
-}
-
+  };
 
   return (
     <React.Fragment>
-      <div className="container-fluid" style={{ height: '750px' }}>
+      <div className="container-fluid" style={{ height: "750px" }}>
         <div className="row">
           <div className="col-7">
             <div className="container mt-4">
-              <ul className="list-group">
-                <CheckoutCard
-                  key={myevent01List.eventId}
-                  name={myevent01List.eventName}
-                  description={myevent01List.otherDetails}
-                  price={(myevent01List.price * travellers)}
-                  units={travellers}
-                />
-
-                <CheckoutCard
-                  key={myevent02List.eventId}
-                  name={myevent02List.eventName}
-                  description={myevent02List.otherDetails}
-                  price={(myevent02List.price * travellers)}
-                  units={travellers}
-                />
-
-                <CheckoutCard
-                  key={myhotelList.hotelId}
-                  name={myhotelList.hotelName}
-                  description={myhotelList.features}
-                  price={(myhotelList.price * days)}
-                  units={days}
-                />
-
-                <CheckoutCard
-                  key={mytransportList.tpid}
-                  name={mytransportList.name}
-                  description={mytransportList.description}
-                  price={mytransportList.costPerDistance}
-                  units={'1 KM'}
-                />
-
-                <CheckoutCard
-                  key={mytourguideList.guideId}
-                  name={mytourguideList.name}
-                  description={mytourguideList.languages}
-                  price={(mytourguideList.costPerDay * days)}
-                  units={days}
-                />
-
-              </ul>
+              <ul className="list-group"> {nameListComponent()} </ul>
             </div>
           </div>
           <div className="col-5">
-            <Card style={{ width: '18rem' }}>
+            <Card style={{ width: "18rem" }}>
               <Card.Header className="text-center">Checkout</Card.Header>
               <div className="container">
                 <div className="row">
-                  <div className="col-8">
-                    Cart -:
-                                   </div>
-                  <div className="col-4">
-                    {cart}$
-                                   </div>
+                  <div className="col-8">Cart -:</div>
+                  <div className="col-4">{value}$</div>
                 </div>
                 <div className="row">
-                  <div className="col-8">
-                    Charges -:
-                                   </div>
-                  <div className="col-4">
-                    20$
-                                   </div>
+                  <div className="col-8">Charges -:</div>
+                  <div className="col-4">20$</div>
                 </div>
                 <div className="row">
-                  <div className="col-8">
-                    Total -:
-                                   </div>
+                  <div className="col-8">Total -:</div>
                   <div className="col-4">
                     <hr />
                     {total}$
-                                       <hr />
+                    <hr />
                   </div>
                 </div>
               </div>
             </Card>
             <br />
             {/* <CreditCard /> */}
-            <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Link to={{ pathname: '/paypal', data: myData }}>
-              <button class="btn btn-warning">Proceed to Checkout</button>
-            </Link>
+            <p>
+              {" "}
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Link to="/paypal">
+                <button class="btn btn-warning">Proceed to Checkout</button>
+              </Link>
             </p>
           </div>
         </div>
       </div>
-
     </React.Fragment>
   );
 }
 
-export default CheckoutCardList;
+const mapStateToProps = (state) => {
+  return {
+    reservations: state.reservations,
+  };
+};
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//       addFormData: (formdata) => { dispatch({type: 'ADD_PAYPAL_DATA', formdata: formdata} )}
+//   }
+// }
+
+export default connect(mapStateToProps)(CheckoutCardList);
