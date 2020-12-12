@@ -1,9 +1,10 @@
 .mback{
     background-color: lightgray;
+    padding-bottom: 20px;
 }
 .fback{
     background-color: white;
-
+    padding: 10px;
 }
 .formmarge{
     margin: 10px;

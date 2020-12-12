@@ -19,7 +19,7 @@ const Form = () => {
             
 
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="container form">
+                <div className="container formx">
                     <div className="row" style={{ padding: "100px" }}>
                         <div className="col-lg-12">
                             <div className="input-group mb-3">

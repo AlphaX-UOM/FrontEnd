@@ -9,6 +9,8 @@ import { DateRangePickerCalendar, START_DATE } from 'react-nice-dates'
 import 'react-nice-dates/build/style.css'
 import moment from 'moment';
 import Dots from "../../../../../images/temp/dots-3.png";
+import logo1 from "../../../../../images/temp/bg lg/bgbanner-logo.png";
+import logo2 from "../../../../../images/temp/bg lg/logoedit.png";
 
 
 function Form() {
@@ -107,6 +109,10 @@ function Form() {
                         <div className="row tm-banner-row tm-banner-row-header">
                             <div className="col-xs-12">
                                 <div className="tm-banner-header">
+                                    <div className="">
+                                        <img src={logo2} alt="Dots" style={{width:"300px"}}/>
+                                    </div>
+                                    <br/>
                                     <h1 className="text-uppercase tm-banner-title">Let's begin</h1>
                                     <img src={Dots} alt="Dots"/>
                                     <p className="tm-banner-subtitle">We assist you to choose the best.</p>

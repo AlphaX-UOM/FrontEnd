@@ -1,6 +1,6 @@
 import React,{Component, useEffect, useState }  from 'react';
 import Listitem from '../../Components/servicemodules/transport/Listitem/listitem'
-
+import axios from 'axios';
 import {BrowserRouter,Route,Switch} from 'react-router-dom';
 
 import {useHistory} from 'react-router-dom'
@@ -14,19 +14,29 @@ class transportproviderlist extends Component{
 
 
 
-   async componentDidMount () {
-        fetch('http://localhost:5000/TransportProvider/getall')
-            .then(res => res.json())
-            .then(provider =>
-                this.setState({ providers:provider.data })
+        async componentDidMount () {
+            fetch('http://localhost:5000/api/TransportServices')
+         .then(res => res.json())
+         .then(provider =>
 
-            )
-            .catch(error => {
+             this.setState({ providers:provider})
 
-                this.setState({error: true});
-            });
+         )
+         .catch(error => {
+
+             this.setState({error: true});
+         });
 
 
+
+
+
+     // axios.get( 'http://localhost:5000/api/TransportServices' )
+     //     .then( response => {
+     //
+     //         this.setState({providers: response});
+     //
+     //     } );
 
 
     }
@@ -68,8 +78,19 @@ class transportproviderlist extends Component{
         return (
 
                     <div>
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-sm-4">
+                                    One of three columns
+                                </div>
+                                <div className="col-sm-8">
+                                    {provideritem}
+                                </div>
 
-                        {provideritem}
+
+                            </div>
+                        </div>
+
 
 
 
