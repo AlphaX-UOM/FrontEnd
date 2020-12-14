@@ -29,38 +29,44 @@ const initialState = {
           id: '1',
           name: "transportres",
           price: 200,
-          units: 1,
+          condition:"",
+          units: null,
           unitTotal:200
         },
         {
             id: '2',
             name: "tourguide",
             price: 200,
-            units: 1,
+            condition:"",
+            units: null,
             unitTotal:200
           },
           {
             id: '1',
             name: "event01",
             price: 200,
-            units: 1,
+            condition:"",
+            units: null,
             unitTotal:200
           },
           {
             id: '1',
             name: "event02",
             price: 200,
-            units: 1,
+            condition:"",
+            units: null,
             unitTotal:200
           },
           {
             id: '1',
             name: "hotelres",
             price: 200,
-            units: 1,
+            condition:"",
+            units: null,
             unitTotal:200
           }
-      ]
+      ],
+      total:null
 
 }
 const rootReducer = (state = initialState, action) => {
@@ -80,6 +86,12 @@ const rootReducer = (state = initialState, action) => {
         return {
             ...state,
             reservations: action.reservations
+        }
+    }
+    if (action.type === 'ADD_PAYPAL_DATA') {
+        return {
+            ...state,
+            total: action.total
         }
     }
     return state;
