@@ -5,7 +5,7 @@ const initialState = {
         { id: '3', title: 'Ghost Ghost', body: 'Hello me Sudam Yasodya love to listen music' }
     ],
     formdata: {
-        budget: 10000,
+        budget: 1000000,
         travelers: 2,
         days: 4
     },
@@ -71,6 +71,7 @@ const initialState = {
 }
 const rootReducer = (state = initialState, action) => {
     if (action.type === 'ADD_FORM_DATA') {
+        console.log("Hey there reducers");
         return {
             ...state,
             formdata: action.formdata

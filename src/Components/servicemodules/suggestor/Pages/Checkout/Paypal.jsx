@@ -5,94 +5,67 @@ import { connect } from "react-redux";
 import axios from "axios";
 
 function Paypal(props) {
-  //     let tranId = props.location.data.transportId;
-  //     let guideId = props.location.data.guidePlanId;
-  //     let event01Id = props.location.data.event01PlanId;
-  //     let event02Id = props.location.data.event02PlanId;
-  //     let hotelId = props.location.data.hotelPlanId;
-
-  //   const [mytransportList, setmyTransportList] = useState([]);
-  //   const [mytourguideList, setmytourguideList] = useState([]);
-  //   const [myevent01List, setmyevent01List] = useState([]);
-  //   const [myevent02List, setmyevent02List] = useState([]);
-  //   const [myhotelList, setmyhotelList] = useState([]);
-
-  //   useEffect( () => {
-  //     fetch(`https://alphax-api.azurewebsites.net/api/transportproviders/${tranId}`).then((response) => {
-  //        return response.json();
-  //      }).then(responseData => {
-  //         setmyTransportList(responseData);
-  //      });
-  //    },[tranId]);
-
-  //    useEffect(() => {
-  //      fetch(`https://alphax-api.azurewebsites.net/api/tourguides/${guideId}`).then((response) => {
-  //        return response.json();
-  //      }).then(responseData => {
-  //         setmytourguideList(responseData);
-  //      });
-  //    }, [guideId]);
-
-  //    useEffect(() => {
-  //      fetch(`https://alphax-api.azurewebsites.net/api/eventplanners/${event01Id}`).then((response) => {
-  //        return response.json();
-  //      }).then(responseData => {
-  //         setmyevent01List(responseData);
-  //      });
-  //    }, [event01Id]);
-
-  //    useEffect(() => {
-  //     fetch(`https://alphax-api.azurewebsites.net/api/eventplanners/${event02Id}`).then((response) => {
-  //       return response.json();
-  //     }).then(responseData => {
-  //        setmyevent02List(responseData);
-  //     });
-  //   }, [event02Id]);
-
-  //    useEffect(() => {
-  //      fetch(`https://alphax-api.azurewebsites.net/api/hotels/${hotelId}`).then((response) => {
-  //        return response.json();
-  //      }).then(responseData => {
-  //         setmyhotelList(responseData);
-  //      });
-  //    }, [hotelId]);
-
-  // let travellers = props.location.data.travellers;
-  // let days = props.location.data.days;
-
-  //    let cart = ((myevent01List.price * travellers)+(myevent02List.price * travellers)+(mytransportList.costPerDistance)+(mytourguideList.costPerDay * days)+(myhotelList.price * days));
-  //    let total = cart+20;
-
-  const product = {
-    // price: props.total,
-    price: 5,
-    description: "Payment for Smart Travel System",
-  };
+  let reservations = props.reservations;
+  console.log(reservations);
+  let total = reservations[0].price*reservations[0].units + reservations[1].price*reservations[1].units + reservations[2].price*reservations[2].units + reservations[3].price*reservations[3].units + reservations[4].price*reservations[4].units;
+  console.log(total-20);
+  console.log(reservations[0].price*reservations[0].units);
+  console.log(reservations[1].price*reservations[1].units);
+  console.log(reservations[2].price*reservations[2].units);
+  console.log(reservations[3].price*reservations[3].units);
+  console.log(reservations[4].price*reservations[4].units);
+  // const product = {
+  //   // price: props.total,
+  //   price: 6,
+  //   description: "Payment for Smart Travel System",
+  // };
 
   const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState(null);
   const paypalRef = useRef();
   const [str, setStr] = useState("07099369D1814234M");
-  const [tra, setTra] = useState(true);
-  const [gui, setGui] = useState(true);
-  const [ev01, setEv01] = useState(true);
-  const [ev02, setev02] = useState(true);
-  const[hot,sethot] = useState(true); 
+  const [tra, setTra] = useState(false);
+  const [gui, setGui] = useState(false);
+  const [ev01, setEv01] = useState(false);
+  const [ev02, setEv02] = useState(false);
+  const [hot, sethot] = useState(false);
 
   useEffect(() => {
     window.paypal
       .Buttons({
         createOrder: (data, actions) => {
           return actions.order.create({
-            purchase_units: [
-              {
-                description: product.description,
-                amount: {
-                  currency_code: "USD",
-                  value: product.price,
-                },
+            purchase_units: [{
+              amount: {
+                  value: total+20,
+                  currency_code: 'USD',
+                  breakdown: {
+                      tax_total: {value: '20', currency_code: 'USD'},
+                      item_total: {value: total, currency_code: 'USD'}
+                  }
               },
-            ],
+              items: [{
+                  name: reservations[0].name,
+                  unit_amount: {value: reservations[0].price, currency_code: 'USD'},
+                  quantity: reservations[0].units
+              }, {
+                name: reservations[1].name,
+                unit_amount: {value: reservations[1].price, currency_code: 'USD'},
+                quantity: reservations[1].units
+              },{
+                name: reservations[2].name,
+                  unit_amount: {value: reservations[2].price, currency_code: 'USD'},
+                  quantity: reservations[2].units
+            },{
+              name: reservations[3].name,
+                  unit_amount: {value: reservations[3].price, currency_code: 'USD'},
+                  quantity: reservations[3].units
+          },{
+            name: reservations[4].name,
+                unit_amount: {value: reservations[4].price, currency_code: 'USD'},
+                quantity: reservations[4].units
+        }]
+          }],
           });
         },
         onApprove: async (data, actions) => {
@@ -100,6 +73,7 @@ function Paypal(props) {
           setPaidFor(true);
           console.log("response from paypal-> " + order.id);
           setStr(order.id);
+          setTra(true);
         },
         onError: (err) => {
           setError(err);
@@ -107,7 +81,7 @@ function Paypal(props) {
         },
       })
       .render(paypalRef.current);
-  }, [product.description, product.price]);
+  }, [reservations, total]);
 
   if (paidFor) {
     // console.log("string -> "+str);
@@ -128,13 +102,6 @@ function Paypal(props) {
       userID: "e4d74bf2-e51a-4c18-78ee-08d89bf76381",
     };
 
-    axios
-      .post("https://alphax-api.azurewebsites.net/api/payments", paymentData)
-      .then(function (response) {
-        console.log(response);
-      });
-
-      if(tra){
     let TransData = {
       pickUpTime: "2020-10-11T00:00:00",
       pickUpLocation: "Katunayake AirPort",
@@ -150,104 +117,116 @@ function Paypal(props) {
       paymentID: GUID,
     };
 
-    axios
-      .post("https://alphax-api.azurewebsites.net/api/transportservicereservations", TransData)
-      .then(function (response) {
-        console.log(response);
-      });
-      setTra(false);
+    let guideData = {
+      tourGuideServiceID: props.reservations[1].id,
+      numOfTravellers: props.formdata.travelers,
+      checkIn: "2020-10-11T00:00:00",
+      checkOut: "2020-10-12T00:00:00",
+      price: props.reservations[1].unitTotal,
+      userID: "e4d74bf2-e51a-4c18-78ee-08d89bf76381",
+      paymentID: GUID,
+    };
+
+    let event01Data = {
+      eventPlannerServiceID: props.reservations[2].id,
+      numOfTravellers: props.formdata.travelers,
+      checkIn: "2020-10-11T00:00:00",
+      checkOut: "2020-10-12T00:00:00",
+      price: props.reservations[2].unitTotal,
+      userID: "e4d74bf2-e51a-4c18-78ee-08d89bf76381",
+      paymentID: GUID,
+    };
+
+    let event02Data = {
+      eventPlannerServiceID: props.reservations[3].id,
+      numOfTravellers: props.formdata.travelers,
+      checkIn: "2020-10-11T00:00:00",
+      checkOut: "2020-10-12T00:00:00",
+      price: props.reservations[3].unitTotal,
+      userID: "e4d74bf2-e51a-4c18-78ee-08d89bf76381",
+      paymentID: GUID,
+    };
+
+    let hotelData = {
+      noOfRooms: Math.round(props.formdata.travelers / 2),
+      hotelsServiceID: props.reservations[4].id,
+      numOfTravellers: props.formdata.travelers,
+      checkIn: "2020-10-11T00:00:00",
+      checkOut: "2020-10-12T00:00:00",
+      price: props.reservations[4].unitTotal,
+      userID: "e4d74bf2-e51a-4c18-78ee-08d89bf76381",
+      paymentID: GUID,
+    };
+
+    if (tra) {
+      axios
+        .post("https://alphax-api.azurewebsites.net/api/payments", paymentData)
+        .then(function (response) {
+          console.log(response);
+        });
+
+      console.log("passed payment");
+
+      axios
+        .post(
+          "https://alphax-api.azurewebsites.net/api/transportservicereservations",
+          TransData
+        )
+        .then(function (response) {
+          console.log(response);
+        });
+
       console.log("passed transport");
 
-      }
-
-      if(gui){
-      let guideData = {
-        tourGuideServiceID: props.reservations[1].id,
-        numOfTravellers: props.formdata.travelers,
-        checkIn: "2020-10-11T00:00:00",
-        checkOut: "2020-10-12T00:00:00",
-        price: props.reservations[1].unitTotal,
-        userID: "e4d74bf2-e51a-4c18-78ee-08d89bf76381",
-        paymentID: GUID
-      };
-
       axios
-      .post("https://alphax-api.azurewebsites.net/api/tourguideservicereservations", guideData)
-      .then(function (response) {
-        console.log(response);
-      });
-      setGui(false);
+        .post(
+          "https://alphax-api.azurewebsites.net/api/tourguideservicereservations",
+          guideData
+        )
+        .then(function (response) {
+          console.log(response);
+        });
+
       console.log("passed guide");
-    }
-
-    if(ev01){
-      let event01Data = {
-        
-        eventPlannerServiceID: props.reservations[2].id,
-        numOfTravellers: props.formdata.travelers,
-        checkIn: "2020-10-11T00:00:00",
-        checkOut: "2020-10-12T00:00:00",
-        price: props.reservations[2].unitTotal,
-        userID: "e4d74bf2-e51a-4c18-78ee-08d89bf76381",
-        paymentID: GUID
-      };
 
       axios
-      .post("https://alphax-api.azurewebsites.net/api/eventplannerservicereservations", event01Data)
-      .then(function (response) {
-        console.log(response);
-      });
-      setEv01(false);
+        .post(
+          "https://alphax-api.azurewebsites.net/api/eventplannerservicereservations",
+          event01Data
+        )
+        .then(function (response) {
+          console.log(response);
+        });
+
       console.log("passed event01");
-    }
-
-    if(ev02){
-      let event02Data = {
-        
-        eventPlannerServiceID: props.reservations[3].id,
-        numOfTravellers: props.formdata.travelers,
-        checkIn: "2020-10-11T00:00:00",
-        checkOut: "2020-10-12T00:00:00",
-        price: props.reservations[3].unitTotal,
-        userID: "e4d74bf2-e51a-4c18-78ee-08d89bf76381",
-        paymentID: GUID
-      };
 
       axios
-      .post("https://alphax-api.azurewebsites.net/api/eventplannerservicereservations", event02Data)
-      .then(function (response) {
-        console.log(response);
-      });
-      setev02(false);
+        .post(
+          "https://alphax-api.azurewebsites.net/api/eventplannerservicereservations",
+          event02Data
+        )
+        .then(function (response) {
+          console.log(response);
+        });
+
       console.log("passed event02");
-    }
-
-      if(hot){
-      let hotelData = {
-        
-        noOfRooms: Math.round(props.formdata.travelers/2),
-        hotelsServiceID: props.reservations[4].id,
-        numOfTravellers: props.formdata.travelers,
-        checkIn: "2020-10-11T00:00:00",
-        checkOut: "2020-10-12T00:00:00",
-        price: props.reservations[4].unitTotal,
-        userID: "e4d74bf2-e51a-4c18-78ee-08d89bf76381",
-        paymentID: GUID
-      };
 
       axios
-      .post("https://alphax-api.azurewebsites.net/api/hotelsservicereservations", hotelData)
-      .then(function (response) {
-        console.log(response);
-      });
-      sethot(false);
-      console.log("passed hotel");
-    }
+        .post(
+          "https://alphax-api.azurewebsites.net/api/hotelsservicereservations",
+          hotelData
+        )
+        .then(function (response) {
+          console.log(response);
+        });
 
+      console.log("passed hotel");
+
+      setTra(false);
+    }
     return (
       <div>
         <Thank />
-        
       </div>
     );
   }
@@ -265,14 +244,14 @@ function Paypal(props) {
           left: "450px",
         }}
       >
-        <h1>Total = {product.price}USD</h1>
+        <h1>Total = {total+20}USD</h1>
 
         <div ref={paypalRef} />
       </Card>
     </div>
   );
-
 }
+
 const mapStateToProps = (state) => {
   return {
     reservations: state.reservations,
