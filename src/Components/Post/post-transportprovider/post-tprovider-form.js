@@ -71,17 +71,18 @@ class PostTproviderForm extends Component{
 
         e.preventDefault();
         console.log(this.state)
+
         axios
             .post('http://localhost:5000/api/TransportServices', {
                 name:this.state.name,
                 // Email:this.state.email,
                 district:this.state.district,
                 // Address:this.state.address,
-                phonenumber:this.state.telephone,
+                pnumber:this.state.telephone,
                 description:this.state.description,
-                typesofVehicle:this.state.vehicletype,
+                vehicleType:this.state.vehicletype,
                 count:2,
-                costperday:parseInt(this.state.costperday),
+                pricePerDay:parseInt(this.state.costperday),
                 userid:"c9d4c053-49b6-410c-bc78-2d54a9991870",
 
 

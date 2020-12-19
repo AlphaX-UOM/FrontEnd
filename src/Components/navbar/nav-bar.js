@@ -4,6 +4,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {Link} from 'react-router-dom';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 import { Button } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
@@ -26,6 +27,14 @@ const navbar=()=>{
                 </button>
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul className="navbar-nav nav-tabs  ">
+                    <li className="nav-item" style={{width:"50px"}}>
+                        {/*<Link className="nav-link" to="/shoppingcart"><span className="align-text-bottom "><ShoppingCartIcon/></span></Link>*/}
+                        <Link to="/shoppingcart">
+                            <i className="fas fa-shopping-bag fa-2x grey"></i>
+                        </Link>
+                        <span className="badge badge-pill badge-success"></span>
+
+                    </li>
                     <li className="nav-item  " style={{width:"100px"}}>
                         <Link className="nav-link " to="/"> <span className="align-text-bottom"><HomeIcon /></span> Home <span className="sr-only">(current)</span></Link>
                     </li>

@@ -1,71 +1,61 @@
 import React,{Component, useEffect, useState }  from 'react';
 import Listitem from '../../Components/servicemodules/transport/Listitem/listitem'
-import axios from 'axios';
 import {BrowserRouter,Route,Switch} from 'react-router-dom';
-
 import {useHistory} from 'react-router-dom'
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
+
 
 class transportproviderlist extends Component{
     state = {
         providers :[],
-        selectedPostId: null,
         error: false
     };
 
 
 
-        async componentDidMount () {
-            fetch('http://localhost:5000/api/TransportServices')
-         .then(res => res.json())
-         .then(provider =>
-
-             this.setState({ providers:provider})
-
-         )
-         .catch(error => {
-
-             this.setState({error: true});
-         });
-
-
-
+         componentDidMount () {
+         //    fetch('http://localhost:5000/api/TransportServices')
+         // .then(res => res.json())
+         // .then(provider =>
+         //
+         //     this.setState({ providers:provider})
+         //     // this.props.onFetchTransport(provider)
+         //
+         // )
+         // .catch(error => {
+         //
+         //     this.setState({error: true});
+         // });
 
 
-     // axios.get( 'http://localhost:5000/api/TransportServices' )
-     //     .then( response => {
-     //
-     //         this.setState({providers: response});
-     //
-     //     } );
-
+        console.log(this.props);
+        this.props.onInitTransport();
 
     }
 
-
-
-    postSelectedHandler = (id) => {
-
-        this.setState({selectedPostId: id});
-       // console.log(id)
-
-
-    }
+    // postSelectedHandler = (id) => {
+    //
+    //     this.setState({selectedPostId: id});
+    //    // console.log(id)
+    //
+    //
+    // }
 
     render() {
-       // console.log(this.state);
-         let  provideritem = (
+
+        let  provideritem = (
                 <div>
-                    {this.state.providers.map((provider) => {
+                    {this.props.providers_array.map((provider) => {
                         return(
 
                                 <Listitem
-                                    key={provider.id}
+                                    post_index={provider.post_id}
                                     id={provider.id}
                                     name={provider.name}
-                                    price={provider.costPerDay}
-                                    vtype={provider.typesOfVehicle}
-                                    rating={provider.ratings}
-                                    clicked={() => this.postSelectedHandler(provider.id)}
+                                    price={provider.pricePerDay}
+                                    vtype={provider.vehicleType}
+
                                 />
 
 
@@ -91,9 +81,6 @@ class transportproviderlist extends Component{
                             </div>
                         </div>
 
-
-
-
             </div>
 
         );
@@ -101,4 +88,20 @@ class transportproviderlist extends Component{
     }
 }
 
-export default transportproviderlist;
+
+
+const mapStateToProps = state => {
+    return {
+
+        providers_array: state.transport_reducer.providers,
+
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onInitTransport: () => dispatch(actions.initTransport()),
+
+    }
+};
+export default  connect(mapStateToProps, mapDispatchToProps)(transportproviderlist);

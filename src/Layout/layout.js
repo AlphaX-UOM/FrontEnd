@@ -3,6 +3,7 @@ import {BrowserRouter,Route,Switch,Redirect} from 'react-router-dom';
 import Navbar from "../Components/navbar/nav-bar";
 
 import Post from "../Components/Post/post";
+import Shoppingcart from "../Components/cart/cartlist/views/cart";
 import Login from "../Components/Login/login";
 import ServiceProvider from "../Components/Userpanels/ServiceProviderUI/Serviceprovider";
 import Transportinput from "../Components/servicemodules/transport/Transport-input/Transport-input";
@@ -62,6 +63,7 @@ class Layoutt extends Component {
                         <Route path="/post/post-transportprovider"component={ PostTransportProviderForm}/>
                         <Route path="/post" component={Post}></Route>
                         <Route path="/login"><Login/></Route>
+                        <Route path="/shoppingcart"><Shoppingcart/></Route>
                         <Route path="/serviceprovider" component={ServiceProvider}/>
                         <Route path="/transport"><Transportinput/></Route>
                         <Route path="/transportproviderlist/:id"  component={Listitemdetails}/>

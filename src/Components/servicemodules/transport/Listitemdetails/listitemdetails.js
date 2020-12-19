@@ -7,26 +7,32 @@ import Logo1 from '../../../../images/vehicle/itemimages/Intermediate.jpg';
 import Logo2 from '../../../../images/vehicle/slide/v.jpg';
 import Logo3 from '../../../../images/vehicle/slide/suv.jfif';
 import Logo4 from '../../../../images/vehicle/slide/Bus.jfif';
+import * as actions from "../../../../store/actions";
+import connect from "react-redux/es/connect/connect";
 class Listitemdetails extends Component {
 
 
-    state = {  providers :[],
+    state = {
+
+        providers :[],
         loadedPost: null,
         userId:null
 
     }
 
     componentDidMount() {
-            fetch('http://localhost:5000/TransportProvider/'+this.props.match.params.id)
+            fetch('http://localhost:5000/api/TransportServices/'+this.props.match.params.id)
             .then(res => res.json())
             .then(provider =>
-                this.setState({ providers:provider.data })
+                this.setState({ providers:provider})
 
             )
             .catch(error => {
 
                 this.setState({error: true});
             });
+            // console.log(this.props);
+            // this.props.onInitTransportProvider(this.props.match.params.id);
 
     }
 
@@ -47,16 +53,6 @@ class Listitemdetails extends Component {
     }
 
     render() {
-
-        // let img =(
-        //
-        //     if (this.state.providers.typesOfVehicle==="Car"){
-        //         <img src={Logo1} alt=""/>
-        //     }else if(this.state.providers.typesOfVehicle==="Van"){
-        //         <img src={Logo2} alt=""/>
-        //     }
-        //
-        // )
 
 
 
@@ -81,22 +77,22 @@ class Listitemdetails extends Component {
                             </div>
                             <div className="col-sm">
                                 {
-                                    ( this.state.providers.typesOfVehicle === 'Car')
+                                    ( this.state.providers.vehicleType === 'Car')
                                         ? <img src={Logo1} alt=""/>
                                         :''
                                 }
                                 {
-                                    ( this.state.providers.typesOfVehicle === 'Van')
+                                    ( this.state.providers.vehicleType === 'Van')
                                         ? <img src={Logo2} alt=""/>
                                         :''
                                 }
                                 {
-                                    ( this.state.providers.typesOfVehicle === 'Suv')
+                                    ( this.state.providers.vehicleType === 'Suv')
                                         ? <img src={Logo3} alt=""/>
                                         :''
                                 }
                                 {
-                                ( this.state.providers.typesOfVehicle === 'Bus')
+                                ( this.state.providers.vehicleType === 'Bus')
                                     ? <img src={Logo4} alt=""/>
                                     :''
                                  }
@@ -128,7 +124,7 @@ class Listitemdetails extends Component {
                                 <div className="col text-center alert alert-dark">Vehicle type</div>
                                 <div className="col ">
                                     <div className="alert alert-secondary" role="alert">
-                                    {this.state.providers.typesOfVehicle}
+                                    {this.state.providers.vehicleType}
                                 </div>
 
                                     </div>
@@ -140,7 +136,7 @@ class Listitemdetails extends Component {
                                 <div className="col text-center alert alert-dark">Price Per Day</div>
                                 <div className="col">
                                         <div className="alert alert-secondary" role="alert">
-                                      {this.state.providers.costPerDay}
+                                      {this.state.providers.pricePerDay}
                                 </div>
                                   </div>
                             </div>
@@ -155,7 +151,7 @@ class Listitemdetails extends Component {
                                 <div className="col text-center alert alert-dark">TP :</div>
                                 <div className="col">
                                         <div className="alert alert-secondary" role="alert">
-                                   {this.state.providers.phoneNumber}
+                                   {this.state.providers.pnumber}
                                 </div>
                                    </div>
                             </div>
@@ -229,6 +225,19 @@ class Listitemdetails extends Component {
 
     }
 }
+const mapStateToProps = state => {
+    return {
 
+        provider_array: state.transport_reducer.provider,
 
-export default Listitemdetails;
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onInitTransportProvider: (id) => dispatch(actions.initTransportProvider(id)),
+
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps) (Listitemdetails);
