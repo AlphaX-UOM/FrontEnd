@@ -44,23 +44,28 @@ function Paypal(props) {
               items: [{
                   name: reservations[0].name,
                   unit_amount: {value: reservations[0].price, currency_code: 'USD'},
-                  quantity: reservations[0].units
+                  quantity: reservations[0].units,
+                  sku: reservations[0].id
               }, {
                 name: reservations[1].name,
                 unit_amount: {value: reservations[1].price, currency_code: 'USD'},
-                quantity: reservations[1].units
+                quantity: reservations[1].units,
+                sku: reservations[1].id
               },{
                 name: reservations[2].name,
                   unit_amount: {value: reservations[2].price, currency_code: 'USD'},
-                  quantity: reservations[2].units
+                  quantity: reservations[2].units,
+                  sku: reservations[2].id
             },{
               name: reservations[3].name,
                   unit_amount: {value: reservations[3].price, currency_code: 'USD'},
-                  quantity: reservations[3].units
+                  quantity: reservations[3].units,
+                  sku: reservations[3].id
           },{
             name: reservations[4].name,
                 unit_amount: {value: reservations[4].price, currency_code: 'USD'},
-                quantity: reservations[4].units
+                quantity: reservations[4].units,
+                sku: reservations[4].id
         }]
           }],
           });
