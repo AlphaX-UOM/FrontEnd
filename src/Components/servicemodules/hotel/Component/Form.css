@@ -1,0 +1,13 @@
+.heading{
+    padding: 20px;
+    border-radius: 0px;
+}
+
+.title{
+    font-size: 40px;
+}
+
+.form{
+    background-image: url('../../../../images/hotel-img/background.jpg');
+    background-size: cover;
+}

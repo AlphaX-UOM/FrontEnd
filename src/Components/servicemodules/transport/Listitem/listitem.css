@@ -1,0 +1,11 @@
+.link{
+    color: black;
+    text-decoration: none;
+}
+.card-title:hover{
+    text-decoration: none;
+}
+.textdec:hover{
+    color: cadetblue;
+    text-decoration: none;
+}
