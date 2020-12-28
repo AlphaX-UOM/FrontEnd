@@ -99,7 +99,7 @@ class TransportInput extends Component{
                                     </div>
                                 </div>
 
-                                <div className="form-group" hidden = {(!this.state.hidden)? "hidden" : ""}>
+                                <div className="form-group" >
                                     <input type="text"
                                            className="form-control" placeholder="Drop Off Location"
                                            value={this.state.dropofflocation} onChange={this.Changehandler}

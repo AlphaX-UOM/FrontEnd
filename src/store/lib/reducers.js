@@ -9,7 +9,7 @@ const saveToLocalStorage = object => {
     localStorage.setItem('items', JSON.stringify(object))
 }
 
-export default function onlineStoreApp(state = initiaState, action) {
+const onlineStoreApp=(state = initiaState, action)=> {
     // console.log(state)
     switch (action.type) {
         case actions.ADD_TO_CART:
@@ -34,4 +34,5 @@ export default function onlineStoreApp(state = initiaState, action) {
     }
 }
 
+export default onlineStoreApp;
 

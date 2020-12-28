@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateCart, removeFromCart } from '../../../../store/lib/actions'
 import { Link } from "react-router-dom";
 import React, { Fragment, useEffect, useState } from 'react';
-
+import './cart.css';
 
 const Row = (props) => {
     // console.log(props)
@@ -28,36 +28,16 @@ const Row = (props) => {
       return (
         <tr>
          
-          <td>{item.name}</td>
-          <td>${item.price}</td>
+          <td>{item}</td>
+          <td>${qty}</td>
           <td>
             <div className="btn-group" role="group" aria-label="Basic example">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={() => {
-                  if (qty > 1) {
-                    setQty(qty - 1)
-                    // update(id, quantity - 1)
-                  }
-                }}  
-              >
-                -
-              </button>
+
                 <span className="btn btn-light">{qty}</span>
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={() => {
-                  setQty(qty + 1)
-                  // update(id, quantity + 1)
-                }}
-              >
-                +
-              </button>
+
             </div>
           </td>
-            <td>${ (quantity * item.price).toFixed(2) }</td>
+            <td>${ (qty * 1).toFixed(2) }</td>
           <td>
             <button
               type="button"

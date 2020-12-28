@@ -42,7 +42,7 @@ class transportproviderlist extends Component{
     //
     // }
 
-    render() {
+render() {
 
         let  provideritem = (
                 <div>

@@ -45,79 +45,7 @@ const post=(props)=>{
 
 
                             <div className="col-sm-6">
-                                {/*<div className="row">*/}
-                                    {/*<div className="col-sm-6">*/}
-                                        {/*<Link to={props.match.url + '/post-transportprovider'} className="link textdec" >*/}
-                                            {/*<div className="card cbground  " style={{width: "15rem"}}>*/}
-                                                {/*<img src={Logo1} className="card-img-top" alt=""/>*/}
-                                                {/*<div className="card-body">*/}
-                                                    {/*<p className="card-text">*/}
-                                                        {/*<div className="alert alert-primary text-center " role="alert">*/}
-                                                            {/*Be a Vehicle Provider*/}
-                                                        {/*</div>*/}
 
-                                                    {/*</p>*/}
-                                                {/*</div>*/}
-                                            {/*</div>*/}
-                                        {/*</Link>*/}
-                                    {/*</div>*/}
-                                        {/*<div className="col-sm-6">*/}
-                                            {/*<Link to={props.match.url +"/post-tourguide"} className="link textdec">*/}
-                                                {/*<div className="card cbground" style={{width: "15rem"}}>*/}
-
-                                                    {/*<img src={Logo2} className="card-img-top" alt=""/>*/}
-                                                    {/*<div className="card-body">*/}
-                                                        {/*<p className="card-text">*/}
-                                                            {/*<div className="alert alert-primary text-center" role="alert">*/}
-                                                                {/*Be a Tour Guide*/}
-                                                            {/*</div>*/}
-
-                                                        {/*</p>*/}
-                                                    {/*</div>*/}
-                                                {/*</div>*/}
-                                            {/*</Link>*/}
-                                        {/*</div>*/}
-
-                                    {/*</div>*/}
-
-                                    {/*<div className="row">*/}
-                                        {/*<div className="col-sm-6">*/}
-                                            {/*<Link to={props.match.url +"/post-event"} className="link textdec">*/}
-                                                {/*<div className="card cbground " style={{width: "15rem"}}>*/}
-
-                                                    {/*<img src={Logo3} className="card-img-top chotel" alt=""/>*/}
-                                                    {/*<div className="card-body ">*/}
-                                                        {/*<p className="card-text">*/}
-                                                            {/*<div className="alert alert-primary text-center" role="alert">*/}
-                                                                {/*Post Your Events*/}
-                                                            {/*</div>*/}
-
-                                                        {/*</p>*/}
-                                                    {/*</div>*/}
-                                                {/*</div>*/}
-                                            {/*</Link>*/}
-                                        {/*</div>*/}
-
-
-             {/*<div className="col-sm-6">*/}
-                    {/*<Link to={props.match.url +"/post-hotel"} className="link textdec">*/}
-                                {/*<div className="card cbground" style={{width: "15rem"}}>*/}
-
-                            {/*<img src={Logo4} className="card-img-top chotel" alt=""/>*/}
-                            {/*<div className="card-body " >*/}
-                             {/*<p className="card-text">*/}
-                              {/*<div className="alert alert-primary text-center" role="alert">*/}
-                            {/*Join with our Hotels*/}
-                             {/*</div>*/}
-
-                                        {/*</p>*/}
-                                    {/*</div>*/}
-                                {/*</div>*/}
-                    {/*</Link>*/}
-             {/*</div>*/}
-
-
-                                    {/*</div>*/}
 
 
                                 <div className="container" id="tm-section-3">

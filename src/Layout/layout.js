@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component,Fragment, useState, useEffect } from 'react';
 import {BrowserRouter,Route,Switch,Redirect} from 'react-router-dom';
 import Navbar from "../Components/navbar/nav-bar";
+import { connect } from 'react-redux'
+import { saveCart } from '../../src/store/lib/actions'
 
 import Post from "../Components/Post/post";
 import Shoppingcart from "../Components/cart/cartlist/views/cart";
@@ -31,8 +33,21 @@ import ResultList from '../Components/servicemodules/suggestor/Pages/ResultList/
 import DetailedResult from '../Components/servicemodules/suggestor/Pages/DetailedResult/DetailedResult';
 import Payment from '../Components/servicemodules/suggestor/Pages/Checkout/Payment';
 import Thank from '../Components/servicemodules/suggestor/Pages/ThankYou/Thank';
-class Layoutt extends Component {
-    render () {
+
+
+
+const Layout=(props)=> {
+    // const { items, saveLocalStorage } = props;
+    // useEffect(() => {
+    //     saveLocalStorage(items)
+    // }, [items])
+
+    // componentDidMount(){
+    //     saveCart(this.props.items)
+    //     // this.props.(this.props.items)
+    // }
+
+    // render () {
         return (
 
                 <div>
@@ -70,13 +85,26 @@ class Layoutt extends Component {
                         <Route path="/transportproviderlist"><Transportproviderlist/></Route>
                         <Route path="/" exact component={Home}/>
                         <Redirect to="/"/>
+
                     </Switch>
 
                     <Footer/>
                 </div>
 
         );
+    // }
+}
+
+
+const mapStateToProps = (state) => {
+    return {
+        items: state.items
     }
 }
 
-export default Layoutt;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        saveLocalStorage:  items => { dispatch(saveCart(items)) }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);

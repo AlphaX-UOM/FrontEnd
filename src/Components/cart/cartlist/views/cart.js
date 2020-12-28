@@ -1,24 +1,27 @@
-
+import './cart.css';
 import { useDispatch, useSelector } from 'react-redux'
 import { updateCart, removeFromCart } from '../../../../store/lib/actions'
 import Table from './Table';
 import React, { Fragment, useEffect, useState } from 'react';
+import { connect } from 'react-redux'
 
 
- const CartPage = () => {
-    const items = useSelector(state => state.items);
+ const CartPage = (props) => {
+     const {items} = props;
+     // const items = useSelector(state => state.items);
     const [ subTotal, setSubTotal] = useState(0.00);
     const [ total, setTotal] = useState(0.00);
     const shipping = 10.00;
   
   
     useEffect(() => {
-      let totals = items.map(item => item.quantity * item.details.price)
+      let totals = items.map(item => item.quantity * 1)
       setSubTotal(totals.reduce((item1, item2) => item1 + item2, 0)) 
       setTotal(subTotal + shipping)
     }, [items, subTotal, total]) // Why useEfect -> Neu ko use it, react chua render first, da change state -> error
       return (
         <Fragment>
+            <br/>
           <div className="container">
               <div className="row">
               <div className="col-sm cart">
@@ -55,7 +58,21 @@ import React, { Fragment, useEffect, useState } from 'react';
               </div>
               </div>
           </div>
+            <br/>
         </Fragment>
       );
   }
-  export default CartPage;
+const mapStateToProps = (state) => {
+    return {
+        items: state.onlineStoreApp.items
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        // saveLocalStorage:  items => { dispatch(saveCart(items)) }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)( CartPage);
+

@@ -626,3 +626,7 @@ label { font-weight: 700; }
         width: 100%;
     }
 }
+.cartnum{
+    margin-top: 1px;
+    margin-right: 70px;
+}

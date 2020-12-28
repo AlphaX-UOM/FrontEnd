@@ -7,18 +7,22 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import transport from './store/reducers/transport_reducer';
+import onlineStoreApp from './../src/store/lib/reducers';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     transport_reducer: transport,
+      onlineStoreApp:onlineStoreApp
 
 });
 
 
-const store = createStore(rootReducer, composeEnhancers(
+const store = createStore(rootReducer,composeEnhancers(
     applyMiddleware(thunk)
 ));
+
+ // const store = createStore(onlineStoreApp)
 
 ReactDOM.render(
   <React.StrictMode>

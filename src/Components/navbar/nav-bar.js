@@ -13,8 +13,10 @@ import { Form } from 'react-bootstrap';
 import { FormControl } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import logo1 from "../../images/temp/bg lg/bgbanner-logo.png"
+import connect from "react-redux/es/connect/connect";
 
-const navbar=()=>{
+const navbar=(props)=>{
+    const {items} = props;
     return(
         <div>
             <nav className="navbar navbar-expand-lg  navbar-dark bg-dark shadow-sm  " >
@@ -27,14 +29,8 @@ const navbar=()=>{
                 </button>
                 <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul className="navbar-nav nav-tabs  ">
-                    <li className="nav-item" style={{width:"50px"}}>
-                        {/*<Link className="nav-link" to="/shoppingcart"><span className="align-text-bottom "><ShoppingCartIcon/></span></Link>*/}
-                        <Link to="/shoppingcart">
-                            <i className="fas fa-shopping-bag fa-2x grey"></i>
-                        </Link>
-                        <span className="badge badge-pill badge-success"></span>
 
-                    </li>
+
                     <li className="nav-item  " style={{width:"100px"}}>
                         <Link className="nav-link " to="/"> <span className="align-text-bottom"><HomeIcon /></span> Home <span className="sr-only">(current)</span></Link>
                     </li>
@@ -45,11 +41,32 @@ const navbar=()=>{
                         <Link className="nav-link" to="/login"><span className="align-text-bottom"><ExitToAppIcon/></span> Sign in</Link>
                     </li>
 
+                    <li className="nav-item" style={{width:"100px"}}>
+                        <span className="badge badge-pill badge-success cartnum" >{items.length > 0 && items.length}</span>
+                        <Link className="nav-link" to="/shoppingcart"><span className="align-text-bottom "><ShoppingCartIcon/></span></Link>
+                        {/*<Link to="/" className="nav-link ">*/}
+                        {/*<ShoppingCartIcon/>*/}
+                        {/*</Link>*/}
+
+
+                    </li>
+
                 </ul>
             </div>
             </nav>
         </div>
     )
 };
+const mapStateToProps = (state) => {
+    return {
+        items: state.onlineStoreApp.items
+    }
+}
 
-export default navbar;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        // saveLocalStorage:  items => { dispatch(saveCart(items)) }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(navbar);
