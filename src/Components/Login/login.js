@@ -26,8 +26,8 @@ const login=()=>{
 
 
             <br/>
-            <Signup/>
-            {/*<Signin/>*/}
+            {/*<Signup/>*/}
+            <Signin/>
         </div>
     )
 };

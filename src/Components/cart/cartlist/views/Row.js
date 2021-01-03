@@ -5,6 +5,8 @@ import { updateCart, removeFromCart } from '../../../../store/lib/actions'
 import { Link } from "react-router-dom";
 import React, { Fragment, useEffect, useState } from 'react';
 import './cart.css';
+import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 const Row = (props) => {
     // console.log(props)
@@ -28,24 +30,26 @@ const Row = (props) => {
       return (
         <tr>
          
-          <td>{item}</td>
+          <td><p className="font-weight-bold">{item}</p></td>
           <td>${qty}</td>
           <td>
             <div className="btn-group" role="group" aria-label="Basic example">
 
-                <span className="btn btn-light">{qty}</span>
+                <span className="btn btn-light">non</span>
 
             </div>
           </td>
             <td>${ (qty * 1).toFixed(2) }</td>
           <td>
-            <button
-              type="button"
-              className="btn btn-danger remove"
-              onClick={() => { remove(props.item) }}
-            >
-              X
-            </button>
+              <CancelIcon color="secondary" fontSize="large" onClick={() => {remove(props.item)}}></CancelIcon>
+              {/*<CancelOutlinedIcon>aa</CancelOutlinedIcon>*/}
+            {/*<button*/}
+              {/*type="button"*/}
+              {/*className="btn btn-danger remove"*/}
+              {/*onClick={() => { remove(props.item) }}*/}
+            {/*>*/}
+              {/*X*/}
+            {/*</button>*/}
           </td>
         </tr>
       );

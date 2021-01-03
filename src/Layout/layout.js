@@ -33,13 +33,14 @@ import ResultList from '../Components/servicemodules/suggestor/Pages/ResultList/
 import DetailedResult from '../Components/servicemodules/suggestor/Pages/DetailedResult/DetailedResult';
 import Payment from '../Components/servicemodules/suggestor/Pages/Checkout/Payment';
 import Thank from '../Components/servicemodules/suggestor/Pages/ThankYou/Thank';
+import SignUp from "../Components/Login/Signup/signup";
 
 
 
 const Layout=(props)=> {
-    // const { items, saveLocalStorage } = props;
+    const { items, saveLocalStorage } = props;
     // useEffect(() => {
-    //     saveLocalStorage(items)
+    //   saveLocalStorage(items)
     // }, [items])
 
     // componentDidMount(){
@@ -78,6 +79,7 @@ const Layout=(props)=> {
                         <Route path="/post/post-transportprovider"component={ PostTransportProviderForm}/>
                         <Route path="/post" component={Post}></Route>
                         <Route path="/login"><Login/></Route>
+                        <Route path="/signupform"><SignUp/></Route>
                         <Route path="/shoppingcart"><Shoppingcart/></Route>
                         <Route path="/serviceprovider" component={ServiceProvider}/>
                         <Route path="/transport"><Transportinput/></Route>

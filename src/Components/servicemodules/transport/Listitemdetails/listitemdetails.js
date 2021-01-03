@@ -9,6 +9,7 @@ import Logo3 from '../../../../images/vehicle/slide/suv.jfif';
 import Logo4 from '../../../../images/vehicle/slide/Bus.jfif';
 import * as actions from "../../../../store/lib/actions";
 import connect from "react-redux/es/connect/connect";
+import {Link} from 'react-router-dom'
 class Listitemdetails extends Component {
 
 
@@ -214,9 +215,9 @@ class Listitemdetails extends Component {
 
 
                             </div>
-                            <div className="col-sm depad">
-                                <button type="button" className="btn btn-primary " onClick={() => this.props.add_to_cart(this.state.providers.vehicleType,this.state.providers.pricePerDay)}>Book Now</button>
-                            </div>
+                            <Link className="col-sm depad" to="/shoppingcart">
+                                <button type="button" className="btn btn-primary "  onClick={() => this.props.add_to_cart(this.state.providers.vehicleType,this.state.providers.pricePerDay,this.state.providers.id)}>Book Now</button>
+                            </Link>
                         </div>
                     </div>
 
@@ -236,7 +237,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         // onInitTransportProvider: (id) => dispatch(actions.initTransportProvider(id)),
-         add_to_cart:(item,qty) => dispatch(actions.addToCart(item,qty))
+         add_to_cart:(item,qty,add_id) => dispatch(actions.addToCart(item,qty,add_id))
 
     }
 };
