@@ -17,11 +17,14 @@ class Listitemdetails extends Component {
 
         providers :[],
         loadedPost: null,
-        userId:null
+        userId:null,
+        travellers: 5
 
     }
 
     componentDidMount() {
+
+
             fetch('http://localhost:5000/api/TransportServices/'+this.props.match.params.id)
             .then(res => res.json())
             .then(provider =>
@@ -32,6 +35,9 @@ class Listitemdetails extends Component {
 
                 this.setState({error: true});
             });
+
+        // console.log(this.props.no_travellers);
+        // console.log(this.state.travellers)
             // console.log(this.props);
             // this.props.onInitTransportProvider(this.props.match.params.id);
 
@@ -216,7 +222,7 @@ class Listitemdetails extends Component {
 
                             </div>
                             <Link className="col-sm depad" to="/shoppingcart">
-                                <button type="button" className="btn btn-primary "  onClick={() => this.props.add_to_cart(this.state.providers.vehicleType,this.state.providers.pricePerDay,this.state.providers.id)}>Book Now</button>
+                                <button type="button" className="btn btn-primary "  onClick={() => this.props.add_to_cart(this.state.providers.vehicleType,this.state.providers.pricePerDay,this.state.providers.id,this.props.no_travellers)}>Book Now</button>
                             </Link>
                         </div>
                     </div>
@@ -230,14 +236,14 @@ const mapStateToProps = state => {
     return {
 
         provider_array: state.transport_reducer.provider,
-
+        no_travellers: state.transport_input_reducer.form_input
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         // onInitTransportProvider: (id) => dispatch(actions.initTransportProvider(id)),
-         add_to_cart:(item,qty,add_id) => dispatch(actions.addToCart(item,qty,add_id))
+         add_to_cart:(item,qty,add_id,no_travellers) => dispatch(actions.addToCart(item,qty,add_id,no_travellers))
 
     }
 };

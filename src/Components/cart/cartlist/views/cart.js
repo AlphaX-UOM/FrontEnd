@@ -16,7 +16,8 @@ import { saveCart } from '../../../../store/lib/actions'
   
   
     useEffect(() => {
-        console.log(items);
+
+        // console.log(items);
 
       let totals = items.map(item => item.quantity * 1)
       setSubTotal(totals.reduce((item1, item2) => item1 + item2, 0)) 
@@ -29,7 +30,7 @@ import { saveCart } from '../../../../store/lib/actions'
           <div className="container">
               <div className="row">
               <div className="col-sm cart">
-                  <Table items={items}/>
+                  <Table items={items} />
               </div>
               <div className="col-sm-3 order-summary">
                   <ul className="list-group">
@@ -68,7 +69,8 @@ import { saveCart } from '../../../../store/lib/actions'
   }
 const mapStateToProps = (state) => {
     return {
-        items: state.onlineStoreApp.items
+        items: state.onlineStoreApp.items,
+
     }
 }
 

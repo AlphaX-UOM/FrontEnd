@@ -7,14 +7,15 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import transport from './store/reducers/transport_reducer';
+import transportinput from './store/reducers/transport_input_reducer';
 import onlineStoreApp from './../src/store/lib/reducers';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     transport_reducer: transport,
-      onlineStoreApp:onlineStoreApp
-
+      onlineStoreApp:onlineStoreApp,
+        transport_input_reducer:transportinput
 });
 
 

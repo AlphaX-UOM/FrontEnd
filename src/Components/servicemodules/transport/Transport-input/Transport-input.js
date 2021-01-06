@@ -4,6 +4,9 @@ import {History} from 'react-router-dom';
 import axios from "axios";
 import {withRouter} from 'react-router-dom';
 import { format } from "date-fns";
+import {saveCart} from "../../../../store/lib/actions";
+import connect from "react-redux/es/connect/connect";
+import * as actions from '../../../../store/actions/index';
 
 class TransportInput extends Component{
 
@@ -34,13 +37,13 @@ class TransportInput extends Component{
 
     }
 
-    handleSubmit = e =>{
+    handleSubmit =(e) =>{
 
 
          e.preventDefault();
 
-         console.log(this.state)
-
+         // console.log(this.state)
+        this.props.transport_input_form(this.state.notravellers);
         this.props.history.push('/transportproviderlist')
         // axios
         //     .post('http://localhost:5000/TransportProvider/Post', {
@@ -92,7 +95,7 @@ class TransportInput extends Component{
                                 </div>
 
                                 <div className="form-check form-check-inline">
-                                    <input className="form-check-input form-group" type="checkbox" id="inlineCheckbox1"
+                                    <input className="form-check-input form-group" type="checkbox"
                                            value="true" name=" checkboxval"   onClick = {this.handlehiddenClik.bind(this)} />
                                     <div className="input-group-prepend">
                                         <label className="form-group "><p >Return  to the same location</p> </label>
@@ -108,28 +111,28 @@ class TransportInput extends Component{
                                 </div>
 
                                 <div className="form-group tm-name-container">
-                                    <input  id="contact_name" name="contact_name" className="form-control"
+                                    <input   name="contact_name" className="form-control"
                                             placeholder="Drop off Date" disabled/>
                                 </div>
 
                                 <div className="form-group tm-email-container">
-                                    <input type="date" id="contact_email" name="dropoffdate" className="form-control"
+                                    <input type="date" name="dropoffdate" className="form-control"
                                            placeholder="date"  value={this.state.dropoffdate} onChange={this.Changehandler}
                                            min={this.state.pickupdate}/>
                                 </div>
 
                                 <div className="form-group tm-name-container">
-                                    <input  id="contact_name" name="contact_name" className="form-control"
+                                    <input   name="contact_name" className="form-control"
                                             placeholder="Drop Off Time" disabled/>
                                 </div>
 
                                 <div className="form-group tm-email-container">
-                                    <input type="time" id="contact_email" name="dropofftime" className="form-control"
+                                    <input type="time"  name="dropofftime" className="form-control"
                                            placeholder="date"   value={this.state.dropofftime} onChange={this.Changehandler}/>
                                 </div>
 
                                 <div className="form-group">
-                                    <input type="Number" id="contact_subject" name="notravellers"
+                                    <input type="Number"  name="notravellers"
                                            className="form-control" placeholder="No Of Travellers"  value={this.state.notravellers} onChange={this.Changehandler} min="0"/>
                                 </div>
 
@@ -143,74 +146,23 @@ class TransportInput extends Component{
                 </div>
 
 
-
-
-
-                {/*<br/>*/}
-                {/*<div className="container-fluid becolor">*/}
-                    {/*<div className="container">*/}
-                        {/*<div className="row">*/}
-                            {/*<div className="col-lg-4">*/}
-                                {/*<hr/>*/}
-                            {/*</div>*/}
-                            {/*<div className="col-lg-4">*/}
-                                {/*<h3 style={{textAlign: "center"}}>Benefits from us</h3>*/}
-                            {/*</div>*/}
-                            {/*<div className="col-lg-4">*/}
-                                {/*<hr/>*/}
-                            {/*</div>*/}
-                        {/*</div>*/}
-
-                        {/*<br/>*/}
-                        {/*<div className="row">*/}
-                            {/*<div className="col-lg-6">*/}
-                                {/*<h4 style={{textAlign: "center"}} className="btitles">*/}
-                                    {/*Incredibly low prices*/}
-                                {/*</h4>*/}
-
-                                {/*<p style={{textAlign: "center"}}>*/}
-                                    {/*huge discounts and special rates*/}
-                                {/*</p>*/}
-                                {/*<br/>*/}
-
-                                {/*<h4 style={{textAlign: "center"}} className="btitles">*/}
-                                    {/*Free cancellation & modification*/}
-                                {/*</h4>*/}
-                                {/*<p style={{textAlign: "center"}}>*/}
-                                    {/*Free of charge week befor cancelation*/}
-                                {/*</p>*/}
-                                {/*<br/>*/}
-                                {/*<h4 style={{textAlign: "center"}} className="btitles">*/}
-                                    {/*24 hour support*/}
-                                {/*</h4>*/}
-                                {/*<p style={{textAlign: "center"}}>*/}
-                                    {/*Round the clock multi language customer service, 7 days a week*/}
-                                {/*</p>*/}
-                            {/*</div>*/}
-
-                            {/*<div className="col-lg-6">*/}
-                                {/*<h4 style={{textAlign: "center"}} className="btitles">*/}
-                                    {/*No hidden fees and commisions*/}
-                                {/*</h4>*/}
-                                {/*<p style={{textAlign: "center"}}>*/}
-                                    {/*All details are indicted in the terms.There are no fees for credit card processing.*/}
-                                {/*</p>*/}
-                                {/*<br/>*/}
-                                {/*<h4 style={{textAlign: "center"}} className="btitles">*/}
-                                    {/*Reliable*/}
-                                {/*</h4>*/}
-                                {/*<p style={{textAlign: "center"}}>*/}
-                                    {/*We collaborate only with reputable car rental companies and always gurantee*/}
-                                    {/*highlevel of services.*/}
-                                {/*</p>*/}
-                            {/*</div>*/}
-                        {/*</div>*/}
-                    {/*</div>*/}
-                {/*</div>*/}
                 <br/>
             </div>
         )
     }
 };
 
-export default withRouter(TransportInput);
+
+const mapStateToProps = (state) => {
+    return {
+        // items: state.onlineStoreApp.items
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        transport_input_form:  (form) => { dispatch(actions.get_transport_input_form(form)) }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(TransportInput));

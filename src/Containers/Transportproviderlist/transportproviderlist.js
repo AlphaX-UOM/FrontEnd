@@ -29,7 +29,7 @@ class transportproviderlist extends Component{
          // });
 
 
-        console.log(this.props);
+        // console.log(this.props);
         this.props.onInitTransport();
 
     }

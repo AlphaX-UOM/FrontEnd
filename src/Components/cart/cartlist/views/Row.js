@@ -9,8 +9,8 @@ import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import CancelIcon from '@material-ui/icons/Cancel';
 
 const Row = (props) => {
-    // console.log(props)
-    const { id, quantity, details } = props.item
+     console.log(props.item)
+    const { id, quantity, details,no_travellers } = props.item
     const item = details
     const [ qty, setQty ] = useState(quantity);
     const dispatch = useDispatch()
@@ -33,11 +33,8 @@ const Row = (props) => {
           <td><p className="font-weight-bold">{item}</p></td>
           <td>${qty}</td>
           <td>
-            <div className="btn-group" role="group" aria-label="Basic example">
+              {no_travellers}
 
-                <span className="btn btn-light">non</span>
-
-            </div>
           </td>
             <td>${ (qty * 1).toFixed(2) }</td>
           <td>
