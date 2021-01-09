@@ -21,7 +21,7 @@ class TransportInput extends Component{
             dropoffdate: '',
             dropofftime: '',
             notravellers: '',
-            hidden:'true'
+            rounded:''
 
         }
 
@@ -32,8 +32,8 @@ class TransportInput extends Component{
         this.setState({ [event.target.name]: event.target.value })
     }
 
-    handlehiddenClik() {
-        this.setState( {hidden: !this.state.hidden} )
+    handlehiddenClik(e) {
+        this.setState( {rounded: e.target.checked} )
 
     }
 
@@ -42,8 +42,8 @@ class TransportInput extends Component{
 
          e.preventDefault();
 
-         // console.log(this.state)
-        this.props.transport_input_form(this.state.notravellers);
+          console.log(this.state)
+        this.props.transport_input_form(this.state.notravellers,this.state.dropofflocation,this.state.dropoffdate,this.state.dropofftime,this.state.pickuplocation,this.state.pickupdate,this.state.pickuptime,this.state.rounded);
         this.props.history.push('/transportproviderlist')
         // axios
         //     .post('http://localhost:5000/TransportProvider/Post', {
@@ -96,7 +96,7 @@ class TransportInput extends Component{
 
                                 <div className="form-check form-check-inline">
                                     <input className="form-check-input form-group" type="checkbox"
-                                           value="true" name=" checkboxval"   onClick = {this.handlehiddenClik.bind(this)} />
+                                           value="true" name=" checkboxval"   onChange = {e=>this.handlehiddenClik(e)} />
                                     <div className="input-group-prepend">
                                         <label className="form-group "><p >Return  to the same location</p> </label>
                                     </div>
@@ -161,7 +161,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        transport_input_form:  (form) => { dispatch(actions.get_transport_input_form(form)) }
+        transport_input_form:  (no_travellers,drop_location,drop_date,drop_time,pickup_location,pickup_date,pickup_time,rounded) => { dispatch(actions.get_transport_input_form(no_travellers,drop_location,drop_date,drop_time,pickup_location,pickup_date,pickup_time,rounded)) }
     }
 }
 

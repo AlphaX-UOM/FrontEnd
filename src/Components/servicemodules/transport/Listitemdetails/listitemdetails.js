@@ -36,7 +36,9 @@ class Listitemdetails extends Component {
                 this.setState({error: true});
             });
 
-        // console.log(this.props.no_travellers);
+        console.log(this.props.no_travellers,this.props.drop_location,this.props.drop_date,this.props.drop_time,this.props.pickup_location,this.props.pickup_date,this.props.pickup_time,this.props.rounded);
+
+
         // console.log(this.state.travellers)
             // console.log(this.props);
             // this.props.onInitTransportProvider(this.props.match.params.id);
@@ -236,7 +238,15 @@ const mapStateToProps = state => {
     return {
 
         provider_array: state.transport_reducer.provider,
-        no_travellers: state.transport_input_reducer.form_input
+        no_travellers: state.transport_input_reducer.form_no_travellers,
+        drop_location: state.transport_input_reducer. form_drop_location,
+        drop_date:state.transport_input_reducer.form_drop_date,
+        drop_time:state.transport_input_reducer.form_drop_time,
+        pickup_location:state.transport_input_reducer.form_pickup_location,
+        pickup_date:state.transport_input_reducer.form_pickup_date,
+        pickup_time:state.transport_input_reducer.form_drop_time,
+        rounded:state.transport_input_reducer.form_rounded
+
     }
 };
 

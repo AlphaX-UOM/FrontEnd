@@ -26,7 +26,7 @@ function NameListEle(props){
         
         
                 <div style={{padding:'10px'}}>
-                 <Card style={{ width: '15rem' }}>
+                 <Card style={{ width: '17rem' }}>
                  <Card.Img variant="top" src={props.avatar} />
                  <Card.Body>
                  <Card.Title>{props.name}</Card.Title>
