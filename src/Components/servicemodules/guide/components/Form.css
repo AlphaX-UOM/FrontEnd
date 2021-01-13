@@ -1,0 +1,113 @@
+.form-container {
+  margin:  auto;
+  width: auto;
+ 
+  position: relative;
+
+  height: 800px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+
+.form-content-left {
+  background: linear-gradient(
+    90deg,
+    rgb(99, 80, 185) 100%,
+   
+  );
+  
+  position: relative;
+}
+
+.form-img {
+  width: 80%;
+  height: 80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+
+
+
+.form-content-right {
+ 
+  position: relative;
+  background: linear-gradient(90deg, rgb(40, 40, 40) 0%, rgb(17, 17, 17) 100%);
+}
+
+.form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form h1 {
+  font-size: 2rem;
+  text-align: start;
+  width: 80%;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.form-inputs {
+  margin-bottom: 0.5rem;
+  width: 51%;
+}
+
+
+.form-label {
+  display: inline-block;
+  font-size: 1.3rem;
+  margin-bottom: 6px;
+  color: #fff;
+}
+
+.form-input {
+  display: block;
+  padding-left: 10px;
+  outline: none;
+  border-radius: 2px;
+  height: 40px;
+  width: 100%;
+  border: none;
+}
+
+
+.form-input-btn {
+  width: 20%;
+  height: 50px;
+  margin-top: 10px;
+ 
+  background: linear-gradient(
+    90deg,
+    rgb(195, 219, 233) 0%,
+    rgb(1, 41, 41) 100%
+  );
+  outline: none;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.form-input-btn:hover {
+  cursor: pointer;
+  background: linear-gradient(
+    90deg,
+    rgb(223, 187, 26) 0%,
+    rgb(250, 139, 12) 100%
+  );
+  transition: all 0.4s ease-out;
+}
+
