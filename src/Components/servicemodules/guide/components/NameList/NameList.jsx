@@ -58,9 +58,9 @@ function NameList(props){
                    <select className='form-input-g' id="language" placeholder='Search' onChange={handleInputlanguage1}  > 
                   <option value="Hindi">Language</option>
                   <option value="Spanish">Spanish</option>
-                  <option value="Chinees">Chinees</option>
+                  <option value="Japan">Japan</option>
                   <option value="English">English</option>
-                  <option value="French">French</option>
+                  <option value="Korean">Korean</option>
                   <option value="x">----</option>
                   </select>
                    </div>
@@ -149,7 +149,7 @@ const [namelistlan,setNamelistlan]=useState('"x"')
     const [nameList,setNameList]=useState(null);
 
     useEffect(() => {
-        fetch("https://run.mocky.io/v3/a3bb3139-db9a-4077-810d-e3af6b2e5eeb")
+        fetch("https://alphax-api.azurewebsites.net/api/TourGuideServices")
           .then(res => res.json())
           .then( (data) =>{
              setNameList(data);
@@ -161,21 +161,20 @@ const [namelistlan,setNamelistlan]=useState('"x"')
           )
       }, [])
    
-    
+    console.log('print tj',nameList)
   
     const nameListComponent=()=>{
-        return  nameList && nameList.filter(person => person.language1===language).map((Aname,i)=>{
+        return  nameList && nameList.filter(person => person.language===language).map((Aname,i)=>{
          
       
         return(
             <NameListEle
               
             key={i}
-             name={Aname.name1} 
-             city={Aname.city}
-             email={Aname.email}
-             lang={Aname.language1}
-             Rating={Aname.age}
+             name={Aname.name} 
+            
+             lang={Aname.language}
+             otherDetails={Aname.otherDetails}
              cost={Aname.costPerDay}
              avatar={Aname.imageurl}
 
@@ -185,99 +184,92 @@ const [namelistlan,setNamelistlan]=useState('"x"')
     };
 
     const nameListComponent1=()=>{
-        return  nameList && nameList.filter(person => (person.language1===namelistlan) ).map((Aname,i)=>{
+        return  nameList && nameList.filter(person => (person.language===namelistlan) ).map((Aname,i)=>{
          
       
         return(
             <NameListEle
               
             key={i}
-             name={Aname.name1} 
-             city={Aname.city}
-             email={Aname.email}
-             lang={Aname.language1}
-             Rating={Aname.age}
+             name={Aname.name} 
+            
+             lang={Aname.language}
+             otherDetails={Aname.otherDetails}
              cost={Aname.costPerDay}
              avatar={Aname.imageurl}
-
             />
         );
         })  ;
     };
     const nameListComponent2=()=>{
-        return  nameList && nameList.filter(person => (person.language1===language) && (person.costPerDay== cost) ).map((Aname,i)=>{
+        return  nameList && nameList.filter(person => (person.language===language) && (person.costPerDay== cost) ).map((Aname,i)=>{
          
       
         return(
             <NameListEle
               
             key={i}
-             name={Aname.name1} 
-             city={Aname.city}
-             email={Aname.email}
-             lang={Aname.language1}
-             Rating={Aname.age}
-             cost={Aname.costPerDay}
-             avatar={Aname.imageurl}
-
+            name={Aname.name} 
+           
+            lang={Aname.language}
+            otherDetails={Aname.otherDetails}
+            cost={Aname.costPerDay}
+            avatar={Aname.imageurl}
             />
         );
         })  ;
     };
      
     const nameListComponent3=()=>{
-        return  nameList && nameList.filter(person => (person.language1===language) && (person.age== rating) ).map((Aname,i)=>{
+        return  nameList && nameList.filter(person => (person.language===language) && (person.age== rating) ).map((Aname,i)=>{
          
       
         return(
             <NameListEle
               
             key={i}
-             name={Aname.name1} 
-             city={Aname.city}
-             email={Aname.email}
-             lang={Aname.language1}
-             Rating={Aname.age}
-             cost={Aname.costPerDay}
-             avatar={Aname.imageurl}
+            name={Aname.name} 
+           
+            lang={Aname.language}
+            otherDetails={Aname.otherDetails}
+            cost={Aname.costPerDay}
+            avatar={Aname.imageurl}
 
             />
         );
         })  ;
     };
     const nameListComponent4=()=>{
-        return  nameList && nameList.filter(person => (person.language1===language) && (person.age== rating) && (person.costPerDay== cost) ).map((Aname,i)=>{
+        return  nameList && nameList.filter(person => (person.language===language) && (person.age== rating) && (person.costPerDay== cost) ).map((Aname,i)=>{
          
       
         return(
             <NameListEle
               
             key={i}
-             name={Aname.name1} 
-             city={Aname.city}
-             email={Aname.email}
-             lang={Aname.language1}
-             Rating={Aname.age}
-             cost={Aname.costPerDay}
-             avatar={Aname.imageurl}
+            name={Aname.name} 
+           
+            lang={Aname.language}
+            otherDetails={Aname.otherDetails}
+            cost={Aname.costPerDay}
+            avatar={Aname.imageurl}
 
             />
         );
         })  ;
     };
     const nameListComponent5=()=>{
-        return  nameList && nameList.filter(person => (person.language1===namelistlan) && (person.costPerDay== cost)).map((Aname,i)=>{
+        return  nameList && nameList.filter(person => (person.language===namelistlan) && (person.costPerDay== cost)).map((Aname,i)=>{
          
       
         return(
             <NameListEle
               
             key={i}
-             name={Aname.name1} 
-             city={Aname.city}
-             email={Aname.email}
-             lang={Aname.language1}
-             Rating={Aname.age}
+             name={Aname.name} 
+            
+             lang={Aname.language}
+             otherDetails={Aname.otherDetails}
              cost={Aname.costPerDay}
              avatar={Aname.imageurl}
 
@@ -286,20 +278,19 @@ const [namelistlan,setNamelistlan]=useState('"x"')
         })  ;
     };
     const nameListComponent6=()=>{
-        return  nameList && nameList.filter(person => (person.language1===namelistlan) && (person.age== rating)).map((Aname,i)=>{
+        return  nameList && nameList.filter(person => (person.language===namelistlan) && (person.age== rating)).map((Aname,i)=>{
          
       
         return(
             <NameListEle
               
             key={i}
-             name={Aname.name1} 
-             city={Aname.city}
-             email={Aname.email}
-             lang={Aname.language1}
-             Rating={Aname.age}
-             cost={Aname.costPerDay}
-             avatar={Aname.imageurl}
+            name={Aname.name} 
+           
+            lang={Aname.language}
+            otherDetails={Aname.otherDetails}
+            cost={Aname.costPerDay}
+            avatar={Aname.imageurl}
 
             />
         );
@@ -307,20 +298,19 @@ const [namelistlan,setNamelistlan]=useState('"x"')
     };
 
     const nameListComponent7=()=>{
-        return  nameList && nameList.filter(person => (person.language1===namelistlan) && (person.age== rating)&& (person.costPerDay== cost)).map((Aname,i)=>{
+        return  nameList && nameList.filter(person => (person.language===namelistlan) && (person.age== rating)&& (person.costPerDay== cost)).map((Aname,i)=>{
          
       
         return(
             <NameListEle
               
             key={i}
-             name={Aname.name1} 
-             city={Aname.city}
-             email={Aname.email}
-             lang={Aname.language1}
-             Rating={Aname.age}
-             cost={Aname.costPerDay}
-             avatar={Aname.imageurl}
+            name={Aname.name} 
+           
+            lang={Aname.language}
+            otherDetails={Aname.otherDetails}
+            cost={Aname.costPerDay}
+            avatar={Aname.imageurl}
 
             />
         );

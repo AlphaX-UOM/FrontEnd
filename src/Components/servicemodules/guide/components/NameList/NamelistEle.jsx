@@ -30,9 +30,9 @@ function NameListEle(props){
                  <Card.Img variant="top" src={props.avatar} />
                  <Card.Body>
                  <Card.Title>{props.name}</Card.Title>
-                 <Card.Text>City: {props.city}  </Card.Text>
-                 <Card.Text>Language: {props.lang}</Card.Text>
+                 <Card.Text> Language: {props.lang} </Card.Text>
                  <Card.Text>Cost Per Day: {props.cost}</Card.Text>
+                 <Card.Text>Details: {props.otherDetails}</Card.Text>
                  <Card.Text>Rating:<Rating name="size-small" defaultValue={props.Rating} precision={0.5} readOnly /></Card.Text>
                 
                  

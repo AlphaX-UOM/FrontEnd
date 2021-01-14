@@ -39,7 +39,8 @@ const FormSearch = () => {
     date2:state[1],
   };
   console.log(language);
-  console.log(state[1]);
+  console.log("date 1=== ",state[0]);
+  console.log("date 2 === ",state[1]);
   return (
     <div className='form-content-right-g'>
       <form className='form1-g' noValidate>
@@ -55,9 +56,9 @@ const FormSearch = () => {
             
           <option value="Hindi">Select Language</option>
           <option value="Spanish">Spanish</option>
-          <option value="Chinees">Chinees</option>
+          <option value="Japan">Japan</option>
           <option value="English">English</option>
-          <option value="French">French</option>
+          <option value="Korean">Korean</option>
           </select>
        
         </div>
