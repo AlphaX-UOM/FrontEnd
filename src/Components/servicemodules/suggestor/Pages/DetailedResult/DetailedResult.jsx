@@ -79,7 +79,8 @@ function DetailedResultPage(props) {
       price: mytransportList.pricePerDay,
       condition:"no. of passengers not considered, max no. of 3 passengers are permited",
       units: props.formdata.days,
-      unitTotal: props.formdata.days * mytransportList.pricePerDay
+      unitTotal: props.formdata.days * mytransportList.pricePerDay,
+      serID: mytransportList.userID
     },
     {
       id: guideId,
@@ -87,7 +88,8 @@ function DetailedResultPage(props) {
       price: mytourguideList.costPerDay,
       condition:"no. of customers are not considered",
       units: props.formdata.days,
-      unitTotal: mytourguideList.costPerDay * props.formdata.days
+      unitTotal: mytourguideList.costPerDay * props.formdata.days,
+      serID: mytourguideList.userID
     },
     {
       id: event01Id,
@@ -95,7 +97,8 @@ function DetailedResultPage(props) {
       price: myevent01List.price,
       condition:"No refunds",
       units: props.formdata.travelers,
-      unitTotal: myevent01List.price * props.formdata.travelers
+      unitTotal: myevent01List.price * props.formdata.travelers,
+      serID: myevent01List.userID
     },
     {
       id: event02Id,
@@ -103,7 +106,8 @@ function DetailedResultPage(props) {
       price: myevent02List.price,
       condition:"No refunds",
       units: props.formdata.travelers,
-      unitTotal: myevent02List.price * props.formdata.travelers
+      unitTotal: myevent02List.price * props.formdata.travelers,
+      serID: myevent02List.userID
     },
     {
       id: hotelId,
@@ -111,7 +115,8 @@ function DetailedResultPage(props) {
       price: myhotelList.pricePerDay * props.formdata.days,
       condition:"2 customers per room considered",
       units: Math.round((props.formdata.travelers)/2),
-      unitTotal: myhotelList.pricePerDay * props.formdata.days * (Math.round((props.formdata.travelers)/2))
+      unitTotal: myhotelList.pricePerDay * props.formdata.days * (Math.round((props.formdata.travelers)/2)),
+      serID:myhotelList.userID
     }
   ];
 

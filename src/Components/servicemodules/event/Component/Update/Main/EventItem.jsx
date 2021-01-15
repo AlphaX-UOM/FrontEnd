@@ -22,8 +22,13 @@ function EventItem(props) {
     console.log("event fired");
   }
   return (
+
+   
     <div>
-      <Link to={{pathname: '/itemlanding',data:props.item}}>
+              <Link  to={{pathname: '/itemlanding',data:props}}>
+      <div className="row">
+      <div className="col-12">
+      <div class="card-deck">
       <Card className="shadow-lg" style={{ width: "18rem" }}>
         <Card.Img
           variant="top"
@@ -44,9 +49,13 @@ function EventItem(props) {
           <Card.Text>{props.price}$</Card.Text>
         </Card.Body>
       </Card>
-      </Link>
       <div><p></p></div>
+      </div>
+      </div>
+      </div>
+      </Link>
     </div>
+   
   );
 }
 

@@ -33,6 +33,10 @@ import ResultList from '../Components/servicemodules/suggestor/Pages/ResultList/
 import DetailedResult from '../Components/servicemodules/suggestor/Pages/DetailedResult/DetailedResult';
 import Payment from '../Components/servicemodules/suggestor/Pages/Checkout/Payment';
 import Paypal from '../Components/servicemodules/suggestor/Pages/Checkout/Paypal';
+import cart from '../Components/servicemodules/event/Component/Update/views/cart';
+import AdminPannel from '../Components/Userpanels/AdminPannel/adminPannel';
+import CustomerPannel from '../Components/Userpanels/CustomerPannel/customerPannel';
+import ServicePannel from '../Components/Userpanels/serviceProvider/sppannel';
 class Layoutt extends Component {
     render () {
         return (
@@ -51,6 +55,7 @@ class Layoutt extends Component {
                         <Route path='/events' component={Event}/>
                         <Route path='/categorylanding' component={CategoryLanding}/>
                         <Route path='/itemlanding' component={ItemLanding}/>
+                        <Route path='/cart' component={cart}/>
 
                         <Route path='/PostGuideForm' component={PostGuideForm}/>
                         <Route path='/FormSearch' component={FormSearch}/>
@@ -68,7 +73,9 @@ class Layoutt extends Component {
                         <Route path="/post/post-transportprovider"component={ PostTransportProviderForm}/>
                         <Route path="/post" component={Post}></Route>
                         <Route path="/login"><Login/></Route>
-                        <Route path="/serviceprovider" component={ServiceProvider}/>
+                        <Route path="/serviceprovider" component={ServicePannel}/>
+                        <Route path="/adminpannel" component={AdminPannel}/>
+                        <Route path="/customerpannel" component={CustomerPannel}/>
                         <Route path="/transport"><Transportinput/></Route>
                         <Route path="/transportproviderlist/:id"  component={Listitemdetails}/>
                         <Route path="/transportproviderlist"><Transportproviderlist/></Route>

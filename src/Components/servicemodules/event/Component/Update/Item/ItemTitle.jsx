@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function ItemTitle() {
+function ItemTitle(props) {
 
 
 
   return (
     <div>
         <p style={{textAlign:"center", fontStyle:'italic'}}>Welcome to the ItemTitle</p>
+       
+       
     </div>
   );
 }

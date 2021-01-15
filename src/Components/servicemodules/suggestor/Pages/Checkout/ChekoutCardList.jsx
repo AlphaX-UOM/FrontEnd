@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CheckoutCard from "./CheckoutCard";
 import { Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -11,10 +11,29 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  paper: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
 function CheckoutCardList(props) {
-  let [cart, setCart] = useState([]);
-  console.log("cart-> " + props.reservations);
+
+  const [cart, setCart] = useState(props.reservations);
+  console.log("now cart item reservation prop-> " + props.reservations[0].name);
+  console.log("now cart item cart-> " + cart[0].name);
 
   let localCart = localStorage.getItem("cart");
 
@@ -97,6 +116,14 @@ function CheckoutCardList(props) {
   }, []); //the empty array ensures useEffect only runs once
 
 
+//if coming from event
+// useEffect(() => {
+  
+//   if (props.type) setCart(localCart);
+// }, []);
+
+
+
   const productIncreaseHandler = index => {
     let products = [...cart];
     let quantity = products[index].units + 1;
@@ -134,7 +161,7 @@ function CheckoutCardList(props) {
     let objects = [...cart];
     objects = objects.filter(e => {
       if (e.id) {
-        if (e.id == id) {
+        if (e.id === id) {
           console.log(e.id);
         } else {
           return true;
@@ -159,7 +186,6 @@ function CheckoutCardList(props) {
           key={aReserve.id}
           name={aReserve.name}
           price={aReserve.price}
-          condition={aReserve.condition}
           units={aReserve.units}
           unitTotal={aReserve.unitTotal}
           increaseQuantity={() => productIncreaseHandler(index)}
@@ -170,10 +196,29 @@ function CheckoutCardList(props) {
     });
   };
 
+  let history = useHistory();
+
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+ 
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const handleFormData = () => {
     props.addTotalData(total);
     props.addResData(cart);
+    
+    if(props.userCred.id !== undefined){
+      history.push("/paypal");
+    }
+    else{
+      setOpen(true);
+    }
   };
+
 
   return (
     <React.Fragment>
@@ -227,15 +272,34 @@ function CheckoutCardList(props) {
             <p>
               {" "}
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <Link to="/paypal">
+              {/* <Link to="/paypal"> */}
                 <button class="btn btn-warning" onClick={handleFormData}>
                   Proceed to Checkout
                 </button>
-              </Link>
+              {/* </Link> */}
             </p>
           </div>
         </div>
       </div>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.paper}>
+            <h2 id="transition-modal-title">Dear Customer!</h2>
+            <p id="transition-modal-description">Please Login or Register to continue.</p>
+          </div>
+        </Fade>
+      </Modal>
     </React.Fragment>
   );
 }
@@ -243,6 +307,7 @@ function CheckoutCardList(props) {
 const mapStateToProps = (state) => {
   return {
     reservations: state.reservations,
+    userCred: state.userCred
   };
 };
 

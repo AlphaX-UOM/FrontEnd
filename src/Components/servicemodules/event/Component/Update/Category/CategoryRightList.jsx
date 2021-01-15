@@ -6,6 +6,7 @@ function CategoryRightList(props) {
     console.log("props->"+props.type);
 
     const [myeventList, setmyeventList] = useState([]);
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
       fetch(`https://alphax-api.azurewebsites.net/api/eventplannerservices/`)
@@ -22,9 +23,23 @@ function CategoryRightList(props) {
         return item.eventType.includes(props.type)
        })
 
+       const filterSearch=filterEvents.filter(item=>{
+        return item.name.toLowerCase().includes(search.toLowerCase())
+       })
+
   return (
     <div>
-        {filterEvents.map((item) => (
+       <div >
+       
+       <input type="text" placeholder="Search" onChange={e=>setSearch(e.target.value)} style={{width:'400px', padding: '10px',alignSelf:'center'}}/> 
+       <div>
+         <br>
+       </br>
+       </div>
+  
+       </div>
+      
+        {filterSearch.map((item) => (
            <CategoryRightListItem key={item.name} name={item.name} item={item} />
          ))}
     </div>
@@ -34,3 +49,4 @@ function CategoryRightList(props) {
 
 
 export default CategoryRightList;
+

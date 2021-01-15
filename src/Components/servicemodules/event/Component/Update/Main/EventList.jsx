@@ -32,12 +32,14 @@ function EventList() {
 
   return (
     <div>
-      <CardColumns fluid="md">
-      <div class="container-fluid py-2" >
-        <div>{EventListComponent()}</div>
-        </div>
-        </CardColumns>
-    </div>
+    <div className="col-12">
+    <CardColumns fluid="md">
+    <div class="container-fluid py-2" >
+      <div>{EventListComponent()}</div>
+      </div>
+      </CardColumns>
+  </div>
+  </div>
   );
 }
 

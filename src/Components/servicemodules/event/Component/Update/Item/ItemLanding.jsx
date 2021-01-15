@@ -4,10 +4,13 @@ import Title from './ItemTitle';
 import { Container,Col,Row } from 'react-bootstrap';
 import ItemSlider from './ItemSlider';
 import ItemCheckout from './ItemCheckout';
+import ItemComments from './ItemComments';
+import ItemCheck1 from './ItemCheck1';
 
 function ItemLanding(props) {
 
-console.log("props ->"+props);
+console.log("props in itemlanding ->"+props.location.data.id);
+
 
   return (
     <div>
@@ -23,7 +26,11 @@ console.log("props ->"+props);
                     <div><br/></div>
                     <div><br/></div>
                     <div><br/></div>
-                    <ItemCheckout/>
+                    <ItemCheck1 data={props.location.data}/>
+                    <div><br/></div>
+                    <div><br/></div>
+                    <div><br/></div>
+                    <ItemComments/>
                 </Col>
             </Row>
         </Container>

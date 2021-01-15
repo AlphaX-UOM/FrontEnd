@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux'
 
 function CategoryItem(props) {
   const useStyles = makeStyles({
@@ -21,11 +22,13 @@ function CategoryItem(props) {
   });
 
   const CategoryClickHandle = () => {
+    let selected = props.type;
     console.log("ClickReached");
+    props.addCategoryData(selected);
   };
 
   const classes = useStyles();
-  console.log("categoriesprop ->" + props.location);
+  
   return (
     <div class="card card-body" style={{ width: "250px" }}>
       <Link  to={{pathname: '/categorylanding',data:props}}>
@@ -52,4 +55,12 @@ function CategoryItem(props) {
   );
 }
 
-export default CategoryItem;
+
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addCategoryData: (selected) => { dispatch({type: 'ADD_Category_DATA', selected: selected} )}
+  }
+}
+
+export default connect(null, mapDispatchToProps)(CategoryItem);

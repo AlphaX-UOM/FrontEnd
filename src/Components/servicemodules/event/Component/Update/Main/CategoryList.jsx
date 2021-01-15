@@ -53,7 +53,7 @@ function CategoryList() {
     {
       id:7,
       type:"Boat Safari",
-      name:'Fun & Games',
+      name:'Others',
       img: 'https://www.srilankatravelandtourism.com/places-sri-lanka/kitulgala/kitulgala-images/kitulgala-10-sri-lanka.jpg',
       link: 'path'
     }

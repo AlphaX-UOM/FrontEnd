@@ -92,8 +92,10 @@ function Paypal(props) {
                 amount: props.total,
                 discount: 0,
                 date: "2020-09-12T00:00:00",
-                userID: "e4d74bf2-e51a-4c18-78ee-08d89bf76381",
+                userID: props.userCred.id,
               };
+
+
           
               let TransData = {
                 pickUpTime: "2020-10-11T00:00:00",
@@ -106,9 +108,30 @@ function Paypal(props) {
                 checkIn: "2020-10-11T00:00:00",
                 checkOut: "2020-10-12T00:00:00",
                 price: props.reservations[0].unitTotal,
-                userID: "e4d74bf2-e51a-4c18-78ee-08d89bf76381",
+                userID: props.userCred.id,
                 paymentID: GUID,
               };
+
+              const fireResId = uuidv4();
+              const apiUrl = `https://vvisit-d6347-default-rtdb.firebaseio.com/reservations/${fireResId}.json`;
+              const fireTrans = {
+                  custId : props.userCred.id,
+                  custName : props.userCred.firstName + " "+ props.userCred.lastName,
+                  serId : props.reservations[0].id,
+                  serName : props.reservations[0].name,
+                  bookedDate : "2020-10-11T00:00:00",
+                  createdDate : new Date(),
+                  custRead : "no",
+                  serRead : "no"
+              };
+
+              axios
+                .put(apiUrl, fireTrans)
+                .then((response) => {
+                  if(response.status === 200){
+                    console.log('Data Saved');
+                  }
+                });
           
               let guideData = {
                 tourGuideServiceID: props.reservations[1].id,
@@ -116,9 +139,32 @@ function Paypal(props) {
                 checkIn: "2020-10-11T00:00:00",
                 checkOut: "2020-10-12T00:00:00",
                 price: props.reservations[1].unitTotal,
-                userID: "e4d74bf2-e51a-4c18-78ee-08d89bf76381",
+                userID: props.userCred.id,
                 paymentID: GUID,
               };
+
+              const fireResIdg = uuidv4();
+              const apiUrlg = `https://vvisit-d6347-default-rtdb.firebaseio.com/reservations/${fireResIdg}.json`;
+              const fireGuide = {
+                  custId : props.userCred.id,
+                  custName : props.userCred.firstName + " "+ props.userCred.lastName,
+                  serId : props.reservations[1].id,
+                  serName : props.reservations[1].name,
+                  bookedDate : "2020-10-11T00:00:00",
+                  createdDate : new Date(),
+                  custRead : "no",
+                  serRead : "no"
+              };
+
+              axios
+                .put(apiUrlg, fireGuide)
+                .then((response) => {
+                  if(response.status === 200){
+                    console.log('Data Saved');
+                  }
+                });
+
+
           
               let event01Data = {
                 eventPlannerServiceID: props.reservations[2].id,
@@ -126,9 +172,33 @@ function Paypal(props) {
                 checkIn: "2020-10-11T00:00:00",
                 checkOut: "2020-10-12T00:00:00",
                 price: props.reservations[2].unitTotal,
-                userID: "e4d74bf2-e51a-4c18-78ee-08d89bf76381",
+                userID: props.userCred.id,
                 paymentID: GUID,
               };
+
+
+              const fireResIde01 = uuidv4();
+              const apiUrle01 = `https://vvisit-d6347-default-rtdb.firebaseio.com/reservations/${fireResIde01}.json`;
+              const fireEvent01 = {
+                  custId : props.userCred.id,
+                  custName : props.userCred.firstName + " "+ props.userCred.lastName,
+                  serId : props.reservations[2].id,
+                  serName : props.reservations[2].name,
+                  bookedDate : "2020-10-11T00:00:00",
+                  createdDate : new Date(),
+                  custRead : "no",
+                  serRead : "no"
+              };
+
+              axios
+                .put(apiUrle01, fireEvent01)
+                .then((response) => {
+                  if(response.status === 200){
+                    console.log('Data Saved');
+                  }
+                });
+
+
           
               let event02Data = {
                 eventPlannerServiceID: props.reservations[3].id,
@@ -136,9 +206,34 @@ function Paypal(props) {
                 checkIn: "2020-10-11T00:00:00",
                 checkOut: "2020-10-12T00:00:00",
                 price: props.reservations[3].unitTotal,
-                userID: "e4d74bf2-e51a-4c18-78ee-08d89bf76381",
+                userID: props.userCred.id,
                 paymentID: GUID,
               };
+
+
+              const fireResIde02 = uuidv4();
+              const apiUrle02 = `https://vvisit-d6347-default-rtdb.firebaseio.com/reservations/${fireResIde02}.json`;
+              const fireEvent02 = {
+                  custId : props.userCred.id,
+                  custName : props.userCred.firstName + " "+ props.userCred.lastName,
+                  serId : props.reservations[3].id,
+                  serName : props.reservations[3].name,
+                  bookedDate : "2020-10-11T00:00:00",
+                  createdDate : new Date(),
+                  custRead : "no",
+                  serRead : "no"
+              };
+
+              axios
+                .put(apiUrle02, fireEvent02)
+                .then((response) => {
+                  if(response.status === 200){
+                    console.log('Data Saved');
+                  }
+                });
+
+
+
           
               let hotelData = {
                 noOfRooms: Math.round(props.formdata.travelers / 2),
@@ -147,9 +242,33 @@ function Paypal(props) {
                 checkIn: "2020-10-11T00:00:00",
                 checkOut: "2020-10-12T00:00:00",
                 price: props.reservations[4].unitTotal,
-                userID: "e4d74bf2-e51a-4c18-78ee-08d89bf76381",
+                userID: props.userCred.id,
                 paymentID: GUID,
               };
+
+              const fireResIdh = uuidv4();
+              const apiUrlh = `https://vvisit-d6347-default-rtdb.firebaseio.com/reservations/${fireResIdh}.json`;
+              const fireHotel = {
+                  custId : props.userCred.id,
+                  custName : props.userCred.firstName + " "+ props.userCred.lastName,
+                  serId : props.reservations[4].id,
+                  serName : props.reservations[4].name,
+                  bookedDate : "2020-10-11T00:00:00",
+                  createdDate : new Date(),
+                  custRead : "no",
+                  serRead : "no"
+              };
+
+              axios
+                .put(apiUrlh, fireHotel)
+                .then((response) => {
+                  if(response.status === 200){
+                    console.log('Data Saved');
+                  }
+                });
+
+
+
           
             
                 axios
@@ -267,6 +386,7 @@ const mapStateToProps = (state) => {
     reservations: state.reservations,
     formdata: state.formdata,
     total: state.total,
+    userCred : state.userCred
   };
 };
 

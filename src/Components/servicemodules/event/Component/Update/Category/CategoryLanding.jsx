@@ -5,11 +5,13 @@ import CategoryRightList from './CategoryRightList';
 import CategoryLeftFilter from './CategoryLeftFilter';
 import Title from '../Main/Title';
 import Date from '../Main/Date';
+import { connect } from 'react-redux'
 
 function CategoryLanding(props) {
 
 
-let type = props.location.data.type;
+let type = props.type;
+console.log("selected type->"+props.type);
 
 
 
@@ -35,5 +37,11 @@ let type = props.location.data.type;
 }
 
 
+const mapStateToProps = (state) => {
+  return {
+      type: state.type
+  }
+}
 
-export default CategoryLanding;
+
+export default connect(mapStateToProps)(CategoryLanding);

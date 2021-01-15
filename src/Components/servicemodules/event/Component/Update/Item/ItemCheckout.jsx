@@ -8,10 +8,20 @@ import Button from "@material-ui/core/Button";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
+import { connect } from 'react-redux'
 
-function ItemCheckout() {
+function ItemCheckout(props) {
   const [quantity, setQuantity] = useState(1);
 
+  let eventData =[{
+    id : props.data.id,
+    name : props.data.name,
+    price : props.data.price,
+    units : quantity,
+    unitTotlal : props.data.price * quantity
+}]
+
+console.log("event price ->"+props.data.price);
   const increaseQuantity = () => {
     let myvar = quantity + 1;
     setQuantity(myvar);
@@ -42,11 +52,20 @@ function ItemCheckout() {
 
   const classes = useStyles();
 
+
+  const EventClickHandle = () => {
+    props.addEventData(eventData);
+  };
+
+
   return (
     <div>
       <Card className="shadow-sm" style={{ width: "530px" }}>
         <Container>
           <Row>
+            <br>
+            </br>
+          <h4>{props.data.name}</h4>
             <br />
           </Row>
           <Row>
@@ -54,7 +73,7 @@ function ItemCheckout() {
               <h5>Select Date and Travelers</h5>
             </Col>
             <Col align="right">
-              <h4>20$</h4>
+              <h4>{props.data.price}$/person</h4>
             </Col>
           </Row>
           <Row>
@@ -134,10 +153,12 @@ function ItemCheckout() {
                 <div>
                   <br />
                 </div>
-                <button type="button" class="btn btn-warning">
+                <Link to="/payment">
+                <button type="button" class="btn btn-warning" onClick={EventClickHandle}>
                   <AddShoppingCartIcon />
                   Add to Cart
                 </button>
+                </Link>
               </div>
             </Col>
             <Col></Col>
@@ -158,4 +179,10 @@ function ItemCheckout() {
   );
 }
 
-export default ItemCheckout;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addEventData: (eventData) => { dispatch({type: 'ADD_Event_DATA', eventData: eventData} )}
+  }
+}
+
+export default connect(null, mapDispatchToProps)(ItemCheckout);
