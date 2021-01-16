@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './signup.css';
+import axios from "axios";
 
 
 
@@ -34,6 +35,24 @@ const SignUp=()=>{
          errors.lastName==""&&errors.firstName==""&&errors.password2==""&&errors.phonenumber==""&&errors.address==""&&errors.email==""&&errors.password==""?state.isvalid=true:state.isvalid=false;
             console.log(state.isvalid);
             if (state.isvalid==true){
+                axios
+                    .post('', {
+                        firstname:state.firstname,
+                        lastname:state.lastname,
+                         email:state.email,
+                        password:state.password,
+                        address:state.address,
+                        contact:state.phonenumber,
+                       role:"customer"
+
+
+                    })
+                    .then(response => {
+                        console.log(response)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
                 alert('Demo Form is submited');
             }
 

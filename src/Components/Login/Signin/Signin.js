@@ -1,9 +1,11 @@
 import './signin.css';
 import {Link} from 'react-router-dom'
 import React, { useEffect, useState } from "react";
+import connect from "react-redux/es/connect/connect";
+import * as actions from '../../../store/actions/index';
 
-
-const  SignIn=()=>{
+const  SignIn=(props)=>{
+    const { onAuth} = props;
     const [state, setstate] = useState({
 
 
@@ -37,6 +39,7 @@ const  SignIn=()=>{
       if (state.isvalid==true){
           alert('Demo Form is submited');
           console.log(state);
+          onAuth(state.email,state.password);
       }
 
 
@@ -66,19 +69,24 @@ const  SignIn=()=>{
 
 
             case "email":
-                if (!validEmailRegex.test(value)) {
-                    errors.email = "Email is not valid!";
-                } else {
-                    errors.email = "";
-                    setstate({
-                        ...state,
-                        email: value,
-                    });
-                }
+                // if (!validEmailRegex.test(value)) {
+                //     errors.email = "Email is not valid!";
+                // } else {
+                //     errors.email = "";
+                //     setstate({
+                //         ...state,
+                //         email: value,
+                //     });
+                // }
+                 errors.email = "";
+                setstate({
+                    ...state,
+                    email: value,
+                });
                 break;
 
             case "password":
-                if (value.length < 6) {
+                if (value.length < 3) {
                     errors.password = "Password must be 6 characters long!";
                 } else {
                     errors.password = "";
@@ -179,4 +187,12 @@ const  SignIn=()=>{
 
 
 }
-export default  SignIn;
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (email, password) => dispatch(actions.auth(email, password))
+    };
+};
+
+export default connect(null, mapDispatchToProps)(SignIn);
+
