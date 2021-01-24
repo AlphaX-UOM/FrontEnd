@@ -15,6 +15,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from "axios";
+import Popup from '../ApproveCancellation/popupModel';
+import { connect } from "react-redux";
 
 
 
@@ -57,7 +59,7 @@ const useStyles = makeStyles({
 
 
 
-export default function Transport() {
+function Transport(props) {
 
     const [open, setOpen] = React.useState(false);
 
@@ -91,6 +93,8 @@ export default function Transport() {
   const classes = useStyles();
 
   const [value, setValue] = useState(false);
+  const [popup, setPopup] = useState(false);
+
 
   const handleApproveChange = (event) => {
     var isTrueSet = (event.target.value == 'true');
@@ -100,24 +104,45 @@ export default function Transport() {
 
 
   const handleUpdateFund = (event) => {
-    console.log("submit data"+event.cancellation.isApproved);
-    let CancelData = {
-      id : event.cancellation.id,
-      isApproved : value,
-      date : event.cancellation.date,
-      userID : event.cancellation.userID,
-      reservationID : event.cancellation.reservationID,
-    }
 
-    axios
-      .put(
-        `https://alphax-api.azurewebsites.net/api/cancellations/${event.cancellation.id}`,
-        CancelData
-      )
-      .then(response =>  {
-        console.log(response);
-      });
+    let adminPopup = true;
+    props.adminCancelPop(adminPopup);
+    let cancelData = {
+      reservationName : event.transportService.name,
+      customerID : event.userID,
+      payment : event.price,
+      canDate : event.cancellation.date,
+      okey : 'YES',
+      policy : 'This is a service policy',
+      paymentID : event.paymentID
+    }
+    props.adminCancelData(cancelData);
+    setPopup(true);
+    // console.log("submit data"+event.cancellation.isApproved);
+    // let CancelData = {
+    //   id : event.cancellation.id,
+    //   isApproved : value,
+    //   date : event.cancellation.date,
+    //   userID : event.cancellation.userID,
+    //   reservationID : event.cancellation.reservationID,
+    // }
+
+    // axios
+    //   .put(
+    //     `https://alphax-api.azurewebsites.net/api/cancellations/${event.cancellation.id}`,
+    //     CancelData
+    //   )
+    //   .then(response =>  {
+    //     console.log(response);
+    //   });
+
   };
+
+  if((props.adminPopup)&&(props.adminRefundData.paymentID!==undefined)){
+    return(
+       <Popup />
+    );
+  }
 
   return (
       <div>
@@ -163,27 +188,27 @@ export default function Transport() {
         </TableBody>
       </Table>
     </TableContainer>
-    <Dialog
-    open={open}
-    onClose={handleClose}
-    aria-labelledby="alert-dialog-title"
-    aria-describedby="alert-dialog-description"
-  >
-    <DialogTitle id="alert-dialog-title">{"Cancel Transport service?"}</DialogTitle>
-    <DialogContent>
-      <DialogContentText id="alert-dialog-description">
-      Are you sure you want to cancel this service?, we will refund the amount based on Cancellation policy.
-      </DialogContentText>
-    </DialogContent>
-    <DialogActions>
-      <Button onClick={handleClose} color="primary">
-        Disagree
-      </Button>
-      <Button onClick={handleClose} color="primary" autoFocus>
-        Agree
-      </Button>
-    </DialogActions>
-  </Dialog>
   </div>
   );
 }
+
+
+const mapStateToProps = (state) => {
+  return {
+    adminPopup: state.adminPopup,
+    adminRefundData: state.adminRefundData
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    adminCancelPop: (adminPopup) => {
+      dispatch({ type: "Admin_Popup", adminPopup: adminPopup });
+    },
+    adminCancelData: (cancelData) => {
+      dispatch({ type: "Admin_Refund_Data", adminRefundData: cancelData });
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Transport);

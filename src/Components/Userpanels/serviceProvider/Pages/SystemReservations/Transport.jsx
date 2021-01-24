@@ -52,7 +52,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Transport() {
+export default function Transport(props) {
   const [open, setOpen] = React.useState(false);
   const [can, setCan] = useState(null);
 
@@ -78,7 +78,7 @@ export default function Transport() {
       });
   };
 
-  let userId = "e4d74bf2-e51a-4c18-78ee-08d89bf76381";
+  let userId = props.myId;
 
   const [eventList, setEventList] = useState([]);
 
@@ -90,7 +90,7 @@ export default function Transport() {
         return response.json();
       })
       .then((responseData) => {
-        responseData = responseData.filter(item => item.cancellation == null);
+        responseData = responseData.filter(item => item.cancellation == null && item.transportService.userID === userId );
         setEventList(responseData);
         console.log("response data->"+responseData);
       });
@@ -123,7 +123,7 @@ export default function Transport() {
           </TableHead>
           <TableBody>
             {eventList.map((row) => (
-              <StyledTableRow key={row.transportService.id}>
+              <StyledTableRow key={row.id}>
                 <StyledTableCell component="th" scope="row">
                   {row.transportService.name}
                 </StyledTableCell>
@@ -143,6 +143,30 @@ export default function Transport() {
           </TableBody>
         </Table>
       </TableContainer>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Cancel Transport service?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you want to cancel this service?, we will refund the
+            amount based on Cancellation policy.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Disagree
+          </Button>
+          <Button onClick={cancelHandler} color="primary" autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

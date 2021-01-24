@@ -159,7 +159,7 @@ function Form(props) {
               >
                 <div className="form-row tm-search-form-row">
                   <div className="form-group tm-form-group tm-form-group-pad tm-form-group-1">
-                    <label htmlFor="inputCity">Choose Your Destination</label>
+                    <label htmlFor="inputCity">Choose Your Flavours</label>
 
                     <Flavour />
                   </div>

@@ -25,6 +25,7 @@ import UserDetails from './Pages/Userdetails';
 import Cancelations from './Pages/cancelation';
 import DashBoard from './Pages/dashBoard';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+import Upgrade from './Pages/upgrade';
 
 
 function Copyright() {
@@ -187,6 +188,7 @@ export default function Dashboard() {
         <Route path='/user'><UserDetails/></Route>
         <Route path='/cancelations'> <Cancelations/> </Route>
         <Route path='/dashboard'><DashBoard/></Route>
+        <Route path='/upgrade'><Upgrade/></Route>
       
         </Switch>
 

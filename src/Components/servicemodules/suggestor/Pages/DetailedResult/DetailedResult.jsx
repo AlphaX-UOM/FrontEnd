@@ -3,6 +3,7 @@ import { Card, CardColumns } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Rating from "@material-ui/lab/Rating";
 import { connect } from "react-redux";
+import Spinner from '../ResultList/Spinner';
 
 function DetailedResultPage(props) {
   let tranId = props.selectId.transportId;
@@ -159,6 +160,14 @@ function DetailedResultPage(props) {
     });
 
   };
+
+
+  if((mytransportList.id === undefined)||(mytourguideList.id === undefined)||(myevent01List.id === undefined)||(myevent02List.id === undefined)||(myhotelList.id === undefined)){
+    return(
+        <Spinner />
+    )
+}
+
 
 
   return (

@@ -9,6 +9,7 @@ function Paypal(props) {
   let reservations = props.reservations;
   
   let total = reservations[0].price*reservations[0].units + reservations[1].price*reservations[1].units + reservations[2].price*reservations[2].units + reservations[3].price*reservations[3].units + reservations[4].price*reservations[4].units;
+  
 
   // const product = {
   //   // price: props.total,
@@ -96,6 +97,25 @@ function Paypal(props) {
               };
 
 
+              const firePaymentData = GUID;
+              const apiUrlPay = `https://vvisit-d6347-default-rtdb.firebaseio.com/payments/${firePaymentData}.json`;
+              const firePay = {
+                  custId : props.userCred.id,
+                  custName : props.userCred.firstName + " "+ props.userCred.lastName,
+                  payId : firePaymentData,
+                  payPalReturn : order.id
+              };
+
+              axios
+                .put(apiUrlPay, firePay)
+                .then((response) => {
+                  if(response.status === 200){
+                    console.log('Data Saved');
+                  }
+                });
+
+
+
           
               let TransData = {
                 pickUpTime: "2020-10-11T00:00:00",
@@ -117,12 +137,13 @@ function Paypal(props) {
               const fireTrans = {
                   custId : props.userCred.id,
                   custName : props.userCred.firstName + " "+ props.userCred.lastName,
-                  serId : props.reservations[0].id,
+                  serId : props.reservations[0].serID,
                   serName : props.reservations[0].name,
                   bookedDate : "2020-10-11T00:00:00",
                   createdDate : new Date(),
                   custRead : "no",
-                  serRead : "no"
+                  serRead : "no",
+                  resId : fireResId
               };
 
               axios
@@ -148,12 +169,13 @@ function Paypal(props) {
               const fireGuide = {
                   custId : props.userCred.id,
                   custName : props.userCred.firstName + " "+ props.userCred.lastName,
-                  serId : props.reservations[1].id,
+                  serId : props.reservations[1].serID,
                   serName : props.reservations[1].name,
                   bookedDate : "2020-10-11T00:00:00",
                   createdDate : new Date(),
                   custRead : "no",
-                  serRead : "no"
+                  serRead : "no",
+                  resId : fireResIdg
               };
 
               axios
@@ -182,12 +204,13 @@ function Paypal(props) {
               const fireEvent01 = {
                   custId : props.userCred.id,
                   custName : props.userCred.firstName + " "+ props.userCred.lastName,
-                  serId : props.reservations[2].id,
+                  serId : props.reservations[2].serID,
                   serName : props.reservations[2].name,
                   bookedDate : "2020-10-11T00:00:00",
                   createdDate : new Date(),
                   custRead : "no",
-                  serRead : "no"
+                  serRead : "no",
+                  resId : fireResIde01
               };
 
               axios
@@ -216,12 +239,13 @@ function Paypal(props) {
               const fireEvent02 = {
                   custId : props.userCred.id,
                   custName : props.userCred.firstName + " "+ props.userCred.lastName,
-                  serId : props.reservations[3].id,
+                  serId : props.reservations[3].serID,
                   serName : props.reservations[3].name,
                   bookedDate : "2020-10-11T00:00:00",
                   createdDate : new Date(),
                   custRead : "no",
-                  serRead : "no"
+                  serRead : "no",
+                  resId : fireResIde02
               };
 
               axios
@@ -251,12 +275,13 @@ function Paypal(props) {
               const fireHotel = {
                   custId : props.userCred.id,
                   custName : props.userCred.firstName + " "+ props.userCred.lastName,
-                  serId : props.reservations[4].id,
+                  serId : props.reservations[4].serID,
                   serName : props.reservations[4].name,
                   bookedDate : "2020-10-11T00:00:00",
                   createdDate : new Date(),
                   custRead : "no",
-                  serRead : "no"
+                  serRead : "no",
+                  resId : fireResIdh
               };
 
               axios

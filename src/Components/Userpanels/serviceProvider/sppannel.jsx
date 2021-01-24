@@ -27,6 +27,8 @@ import Ratings from './Pages/Ratings';
 import Cancelation from './Pages/cancelation';
 import Sreservation from './Pages/Sreservations';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+import Notifications from './notifications';
+import LogoutIcon from './logoutIcon';
 
 
 
@@ -124,7 +126,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+export default function Dashboard(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -153,10 +155,13 @@ export default function Dashboard() {
             Service Provider Pannel
           </Typography>
           <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-              <PowerSettingsNewIcon/>
-            </Badge>
+            {/* <Badge badgeContent={4} color="secondary"> */}
+              {/* <NotificationsIcon /> */}
+              <Notifications myId={props.myId} />
+            {/* </Badge> */}
+          </IconButton>
+          <IconButton color="inherit">
+            <LogoutIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -182,14 +187,13 @@ export default function Dashboard() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Switch>
-        <Route path='/account'> <Account /> </Route>
-        <Route path='/services'><Services/></Route>
-        <Route path='/ratings'><Ratings/></Route>
-        <Route path='/cancelation'><Cancelation/></Route>
-        <Route path='/sreservation'><Sreservation/></Route>
-        <Route path='/reservations'><Reservations/></Route>
-       
-      
+        <Route path='/account'> <Account myId={props.myId}/> </Route>
+        <Route path='/services'><Services myId={props.myId}/></Route>
+        <Route path='/ratings'><Ratings myId={props.myId}/></Route>
+        <Route path='/cancelation'><Cancelation myId={props.myId}/></Route>
+        <Route path='/sreservation'><Sreservation myId={props.myId}/></Route>
+        <Route path='/reservations'><Reservations myId={props.myId}/></Route>
+
         </Switch>
 
 

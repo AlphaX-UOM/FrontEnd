@@ -24,9 +24,10 @@ import Reservation from './Pages/Reservation';
 import Account from './Pages/Account';
 import Cancelations from './Pages/cancelation';
 import Ratings from './Pages/Ratings';
-import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import axios from 'axios';
 import Notifications from './notifications';
+import LogoutIcon from './logoutIcon';
+import Upgrade from './Pages/upgrade';
 
 
 
@@ -164,7 +165,9 @@ export default function Dashboard(props) {
               <Notifications myId={props.myId} />
             {/* </Badge> */}
           </IconButton>
-          <PowerSettingsNewIcon/>
+          <IconButton color="inherit">
+            <LogoutIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -193,6 +196,7 @@ export default function Dashboard(props) {
         <Route path='/reservations'><Reservation myId={props.myId}/></Route>
         <Route path='/cancelations'><Cancelations myId={props.myId}/></Route>
         <Route path='/ratings'><Ratings myId={props.myId}/></Route>
+        <Route path='/upgrade'><Upgrade myId={props.myId}/></Route>
         </Switch>
 
 

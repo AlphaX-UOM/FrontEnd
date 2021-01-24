@@ -85,6 +85,10 @@ const initialState = {
     ],
     userCred : {
 
+    },
+    adminPopup: false,
+    adminRefundData : {
+        
     }
 
 }
@@ -132,6 +136,18 @@ const rootReducer = (state = initialState, action) => {
         return {
             ...state,
             userCred: action.userCred
+        }
+    }
+    if (action.type === 'Admin_Popup') {
+        return {
+            ...state,
+            adminPopup: action.adminPopup
+        }
+    }
+    if (action.type === 'Admin_Refund_Data') {
+        return {
+            ...state,
+            adminRefundData: action.adminRefundData
         }
     }
     return state;

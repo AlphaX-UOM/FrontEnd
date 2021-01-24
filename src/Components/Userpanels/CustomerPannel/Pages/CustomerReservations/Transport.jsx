@@ -15,6 +15,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
+import { connect } from "react-redux";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -52,15 +54,17 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Transport(props) {
+function Transport(props) {
   const [open, setOpen] = React.useState(false);
   const [can, setCan] = useState(null);
   const [loadning, setLoading] = useState(null);
+  const [canData, setCanData] = useState([]);
 
   function handleClickOpen(params) {
     setOpen(true);
     console.log("cancelled 01->" + params.id);
     setCan(params.id);
+    setCanData(params);
   }
 
   const handleClose = () => {
@@ -69,16 +73,33 @@ export default function Transport(props) {
 
   const cancelHandler = () => {
     axios
-      .post(
-        "https://alphax-api.azurewebsites.net/api/cancellations",
-        cancelData
-      )
+      .post("https://alphax-api.azurewebsites.net/api/cancellations", cancelData)
       .then(function (response) {
         console.log(response);
         setLoading(response);
         setOpen(false);
       });
 
+    const fireResIdg = uuidv4();
+    const apiUrlg = `https://vvisit-d6347-default-rtdb.firebaseio.com/reservations/${fireResIdg}.json`;
+    const fireGuide = {
+      custId: userId,
+      custName: props.userCred.firstName + " " + props.userCred.lastName,
+      serId: canData.transportService.userID,
+      serName: canData.transportService.name,
+      bookedDate: canData.checkIn,
+      createdDate: new Date(),
+      custRead: "no",
+      serRead: "no",
+      resId: fireResIdg,
+      type: "cancellation",
+    };
+
+    axios.put(apiUrlg, fireGuide).then((response) => {
+      if (response.status === 200) {
+        console.log("Data Saved");
+      }
+    });
   };
 
   let userId = props.myId;
@@ -93,11 +114,11 @@ export default function Transport(props) {
         return response.json();
       })
       .then((responseData) => {
-        responseData = responseData.filter(item => item.cancellation == null);
-            setEventList(responseData);
-            console.log("response data transportreservations->"+responseData);
+        responseData = responseData.filter((item) => item.cancellation == null);
+        setEventList(responseData);
+        console.log("response data transportreservations->" + responseData);
       });
-  }, [userId,loadning]);
+  }, [userId, loadning]);
 
   const classes = useStyles();
 
@@ -184,3 +205,11 @@ export default function Transport(props) {
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    userCred: state.userCred,
+  };
+};
+
+export default connect(mapStateToProps)(Transport);

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ResultComponent from './ResultComponent';
 import { CardDeck } from 'react-bootstrap';
 import { connect } from 'react-redux'
+import Spinner from './Spinner';
 
 
 
@@ -68,16 +69,16 @@ function ResultSlider(props) {
 
 
   if(transportList === undefined){
-    return <>Still loading...</>
+    return <Spinner />
   }
   if(tourguideList === undefined){
-    return <>Still loading...</>
+    return <Spinner />
   }
   if(eventList === undefined){
-    return <>Still loading...</>
+    return <Spinner />
   }
   if(hotelList === undefined){
-    return <>Still loading...</>
+    return <Spinner />
   }
 // console.log("Price for the first -> "+((eventList[(props.idss)-1].price * travellers)+(eventList[(props.idss)].price * travellers)+(transportList[(props.idss)-1].pricePerDay)+(tourguideList[(props.idss)-1].costPerDay * days)+(hotelList[(props.idss)-1].pricePerDay * days * hotelcouple)));
 // console.log("price for event01-> "+eventList[(props.idss)-1].price * travellers);
