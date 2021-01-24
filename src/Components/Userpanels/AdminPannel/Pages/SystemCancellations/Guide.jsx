@@ -153,9 +153,9 @@ function Guide(props) {
               <StyledTableCell align="right">{row.tourGuideService.costPerDay}$</StyledTableCell>
               <StyledTableCell align="right">{row.cancellation.isApproved.toString()}</StyledTableCell>
               
-              <StyledTableCell align="right"><Button variant="contained" color="secondary" value= {row} onClick={() => handleUpdateFund(row)}>
-        Update
-      </Button></StyledTableCell>
+              <StyledTableCell align="right">
+                  {row.cancellation.isApproved.toString()==='false' ? <Button variant="contained" color="secondary" value={row} onClick={() => handleUpdateFund(row)}> Update</Button> : <Button variant="contained" disabled>Updated</Button> }
+                </StyledTableCell>
               
             </StyledTableRow>
           ))}

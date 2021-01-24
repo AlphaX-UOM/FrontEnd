@@ -74,9 +74,12 @@ function RefundDetails(props) {
           onChange={handleTextChange}
         />
         <br/>
+        <br/>
+        <br/>
         <Button variant="contained" color="secondary" onClick={handleSaveChange}>
         SAVE
       </Button>
+      <br/>
       </Container>
     </div>
   );
