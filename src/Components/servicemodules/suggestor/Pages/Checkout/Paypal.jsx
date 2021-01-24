@@ -74,19 +74,21 @@ function Paypal(props) {
         onApprove: async (data, actions) => {
           const order = await actions.order.capture();
           setPaidFor(true);
-          console.log("response from paypal-> " + order);
+          console.log("response from paypal->" + order.purchase_units[0].payments.captures[0].id);
           console.log("renderrrringggg");
           setStr(order.id);
-          console.log("2nd renderrrr");
-            
-            var parts = [];
-            parts.push(order.id.slice(0, 8).toLowerCase());
-            parts.push(reservations[0].id.slice(9, 36));
-            
-            
-            // let GUID = "89e74472-5afb-4784-13b9-08d89c0cf5ab";
-            console.log("Guid-> "+GUID);
-            console.log("3nd renderrrr");
+
+          
+              const apiUrlPay111 = `https://vvisit-d6347-default-rtdb.firebaseio.com/test.json`;
+              
+
+              axios
+                .put(apiUrlPay111, order)
+                .then((response) => {
+                  if(response.status === 200){
+                    console.log('Data Saved');
+                  }
+                });
 
             let paymentData = {
                 id: GUID,
@@ -103,7 +105,7 @@ function Paypal(props) {
                   custId : props.userCred.id,
                   custName : props.userCred.firstName + " "+ props.userCred.lastName,
                   payId : firePaymentData,
-                  payPalReturn : order.id
+                  payPalReturn : order.purchase_units[0].payments.captures[0].id
               };
 
               axios

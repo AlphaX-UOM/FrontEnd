@@ -14,6 +14,7 @@ function RefundDetails(props) {
   let ok = props.adminRefundData.okey;
   let poli = props.adminRefundData.policy;
   let paymentUn = props.adminRefundData.paymentID;
+  let cancellation = props.adminRefundData.cancellation;
 
 
   const [amount,setAmount] = useState(null);
@@ -40,7 +41,8 @@ function RefundDetails(props) {
       policy :poli,
       paymentID : paymentUn,
       refund : amount,
-      note : note
+      note : note,
+      cancellation : cancellation
     }
 
     props.adminCancelData(cancelData);

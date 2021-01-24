@@ -114,7 +114,8 @@ function Transport(props) {
       canDate : event.cancellation.date,
       okey : 'YES',
       policy : 'This is a service policy',
-      paymentID : event.paymentID
+      paymentID : event.paymentID,
+      cancellation : event.cancellation
     }
     props.adminCancelData(cancelData);
     setPopup(true);
@@ -158,6 +159,7 @@ function Transport(props) {
             <StyledTableCell align="right">PickUp Date & Time</StyledTableCell>
             <StyledTableCell align="right">PricePerDay</StyledTableCell>
             <StyledTableCell align="right">Funded</StyledTableCell>
+            <StyledTableCell align="right"></StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -172,13 +174,8 @@ function Transport(props) {
               <StyledTableCell align="right">{row.vehicleType}</StyledTableCell>
               <StyledTableCell align="right">{row.pickUpTime}</StyledTableCell>
               <StyledTableCell align="right">{row.price}$</StyledTableCell>
-              <StyledTableCell align="right">
-              <select  onChange={handleApproveChange}>
-            <option value={(row.cancellation.isApproved === false) ? false.toString() : true.toString()} > {(row.cancellation.isApproved === false) ? false.toString() : true.toString()} </option>
-            <option value={(row.cancellation.isApproved === false) ? true.toString() : false.toString()} > {(row.cancellation.isApproved === false) ? true.toString() : false.toString()} </option>
-          </select>
-
-              </StyledTableCell>
+              <StyledTableCell align="right">{row.cancellation.isApproved.toString()}</StyledTableCell>
+          
               <StyledTableCell align="right"><Button variant="contained" color="secondary" value= {row} onClick={() => handleUpdateFund(row)}>
         Update
       </Button></StyledTableCell>

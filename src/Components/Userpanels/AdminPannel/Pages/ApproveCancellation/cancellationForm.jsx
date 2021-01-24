@@ -16,7 +16,7 @@ import ReservationDetails from "./reservationDetails";
 import RefundDetails from "./refundDetails";
 import VerifyRefund from "./verifyRefund";
 import axios from "axios";
-import {encode as base64_encode} from 'base-64';
+import { encode as base64_encode } from "base-64";
 
 const ColorlibConnector = withStyles({
   alternativeLabel: {
@@ -165,69 +165,76 @@ function CancellationForm(props) {
     //send the requests to paypal here
     if (activeStep === steps.length - 1) {
       console.log("send data to server");
+      //start here - token obtaining
 
-      // Note: This is example code. Each server platform and programming language has a different way of handling requests, making HTTP API calls, and serving responses to the browser.
+      var axios = require("axios");
+      var qs = require("qs");
+      var data = qs.stringify({
+        grant_type: "client_credentials",
+      });
+      var config = {
+        method: "post",
+        url: "https://api.sandbox.paypal.com/v1/oauth2/token",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization:
+            "Basic QWRJaWZHbEdIbTNIOWl3dEw5Q016cnNFOTg3SVY0VWdiTlZiTmJBbUMyUE5lUjhLZ09Md245NkRvbE9lSHdpbERHY29pbUNrX0M4RFg4NWI6RUNKY0Nld1J6VUsybGkxU0RjTlJSOWtjcU5jV0RMeTl5SFdmcEJvWERoeTJfdy1rc1pIUEw1eGdsMS05UE5PWXVqNHZCSERRR04wZzFUcHc=",
+        },
+        data: data,
+      };
 
-      // 1. Set up your server to make calls to PayPal
+      axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+          let token = response.data.access_token;
 
-      // 1a. Add your client ID and secret
-      let PAYPAL_CLIENT =
-        "AdIifGlGHm3H9iwtL9CMzrsE987IV4UgbNVbNbAmC2PNeR8KgOLwn96DolOeHwilDGcoimCk_C8DX85b";
-      let PAYPAL_SECRET =
-        "ECJcCewRzUK2li1SDcNRR9kcqNcWDLy9yHWfpBoXDhy2_w-ksZHPL5xgl1-9PNOYuj4vBHDQGN0g1Tpw";
+          var data2 = JSON.stringify({
+            amount: {
+              value: props.adminRefundData.refund,
+              currency_code: "USD",
+            },
+            note_to_payer: props.adminRefundData.note,
+          });
 
-      // 1b. Point your server to the PayPal API
-      let PAYPAL_OAUTH_API =
-        "https://api-m.sandbox.paypal.com/v1/oauth2/token/";
-      let PAYPAL_PAYMENTS_API =
-        "https://api-m.sandbox.paypal.com/v2/payments/captures/";
+          var config = {
+            method: "post",
+            url: `https://api-m.sandbox.paypal.com/v2/payments/captures/${payPalReservedId}/refund`,
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            data: data2,
+          };
 
-        var axios = require('axios');
-var qs = require('qs');
-var data = qs.stringify({
- 'grant_type': 'client_credentials' 
-});
-var config = {
-  method: 'post',
-  url: 'https://api-m.sandbox.paypal.com/v1/oauth2/token',
-  headers: { 
-    'Authorization': 'Basic QWRJaWZHbEdIbTNIOWl3dEw5Q016cnNFOTg3SVY0VWdiTlZiTmJBbUMyUE5lUjhLZ09Md245NkRvbE9lSHdpbERHY29pbUNrX0M4RFg4NWI6RUNKY0Nld1J6VUsybGkxU0RjTlJSOWtjcU5jV0RMeTl5SFdmcEJvWERoeTJfdy1rc1pIUEw1eGdsMS05UE5PWXVqNHZCSERRR04wZzFUcHc=', 
-    'Content-Type': 'application/x-www-form-urlencoded'
-  },
-  data : data
-};
+          axios(config)
+            .then(function (response) {
+              console.log(JSON.stringify(response.data));
 
-axios(config)
-.then(function (response) {
-  let token = response.data.access_token;
-  console.log("Access token->"+response.data.access_token);
-
-
-  let  captureID = payPalReservedId;
-  let refund = axios.post(PAYPAL_PAYMENTS_API + captureID + '/refund', {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    },
-    body: JSON.stringify({
-      amount: {
-        currency_code: 'USD',
-        value:         '20.00'
-      }
-    })
-  });
-  
-  // 4. Handle any errors from the call
-  if (refund.error) {
-    console.error(refund.error);
-  }
-
-})
-.catch(function (error) {
-  console.log(error);
-});
-
-        
+              let CancelData = {
+                  id : props.adminRefundData.cancellation.id,
+                  isApproved : "true",
+                  date : props.adminRefundData.cancellation.date,
+                  userID : props.adminRefundData.cancellation.userID,
+                  reservationID : props.adminRefundData.cancellation.reservationID,
+                }
+            
+                axios
+                  .put(
+                    `https://alphax-api.azurewebsites.net/api/cancellations/${props.adminRefundData.cancellation.id}`,
+                    CancelData
+                  )
+                  .then(response =>  {
+                    console.log(response);
+                  });
+              
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
