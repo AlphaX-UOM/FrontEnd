@@ -2,14 +2,14 @@
     background-image:url('../../../../images/vehicle/vehicle.jpg');
     background-repeat: no-repeat;
     background-position: center center;
-    background-attachment: fixed;
+    /*background-attachment: fixed;*/
     background-size: cover;
     padding-top: 0px;
-    border-radius:25px ;
+
     height: 600px;
 }
 
-.bcolor{
+.becolor{
     background-color:lavender;
 
     background-size: cover;

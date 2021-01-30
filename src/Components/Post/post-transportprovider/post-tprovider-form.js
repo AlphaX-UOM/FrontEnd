@@ -71,16 +71,21 @@ class PostTproviderForm extends Component{
 
         e.preventDefault();
         console.log(this.state)
+
         axios
-            .post('http://localhost:5000/TransportProvider/Post', {
+            .post('http://localhost:5000/api/TransportServices', {
                 name:this.state.name,
-                Email:this.state.email,
-                Address:this.state.address,
-                District:this.state.district,
-                Costperday:parseInt(this.state.costperday),
-                Phonenumber:this.state.telephone,
-                TypesofVehicle:this.state.vehicletype,
-                Description:this.state.description
+                // Email:this.state.email,
+                district:this.state.district,
+                // Address:this.state.address,
+                pnumber:this.state.telephone,
+                description:this.state.description,
+                vehicleType:this.state.vehicletype,
+                count:2,
+                pricePerDay:parseInt(this.state.costperday),
+                userid:"c9d4c053-49b6-410c-bc78-2d54a9991870",
+
+
             })
             .then(response => {
                 console.log(response)
@@ -160,7 +165,7 @@ class PostTproviderForm extends Component{
                             <div className="col-sm-6">
                                 <div className="form-group">
                                     <label htmlFor="exampleFormControlSelect1">Vehicle type</label>
-                                    <select className="form-control"  name="vehicletype" value={this.state.vehicletype} onChange={this.Changehandler}>
+                                    <select className="form-control tm-select"  name="vehicletype" value={this.state.vehicletype} onChange={this.Changehandler}>
                                         <option value="Car">Car</option>
                                         <option value="Van">Van</option>
                                         <option value="Suv">Suv</option>
@@ -223,7 +228,7 @@ class PostTproviderForm extends Component{
                                 <div className="col-sm">
                                     <div className="form-group">
 
-                                        <select className="form-control" id="exampleFormControlSelect1"  name="carvalue" value={this.state.carvalue} onChange={this.Changehandler} disabled = {(!this.state.disabled1)? "disabled" : ""} >
+                                        <select className="form-control tm-select" id="exampleFormControlSelect1"  name="carvalue" value={this.state.carvalue} onChange={this.Changehandler} disabled = {(!this.state.disabled1)? "disabled" : ""} >
                                             <option value="Car">Car</option>
 
 
@@ -254,7 +259,7 @@ class PostTproviderForm extends Component{
                                 <div className="col-sm">
                                     <div className="form-group">
 
-                                        <select className="form-control" id="exampleFormControlSelect1"  name="vanvalue" value={this.state.vanvalue} onChange={this.Changehandler} disabled = {(!this.state.disabled2)? "disabled" : ""} >
+                                        <select className="form-control tm-select" id="exampleFormControlSelect1"  name="vanvalue" value={this.state.vanvalue} onChange={this.Changehandler} disabled = {(!this.state.disabled2)? "disabled" : ""} >
                                             <option value="Van">Van</option>
 
 
@@ -285,7 +290,7 @@ class PostTproviderForm extends Component{
                                 <div className="col-sm">
                                     <div className="form-group">
 
-                                        <select className="form-control" id="exampleFormControlSelect1"  name="suvvalue" value={this.state.suvvalue} onChange={this.Changehandler} disabled = {(!this.state.disabled3)? "disabled" : ""} >
+                                        <select className="form-control tm-select " id="exampleFormControlSelect1"  name="suvvalue" value={this.state.suvvalue} onChange={this.Changehandler} disabled = {(!this.state.disabled3)? "disabled" : ""} >
                                             <option value="suv">Suv</option>
 
 
@@ -316,7 +321,7 @@ class PostTproviderForm extends Component{
                                 <div className="col-sm">
                                     <div className="form-group">
 
-                                        <select className="form-control" id="exampleFormControlSelect1"  name="busvalue" value={this.state.busvalue} onChange={this.Changehandler} disabled = {(!this.state.disabled4)? "disabled" : ""} >
+                                        <select className="form-control tm-select" id="exampleFormControlSelect1"  name="busvalue" value={this.state.busvalue} onChange={this.Changehandler} disabled = {(!this.state.disabled4)? "disabled" : ""} placeholder="select">
                                             <option value="Bus">Bus</option>
 
 

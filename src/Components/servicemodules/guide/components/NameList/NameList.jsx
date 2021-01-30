@@ -1,16 +1,13 @@
 import React,{useState,useEffect} from 'react';
 import NameListEle from './NamelistEle';
 import {Row,Col, Card } from 'react-bootstrap';
-import { useParams } from "react-router-dom";
-import { render } from '@testing-library/react';
-import FormSearch from '../formsearch';
-
-import guide from '../../../../../images/guide-img/img/img-2.svg';
+import guidedetailspage from './guidedetailspage';
 import './formlist.css'
+import connect from "react-redux/es/connect/connect";
 
 
 function NameList(props){
-   
+    const { form_language,date,date1 } = props;
     const [language3,setLanguage3]=useState("x");
     const [rating,setrating]=useState("x");
     const [cost,setcost]=useState("x");
@@ -19,6 +16,13 @@ function NameList(props){
     const [ratingx,setratingx]=useState("x");
     const [costx,setcostx]=useState("x");
 
+
+
+    useEffect(() => {
+        console.log(form_language);
+        console.log(date);
+        console.log(date1);
+    },[])
     function NameListMenu(){
        
 
@@ -55,14 +59,14 @@ function NameList(props){
                    <Card.Title>Select Your Guide</Card.Title> */}
                    <div styles={{alignItems: 'center',justifyContent: 'space-between'}}>
                    <div style={{ padding: '10px'}}>
-                   <select className='form-input-g' id="language" placeholder='Search' onChange={handleInputlanguage1}  > 
-                  <option value="Hindi">Language</option>
-                  <option value="Spanish">Spanish</option>
-                  <option value="Japan">Japan</option>
-                  <option value="English">English</option>
-                  <option value="Korean">Korean</option>
-                  <option value="x">----</option>
-                  </select>
+                   {/*<select className='form-input-g' id="language" placeholder='Search' onChange={handleInputlanguage1}  > */}
+                  {/*<option value="Hindi">Language</option>*/}
+                  {/*<option value="Spanish">Spanish</option>*/}
+                  {/*<option value="Chinees">Chinees</option>*/}
+                  {/*<option value="English">English</option>*/}
+                  {/*<option value="French">French</option>*/}
+                  {/*<option value="x">----</option>*/}
+                  {/*</select>*/}
                    </div>
                    <div style={{ padding: '10px'}}>
                    <select className='form-input-g' id="rating" placeholder='Search' onChange={handleInputlanguage2} > 
@@ -140,11 +144,10 @@ function NameList(props){
       
 
         
-const language = props.location.data.language;
+const language = form_language;
 const [namelistlan,setNamelistlan]=useState('"x"')
    
 
- console.log(namelistlan);
 
     const [nameList,setNameList]=useState(null);
 
@@ -161,22 +164,24 @@ const [namelistlan,setNamelistlan]=useState('"x"')
           )
       }, [])
    
-    console.log('print tj',nameList)
+    
   
     const nameListComponent=()=>{
-        return  nameList && nameList.filter(person => person.language===language).map((Aname,i)=>{
+        return  nameList && nameList.filter(person => person.language===form_language).map((Aname,i)=>{
          
       
         return(
             <NameListEle
               
             key={i}
+            userid={Aname.id}
              name={Aname.name} 
-            
+             city={Aname.city}
+             email={Aname.email}
              lang={Aname.language}
-             otherDetails={Aname.otherDetails}
+            Dob={Aname.dob}
              cost={Aname.costPerDay}
-             avatar={Aname.imageurl}
+            
 
             />
         );
@@ -184,113 +189,127 @@ const [namelistlan,setNamelistlan]=useState('"x"')
     };
 
     const nameListComponent1=()=>{
-        return  nameList && nameList.filter(person => (person.language===namelistlan) ).map((Aname,i)=>{
+        return  nameList && nameList.filter(person => (person.language1===namelistlan) ).map((Aname,i)=>{
          
       
         return(
             <NameListEle
               
             key={i}
+            userid={Aname.id}
              name={Aname.name} 
-            
+             city={Aname.city}
+             email={Aname.email}
              lang={Aname.language}
-             otherDetails={Aname.otherDetails}
+            Dob={Aname.dob}
              cost={Aname.costPerDay}
-             avatar={Aname.imageurl}
+            
             />
         );
         })  ;
     };
+
+
     const nameListComponent2=()=>{
-        return  nameList && nameList.filter(person => (person.language===language) && (person.costPerDay== cost) ).map((Aname,i)=>{
+        return  nameList && nameList.filter(person => (person.language1===form_language) && (person.costPerDay== cost) ).map((Aname,i)=>{
          
       
         return(
             <NameListEle
               
             key={i}
-            name={Aname.name} 
-           
-            lang={Aname.language}
-            otherDetails={Aname.otherDetails}
-            cost={Aname.costPerDay}
-            avatar={Aname.imageurl}
+            userid={Aname.id}
+             name={Aname.name} 
+             city={Aname.city}
+             email={Aname.email}
+             lang={Aname.language}
+            Dob={Aname.dob}
+             cost={Aname.costPerDay}
+            
+
             />
         );
         })  ;
     };
      
     const nameListComponent3=()=>{
-        return  nameList && nameList.filter(person => (person.language===language) && (person.age== rating) ).map((Aname,i)=>{
+        return  nameList && nameList.filter(person => (person.language1===form_language) && (person.age== rating) ).map((Aname,i)=>{
          
       
         return(
             <NameListEle
               
             key={i}
-            name={Aname.name} 
-           
-            lang={Aname.language}
-            otherDetails={Aname.otherDetails}
-            cost={Aname.costPerDay}
-            avatar={Aname.imageurl}
-
+            userid={Aname.id}
+             name={Aname.name} 
+             city={Aname.city}
+             email={Aname.email}
+             lang={Aname.language}
+            Dob={Aname.dob}
+             cost={Aname.costPerDay}
+            
             />
         );
         })  ;
     };
     const nameListComponent4=()=>{
-        return  nameList && nameList.filter(person => (person.language===language) && (person.age== rating) && (person.costPerDay== cost) ).map((Aname,i)=>{
+        return  nameList && nameList.filter(person => (person.language1===form_language) && (person.age== rating) && (person.costPerDay== cost) ).map((Aname,i)=>{
          
       
         return(
             <NameListEle
               
             key={i}
-            name={Aname.name} 
-           
-            lang={Aname.language}
-            otherDetails={Aname.otherDetails}
-            cost={Aname.costPerDay}
-            avatar={Aname.imageurl}
+            userid={Aname.id}
+             name={Aname.name} 
+             city={Aname.city}
+             email={Aname.email}
+             lang={Aname.language}
+            Dob={Aname.dob}
+             cost={Aname.costPerDay}
+            
 
             />
         );
         })  ;
     };
     const nameListComponent5=()=>{
-        return  nameList && nameList.filter(person => (person.language===namelistlan) && (person.costPerDay== cost)).map((Aname,i)=>{
+        return  nameList && nameList.filter(person => (person.language1===namelistlan) && (person.costPerDay== cost)).map((Aname,i)=>{
          
       
         return(
             <NameListEle
               
             key={i}
+            userid={Aname.id}
              name={Aname.name} 
-            
+             city={Aname.city}
+             email={Aname.email}
              lang={Aname.language}
-             otherDetails={Aname.otherDetails}
+            Dob={Aname.dob}
              cost={Aname.costPerDay}
-             avatar={Aname.imageurl}
+            
 
             />
         );
         })  ;
     };
     const nameListComponent6=()=>{
-        return  nameList && nameList.filter(person => (person.language===namelistlan) && (person.age== rating)).map((Aname,i)=>{
+        return  nameList && nameList.filter(person => (person.language1===namelistlan) && (person.age== rating)).map((Aname,i)=>{
          
       
         return(
             <NameListEle
               
             key={i}
-            name={Aname.name} 
-           
-            lang={Aname.language}
-            otherDetails={Aname.otherDetails}
-            cost={Aname.costPerDay}
-            avatar={Aname.imageurl}
+            userid={Aname.id}
+             name={Aname.name} 
+             city={Aname.city}
+             email={Aname.email}
+             lang={Aname.language}
+            Dob={Aname.dob}
+             cost={Aname.costPerDay}
+            
 
             />
         );
@@ -298,37 +317,27 @@ const [namelistlan,setNamelistlan]=useState('"x"')
     };
 
     const nameListComponent7=()=>{
-        return  nameList && nameList.filter(person => (person.language===namelistlan) && (person.age== rating)&& (person.costPerDay== cost)).map((Aname,i)=>{
+        return  nameList && nameList.filter(person => (person.language1===namelistlan) && (person.age== rating)&& (person.costPerDay== cost)).map((Aname,i)=>{
          
       
         return(
             <NameListEle
               
             key={i}
-            name={Aname.name} 
-           
-            lang={Aname.language}
-            otherDetails={Aname.otherDetails}
-            cost={Aname.costPerDay}
-            avatar={Aname.imageurl}
-
+            userid={Aname.id}
+             name={Aname.name} 
+             city={Aname.city}
+             email={Aname.email}
+             lang={Aname.language}
+            Dob={Aname.dob}
+             cost={Aname.costPerDay}
+            
             />
         );
         })  ;
     };
 
-const addUsserHandler=()=>{
-   const newUsser={
-    "id":3,
-    "name":{"title":"Mrs","first":"Stella","last":"jaxon"},
-    "location":{"city":"kilinocchi"},
-    "email":"polamuna.yuid@example.com",
-    "dob":{"date":"1983-02-26T19:18:16.968Z","age":37},
-    "picture":{"medium":"https://randomuser.me/api/portraits/med/women/54.jpg"},
-   }
 
-   setNameList((nameList)=>nameList.concat(newUsser));
-}
 
 
 
@@ -367,4 +376,21 @@ const addUsserHandler=()=>{
     );
 }
 
-export default NameList;
+
+const mapStateToProps = (state) => {
+    return {
+
+        form_language:state.guide_input_reducer.language,
+        date:state.guide_input_reducer.date,
+        date1:state.guide_input_reducer.date1
+
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)( NameList);

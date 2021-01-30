@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
-
+import Signup from './Signup/signup'
+import Test from './test'
+import Signin from './Signin/Signin'
 const login=()=>{
     return(
         <div>
@@ -23,7 +25,10 @@ const login=()=>{
             </div>
 
 
-
+            <br/>
+            {/*<Signup/>*/}
+            <Signin/>
+            {/*<Test/>*/}
         </div>
     )
 };
