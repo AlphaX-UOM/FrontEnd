@@ -21,6 +21,7 @@ function NameList(props){
     const [costx,setcostx]=useState("x");
 
 
+
     useEffect(() => {
         console.log(form_language);
         console.log(date);
@@ -62,14 +63,14 @@ function NameList(props){
                    <Card.Title>Select Your Guide</Card.Title> */}
                    <div styles={{alignItems: 'center',justifyContent: 'space-between'}}>
                    <div style={{ padding: '10px'}}>
-                   <select className='form-input-g' id="language" placeholder='Search' onChange={handleInputlanguage1}  > 
-                  <option value="Hindi">Language</option>
-                  <option value="Spanish">Spanish</option>
-                  <option value="Chinees">Chinees</option>
-                  <option value="English">English</option>
-                  <option value="French">French</option>
-                  <option value="x">----</option>
-                  </select>
+                   {/*<select className='form-input-g' id="language" placeholder='Search' onChange={handleInputlanguage1}  > */}
+                  {/*<option value="Hindi">Language</option>*/}
+                  {/*<option value="Spanish">Spanish</option>*/}
+                  {/*<option value="Chinees">Chinees</option>*/}
+                  {/*<option value="English">English</option>*/}
+                  {/*<option value="French">French</option>*/}
+                  {/*<option value="x">----</option>*/}
+                  {/*</select>*/}
                    </div>
                    <div style={{ padding: '10px'}}>
                    <select className='form-input-g' id="rating" placeholder='Search' onChange={handleInputlanguage2} > 
@@ -211,6 +212,8 @@ const [namelistlan,setNamelistlan]=useState('"x"')
         );
         })  ;
     };
+
+
     const nameListComponent2=()=>{
         return  nameList && nameList.filter(person => (person.language1===language) && (person.costPerDay== cost) ).map((Aname,i)=>{
          

@@ -7,10 +7,12 @@ import React, { Fragment, useEffect, useState } from 'react';
 import './cart.css';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import CancelIcon from '@material-ui/icons/Cancel';
+import { makeStyles } from '@material-ui/core/styles';
+import { green } from '@material-ui/core/colors';
 
 const Row = (props) => {
      console.log(props.item)
-    const { id, quantity, details,no_travellers } = props.item
+    const { id, quantity, details,no_travellers,date } = props.item
     const item = details
     const [ qty, setQty ] = useState(quantity);
     const dispatch = useDispatch()
@@ -29,8 +31,8 @@ const Row = (props) => {
   
       return (
         <tr>
-         
-          <td><p className="font-weight-bold">{item}</p></td>
+         <td>{date}</td>
+          <td className="font-weight-bold">{item}</td>
           <td>${qty}</td>
           <td>
               {no_travellers}
@@ -38,7 +40,7 @@ const Row = (props) => {
           </td>
             <td>${ (qty * 1).toFixed(2) }</td>
           <td>
-              <CancelIcon color="secondary" fontSize="large" onClick={() => {remove(props.item)}}></CancelIcon>
+              <CancelIcon  style={{ color: green[500] }} fontSize="large" onClick={() => {remove(props.item)}}></CancelIcon>
               {/*<CancelOutlinedIcon>aa</CancelOutlinedIcon>*/}
             {/*<button*/}
               {/*type="button"*/}

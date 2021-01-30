@@ -2,7 +2,7 @@ import React from 'react';
 import './listitem.css';
 import {Link} from 'react-router-dom'
 import Listitemdetails from "../Listitemdetails/listitemdetails";
-
+import Ratings from '../rating-mod/ratingm'
 
 const listitem=(props)=>{
 
@@ -31,7 +31,7 @@ const listitem=(props)=>{
                                 <div className="tm-recommended-description-box">
                                     <h3 className="tm-recommended-title">{props.name}</h3>
                                     <p className="tm-text-highlight">Vehicle Type: <strong>{props.vtype}</strong></p>
-                                    <p className="tm-text-gray">Ratings:{props.ratings}</p>
+                                    <p className="tm-text-gray"><Ratings/></p>
                                 </div>
                                 <a  className="tm-recommended-price-box">
                                     <p className="tm-recommended-price">$ {props.price}</p>

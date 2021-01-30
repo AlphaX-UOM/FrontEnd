@@ -8,10 +8,11 @@ const Table = ({items}) => {
       <table className="table table-striped ">
           <thead className="thead-light">
         <tr >
-          <th scope="col" width="200">Service Name</th>
+            <th scope="col" width="120">Date</th>
+          <th scope="col" width="150">Service Name</th>
           <th width="150">Price Per Unit</th>
           <th width="150">No. Customers</th>
-          <th width="200">Total price</th>
+          <th width="150">Total price</th>
         </tr>
           </thead>
         {

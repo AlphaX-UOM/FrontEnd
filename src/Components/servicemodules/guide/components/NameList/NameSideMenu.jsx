@@ -26,13 +26,13 @@ const handleInputlanguage = (event) => {
            <Card.Title>Select Your Guide</Card.Title>
            <div styles={{alignItems: 'center',justifyContent: 'space-between'}}>
            <div style={{ padding: '10px'}}>
-           <select className='form-input-g' id="language" placeholder='Search' onChange={handleInputlanguage}  > 
-          <option value="Hindi">Language</option>
-          <option value="Spanish">Spanish</option>
-          <option value="Chinees">Chinees</option>
-          <option value="English">English</option>
-          <option value="French">French</option>
-          </select>
+           {/*<select className='form-input-g' id="language" placeholder='Search' onChange={handleInputlanguage}  > */}
+          {/*<option value="Hindi">Language</option>*/}
+          {/*<option value="Spanish">Spanish</option>*/}
+          {/*<option value="Chinees">Chinees</option>*/}
+          {/*<option value="English">English</option>*/}
+          {/*<option value="French">French</option>*/}
+          {/*</select>*/}
            </div>
            <div style={{ padding: '10px'}}>
            <select className='form-input-g' id="rating" placeholder='Search'  > 

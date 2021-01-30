@@ -9,6 +9,7 @@ const Form = () => {
  
   return (
     <>
+        <br/>
       <div className='form-container-g'>
         
         <div className='form-content-left-g'>
@@ -16,6 +17,7 @@ const Form = () => {
         </div>
         <FormSearch/>
       </div>
+        <br/>
     </>
   );
 };
