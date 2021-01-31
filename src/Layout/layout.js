@@ -25,9 +25,11 @@ import HotelList from '../Components/servicemodules/hotel/Component/HotelList';
 
 import Form from '../Components/servicemodules/guide/components/Form';
 import NameList from '../Components/servicemodules/guide/components/NameList/NameList';
+import guidedetailspage from '../Components/servicemodules/guide/components/NameList/guidedetailspage';
 import FormSearch from '../Components/servicemodules/guide/components/formsearch';
 import PostGuideForm from '../Components/servicemodules/guide/components/post-guide'
 import Events from '../Components/servicemodules/event/Component/Main'
+
 
 import ResultList from '../Components/servicemodules/suggestor/Pages/ResultList/ResultList';
 import DetailedResult from '../Components/servicemodules/suggestor/Pages/DetailedResult/DetailedResult';
@@ -66,6 +68,7 @@ const Layout=(props)=> {
                         <Route path='/PostGuideForm' component={PostGuideForm}/>
                         <Route path='/FormSearch' component={FormSearch}/>
                         <Route path='/NameList' component={NameList}/>
+                        <Route path='/guidedetailspage' component={ guidedetailspage}/>
                         <Route path='/guide'>  <Form /> </Route>
 
                         <Route path="/hotelList"><HotelList/></Route>
