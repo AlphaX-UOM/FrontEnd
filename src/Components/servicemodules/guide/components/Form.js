@@ -16,6 +16,7 @@ const Form = () => {
           <img className='form-img-g' src={guide} alt='toure gude' />
         </div>
         <FormSearch/>
+
       </div>
         <br/>
     </>

@@ -11,10 +11,8 @@ import { Link } from "react-router-dom";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 
 function guidedetailspage(props) {
-  
-
-    // backend dta assinged for these variables
-    let name1;
+  // backend dta assinged for these variables
+  let name1;
 
   let email;
   let lang;
@@ -27,31 +25,27 @@ function guidedetailspage(props) {
   console.log(props.location.data.userId);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [nameList, setNameList] = useState(null);
+  const [nameList, setNameList] = useState([]);
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    fetch("https://alphax-api.azurewebsites.net/api/TourGuideServices")
+    fetch(
+      "https://alphax-api.azurewebsites.net/api/TourGuideServices/" +
+        props.location.data.userId
+    )
       .then((res) => res.json())
       .then((data) => {
         setNameList(data);
       });
   }, []);
 
+  name1 = nameList.name;
+  email = nameList.pnumber;
+  Dob = nameList.dob;
+  cost = nameList.costPerDay;
+  details = nameList.otherDetails;
 
-
-  nameList &&
-    nameList
-      .filter((person) => person.id === props.location.data.userId)
-      .map((Aname, i) => {
-        return (
-          (name1 = Aname.name),
-          (email = Aname.pnumber),
-          (Dob = Aname.dob),
-          (cost = Aname.costPerDay),
-          (details = Aname.otherDetails)
-        );
-      });
+  console.log(nameList.name);
 
   return (
     <div className="">
