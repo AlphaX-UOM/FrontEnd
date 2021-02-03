@@ -131,7 +131,7 @@ function guidedetailspage(props) {
 
                   <span className="">
                     <div className="row">
-                      <div className="">DOB :</div>
+                      <div className="">Age :</div>
                       <div className="col">
                         <div className="" role="alert">
                           {Dob}

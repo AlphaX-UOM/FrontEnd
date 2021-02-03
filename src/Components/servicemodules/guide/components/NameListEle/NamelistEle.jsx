@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./NamelistEle.css";
-import Ratings from "../NameList/../../../transport/rating-mod/ratings";
+import Ratings from "../../../transport/rating-mod/ratings";
 function click() {
   return alert("request sent");
 }
@@ -38,7 +38,7 @@ function NameListEle(props) {
 
           <Card.Text>Language: {props.lang}</Card.Text>
           <Card.Text>Cost Per Day: {props.cost}</Card.Text>
-          <Card.Text>DOB: {props.dob}</Card.Text>
+          <Card.Text>Age: {props.dob}</Card.Text>
           <Card.Text>
             {" "}
             <Ratings />

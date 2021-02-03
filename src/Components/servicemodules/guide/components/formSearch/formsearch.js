@@ -2,10 +2,10 @@ import React,{useState} from 'react';
 import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import './Form.css';
+import '../Form/Form.css';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import connect from "react-redux/es/connect/connect";
-import {guide_input_form} from "../../../../store/actions/guide_input_reducer"
+import {guide_input_form} from "../../../../../store/actions/guide_input_reducer"
 
 
 const FormSearch = (props) => {

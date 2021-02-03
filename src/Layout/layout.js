@@ -23,11 +23,11 @@ import Result from '../Components/servicemodules/hotel/Result/Result';
 import Details from '../Components/servicemodules/hotel/Details/Details';
 import HotelList from '../Components/servicemodules/hotel/Component/HotelList';
 
-import Form from '../Components/servicemodules/guide/components/Form';
+import Form from '../Components/servicemodules/guide/components/Form/Form';
 import NameList from '../Components/servicemodules/guide/components/NameList/NameList';
-import guidedetailspage from '../Components/servicemodules/guide/components/NameList/guidedetailspage';
-import FormSearch from '../Components/servicemodules/guide/components/formsearch';
-import PostGuideForm from '../Components/servicemodules/guide/components/post-guide'
+import guidedetailspage from '../Components/servicemodules/guide/components/GuideDetails/guidedetailspage';
+import FormSearch from '../Components/servicemodules/guide/components/formSearch/formsearch';
+import PostGuideForm from '../Components/servicemodules/guide/components/PostGuide/post-guide'
 import Events from '../Components/servicemodules/event/Component/Main'
 
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Form.css';
-import FormSearch from './formsearch';
-import guide from '../../../../images/guide-img/img/img-2.svg';
+import FormSearch from '../formSearch/formsearch';
+import guide from '../../../../../images/guide-img/img/img-2.svg';
 
 const Form = () => {
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import NameListEle from "./NamelistEle";
+import NameListEle from "../NameListEle/NamelistEle";
 import { Row, Col, Card } from "react-bootstrap";
-import guidedetailspage from "./guidedetailspage";
+import guidedetailspage from "../GuideDetails/guidedetailspage";
 import "./formlist.css";
 import connect from "react-redux/es/connect/connect";
 
@@ -40,12 +40,7 @@ function NameList(props) {
     return (
       <div>
         <div styles={{ alignItems: "center" }}>
-          {/* <Card style={{ width: '10rem', height: '60rem', backgroundColor:'gray'}}>
-                   <div>
-                  <Card.Img variant="top" src={guide} style={{ height: '100px' , padding: '10px'}}/>
-                  </div>
-                   <Card.Body>
-                   <Card.Title>Select Your Guide</Card.Title> */}
+        
           <div
             styles={{ alignItems: "center", justifyContent: "space-between" }}
           >
@@ -329,7 +324,7 @@ function NameList(props) {
       <div
         style={{
           background:
-            "linear-gradient(90deg, rgb(40, 40, 40) 0%, rgb(17, 17, 17) 100%)",
+            "linear-gradient(90deg, rgb(40, 40, 40) 0%, rgb(17, 17, 17) 100%)",minHeight: "100vh"
         }}
       >
         <Row style={{ width: "100%", height: "100%" }}>
