@@ -17,7 +17,7 @@ function NameList (){
       return response.json();
     })*/
     .then((responseData) => {
-      // console.log(responseData);
+      console.log(responseData);
 
       setNameList(responseData.data);
       setLoading(false);

@@ -1,7 +1,11 @@
 import React,{useState,useEffect} from 'react';
 import NameListEle from './NamelistEle';
 import {Row,Col, Card } from 'react-bootstrap';
-import guidedetailspage from './guidedetailspage';
+import { useParams } from "react-router-dom";
+import { render } from '@testing-library/react';
+import FormSearch from '../formsearch';
+
+import guide from '../../../../../images/guide-img/img/img-2.svg';
 import './formlist.css'
 import connect from "react-redux/es/connect/connect";
 
@@ -144,15 +148,16 @@ function NameList(props){
       
 
         
-const language = form_language;
+const language = props.location.data.language;
 const [namelistlan,setNamelistlan]=useState('"x"')
    
 
+ console.log(namelistlan);
 
     const [nameList,setNameList]=useState(null);
 
     useEffect(() => {
-        fetch("https://alphax-api.azurewebsites.net/api/TourGuideServices")
+        fetch("https://run.mocky.io/v3/a3bb3139-db9a-4077-810d-e3af6b2e5eeb")
           .then(res => res.json())
           .then( (data) =>{
              setNameList(data);
@@ -167,21 +172,20 @@ const [namelistlan,setNamelistlan]=useState('"x"')
     
   
     const nameListComponent=()=>{
-        return  nameList && nameList.filter(person => person.language===form_language).map((Aname,i)=>{
+        return  nameList && nameList.filter(person => person.language1===language).map((Aname,i)=>{
          
       
         return(
             <NameListEle
               
             key={i}
-            userid={Aname.id}
-             name={Aname.name} 
+             name={Aname.name1} 
              city={Aname.city}
              email={Aname.email}
-             lang={Aname.language}
-            Dob={Aname.dob}
+             lang={Aname.language1}
+             Rating={Aname.age}
              cost={Aname.costPerDay}
-            
+             avatar={Aname.imageurl}
 
             />
         );
@@ -196,14 +200,14 @@ const [namelistlan,setNamelistlan]=useState('"x"')
             <NameListEle
               
             key={i}
-            userid={Aname.id}
-             name={Aname.name} 
+             name={Aname.name1} 
              city={Aname.city}
              email={Aname.email}
-             lang={Aname.language}
-            Dob={Aname.dob}
+             lang={Aname.language1}
+             Rating={Aname.age}
              cost={Aname.costPerDay}
-            
+             avatar={Aname.imageurl}
+
             />
         );
         })  ;
@@ -211,21 +215,20 @@ const [namelistlan,setNamelistlan]=useState('"x"')
 
 
     const nameListComponent2=()=>{
-        return  nameList && nameList.filter(person => (person.language1===form_language) && (person.costPerDay== cost) ).map((Aname,i)=>{
+        return  nameList && nameList.filter(person => (person.language1===language) && (person.costPerDay== cost) ).map((Aname,i)=>{
          
       
         return(
             <NameListEle
               
             key={i}
-            userid={Aname.id}
-             name={Aname.name} 
+             name={Aname.name1} 
              city={Aname.city}
              email={Aname.email}
-             lang={Aname.language}
-            Dob={Aname.dob}
+             lang={Aname.language1}
+             Rating={Aname.age}
              cost={Aname.costPerDay}
-            
+             avatar={Aname.imageurl}
 
             />
         );
@@ -233,41 +236,40 @@ const [namelistlan,setNamelistlan]=useState('"x"')
     };
      
     const nameListComponent3=()=>{
-        return  nameList && nameList.filter(person => (person.language1===form_language) && (person.age== rating) ).map((Aname,i)=>{
+        return  nameList && nameList.filter(person => (person.language1===language) && (person.age== rating) ).map((Aname,i)=>{
          
       
         return(
             <NameListEle
               
             key={i}
-            userid={Aname.id}
-             name={Aname.name} 
+             name={Aname.name1} 
              city={Aname.city}
              email={Aname.email}
-             lang={Aname.language}
-            Dob={Aname.dob}
+             lang={Aname.language1}
+             Rating={Aname.age}
              cost={Aname.costPerDay}
-            
+             avatar={Aname.imageurl}
+
             />
         );
         })  ;
     };
     const nameListComponent4=()=>{
-        return  nameList && nameList.filter(person => (person.language1===form_language) && (person.age== rating) && (person.costPerDay== cost) ).map((Aname,i)=>{
+        return  nameList && nameList.filter(person => (person.language1===language) && (person.age== rating) && (person.costPerDay== cost) ).map((Aname,i)=>{
          
       
         return(
             <NameListEle
               
             key={i}
-            userid={Aname.id}
-             name={Aname.name} 
+             name={Aname.name1} 
              city={Aname.city}
              email={Aname.email}
-             lang={Aname.language}
-            Dob={Aname.dob}
+             lang={Aname.language1}
+             Rating={Aname.age}
              cost={Aname.costPerDay}
-            
+             avatar={Aname.imageurl}
 
             />
         );
@@ -281,14 +283,13 @@ const [namelistlan,setNamelistlan]=useState('"x"')
             <NameListEle
               
             key={i}
-            userid={Aname.id}
-             name={Aname.name} 
+             name={Aname.name1} 
              city={Aname.city}
              email={Aname.email}
-             lang={Aname.language}
-            Dob={Aname.dob}
+             lang={Aname.language1}
+             Rating={Aname.age}
              cost={Aname.costPerDay}
-            
+             avatar={Aname.imageurl}
 
             />
         );
@@ -302,14 +303,13 @@ const [namelistlan,setNamelistlan]=useState('"x"')
             <NameListEle
               
             key={i}
-            userid={Aname.id}
-             name={Aname.name} 
+             name={Aname.name1} 
              city={Aname.city}
              email={Aname.email}
-             lang={Aname.language}
-            Dob={Aname.dob}
+             lang={Aname.language1}
+             Rating={Aname.age}
              cost={Aname.costPerDay}
-            
+             avatar={Aname.imageurl}
 
             />
         );
@@ -324,20 +324,31 @@ const [namelistlan,setNamelistlan]=useState('"x"')
             <NameListEle
               
             key={i}
-            userid={Aname.id}
-             name={Aname.name} 
+             name={Aname.name1} 
              city={Aname.city}
              email={Aname.email}
-             lang={Aname.language}
-            Dob={Aname.dob}
+             lang={Aname.language1}
+             Rating={Aname.age}
              cost={Aname.costPerDay}
-            
+             avatar={Aname.imageurl}
+
             />
         );
         })  ;
     };
 
+const addUsserHandler=()=>{
+   const newUsser={
+    "id":3,
+    "name":{"title":"Mrs","first":"Stella","last":"jaxon"},
+    "location":{"city":"kilinocchi"},
+    "email":"polamuna.yuid@example.com",
+    "dob":{"date":"1983-02-26T19:18:16.968Z","age":37},
+    "picture":{"medium":"https://randomuser.me/api/portraits/med/women/54.jpg"},
+   }
 
+   setNameList((nameList)=>nameList.concat(newUsser));
+}
 
 
 

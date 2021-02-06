@@ -69,8 +69,8 @@ const FormSearch = (props) => {
                           <select className='form-control tm-select' id="language" placeholder='Search' onChange={handleInputlanguage} style={{borderRadius:"10px"}} required>
 
                               <option value="Hindi" selected>Select Language</option>
-                              <option value="Japan">Japan</option>
-                              <option value="Korean">Korean</option>
+                              <option value="Spanish">Spanish</option>
+                              <option value="Chinees">Chinees</option>
                               <option value="English">English</option>
                               <option value="French">French</option>
                           </select>

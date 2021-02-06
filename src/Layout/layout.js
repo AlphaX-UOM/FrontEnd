@@ -25,11 +25,9 @@ import HotelList from '../Components/servicemodules/hotel/Component/HotelList';
 
 import Form from '../Components/servicemodules/guide/components/Form';
 import NameList from '../Components/servicemodules/guide/components/NameList/NameList';
-import guidedetailspage from '../Components/servicemodules/guide/components/NameList/guidedetailspage';
 import FormSearch from '../Components/servicemodules/guide/components/formsearch';
 import PostGuideForm from '../Components/servicemodules/guide/components/post-guide'
-import Events from '../Components/servicemodules/event/Component/Main'
-
+import Events from '../Components/servicemodules/event/Component/Update/Main/Landing';
 
 import ResultList from '../Components/servicemodules/suggestor/Pages/ResultList/ResultList';
 import DetailedResult from '../Components/servicemodules/suggestor/Pages/DetailedResult/DetailedResult';
@@ -37,7 +35,8 @@ import Payment from '../Components/servicemodules/suggestor/Pages/Checkout/Payme
 import Thank from '../Components/servicemodules/suggestor/Pages/ThankYou/Thank';
 import SignUp from "../Components/Login/Signup/signup";
 
-
+import CategoryLanding from '../Components/servicemodules/event/Component/Update/Category/CategoryLanding';
+import ItemLanding from '../Components/servicemodules/event/Component/Update/Item/ItemLanding';
 
 const Layout=(props)=> {
     const { items, saveLocalStorage } = props;
@@ -59,16 +58,18 @@ const Layout=(props)=> {
                     <Switch>
                         <Route path='/result' component={ResultList} />
                         <Route path='/thank'> <Thank /> </Route>
+
                         <Route path='/detailedresult' component={DetailedResult} />
                         <Route path='/payment' component={Payment} />
 
 
                         <Route path='/events' component={Events}/>
+                        <Route path='/categorylanding' component={CategoryLanding}/>
+                        <Route path='/itemlanding' component={ItemLanding}/>
 
                         <Route path='/PostGuideForm' component={PostGuideForm}/>
                         <Route path='/FormSearch' component={FormSearch}/>
                         <Route path='/NameList' component={NameList}/>
-                        <Route path='/guidedetailspage' component={ guidedetailspage}/>
                         <Route path='/guide'>  <Form /> </Route>
 
                         <Route path="/hotelList"><HotelList/></Route>

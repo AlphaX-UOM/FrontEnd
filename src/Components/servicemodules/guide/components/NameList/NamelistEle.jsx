@@ -2,9 +2,7 @@ import React from 'react';
 import Rating from '@material-ui/lab/Rating';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card,Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import './NamelistEle.css'
-import Ratings from '../NameList/../../../transport/rating-mod/ratings'
+
 function click(){
     return(
         alert('request sent')
@@ -13,13 +11,6 @@ function click(){
 
 
 function NameListEle(props){
-
-  let formdata={
-   userId:props.userid,
-  };
-
-
-  
     const useStyles = makeStyles((theme) => ({
         root: {
           display: 'flex',
@@ -34,26 +25,23 @@ function NameListEle(props){
     return(
         
         
-                <Link to={{pathname:"/guidedetailspage", data:formdata}}   style={{padding:'10px'}} >
-                 <Card  style={{ width: '17rem' }} className="backcolor tcolr-guide" >
+                <div style={{padding:'10px'}}>
+                 <Card style={{ width: '17rem' }}>
                  <Card.Img variant="top" src={props.avatar} />
-                 <Card.Body >
+                 <Card.Body>
                  <Card.Title>{props.name}</Card.Title>
-                     <hr/>
-                 <Card.Text>City: </Card.Text>
+                 <Card.Text>City: {props.city}  </Card.Text>
                  <Card.Text>Language: {props.lang}</Card.Text>
                  <Card.Text>Cost Per Day: {props.cost}</Card.Text>
-                 <Card.Text> <Ratings/></Card.Text>
+                 <Card.Text>Rating:<Rating name="size-small" defaultValue={props.Rating} precision={0.5} readOnly /></Card.Text>
                 
-            
                  
-               
-
+                 
+                 <Button variant="primary" onClick={click}>Select</Button>
                  </Card.Body>
                  </Card>
-
-
-                </Link>
+                
+                </div>
            
 
             
