@@ -9,7 +9,7 @@ import Brightness4Icon from "@material-ui/icons/Brightness4";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "./actions";
+import { addToCart } from "../../../../../../store/lib/actions";
 import connect from "react-redux/es/connect/connect";
 
 
@@ -155,7 +155,7 @@ console.log("event price ->"+props.data.price);
                   <br />
                 </div>
                 <Link to="/shoppingcart">
-                <button type="button" class="btn btn-warning" onClick={ add_to_cart(props.data.name,props.data.price,props.data.id,quantity,date)}>
+                <button type="button" class="btn btn-warning" onClick={ ()=>add_to_cart(props.data.name,props.data.price,props.data.id,quantity,date)}>
                   <AddShoppingCartIcon />
                   Add to Cart
                 </button>

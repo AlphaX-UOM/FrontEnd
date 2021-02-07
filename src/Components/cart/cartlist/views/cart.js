@@ -27,7 +27,7 @@ import { saveCart } from '../../../../store/lib/actions'
       return (
         <Fragment>
             <br/>
-          <div className="container">
+          <div className="container-fluid">
               <div className="row">
               <div className="col-sm cart">
                   <Table items={items} />

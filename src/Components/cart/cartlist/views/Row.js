@@ -33,6 +33,7 @@ const Row = (props) => {
         <tr>
          <td>{date}</td>
           <td className="font-weight-bold">{item}</td>
+            <td></td>
           <td>${qty}</td>
           <td>
               {no_travellers}

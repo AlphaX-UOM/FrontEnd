@@ -23,10 +23,10 @@ import Result from '../Components/servicemodules/hotel/Result/Result';
 import Details from '../Components/servicemodules/hotel/Details/Details';
 import HotelList from '../Components/servicemodules/hotel/Component/HotelList';
 
-import Form from '../Components/servicemodules/guide/components/Form';
+import Form from '../Components/servicemodules/guide/components/Form/Form';
 import NameList from '../Components/servicemodules/guide/components/NameList/NameList';
-import FormSearch from '../Components/servicemodules/guide/components/formsearch';
-import PostGuideForm from '../Components/servicemodules/guide/components/post-guide'
+import FormSearch from '../Components/servicemodules/guide/components/formSearch/formsearch';
+import PostGuideForm from '../Components/servicemodules/guide/components/PostGuide/post-guide'
 import Events from '../Components/servicemodules/event/Component/Update/Main/Landing';
 
 import ResultList from '../Components/servicemodules/suggestor/Pages/ResultList/ResultList';
@@ -37,6 +37,8 @@ import SignUp from "../Components/Login/Signup/signup";
 
 import CategoryLanding from '../Components/servicemodules/event/Component/Update/Category/CategoryLanding';
 import ItemLanding from '../Components/servicemodules/event/Component/Update/Item/ItemLanding';
+import guidedetailspage from '../Components/servicemodules/guide/components/GuideDetails/guidedetailspage';
+
 
 const Layout=(props)=> {
     const { items, saveLocalStorage } = props;
@@ -70,6 +72,7 @@ const Layout=(props)=> {
                         <Route path='/PostGuideForm' component={PostGuideForm}/>
                         <Route path='/FormSearch' component={FormSearch}/>
                         <Route path='/NameList' component={NameList}/>
+                        <Route path="/guide/:id" component={ guidedetailspage}/>
                         <Route path='/guide'>  <Form /> </Route>
 
                         <Route path="/hotelList"><HotelList/></Route>
