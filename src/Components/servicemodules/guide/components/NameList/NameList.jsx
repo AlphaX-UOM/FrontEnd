@@ -132,7 +132,7 @@ function NameList(props) {
   const language = form_language;
   const [namelistlan, setNamelistlan] = useState('"x"');
 
-  const [nameList, setNameList] = useState(null);
+  const [nameList, setNameList] = useState([]);
 
   useEffect(() => {
     fetch("https://alphax-api.azurewebsites.net/api/TourGuideServices")
@@ -143,23 +143,37 @@ function NameList(props) {
   }, []);
 
   const nameListComponent = () => {
-    return (
-      nameList &&
-      nameList
-        .filter((person) => person.language === form_language)
-        .map((Aname, i) => {
-          return (
-            <NameListEle
-              key={i}
-              userid={Aname.id}
-              name={Aname.name}
-              dob={Aname.dob}
-              lang={Aname.language}
-              cost={Aname.costPerDay}
-            />
-          );
-        })
-    );
+    
+      // nameList &&
+      // nameList
+      //   .filter((person) => person.language === form_language)
+      //   .map((Aname, i) => {
+      //     return (
+      //       <NameListEle
+      //         key={i}
+      //         userid={Aname.id}
+      //         name={Aname.name}
+      //         dob={Aname.dob}
+      //         lang={Aname.language}
+      //         cost={Aname.costPerDay}
+      //       />
+      //     );
+      //   })
+    return(
+      nameList.map((Aname,i)=>{
+        return(
+          <NameListEle
+                   key={i}
+                  userid={Aname.id}
+                  name={Aname.name}
+                   dob={Aname.dob}
+                  lang={Aname.language}
+                  cost={Aname.costPerDay}
+                 />
+        )
+      })
+    )
+    
   };
 
   const nameListComponent1 = () => {
@@ -334,7 +348,7 @@ function NameList(props) {
             </div>
           </Col>
           <Col xs={10}>
-            <Row>{selection()}</Row>
+            <Row>{ nameListComponent()}</Row>
           </Col>
         </Row>
       </div>
