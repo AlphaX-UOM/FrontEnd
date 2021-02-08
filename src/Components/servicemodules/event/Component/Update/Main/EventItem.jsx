@@ -19,13 +19,13 @@ function EventItem(props) {
 
 
   const ratingChangeHandler = () => {
-    console.log("event fired");
+    console.log(props);
   }
   return (
-
+      //
    
     <div>
-              <Link  to={{pathname: '/itemlanding',data:props}}>
+              <Link onClick={props.clicked} to={`/categorylanding/${props.item.id}`} >
       <div className="row">
       <div className="col-12">
       <div class="card-deck">

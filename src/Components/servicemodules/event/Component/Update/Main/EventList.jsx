@@ -20,6 +20,7 @@ function EventList() {
     return myeventList.map((aCat) => {
       return (
         <EventItem
+
           item={aCat}
           key={aCat.id}
           name={aCat.name}

@@ -66,8 +66,10 @@ const Layout=(props)=> {
 
 
                         <Route path='/events' component={Events}/>
-                        <Route path='/categorylanding' component={CategoryLanding}/>
+                        <Route path="/categorylanding/:id" component={ItemLanding}/>
                         <Route path='/itemlanding' component={ItemLanding}/>
+                        <Route path="/categorylanding" component={CategoryLanding}/>
+
 
                         <Route path='/PostGuideForm' component={PostGuideForm}/>
                         <Route path='/FormSearch' component={FormSearch}/>

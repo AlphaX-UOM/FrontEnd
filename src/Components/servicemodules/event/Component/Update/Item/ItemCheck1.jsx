@@ -16,11 +16,24 @@ import connect from "react-redux/es/connect/connect";
 function ItemCheck1(props) {
   const [quantity, setQuantity] = useState(1);
     const { add_to_cart} = props;
+    const [nameList, setNameList] = useState([]);
+
+
+    useEffect(() => {
+        fetch(
+            'https://alphax-api.azurewebsites.net/api/eventplannerservices/' +
+            props.userid
+        )
+            .then((res) => res.json())
+            .then((data) => {
+                setNameList(data);
+            });
+    }, []);
 
     var today = new Date(),
         date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
-console.log("event price ->"+props.data.price);
+console.log("event price ->"+nameList.price);
   const increaseQuantity = () => {
     let myvar = quantity + 1;
     setQuantity(myvar);
@@ -66,7 +79,7 @@ console.log("event price ->"+props.data.price);
           <Row>
             <br>
             </br>
-          <h4>{props.data.name}</h4>
+          <h4>{nameList.name}</h4>
             <br />
           </Row>
           <Row>
@@ -74,7 +87,7 @@ console.log("event price ->"+props.data.price);
               <h5>Select Date and Travelers</h5>
             </Col>
             <Col align="right">
-              <h4>{props.data.price}$/person</h4>
+              <h4>{nameList.price}$/person</h4>
             </Col>
           </Row>
           <Row>
@@ -155,7 +168,7 @@ console.log("event price ->"+props.data.price);
                   <br />
                 </div>
                 <Link to="/shoppingcart">
-                <button type="button" class="btn btn-warning" onClick={ ()=>add_to_cart(props.data.name,props.data.price,props.data.id,quantity,date)}>
+                <button type="button" class="btn btn-warning" onClick={ ()=>add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date)}>
                   <AddShoppingCartIcon />
                   Add to Cart
                 </button>

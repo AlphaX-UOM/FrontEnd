@@ -39,7 +39,7 @@ console.log("selected type->"+props.type);
 
 const mapStateToProps = (state) => {
   return {
-      type: state.type
+      type: state.eventpnl.type
   }
 }
 
