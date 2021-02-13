@@ -59,7 +59,7 @@ function resultList(props) {
 
 const mapStateToProps = (state) => {
     return {
-        formdata: state.formdata
+        formdata: state.eventpnl.formdata
     }
 }
 

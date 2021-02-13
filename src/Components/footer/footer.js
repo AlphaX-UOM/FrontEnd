@@ -4,7 +4,7 @@ import './footer.css';
 const footer=()=>{
     return(
         <div className="">
-            <section style={{height:"80px"}}></section>
+
             <div className="row" style={{textalign:"center"}}>
 
             </div>

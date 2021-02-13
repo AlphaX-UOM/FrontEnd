@@ -9,14 +9,15 @@ const Form = () => {
  
   return (
     <>
-      <div className='form-container'>
+        <br/>
+      <div className='form-container-g'>
         
-        <div className='form-content-left'>
-          <img className='form-img' src={guide} alt='toure gude' />
+        <div className='form-content-left-g'>
+          <img className='form-img-g' src={guide} alt='toure gude' />
         </div>
         <FormSearch/>
-        
       </div>
+        <br/>
     </>
   );
 };

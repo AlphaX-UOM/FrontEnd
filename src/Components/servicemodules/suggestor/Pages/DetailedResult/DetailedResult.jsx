@@ -300,8 +300,8 @@ function DetailedResultPage(props) {
 
 const mapStateToProps = (state) => {
   return {
-    selectId: state.selectId,
-    formdata: state.formdata,
+    selectId: state.eventpnl.selectId,
+    formdata: state.eventpnl.formdata,
   };
 };
 

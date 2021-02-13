@@ -3,6 +3,7 @@ import ResultComponent from './ResultComponent';
 import { CardDeck } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import Spinner from './Spinner';
+import ErrorPage from '../../Error/ErrorPage';
 
 
 
@@ -93,7 +94,7 @@ function ResultSlider(props) {
 
 
 
-
+try {
 
   return (
     <div>
@@ -158,12 +159,17 @@ function ResultSlider(props) {
       </CardDeck>
     </div>
   );
+     } catch (e) {
+           return <ErrorPage />
+   }
+
+
 }
 
 const mapStateToProps = (state) => {
   return {
-      formdata: state.formdata,
-      slider:state.slider
+      formdata: state.eventpnl.formdata,
+      slider:state.eventpnl.slider
   }
 }
 

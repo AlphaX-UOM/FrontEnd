@@ -13,11 +13,10 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
-import AdminPanel from '../Userpanels/AdminPannel/adminPannel';
-import CustomerPanel from '../Userpanels/CustomerPannel/customerPannel';
-import ServicePanel from '../Userpanels/serviceProvider/sppannel';
+import AdminPanel from '../pannels/adminPannel/adminpannel';
+import CustomerPanel from '../pannels/CustomerPannel/customerPannel';
+import ServicePanel from '../pannels/serviceProvider/sppannel';
 import { connect } from "react-redux";
-import Spinner from '../servicemodules/suggestor/Pages/ResultList/Spinner';
 
 function Copyright() {
     return (
@@ -71,12 +70,11 @@ function Login(props) {
     const [password, setPassword] = useState();
     const [userDetail, setUserDetail] = useState(props.userCred.id);
     const [userType, setUserType] = useState(props.userCred.role);
-    const[spin,setSpin] = useState(0);
 
 
     const handleFormData = () => {
         console.log("signinsubmit");
-        setSpin(1);
+        
 
         fetch(`https://alphax-api.azurewebsites.net/api/users`)
             .then((response) => {
@@ -85,7 +83,7 @@ function Login(props) {
             .then((responseData) => {
                 
                 responseData = responseData.filter(item => item.email == email && item.password == password);
-                setSpin(0);
+
                 if (responseData[0] != undefined) {
                     setUserDetail(responseData[0].id);
                     setUserType(responseData[0].role);
@@ -168,12 +166,6 @@ function Login(props) {
         )
     }
 
-    if(spin == 1){
-        return(
-            <Spinner />
-        )
-    }
-
 
 
     return (
@@ -251,7 +243,7 @@ function Login(props) {
 
 const mapStateToProps = (state) => {
     return {
-        userCred: state.userCred
+        userCred: state.eventpnl.userCred
     };
   };
 

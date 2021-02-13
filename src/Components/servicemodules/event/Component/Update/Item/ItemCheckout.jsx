@@ -8,10 +8,15 @@ import Button from "@material-ui/core/Button";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import {addToCart} from "../../../../../../store/lib/actions";
 
 function ItemCheckout(props) {
   const [quantity, setQuantity] = useState(1);
+    const { add_to_cart} = props;
+
+    var today = new Date(),
+        date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
   let eventData =[{
     id : props.data.id,
@@ -153,9 +158,9 @@ console.log("event price ->"+props.data.price);
                 <div>
                   <br />
                 </div>
-                <Link to="/payment">
-                <button type="button" class="btn btn-warning" onClick={EventClickHandle}>
-                  <AddShoppingCartIcon />
+                <Link to="/shoppingcart">
+                <button type="button" class="btn btn-warning" onClick={ add_to_cart(props.data.name,props.data.price,props.data.id,quantity,date)}>
+                  {/*<AddShoppingCartIcon />*/}
                   Add to Cart
                 </button>
                 </Link>
@@ -178,11 +183,18 @@ console.log("event price ->"+props.data.price);
     </div>
   );
 }
+const mapStateToProps = (state) => {
+    return {
+
+    };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addEventData: (eventData) => { dispatch({type: 'ADD_Event_DATA', eventData: eventData} )}
+    // addEventData: (eventData) => { dispatch({type: 'ADD_Event_DATA', eventData: eventData} )}
+      add_to_cart:(item,cost,add_id,no_travellers,date) => dispatch(addToCart(item,cost,add_id,no_travellers,date))
   }
 }
 
-export default connect(null, mapDispatchToProps)(ItemCheckout);
+
+export default connect(mapStateToProps, mapDispatchToProps) (ItemCheckout);

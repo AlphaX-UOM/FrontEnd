@@ -410,10 +410,10 @@ function Paypal(props) {
 
 const mapStateToProps = (state) => {
   return {
-    reservations: state.reservations,
-    formdata: state.formdata,
-    total: state.total,
-    userCred : state.userCred
+    reservations: state.eventpnl.reservations,
+    formdata: state.eventpnl.formdata,
+    total: state.eventpnl.total,
+    userCred : state.eventpnl.userCred
   };
 };
 

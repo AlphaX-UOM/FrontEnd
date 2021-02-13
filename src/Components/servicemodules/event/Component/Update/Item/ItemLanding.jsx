@@ -9,8 +9,8 @@ import ItemCheck1 from './ItemCheck1';
 
 function ItemLanding(props) {
 
-console.log("props in itemlanding ->"+props.location.data.id);
-
+// console.log("props in itemlanding ->"+props.location.data.id);
+// console.log(props.match.params.id)
 
   return (
     <div>
@@ -26,7 +26,7 @@ console.log("props in itemlanding ->"+props.location.data.id);
                     <div><br/></div>
                     <div><br/></div>
                     <div><br/></div>
-                    <ItemCheck1 data={props.location.data}/>
+                    <ItemCheck1 userid={ props.match.params.id} />
                     <div><br/></div>
                     <div><br/></div>
                     <div><br/></div>

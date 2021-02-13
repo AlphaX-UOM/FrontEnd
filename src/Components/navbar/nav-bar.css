@@ -109,7 +109,7 @@ p:last-child { margin-bottom: 0; }
 }
 .tm-banner-bg {
     background: url(../../images/temp/banner.jpg ) center top no-repeat;
-    min-height: 720px;
+    min-height: 730px;
     position: relative;
     background-size: cover;
 }
@@ -117,7 +117,7 @@ p:last-child { margin-bottom: 0; }
     position: relative;
     z-index: 100;
     justify-content: center;
-    padding-top: 100px;
+    padding-top: 90px;
 }
 .tm-banner-row-header { text-align: center; }
 .tm-down-arrow-link {
@@ -340,8 +340,8 @@ label { font-weight: 700; }
 }
 
 .tab-pane {
-    max-width: 970px;
-    margin: 60px auto;
+    max-width: 500px;
+    margin: 60px ;
 }
 
 .tm-recommended-place {
@@ -625,4 +625,8 @@ label { font-weight: 700; }
     .tm-form-group-3 {
         width: 100%;
     }
+}
+.cartnum{
+    margin-top: 1px;
+    margin-right: 70px;
 }

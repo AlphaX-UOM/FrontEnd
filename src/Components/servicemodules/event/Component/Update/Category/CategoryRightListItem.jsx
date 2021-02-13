@@ -48,7 +48,7 @@ function CategoryRightListItem(props) {
   return (
     <div>
         <ul>
-      <Link to={{pathname: '/itemlanding',data:props.item}}>
+      <Link onClick={props.clicked} to={`/categorylanding/${props.item.id}`}>
         <Card className={classes.root}>
         <CardMedia
             className={classes.cover}
@@ -59,6 +59,7 @@ function CategoryRightListItem(props) {
             <CardContent className={classes.content}>
               <Typography component="h5" variant="h5">
                 {props.name}
+
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
                 {props.item.otherDetails}

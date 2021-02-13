@@ -9,14 +9,31 @@ import Brightness4Icon from "@material-ui/icons/Brightness4";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "./actions";
+import { addToCart } from "../../../../../../store/lib/actions";
+import connect from "react-redux/es/connect/connect";
 
 
 function ItemCheck1(props) {
   const [quantity, setQuantity] = useState(1);
+    const { add_to_cart} = props;
+    const [nameList, setNameList] = useState([]);
 
 
-console.log("event price ->"+props.data.price);
+    useEffect(() => {
+        fetch(
+            'https://alphax-api.azurewebsites.net/api/eventplannerservices/' +
+            props.userid
+        )
+            .then((res) => res.json())
+            .then((data) => {
+                setNameList(data);
+            });
+    }, []);
+
+    var today = new Date(),
+        date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+console.log("event price ->"+nameList.price);
   const increaseQuantity = () => {
     let myvar = quantity + 1;
     setQuantity(myvar);
@@ -62,7 +79,7 @@ console.log("event price ->"+props.data.price);
           <Row>
             <br>
             </br>
-          <h4>{props.data.name}</h4>
+          <h4>{nameList.name}</h4>
             <br />
           </Row>
           <Row>
@@ -70,7 +87,7 @@ console.log("event price ->"+props.data.price);
               <h5>Select Date and Travelers</h5>
             </Col>
             <Col align="right">
-              <h4>{props.data.price}$/person</h4>
+              <h4>{nameList.price}$/person</h4>
             </Col>
           </Row>
           <Row>
@@ -150,8 +167,8 @@ console.log("event price ->"+props.data.price);
                 <div>
                   <br />
                 </div>
-                <Link to="/cart">
-                <button type="button" class="btn btn-warning" onClick={() => add(props.name, quantity)}>
+                <Link to="/shoppingcart">
+                <button type="button" class="btn btn-warning" onClick={ ()=>add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date)}>
                   <AddShoppingCartIcon />
                   Add to Cart
                 </button>
@@ -175,5 +192,18 @@ console.log("event price ->"+props.data.price);
     </div>
   );
 }
+const mapStateToProps = (state) => {
+    return {
 
-export default ItemCheck1;
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        // addEventData: (eventData) => { dispatch({type: 'ADD_Event_DATA', eventData: eventData} )}
+        add_to_cart:(item,cost,add_id,no_travellers,date) => dispatch(addToCart(item,cost,add_id,no_travellers,date))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps) (ItemCheck1);

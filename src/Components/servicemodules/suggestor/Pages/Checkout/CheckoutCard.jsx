@@ -44,8 +44,8 @@ function chekoutCard(props) {
 
 const mapStateToProps = (state) => {
   return {
-    formdata: state.formdata,
-    slider: state.slider,
+    formdata: state.eventpnl.formdata,
+    slider: state.eventpnl.slider,
   };
 };
 

@@ -306,8 +306,8 @@ function CheckoutCardList(props) {
 
 const mapStateToProps = (state) => {
   return {
-    reservations: state.reservations,
-    userCred: state.userCred
+    reservations: state.eventpnl.reservations,
+    userCred: state.eventpnl.userCred
   };
 };
 

@@ -9,7 +9,7 @@ import { DateRangePickerCalendar, START_DATE } from "react-nice-dates";
 import "react-nice-dates/build/style.css";
 import moment from "moment";
 import Dots from "../../../../../images/temp/dots-3.png";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 
 function Form(props) {
   const [travellers, setTravelers] = useState();
@@ -67,10 +67,10 @@ function Form(props) {
   };
 
   let formdata = {
-      budget: budget,
-      travelers: travellers,
-      days: noOdDates
-  }
+    budget: budget,
+    travelers: travellers,
+    days: noOdDates,
+  };
 
   const handleStartDate = (event) => {
     setStartDate(event.target.value);
@@ -84,7 +84,7 @@ function Form(props) {
 
   const handleFormData = () => {
     props.addFormData(formdata);
-}
+  };
   // console.log(noOdDates);
   return (
     <div>
@@ -219,15 +219,29 @@ function Form(props) {
                   </div>
                   <div className="form-group tm-form-group tm-form-group-pad tm-form-group-1">
                     <label htmlFor="btnSubmit">&nbsp;</label>
-                    <Link
-                      type="submit"
-                      to="/result"
-                      className="btn btn-primary tm-btn tm-btn-search text-uppercase"
-                      id="btnSubmit"
-                      onClick={handleFormData}
-                    >
-                      Give Me A Plan
-                    </Link>
+                    {budget !== undefined &&
+                    travellers !== undefined &&
+                    noOdDates !== undefined ? (
+                      <Link
+                        type="submit"
+                        to="/result"
+                        className="btn btn-primary tm-btn tm-btn-search text-uppercase"
+                        id="btnSubmit"
+                        onClick={handleFormData}
+                      >
+                        Give Me A Plan
+                      </Link>
+                    ) : (
+                      <Link
+                        type="submit"
+                        to="/result"
+                        className="btn btn-primary tm-btn tm-btn-search text-uppercase disabled"
+                        id="btnSubmit"
+                        onClick={handleFormData}
+                      >
+                        Give Me A Plan
+                      </Link>
+                    )}
                   </div>
                 </div>
               </form>
@@ -242,15 +256,17 @@ function Form(props) {
 }
 
 const mapStateToProps = (state) => {
-    return {
-        formdata: state.formdata
-    }
-}
+  return {
+    formdata: state.eventpnl.formdata,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        addFormData: (formdata) => { dispatch({type: 'ADD_FORM_DATA', formdata: formdata} )}
-    }
-}
+  return {
+    addFormData: (formdata) => {
+      dispatch({ type: "ADD_FORM_DATA", formdata: formdata });
+    },
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Radium(Form));
