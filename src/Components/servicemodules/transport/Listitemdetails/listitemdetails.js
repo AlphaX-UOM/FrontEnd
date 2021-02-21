@@ -43,7 +43,7 @@ class Listitemdetails extends Component {
     componentDidMount() {
 
 
-            fetch('http://localhost:5000/api/TransportServices/'+this.props.match.params.id)
+            fetch('https://alphax-api.azurewebsites.net/api/TransportServices/'+this.props.match.params.id)
             .then(res => res.json())
             .then(provider =>
                 this.setState({ providers:provider})
