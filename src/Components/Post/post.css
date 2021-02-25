@@ -1,0 +1,26 @@
+.cbground:hover{
+    background-color: lightgray;
+}
+.cbground{
+    margin-top: 10px;
+}
+.cevent{
+    padding-top: 35px;
+}
+
+.chotel{
+    height: 158.38px;
+}
+
+.link{
+    color: black;
+    text-decoration: none;
+}
+.ct:hover{
+    color: black;
+    text-decoration: none;
+}
+.textdec:hover{
+    color: black;
+    text-decoration: none;
+}
