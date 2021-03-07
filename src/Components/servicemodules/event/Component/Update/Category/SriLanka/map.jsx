@@ -75,7 +75,7 @@ const mapOptions = {
       type: "mapbubble",
       name: "Locations",
       color: "#4169E1",
-      data: [{ z: 10, keyword: "Galway", lat: 7.8731 , lon: 80.7718 }],
+      data: [{ z: 10, keyword: "Galway" }],
       cursor: "pointer",
       point: {
         events: {

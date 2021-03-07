@@ -32,7 +32,7 @@ import Events from '../Components/servicemodules/event/Component/Update/Main/Lan
 import ResultList from '../Components/servicemodules/suggestor/Pages/ResultList/ResultList';
 import DetailedResult from '../Components/servicemodules/suggestor/Pages/DetailedResult/DetailedResult';
 import Payment from '../Components/servicemodules/suggestor/Pages/Checkout/Payment';
-import Thank from '../Components/servicemodules/suggestor/Pages/ThankYou/Thank';
+import Paypal from '../Components/servicemodules/suggestor/Pages/Checkout/Paypal';
 import SignUp from "../Components/Login/Signup/signup";
 
 import CategoryLanding from '../Components/servicemodules/event/Component/Update/Category/CategoryLanding';
@@ -58,9 +58,8 @@ const Layout=(props)=> {
                     <Navbar/>
 
                     <Switch>
-                        <Route path='/result' component={ResultList} />
-                        <Route path='/thank'> <Thank /> </Route>
-
+                    <Route path='/result' component={ResultList} />
+                        <Route path='/paypal' component={Paypal} />
                         <Route path='/detailedresult' component={DetailedResult} />
                         <Route path='/payment' component={Payment} />
 
@@ -88,7 +87,7 @@ const Layout=(props)=> {
                         <Route path="/post/post-transportprovider"component={ PostTransportProviderForm}/>
                         <Route path="/post" component={Post}></Route>
                         <Route path="/login"><Login/></Route>
-                        <Route path="/signupform"><SignUp/></Route>
+                       
                         <Route path="/shoppingcart"><Shoppingcart/></Route>
                         <Route path="/serviceprovider" component={ServiceProvider}/>
                         <Route path="/transport"><Transportinput/></Route>

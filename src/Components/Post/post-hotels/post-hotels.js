@@ -7,13 +7,17 @@ class PostHotelForm extends Component{
     constructor(props){
         super(props)
         this.state = {
-            hotelname:'',
-            district:'',
-            address:'',
-            email:'',
-            telephone:'',
-            costperday:''
-
+            name:'',
+            venue:'',
+            costperday:'',
+            district: '',
+            pnumber: '',
+            features: '',
+            otherDetails: '',
+            roomTypeID: '',
+            roomType: '',
+            userID: '',
+            url:''
         };
 
     }
@@ -29,7 +33,7 @@ class PostHotelForm extends Component{
         e.preventDefault();
         console.log(this.state)
         axios
-            .post('http://localhost:5000/TransportProvider/Post', this.state)
+            .post('https://alphax-api.azurewebsites.net/api/hotelsservices', this.state)
             .then(response => {
                 console.log(response)
             })
@@ -142,12 +146,6 @@ class PostHotelForm extends Component{
                             <div className="col-sm-4"></div>
                         </div>
                         <hr/>
-
-
-
-
-
-
 
 
 

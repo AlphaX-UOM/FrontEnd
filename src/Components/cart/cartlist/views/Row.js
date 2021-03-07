@@ -11,8 +11,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 
 const Row = (props) => {
-     console.log(props.item)
-    const { id, quantity, details,no_travellers,date } = props.item
+     // console.log(props.item)
+    const { id, quantity, details,no_travellers,date,type } = props.item
     const item = details
     const [ qty, setQty ] = useState(quantity);
     const dispatch = useDispatch()
@@ -33,7 +33,7 @@ const Row = (props) => {
         <tr>
          <td>{date}</td>
           <td className="font-weight-bold">{item}</td>
-            <td></td>
+            <td>{type}</td>
           <td>${qty}</td>
           <td>
               {no_travellers}

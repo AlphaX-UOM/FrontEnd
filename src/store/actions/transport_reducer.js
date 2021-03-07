@@ -70,7 +70,7 @@ export const initTransport = () => {
             // });
 
 
-        axios.get( 'http://localhost:5000/api/TransportServices' )
+        axios.get( 'https://alphax-api.azurewebsites.net/api/TransportServices' )
             .then( res => {
                 const fetchedOrders = [];
                 for ( let key in res.data ) {

@@ -77,7 +77,7 @@ render() {
 
                     <div>
                         <br/>
-                        <div className="container">
+                        <div className="container viewp">
                             <div className="row">
                                 <div className="col-sm-4">
                                     <div className="row">

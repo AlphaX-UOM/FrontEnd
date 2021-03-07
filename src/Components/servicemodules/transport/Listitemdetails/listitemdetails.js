@@ -43,7 +43,7 @@ class Listitemdetails extends Component {
     componentDidMount() {
 
 
-            fetch('http://localhost:5000/api/TransportServices/'+this.props.match.params.id)
+            fetch('https://alphax-api.azurewebsites.net/api/TransportServices/'+this.props.match.params.id)
             .then(res => res.json())
             .then(provider =>
                 this.setState({ providers:provider})
@@ -90,45 +90,47 @@ class Listitemdetails extends Component {
                             <div className="col-sm-4 imgcolor" >
                                 <br/>
                                 <div className="col-sm-12 ">
-                                    <h3 className="txtcolorx">{this.state.providers.name}</h3>
+                                    <h3 className="txtcolorx">{this.state.providers.brand} {this.state.providers.model} {this.state.providers.vehicleType}</h3>
+
                                 </div>
+                                <br/>
 
 
                                 <div className="col-sm-12">
                                     {
                                         ( this.state.providers.vehicleType === 'Car')
-                                            ? <img src={Logo1} alt=""/>
+                                            ?<img src={this.state.providers.imgURL || "http://via.placeholder.com/300"} alt="firebase-image" className='imgsize' />
                                             :''
                                     }
                                     {
                                         ( this.state.providers.vehicleType === 'Van')
-                                            ? <img src={Logo2} alt=""/>
+                                            ? <img src={this.state.providers.imgURL || "http://via.placeholder.com/300"} alt="firebase-image" className='imgsize' />
                                             :''
                                     }
                                     {
                                         ( this.state.providers.vehicleType === 'Suv')
-                                            ? <img src={Logo3} alt=""/>
+                                            ?  <img src={this.state.providers.imgURL || "http://via.placeholder.com/300"} alt="firebase-image" className='imgsize' />
                                             :''
                                     }
                                     {
                                         ( this.state.providers.vehicleType === 'Bus')
-                                            ? <img src={Logo4} alt=""/>
+                                            ? <img src={this.state.providers.imgURL || "http://via.placeholder.com/300"} alt="firebase-image" className='imgsize' />
                                             :''
                                     }
                                 </div>
-
+                                <br/>
                                 <div className="col-sm-12">
                         <span className="lead">
                             <div className="row">
 
                                 <div className="col-sm"><Ratings/></div>
-                                   <div className="col-sm txtcolorx">Excellent</div>
+
 
                             </div>
 
                             <div className="row">
                                 <Link onClick={this.handlecarClik.bind(this)}>
-                            <div className="col txtcolorx"><small className="iconpad">Customer Reviews</small><ChatBubbleOutlineIcon fontSize="small"  /></div>
+                            <div className="col txtcolorx"><small className="iconpad"> Reviews</small><ChatBubbleOutlineIcon fontSize="small"  /></div>
                                 </Link>
 
 
@@ -148,37 +150,51 @@ class Listitemdetails extends Component {
                                         <div className="depad">
 
                                             <br/>
-                        <span className="">
-                            <div className="row ">
-                                <div className="">Vehicle type :</div>
-                                <div className="col ">
-                                    <div className="" role="alert">
-                                    {this.state.providers.vehicleType}
-                                </div>
 
-                                    </div>
-                            </div>
-                        </span>
+
 
                                             <span className="">
                             <div className="row">
-                                <div className="">Price Per Day :</div>
-                                <div className="col">
+                                <div className="col-sm-4"><strong>Owner :</strong> </div>
+                                <div className="col-sm-8">
                                         <div className="" >
-                                      ${this.state.providers.pricePerDay}
+                                    {this.state.providers.name} - {this.state.providers.district}
                                 </div>
                                   </div>
                             </div>
 
+
+
                         </span>
-
-
 
 
                                             <span className="">
                             <div className="row">
-                                <div className="">TP :</div>
-                                <div className="col">
+                                <div className="col-sm-4"><strong>District :</strong></div>
+                                <div className="col-sm-8">
+                                    <div className="text-uppercase" role="alert">
+                                    {this.state.providers.district}
+                                </div>
+                                </div>
+                            </div>
+
+                        </span>
+
+
+                                            <span className="">
+                            <div className="row">
+                                <div className="col-sm-4"><strong>Address :</strong></div>
+                                <div className="col-sm-8">
+                                    <div className="" role="alert">
+                                    {this.state.providers.address}
+                                </div></div>
+                            </div>
+
+                        </span>
+                                            <span className="">
+                            <div className="row">
+                                <div className="col-sm-4"><strong>TP :</strong></div>
+                                <div className="col-sm-8">
                                         <div className="" role="alert">
                                    {this.state.providers.pnumber}
                                 </div>
@@ -189,47 +205,64 @@ class Listitemdetails extends Component {
 
                                             <span className="">
                             <div className="row">
-                                <div className=" ">Email :</div>
-                                <div className="col">
+                                <div className=" col-sm-4"><strong>Email :</strong></div>
+                                <div className="col-sm-8">
                                     <div className="" role="alert">
                                     {this.state.providers.email}
                                 </div></div>
                             </div>
 
-                        </span>
+                              </span>
+
 
                                             <span className="">
                             <div className="row">
-                                <div className="">Address :</div>
-                                <div className="col">
-                                    <div className="" role="alert">
-                                    {this.state.providers.address}
-                                </div></div>
+                                <div className="col-sm-4"><strong>AirCondition :</strong></div>
+                                <div className="col-sm-8">
+                                        <div className=" " role="alert">
+                                     {/*{this.state.providers.airCondition.toString()}*/}
+                                </div>
+                                 </div>
                             </div>
-
                         </span>
+
+
+
 
                                             <span className="">
                             <div className="row">
-                                <div className="">District :</div>
-                                <div className="col">
-                                    <div className="" role="alert">
-                                    {this.state.providers.district}
-                                </div>
-                                </div>
-                            </div>
-                         <span className="">
-                            <div className="row">
-                                <div className="">Description :</div>
-                                <div className="col">
+                                <div className="col-sm-4"><strong>Description :</strong></div>
+                                <div className="col-sm-8">
                                         <div className=" " role="alert">
                                      {this.state.providers.description}
                                 </div>
                                  </div>
                             </div>
                         </span>
+                                            <br/>
+                                            <span className="">
+                            <div className="row txtcolorx">
+                                <div className="col-sm-5 h5"><strong>Price Per 1KM :</strong> </div>
+                                <div className="col-sm-7">
+                                        <div className="h5" >
+                                      Rs {this.state.providers.pricePer1KM}
+                                </div>
+                                  </div>
+                            </div>
+
                         </span>
 
+                                            <span className="">
+                            <div className="row txtcolorx">
+                                <div className="col-sm-5 h5"><strong>Price Per Day :</strong> </div>
+                                <div className="col-sm-7">
+                                        <div className="h5" >
+                                      Rs {this.state.providers.pricePerDay}
+                                </div>
+                                  </div>
+                            </div>
+
+                        </span>
                                             <div className="row">
                                                 <div className="col-sm">
 
@@ -239,7 +272,7 @@ class Listitemdetails extends Component {
 
                                                 </div>
                                                 <Link className="col-sm depad" to="/shoppingcart">
-                                                    <button type="button" className="btn btn-primary "  onClick={() => this.props.add_to_cart(this.state.providers.vehicleType,this.state.providers.pricePerDay,this.state.providers.id,this.props.no_travellers,this.state.currentDate)}>Book Now</button>
+                                                    <button type="button" className="btn btn-primary  subbtn"  onClick={() => this.props.add_to_cart(this.state.providers.vehicleType,this.state.providers.pricePerDay,this.state.providers.id,this.props.no_travellers,this.state.currentDate,'Transport')}>Book Now</button>
                                                 </Link>
                                             </div>
 
@@ -292,7 +325,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         // onInitTransportProvider: (id) => dispatch(actions.initTransportProvider(id)),
-         add_to_cart:(item,qty,add_id,no_travellers,date) => dispatch(actions.addToCart(item,qty,add_id,no_travellers,date))
+         add_to_cart:(item,qty,add_id,no_travellers,date,type) => dispatch(actions.addToCart(item,qty,add_id,no_travellers,date,type))
 
     }
 };

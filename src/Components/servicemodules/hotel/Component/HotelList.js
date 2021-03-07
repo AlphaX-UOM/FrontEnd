@@ -23,7 +23,7 @@ function HotelList() {
     console.log("I'm here");
     useEffect(() => {
         setloading(true);
-        Axios.get('https://localhost:44389/api/hotel')
+        Axios.get('https://alphax-api.azurewebsites.net/api/hotelsservices')
             .then((responseData) => {
                 setHotels(responseData.data);
                 setloading(false);
