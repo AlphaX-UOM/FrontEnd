@@ -1,0 +1,20 @@
+.backcol{
+    background-color: lightgray;
+
+}
+.marge{
+   margin: 20px;
+}
+.h{
+   background-color: white;
+}
+.sidemarge{
+    margin-top: 10px;
+}
+.sidesubmarge{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.sidesubmargediv:hover{
+    background-color: aqua;
+}
