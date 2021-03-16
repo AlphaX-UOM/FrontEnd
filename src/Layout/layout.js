@@ -34,6 +34,8 @@ import DetailedResult from '../Components/servicemodules/suggestor/Pages/Detaile
 import Payment from '../Components/servicemodules/suggestor/Pages/Checkout/Payment';
 import Paypal from '../Components/servicemodules/suggestor/Pages/Checkout/Paypal';
 import SignUp from "../Components/Login/Signup/signup";
+import PackageDetails from '../Components/servicemodules/suggestor/Pages/Update/PackageDetails/packagedetails';
+import ResultListLanding from '../Components/servicemodules/suggestor/Pages/Update/ResultPackages/ResultListLanding';
 
 import CategoryLanding from '../Components/servicemodules/event/Component/Update/Category/CategoryLanding';
 import ItemLanding from '../Components/servicemodules/event/Component/Update/Item/ItemLanding';
@@ -62,6 +64,8 @@ const Layout=(props)=> {
                         <Route path='/paypal' component={Paypal} />
                         <Route path='/detailedresult' component={DetailedResult} />
                         <Route path='/payment' component={Payment} />
+                        <Route path='/packagedetails' component={PackageDetails} />
+                        <Route path='/Resultlistlanding' component={ResultListLanding} />
 
 
                         <Route path='/events' component={Events}/>
