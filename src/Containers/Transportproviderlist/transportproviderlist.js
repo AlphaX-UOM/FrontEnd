@@ -63,6 +63,10 @@ render() {
                                     name={provider.name}
                                     price={provider.pricePerDay}
                                     vtype={provider.vehicleType}
+                                    brand={provider.brand}
+                                    model={provider.model}
+                                    district={provider.district}
+                                    imgURL={provider.imgURL}
 
                                 />
 
@@ -85,7 +89,7 @@ render() {
                                         <div className="col-sm-12">
                                             <div className="form-group">
 
-                                            <select className="form-control tm-select"  name="vehicletype" value={this.state.vehicletype} onChange={this.Changehandler}>
+                                            <select className="form-control tm-select "  name="vehicletype" value={this.state.vehicletype} onChange={this.Changehandler}>
                                                 <option value="all">Vehicle Type</option>
                                                 <option value="Car">Car</option>
                                                 <option value="Van">Van</option>

@@ -15,7 +15,7 @@ import Ratingsm from '../rating-mod/ratings'
 import Comments from '../comments/comments'
 import Listitem from "../Listitem/listitem";
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-
+import {History} from 'react-router-dom';
 
 class Listitemdetails extends Component {
     constructor() {
@@ -32,12 +32,29 @@ class Listitemdetails extends Component {
             hidden1: false,
             currentDate: date
         };
-
+        this.onValueChange = this.onValueChange.bind(this);
     }
 
-
+    onValueChange(event) {
+        this.setState({
+            selectedOption: event.target.value
+        });
+    }
     handlecarClik() {
         this.setState( {hidden1: !this.state.hidden1} )
+    }
+
+    handlesubmit =(e) =>{
+        console.log(this.props.distance_text)
+        var txt = this.props.distance_text;
+        var numb = txt.match(/\d/g);
+        numb = numb.join("");
+        this.props.add_to_cart(this.state.providers.vehicleType,this.state.providers.pricePerDay,this.state.providers.id,this.props.no_travellers,
+            this.state.currentDate,'Transport',this.state.selectedOption==='Per_day'?
+                ((new Date(this.props.drop_date).getTime()-new Date(this.props.pickup_date).getTime())/(1000 * 3600 * 24)+1)*this.state.providers.pricePerDay:
+                ((this.props.rounded===''?numb:numb*2)*this.state.providers.pricePer1KM));
+
+        this.props.history.push('/shoppingcart')
     }
 
     componentDidMount() {
@@ -217,10 +234,16 @@ class Listitemdetails extends Component {
 
                                             <span className="">
                             <div className="row">
-                                <div className="col-sm-4"><strong>AirCondition :</strong></div>
+                                <div className="col-sm-4"><strong>Air Condition :</strong></div>
                                 <div className="col-sm-8">
                                         <div className=" " role="alert">
                                      {/*{this.state.providers.airCondition.toString()}*/}
+
+                                            {
+                                                ( this.state.providers.airCondition === true)
+                                                    ? 'Available'
+                                                    :'Not Available'
+                                            }
                                 </div>
                                  </div>
                             </div>
@@ -263,6 +286,33 @@ class Listitemdetails extends Component {
                             </div>
 
                         </span>
+                                            <hr/>
+
+                                                <form onSubmit={this.handlesubmit}>
+                                                     <span className="">
+                                                      <div className="row">
+                                <div className="form-group">
+                                    <div className="form-check">
+                                        <input className="form-check-input" type="radio" name="p_methode"  checked={this.state.selectedOption === "Per_day"}
+                                               onChange={this.onValueChange}
+                                               id="exampleRadios1" value="Per_day" required/>
+                                            <label className="form-check-label" htmlFor="exampleRadios1">
+                                              Pay for day
+                                            </label>
+                                    </div>
+                                    <div className="form-check">
+                                        <input className="form-check-input" type="radio" name="p_methode"
+                                               id="exampleRadios2" value="Per_distance" checked={this.state.selectedOption === "Per_distance"}
+                                               onChange={this.onValueChange}required />
+                                            <label className="form-check-label" htmlFor="exampleRadios2">
+                                                    Pay for distance
+                                            </label>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </span>
                                             <div className="row">
                                                 <div className="col-sm">
 
@@ -271,10 +321,12 @@ class Listitemdetails extends Component {
 
 
                                                 </div>
-                                                <Link className="col-sm depad" to="/shoppingcart">
-                                                    <button type="button" className="btn btn-primary  subbtn"  onClick={() => this.props.add_to_cart(this.state.providers.vehicleType,this.state.providers.pricePerDay,this.state.providers.id,this.props.no_travellers,this.state.currentDate,'Transport')}>Book Now</button>
-                                                </Link>
+
+                                                    <button type="submit" className="btn btn-primary  subbtn">Book Now</button>
+
                                             </div>
+                                                </form>
+
 
 
 
@@ -317,7 +369,8 @@ const mapStateToProps = state => {
         pickup_location:state.transport_input_reducer.form_pickup_location,
         pickup_date:state.transport_input_reducer.form_pickup_date,
         pickup_time:state.transport_input_reducer.form_drop_time,
-        rounded:state.transport_input_reducer.form_rounded
+        rounded:state.transport_input_reducer.form_rounded,
+        distance_text:state.transport_input_reducer.form_distance_text
 
     }
 };
@@ -325,7 +378,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         // onInitTransportProvider: (id) => dispatch(actions.initTransportProvider(id)),
-         add_to_cart:(item,qty,add_id,no_travellers,date,type) => dispatch(actions.addToCart(item,qty,add_id,no_travellers,date,type))
+         add_to_cart:(item,qty,add_id,no_travellers,date,type,paymod) => dispatch(actions.addToCart(item,qty,add_id,no_travellers,date,type,paymod))
 
     }
 };

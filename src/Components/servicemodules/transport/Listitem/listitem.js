@@ -29,13 +29,14 @@ const listitem=(props)=>{
                             <div className="tm-recommended-place">
 
                                 <div className="tm-recommended-description-box">
-                                    <h3 className="tm-recommended-title">{props.name}</h3>
-                                    <p className="tm-text-highlight">Vehicle Type: <strong>{props.vtype}</strong></p>
+                                    <h3 className="txtcolorx">{props.brand} {props.model} {props.vtype}</h3>
+                                    <small className="">{props.district},{props.vtype}</small>
+                                    <p className="tm-text-highlight"><strong>{props.name}</strong></p>
                                     <p className="tm-text-gray"><Ratings/></p>
                                 </div>
-                                <a  className="tm-recommended-price-box">
-                                    <p className="tm-recommended-price">$ {props.price}</p>
-
+                                <a  className="">
+                                    {/*<p className="tm-recommended-price">$ {props.price}</p>*/}
+                                    <img src={props.imgURL || "http://via.placeholder.com/50"} alt="firebase-image" className='listitemimgsize' />
                                 </a>
                             </div>
                         </div>

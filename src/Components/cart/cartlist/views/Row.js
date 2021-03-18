@@ -12,7 +12,7 @@ import { green } from '@material-ui/core/colors';
 
 const Row = (props) => {
      // console.log(props.item)
-    const { id, quantity, details,no_travellers,date,type } = props.item
+    const { id, quantity, details,no_travellers,date,type,paymod } = props.item
     const item = details
     const [ qty, setQty ] = useState(quantity);
     const dispatch = useDispatch()
@@ -39,7 +39,8 @@ const Row = (props) => {
               {no_travellers}
 
           </td>
-            <td>${ (qty * 1).toFixed(2) }</td>
+            {/*<td>${ (qty * 1).toFixed(2) }</td>*/}
+            <td>${ paymod }</td>
           <td>
               <CancelIcon  style={{ color: green[500] }} fontSize="large" onClick={() => {remove(props.item)}}></CancelIcon>
               {/*<CancelOutlinedIcon>aa</CancelOutlinedIcon>*/}

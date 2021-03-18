@@ -10,10 +10,10 @@ export const actions = {
 }
 
 /* Action Creators */ 
-export function addToCart(item, quantity, add_id, no_travellers,date,service_type) {
+export function addToCart(item, quantity, add_id, no_travellers,date,service_type,paymod) {
     return {
         type: actions.ADD_TO_CART,
-        payload: { id: uuidv4(), quantity: quantity, details: item, add_id:add_id, no_travellers:no_travellers,date:date,type:service_type}
+        payload: { id: uuidv4(), quantity: quantity, details: item, add_id:add_id, no_travellers:no_travellers,date:date,type:service_type,paymod:paymod}
     }
 }
 
