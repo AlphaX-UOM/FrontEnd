@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useHistory } from "react-router-dom";
+import { connect } from 'react-redux'
 
 const cardWidth = 400;
 const borderRadius = 8;
@@ -108,26 +110,62 @@ const Style = styled.button`
   }
 `;
 
-const Card = ({ hexa, title, description, image }) => (
-  <Style>
-    <Screenshot image={image} />
-    <Content>
-      <Title>{title}</Title>
-      <br/>
-      <br/>
-      <Description>{description}</Description>
-      <br/>
-      <Description>{description}</Description>
-      <br/>
-      <Description>{description}</Description>
-      <br/>
-      <Description>{description}</Description>
-      <br/>
-      <Description>{description}</Description>
-      <br/>
-      <BottomBar background={hexa} />
-    </Content>
-  </Style>
-);
 
-export default Card;
+function Card(props) {
+
+  let history = useHistory();
+
+  const handlePackageData = (event) => {
+    let selectId = {
+      transportId: event.transId,
+      guidePlanId: event.tourId,
+      event01PlanId: event.event01Id,
+      event02PlanId: event.event02Id,
+      hotelPlanId: event.hotelId,
+      travellers: event.travellers,
+      budget: event.budget,
+      days: event.days
+    }
+
+    props.addIdData(selectId);
+    props.addTotalData(props.price);
+    console.log(event);
+    
+    history.push("/packagedetails");
+  };
+
+
+  return (
+    <Style value={props} onClick={() => handlePackageData(props)}>
+      <Screenshot image={props.image} />
+      <Content>
+        <Title><span class="badge bg-warning">{props.price}$</span></Title>
+        <br />
+        <br />
+        <Description><span class="badge rounded-pill bg-primary text-dark">Transport Service</span>{props.description01}</Description>
+        <br />
+        <Description><span class="badge rounded-pill bg-success text-dark">Guide Service</span>{props.description02}</Description>
+        <br />
+        <Description><span class="badge rounded-pill bg-danger text-dark">Hotel</span>{props.description03}</Description>
+        <br />
+        <Description><span class="badge rounded-pill bg-info text-dark">Event 01</span>{props.description04}</Description>
+        <br />
+        <Description><span class="badge rounded-pill bg-info text-dark">Event 02</span>{props.description05}</Description>
+        <br />
+        <BottomBar background={props.hexa} />
+      </Content>
+    </Style>
+  );
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addIdData: (selectId) => { dispatch({ type: 'ADD_SELECTED_DATA', selectId: selectId }) },
+    addTotalData: (total) => {
+      dispatch({ type: "ADD_PAYPAL_DATA", total: total });
+    }
+  }
+}
+
+
+export default connect(null, mapDispatchToProps)(Card);

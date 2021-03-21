@@ -1,31 +1,31 @@
 [
   {
     "hexa": "#1D1148",
-    "title": "Package 01->  1000$",
+    "title": "Package 01",
     "description": "This is a module name",
     "image": "https://cdn.cnn.com/cnnnext/dam/assets/191029144826-sri-lanka-tourism---sri-lanka-wildlife-full-169.jpg"
   },
   {
     "hexa": "#FFCD00",
-    "title": "Package 02->  1500$",
+    "title": "Package 02",
     "description": "This is a module name",
     "image": "https://i.insider.com/5cdd5b08021b4c002811c352?width=1136&format=jpeg"
   },
   {
     "hexa": "#FF5041",
-    "title": "Package 03->  1250$",
+    "title": "Package 03",
     "description": "This is a module name",
     "image": "http://cdn.cnn.com/cnnnext/dam/assets/191029144947-sri-lanka-tourism-images---bentota-beach-1.jpg"
   },
   {
     "hexa": "#000000",
-    "title": "Package 04->  1300$",
+    "title": "Package 04",
     "description": "This is a module name",
     "image": "http://s3.amazonaws.com/themorning-aruna/wp-content/uploads/2021/01/03094419/Tourism-SL.jpg"
   },
   {
     "hexa": "#FFCD00",
-    "title": "Package 05->  3200$",
+    "title": "Package 05",
     "description": "This is a module name",
     "image": "https://www.traveldailymedia.com/assets/2020/01/Sri-Lanka-Tourism-for-2020-5-scaled-e1580287972607.jpg"
   }

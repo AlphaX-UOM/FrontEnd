@@ -230,7 +230,7 @@ function Form(props) {
                     noOdDates !== undefined ? (
                       <Link
                         type="submit"
-                        to="/result"
+                        to="/Resultlistlanding"
                         className="btn btn-primary tm-btn tm-btn-search text-uppercase"
                         id="btnSubmit"
                         onClick={handleFormData}
@@ -240,7 +240,7 @@ function Form(props) {
                     ) : (
                       <Link
                         type="submit"
-                        to="/result"
+                        to="/Resultlistlanding"
                         className="btn btn-primary tm-btn tm-btn-search text-uppercase disabled"
                         id="btnSubmit"
                         onClick={handleFormData}

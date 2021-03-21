@@ -1,11 +1,231 @@
-import React, { useState, useRef } from 'react';
-import ReactDOM from 'react-dom';
-import { useSpring, animated } from 'react-spring';
-import ReactParticles from 'react-particles-js';
-import particlesConfig from './particles-config.js';
-import './packageDetailsStyles.scss';
+import React, { useState, useEffect, useRef } from "react";
+import ReactDOM from "react-dom";
+import { useSpring, animated } from "react-spring";
+import ReactParticles from "react-particles-js";
+import particlesConfig from "./particles-config.js";
+import "./packageDetailsStyles.scss";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import Spinner from "../../ResultList/Spinner";
+import { addToCart } from "../../../../../../store/lib/actions";
 
-function PackageDetails() {
+function PackageDetails(props) {
+  const { add_to_cart } = props;
+
+  var today = new Date();
+  var date =
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+
+  let tranId = props.selectId.transportId;
+  let guideId = props.selectId.guidePlanId;
+  let event01Id = props.selectId.event01PlanId;
+  let event02Id = props.selectId.event02PlanId;
+  let hotelId = props.selectId.hotelPlanId;
+
+  const [mytransportList, setmyTransportList] = useState([]);
+  const [mytourguideList, setmytourguideList] = useState([]);
+  const [myevent01List, setmyevent01List] = useState([]);
+  const [myevent02List, setmyevent02List] = useState([]);
+  const [myhotelList, setmyhotelList] = useState([]);
+
+  useEffect(() => {
+    fetch(
+      `https://alphax-api.azurewebsites.net/api/transportservices/${tranId}`
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseData) => {
+        setmyTransportList(responseData);
+      });
+  }, [tranId]);
+
+  useEffect(() => {
+    fetch(
+      `https://alphax-api.azurewebsites.net/api/tourguideservices/${guideId}`
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseData) => {
+        setmytourguideList(responseData);
+      });
+  }, [guideId]);
+
+  useEffect(() => {
+    fetch(
+      `https://alphax-api.azurewebsites.net/api/eventplannerservices/${event01Id}`
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseData) => {
+        setmyevent01List(responseData);
+      });
+  }, [event01Id]);
+
+  useEffect(() => {
+    fetch(
+      `https://alphax-api.azurewebsites.net/api/eventplannerservices/${event02Id}`
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseData) => {
+        setmyevent02List(responseData);
+      });
+  }, [event02Id]);
+
+  useEffect(() => {
+    fetch(`https://alphax-api.azurewebsites.net/api/hotelsservices/${hotelId}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseData) => {
+        setmyhotelList(responseData);
+      });
+  }, [hotelId]);
+
+  const cards = [
+    {
+      title: "Transport Service 🚙 " + mytransportList.name,
+      description: mytransportList.description,
+      image: "https://6jlvz1j5q3.csb.app/undraw_collection.svg",
+      imageRatio: 784 / 1016,
+    },
+    {
+      title: "Hotel Service 🏨" + myhotelList.name,
+      description: myhotelList.otherDetails,
+      image: "https://6jlvz1j5q3.csb.app/undraw_upload.svg",
+      imageRatio: 839 / 1133,
+    },
+    {
+      title: "Tour Guide 🤵" + mytourguideList.name,
+      description: mytourguideList.otherDetails,
+      image: "https://6jlvz1j5q3.csb.app/undraw_static_assets.svg",
+      imageRatio: 730 / 1030,
+    },
+    {
+      title: "Event 01 🏖️" + myevent01List.name,
+      description: myevent01List.otherDetails,
+      image: "https://6jlvz1j5q3.csb.app/undraw_static_assets.svg",
+      imageRatio: 730 / 1030,
+    },
+    {
+      title: "Click Below To Get Started",
+      description: myevent02List.otherDetails,
+      image: "https://6jlvz1j5q3.csb.app/undraw_static_assets.svg",
+      imageRatio: 730 / 1030,
+    },
+    {
+      title: "Event 02 🏞️" + myevent02List.name,
+      description: myevent02List.otherDetails,
+      image: "https://6jlvz1j5q3.csb.app/undraw_static_assets.svg",
+      imageRatio: 730 / 1030,
+    },
+  ];
+
+  const handleFormData = () => {
+    let type = "TransportService";
+    let checkin = props.formdata.checkin;
+    let checkout = props.formdata.checkout;
+    let totalUnit = mytransportList.pricePerDay * props.formdata.days;
+    let number = props.formdata.days;
+
+    props.add_to_cart(
+      mytransportList.name,
+      mytransportList.pricePerDay,
+      tranId,
+      props.formdata.travelers,
+      date,
+      checkin,
+      checkout,
+      type,
+      props.formdata.days,
+      totalUnit,
+      number
+    );
+
+    type = "GuideService";
+    totalUnit = mytourguideList.costPerDay * props.formdata.days;
+    props.add_to_cart(
+      mytourguideList.name,
+      mytourguideList.costPerDay,
+      guideId,
+      props.formdata.travelers,
+      date,
+      checkin,
+      checkout,
+      type,
+      props.formdata.days,
+      totalUnit,
+      number
+    );
+
+    type = "EventService";
+    totalUnit = myevent01List.price;
+    number = 1;
+    props.add_to_cart(
+      myevent01List.name,
+      myevent01List.price,
+      event01Id,
+      props.formdata.travelers,
+      date,
+      checkin,
+      checkout,
+      type,
+      props.formdata.days,
+      totalUnit,
+      number
+    );
+
+    type = "EventService";
+    totalUnit = myevent02List.price;
+    props.add_to_cart(
+      myevent02List.name,
+      myevent02List.price,
+      event02Id,
+      props.formdata.travelers,
+      date,
+      checkin,
+      checkout,
+      type,
+      props.formdata.days,
+      totalUnit,
+      number
+    );
+
+    type = "HotelService";
+    totalUnit =
+      myhotelList.pricePerDay *
+      props.formdata.days *
+      Math.round(props.formdata.travelers / 2);
+    number = props.formdata.days * Math.round(props.formdata.travelers / 2);
+    props.add_to_cart(
+      myhotelList.name,
+      myhotelList.pricePerDay,
+      hotelId,
+      props.formdata.travelers,
+      date,
+      checkin,
+      checkout,
+      type,
+      props.formdata.days,
+      totalUnit,
+      number
+    );
+  };
+
+  if (
+    mytransportList.id === undefined ||
+    mytourguideList.id === undefined ||
+    myevent01List.id === undefined ||
+    myevent02List.id === undefined ||
+    myhotelList.id === undefined
+  ) {
+    return <Spinner />;
+  }
+
   return (
     <div className="main">
       <Particles>
@@ -17,7 +237,11 @@ function PackageDetails() {
                 <div className="column">
                   <Card>
                     <div className="card-title">{card.title}</div>
-                    <div className="card-body">{card.description}</div>
+                   {card.title==="Click Below To Get Started" ? <div className="card-body"><center><Link to="/shoppingcart">
+                <button class="btn btn-warning" onClick={handleFormData}>
+                  Get Started!
+                </button>
+              </Link></center></div> : <div className="card-body">{card.description}</div>}
                     <Image ratio={card.imageRatio} src={card.image} />
                   </Card>
                 </div>
@@ -47,7 +271,7 @@ function Card({ children }) {
       // ... easily generate the css transform value below.
       xys: [0, 0, 1],
       // Setup physics
-      config: { mass: 10, tension: 400, friction: 40, precision: 0.00001 }
+      config: { mass: 10, tension: 400, friction: 40, precision: 0.00001 },
     };
   });
 
@@ -74,7 +298,7 @@ function Card({ children }) {
         const xys = [
           -(y - ref.current.clientHeight / 2) / dampen, // rotateX
           (x - ref.current.clientWidth / 2) / dampen, // rotateY
-          1.07 // Scale
+          1.07, // Scale
         ];
 
         // Update values to animate to
@@ -92,7 +316,7 @@ function Card({ children }) {
         transform: animatedProps.xys.interpolate(
           (x, y, s) =>
             `perspective(600px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`
-        )
+        ),
       }}
     >
       {children}
@@ -102,19 +326,19 @@ function Card({ children }) {
 
 function Particles({ children }) {
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: "relative" }}>
       <ReactParticles
         params={particlesConfig}
         style={{
-          position: 'absolute',
+          position: "absolute",
           zIndex: 1,
           left: 0,
           right: 0,
           bottom: 0,
-          top: 0
+          top: 0,
         }}
       />
-      {children && <div style={{ position: 'relative' }}>{children}</div>}
+      {children && <div style={{ position: "relative" }}>{children}</div>}
     </div>
   );
 }
@@ -134,7 +358,7 @@ function Image({ ratio, src }) {
         <div
           className="ratio"
           style={{
-            paddingTop: ratio * 100 + '%'
+            paddingTop: ratio * 100 + "%",
           }}
         >
           <div className="ratio-inner">
@@ -155,44 +379,165 @@ function Info() {
   );
 }
 
-const cards = [
-  {
-    title: 'Transport Service 🚙',
-    description:
-      'This is a description of the Transport Service',
-    image: 'https://6jlvz1j5q3.csb.app/undraw_collection.svg',
-    imageRatio: 784 / 1016
-  },
-  {
-    title: 'Hotel Service 🏨',
-    description:
-    'This is a description of the Hotel Service',
-    image: 'https://6jlvz1j5q3.csb.app/undraw_upload.svg',
-    imageRatio: 839 / 1133
-  },
-  {
-    title: 'Tour Guide 🤵',
-    description:
-    'This is a description of the Tour Guide Service',
-    image: 'https://6jlvz1j5q3.csb.app/undraw_static_assets.svg',
-    imageRatio: 730 / 1030
-  },
-  {
-    title: 'Event 01 🏖️',
-    description:
-    'This is a description of the Event 01 Service,This is a description of the Event 01 Service,This is a description of the Event 01 Service,This is a description of the Event 01 Service',
-    image: 'https://6jlvz1j5q3.csb.app/undraw_static_assets.svg',
-    imageRatio: 730 / 1030
-  },
-  {
-    title: 'Event 02 🏞️',
-    description:
-    'This is a description of the Event 02 Service,This is a description of the Event 02 Service,This is a description of the Event 02 Service',
-    image: 'https://6jlvz1j5q3.csb.app/undraw_static_assets.svg',
-    imageRatio: 730 / 1030
-  }
-];
 
+const mapStateToProps = (state) => {
+  return {
+    selectId: state.eventpnl.selectId,
+    formdata: state.eventpnl.formdata,
+  };
+};
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addResData: (reservations) => {
+      dispatch({ type: "ADD_RESERVATIONS", reservations: reservations });
+    },
+    add_to_cart: (
+      item,
+      price,
+      add_id,
+      no_travellers,
+      date,
+      checkin,
+      checkout,
+      type,
+      days,
+      totalUnit,
+      number
+    ) => {
+      dispatch(
+        addToCart(
+          item,
+          price,
+          add_id,
+          no_travellers,
+          date,
+          checkin,
+          checkout,
+          type,
+          days,
+          totalUnit,
+          number
+        )
+      );
+    },
+    add_to_cart: (
+      item,
+      price,
+      add_id,
+      no_travellers,
+      date,
+      checkin,
+      checkout,
+      type,
+      days,
+      totalUnit,
+      number
+    ) => {
+      dispatch(
+        addToCart(
+          item,
+          price,
+          add_id,
+          no_travellers,
+          date,
+          checkin,
+          checkout,
+          type,
+          days,
+          totalUnit,
+          number
+        )
+      );
+    },
+    add_to_cart: (
+      item,
+      price,
+      add_id,
+      no_travellers,
+      date,
+      checkin,
+      checkout,
+      type,
+      days,
+      totalUnit,
+      number
+    ) => {
+      dispatch(
+        addToCart(
+          item,
+          price,
+          add_id,
+          no_travellers,
+          date,
+          checkin,
+          checkout,
+          type,
+          days,
+          totalUnit,
+          number
+        )
+      );
+    },
+    add_to_cart: (
+      item,
+      price,
+      add_id,
+      no_travellers,
+      date,
+      checkin,
+      checkout,
+      type,
+      days,
+      totalUnit,
+      number
+    ) => {
+      dispatch(
+        addToCart(
+          item,
+          price,
+          add_id,
+          no_travellers,
+          date,
+          checkin,
+          checkout,
+          type,
+          days,
+          totalUnit,
+          number
+        )
+      );
+    },
+    add_to_cart: (
+      item,
+      price,
+      add_id,
+      no_travellers,
+      date,
+      checkin,
+      checkout,
+      type,
+      days,
+      totalUnit,
+      number
+    ) => {
+      dispatch(
+        addToCart(
+          item,
+          price,
+          add_id,
+          no_travellers,
+          date,
+          checkin,
+          checkout,
+          type,
+          days,
+          totalUnit,
+          number
+        )
+      );
+    },
+  };
+};
 
-export default PackageDetails;
+export default connect(mapStateToProps, mapDispatchToProps)(PackageDetails);
