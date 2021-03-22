@@ -49,10 +49,23 @@ class Listitemdetails extends Component {
         var txt = this.props.distance_text;
         var numb = txt.match(/\d/g);
         numb = numb.join("");
-        this.props.add_to_cart(this.state.providers.vehicleType,this.state.providers.pricePerDay,this.state.providers.id,this.props.no_travellers,
-            this.state.currentDate,'Transport',this.state.selectedOption==='Per_day'?
+        this.props.add_to_cart(this.state.providers.vehicleType,
+            this.state.selectedOption==='Per_day'?this.state.providers.pricePerDay:this.state.providers.pricePer1KM,
+            this.state.providers.id,
+            this.props.no_travellers,
+            this.state.currentDate,
+            'Transport',
+            this.state.selectedOption==='Per_day'?
                 ((new Date(this.props.drop_date).getTime()-new Date(this.props.pickup_date).getTime())/(1000 * 3600 * 24)+1)*this.state.providers.pricePerDay:
-                ((this.props.rounded===''?numb:numb*2)*this.state.providers.pricePer1KM));
+                ((this.props.rounded===''?numb:numb*2)*this.state.providers.pricePer1KM),
+            this.state.selectedOption==='Per_day'?((new Date(this.props.drop_date).getTime()-new Date(this.props.pickup_date).getTime())/(1000 * 3600 * 24)+1)+" days":((this.props.rounded===''?numb:numb*2))+" km",
+            this.props.pickup_date,
+            this.props.pickup_time,
+            this.props.pickup_location,
+            this.props.drop_date,
+            this.props.drop_time,
+            this.props.drop_location
+            );
 
         this.props.history.push('/shoppingcart')
     }
@@ -99,16 +112,16 @@ class Listitemdetails extends Component {
         return (
             <div className="">
                     <br/>
-                    <div className="container debackcolor" >
+                    <div className="container border border-success  " >
                         <br/>
                         <div className="row ">
                             <div className="col-sm-1">
                             </div>
-                            <div className="col-sm-4 imgcolor" >
+                            <div className="col-sm-4 imgcolor " >
                                 <br/>
                                 <div className="col-sm-12 ">
                                     <h3 className="txtcolorx">{this.state.providers.brand} {this.state.providers.model} {this.state.providers.vehicleType}</h3>
-
+                                    <hr/>
                                 </div>
                                 <br/>
 
@@ -146,8 +159,8 @@ class Listitemdetails extends Component {
                             </div>
 
                             <div className="row">
-                                <Link onClick={this.handlecarClik.bind(this)}>
-                            <div className="col txtcolorx"><small className="iconpad"> Reviews</small><ChatBubbleOutlineIcon fontSize="small"  /></div>
+                                <Link onClick={this.handlecarClik.bind(this)} >
+                            <div className="col txtcolorx rev-col "><small className="iconpad"> Reviews</small><ChatBubbleOutlineIcon fontSize="small"  /></div>
                                 </Link>
 
 
@@ -363,12 +376,12 @@ const mapStateToProps = state => {
 
         provider_array: state.transport_reducer.provider,
         no_travellers: state.transport_input_reducer.form_no_travellers,
-        drop_location: state.transport_input_reducer. form_drop_location,
+        drop_location: state.transport_input_reducer.form_drop_location,
         drop_date:state.transport_input_reducer.form_drop_date,
         drop_time:state.transport_input_reducer.form_drop_time,
         pickup_location:state.transport_input_reducer.form_pickup_location,
         pickup_date:state.transport_input_reducer.form_pickup_date,
-        pickup_time:state.transport_input_reducer.form_drop_time,
+        pickup_time:state.transport_input_reducer. form_pickup_time,
         rounded:state.transport_input_reducer.form_rounded,
         distance_text:state.transport_input_reducer.form_distance_text
 
@@ -378,7 +391,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         // onInitTransportProvider: (id) => dispatch(actions.initTransportProvider(id)),
-         add_to_cart:(item,qty,add_id,no_travellers,date,type,paymod) => dispatch(actions.addToCart(item,qty,add_id,no_travellers,date,type,paymod))
+         add_to_cart:(Servicename,unit_price,add_id,no_travellers,Current_date,type,totalprice,units,checkin_date,checkin_time,checkin_location,checkout_date,checkout_time,checkout_location) => dispatch(actions.addToCart(Servicename,unit_price,add_id,no_travellers,Current_date,type,totalprice,units,checkin_date,checkin_time,checkin_location,checkout_date,checkout_time,checkout_location))
 
     }
 };

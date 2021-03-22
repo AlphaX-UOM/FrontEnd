@@ -21,23 +21,58 @@ const listitem=(props)=>{
 
             <Link  className="link textdec" onClick={props.clicked} to={`/transportproviderlist/${props.id}`}>
 
-                <div className="tab-content clearfix container">
+                <div className="tab-content clearfix container ">
 
 
                     <div className="row" >
                         <div className="tm-recommended-place-wrap">
                             <div className="tm-recommended-place">
 
-                                <div className="tm-recommended-description-box">
-                                    <h3 className="txtcolorx">{props.brand} {props.model} {props.vtype}</h3>
-                                    <small className="">{props.district},{props.vtype}</small>
-                                    <p className="tm-text-highlight"><strong>{props.name}</strong></p>
-                                    <p className="tm-text-gray"><Ratings/></p>
+                                <div className="tm-recommended-description-box border border-success rounded ">
+                                    <div className="container">
+                                        <div className="row">
+                                            <div className="col-sm-8">
+                                                <h3 className="txtcolorx">{props.brand} {props.model} {props.vtype}</h3>
+                                            </div>
+
+                                            <div className="col-sm-4">
+                                                <p className="tm-text-gray"><Ratings/></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="container">
+                                        <div className="row">
+                                            <div className="col-sm-8">
+                                                <p className="tm-text-highlight"><strong>{props.name}</strong></p>
+                                            </div>
+
+                                            <div className="col-sm-4">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="container">
+                                        <div className="row">
+                                            <div className="col-sm-6">
+                                                <div className="row txtcolorx">
+                                                    <div className="col-sm">per 1KM : <small>(LKR) </small> <strong> {props.pricePer1KM}</strong> </div>
+
+
+                                                </div>
+                                            </div>
+
+                                            <div className="col-sm-6">
+                                                <div className="row txtcolorx">
+                                                    <div className="col-sm">per day :  <small>(LKR) </small><strong> {props.pricePerDay}</strong>  </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                 </div>
-                                <a  className="">
-                                    {/*<p className="tm-recommended-price">$ {props.price}</p>*/}
-                                    <img src={props.imgURL || "http://via.placeholder.com/50"} alt="firebase-image" className='listitemimgsize' />
-                                </a>
+
                             </div>
                         </div>
                     </div>

@@ -12,12 +12,12 @@ import { green } from '@material-ui/core/colors';
 
 const Row = (props) => {
      // console.log(props.item)
-    const { id, quantity, details,no_travellers,date,type,paymod } = props.item
+    const { id, details,unit_price, no_travellers,Current_date,type,total_price,units,checkin_date,checkin_time,checkin_location,checkout_date,checkout_time,checkout_location } = props.item
     const item = details
-    const [ qty, setQty ] = useState(quantity);
+    const [ qty, setQty ] = useState(unit_price);
     const dispatch = useDispatch()
-    const update = (id, quantity) => {
-      dispatch(updateCart(id, quantity))
+    const update = (id, unit_price) => {
+      dispatch(updateCart(id, unit_price))
     }
   /* Prolems: Tai sao khi click, qty + 1 -> qua line update, qty ko update -> thieu 1 khi tinh so luong */
     const remove = (item) => {
@@ -31,16 +31,19 @@ const Row = (props) => {
   
       return (
         <tr>
-         <td>{date}</td>
+         <td>{Current_date}</td>
           <td className="font-weight-bold">{item}</td>
             <td>{type}</td>
-          <td>${qty}</td>
-          <td>
-              {no_travellers}
+            <td>
+                {no_travellers}
 
-          </td>
+            </td>
+
+          <td>{qty}</td>
+            <td>{units}</td>
+
             {/*<td>${ (qty * 1).toFixed(2) }</td>*/}
-            <td>${ paymod }</td>
+            <td>{ total_price }</td>
           <td>
               <CancelIcon  style={{ color: green[500] }} fontSize="large" onClick={() => {remove(props.item)}}></CancelIcon>
               {/*<CancelOutlinedIcon>aa</CancelOutlinedIcon>*/}

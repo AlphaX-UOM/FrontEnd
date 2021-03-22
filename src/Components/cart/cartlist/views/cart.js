@@ -19,7 +19,10 @@ import { saveCart } from '../../../../store/lib/actions'
 
         // console.log(items);
 
-      let totals = items.map(item => item.quantity * 1)
+
+
+
+      let totals = items.map(item => item.unit_price * item.units.match(/\d/g).join(""))
       setSubTotal(totals.reduce((item1, item2) => item1 + item2, 0)) 
       setTotal(subTotal)
         saveLocalStorage(items);

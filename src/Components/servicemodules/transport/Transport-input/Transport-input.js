@@ -13,6 +13,9 @@ class TransportInput extends Component{
 
     constructor(props) {
         super(props)
+        var today = new Date(),
+
+            date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         this.state = {
 
 
@@ -31,7 +34,8 @@ class TransportInput extends Component{
             origin_lang: 0,
             desti_lat: 0,
             desti_lang: 0,
-            distance_text: ''
+            distance_text: '',
+            currentDate: ''
 
         }
 
@@ -53,6 +57,8 @@ class TransportInput extends Component{
 
 
          e.preventDefault();
+        // this.props.history.push('/transportproviderlist');
+
 
         Geocode.setApiKey('AIzaSyD3hAWVrmMEMeI6xhdtSGCmEJ6FHccdKUk');
         Geocode.setLanguage("en");
@@ -90,7 +96,8 @@ class TransportInput extends Component{
             )
         ).then(
             setTimeout(function() { //Start the timer
-                this.calculateDistance()
+                 this.calculateDistance()
+
             }.bind(this), 3000)
 
         ).then(
@@ -104,7 +111,7 @@ class TransportInput extends Component{
                     this.props.history.push('/transportproviderlist');
                 }
 
-            }.bind(this), 4000),  // this.props.history.push('/transportproviderlist')
+            }.bind(this), 5000),  // this.props.history.push('/transportproviderlist')
 
 
 
@@ -152,7 +159,19 @@ class TransportInput extends Component{
 
 
     render() {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = "0" + dd;
+        }
+        if (mm < 10) {
+            mm = "0" + mm;
+        }
 
+        today = yyyy + "-" + mm + "-" + dd;
+        console.log(today);
         return (
             <div>
                 <br/>
@@ -172,11 +191,11 @@ class TransportInput extends Component{
                                 <div className="form-group">
                                     <input type="text" id="contact_subject"
                                            className="form-control" placeholder="Pickup Location"    value={this.state.pickuplocation} onChange={this.Changehandler}
-                                           name="pickuplocation"/>
+                                           name="pickuplocation" />
                                 </div>
                                 <div className="form-group tm-name-container">
                                     <input type="date" id="contact_name" name="pickupdate" className="form-control"
-                                           placeholder="Pickup Date"  value={this.state.pickupdate} onChange={this.Changehandler} />
+                                           placeholder="Pickup Date"  value={this.state.pickupdate} onChange={this.Changehandler} min={today} />
                                 </div>
 
                                 <div className="form-group tm-email-container">
@@ -223,11 +242,11 @@ class TransportInput extends Component{
 
                                 <div className="form-group">
                                     <input type="Number"  name="notravellers"
-                                           className="form-control" placeholder="No Of Travellers"  value={this.state.notravellers} onChange={this.Changehandler} min="0"/>
+                                           className="form-control" placeholder="No Of Travellers" max='20' value={this.state.notravellers} onChange={this.Changehandler} min="0"/>
                                 </div>
 
 
-                                <button type="submit" className="btn btn-primary tm-btn-primary tm-btn-send text-uppercase">
+                                <button type="submit" className="btn btn-primary tm-btn-primary tm-btn-send text-uppercase rounded subbtn">
                                  Find a ride
                                 </button>
                             </form>
