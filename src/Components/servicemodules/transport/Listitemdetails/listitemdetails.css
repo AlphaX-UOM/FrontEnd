@@ -4,6 +4,7 @@
 }
 .depad{
     padding: 20px;
+    border-radius: 30px;
 
 }
 .btn-res{
@@ -21,4 +22,24 @@
 
 .iconpad{
     padding-right: 10px;
+}
+.subbtn{
+    border-radius: 30px;
+}
+.imgsize{
+    width: 320px;
+    height: 250px;
+}
+.vl {
+    border-left: 6px solid green;
+    height: 500px;
+    position: absolute;
+    left: 50%;
+    margin-left: -3px;
+    top: 0;
+}
+.rev-col:hover{
+    background-color: #00A680;
+    border-radius: 30px;
+    color: white;
 }

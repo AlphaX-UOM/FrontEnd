@@ -11,13 +11,15 @@ import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../../../../store/lib/actions";
 import connect from "react-redux/es/connect/connect";
+import DatePicker from 'react-date-picker';
+
 
 
 function ItemCheck1(props) {
   const [quantity, setQuantity] = useState(1);
     const { add_to_cart} = props;
     const [nameList, setNameList] = useState([]);
-
+    const [value, onChange] = useState(new Date());
 
     useEffect(() => {
         fetch(
@@ -58,7 +60,7 @@ console.log("event price ->"+nameList.price);
     textField: {
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
-      width: 200,
+      width: 400,
     },
   }));
 
@@ -74,27 +76,36 @@ console.log("event price ->"+nameList.price);
 
   return (
     <div>
-      <Card className="shadow-sm" style={{ width: "530px" }}>
+      <Card className="shadow-sm" style={{ width: "600px" }}>
         <Container>
           <Row>
             <br>
             </br>
           <h4>{nameList.name}</h4>
+          <Col align="right">
+              <h5>{nameList.price}$/per Adult</h5>
+            </Col>
             <br />
           </Row>
           <Row>
             <Col>
-              <h5>Select Date and Travelers</h5>
+              <h6>Select Date </h6>
+             
+      {/* <DatePicker
+        onChange={onChange}
+        value={value}
+      /> */}
+   
             </Col>
-            <Col align="right">
-              <h4>{nameList.price}$/person</h4>
-            </Col>
+            <Col><h6>Adults</h6></Col>
+            <Col><h6>Kids</h6></Col>
+          
           </Row>
           <Row>
             <br />
           </Row>
           <Row>
-            <Col>
+            {/* <Col>
               <form className={classes.container} noValidate>
                 <TextField
                   id="datetime-local"
@@ -107,8 +118,62 @@ console.log("event price ->"+nameList.price);
                   }}
                 />
               </form>
+            </Col> */}
+            <Col>
+               <DatePicker
+        onChange={onChange}
+        value={value}
+      /> 
             </Col>
             <Col>
+              
+              <TableCell align="right">
+                <Button
+                  style={{
+                    maxWidth: "20px",
+                    maxHeight: "20px",
+                    minWidth: "10px",
+                    minHeight: "20px",
+                    background:
+                      "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+                    color: "white",
+                  }}
+                  onClick={increaseQuantity}
+                >
+                  +
+                </Button>
+                <Button
+                  variant="contained"
+                  disabled
+                  style={{
+                    maxWidth: "20px",
+                    maxHeight: "20px",
+                    minWidth: "20px",
+                    minHeight: "20px",
+                    color: "black",
+                  }}
+                >
+                  <EmojiPeopleIcon /> * {quantity}
+                </Button>
+                <Button
+                  style={{
+                    maxWidth: "20px",
+                    maxHeight: "20px",
+                    minWidth: "20px",
+                    minHeight: "20px",
+                    background:
+                      "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+                    color: "white",
+                  }}
+                  onClick={decreaseQuantity}
+                >
+                  -
+                </Button>
+              </TableCell>
+              </Col>
+
+              <Col>
+          
               <TableCell align="right">
                 <Button
                   style={{
@@ -154,10 +219,7 @@ console.log("event price ->"+nameList.price);
               </TableCell>
             </Col>
             <Col>
-              <Button variant="outlined" color="secondary">
-                <Brightness4Icon />
-                Options
-              </Button>
+             
             </Col>
           </Row>
           <Row>
@@ -168,7 +230,7 @@ console.log("event price ->"+nameList.price);
                   <br />
                 </div>
                 <Link to="/shoppingcart">
-                <button type="button" class="btn btn-warning" onClick={ ()=>add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date)}>
+                <button type="button" class="btn btn-success" onClick={ ()=>add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date)}>
                   <AddShoppingCartIcon />
                   Add to Cart
                 </button>

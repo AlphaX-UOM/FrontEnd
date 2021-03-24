@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Spinner from "../../ResultList/Spinner";
 import { addToCart } from "../../../../../../store/lib/actions";
+import moment from "moment";
 
 function PackageDetails(props) {
   const { add_to_cart } = props;
@@ -126,93 +127,105 @@ function PackageDetails(props) {
   ];
 
   const handleFormData = () => {
-    let type = "TransportService";
-    let checkin = props.formdata.checkin;
-    let checkout = props.formdata.checkout;
+    
     let totalUnit = mytransportList.pricePerDay * props.formdata.days;
-    let number = props.formdata.days;
+    let days = props.formdata.days;
 
     props.add_to_cart(
-      mytransportList.name,
+      mytransportList.vehicleType,
       mytransportList.pricePerDay,
       tranId,
       props.formdata.travelers,
       date,
-      checkin,
-      checkout,
-      type,
-      props.formdata.days,
+      "Transport",
       totalUnit,
-      number
+      days,
+      props.formdata.Checkin,
+      null,
+      null,
+      props.formdata.Checkout,
+      null,
+      null
     );
 
-    type = "GuideService";
     totalUnit = mytourguideList.costPerDay * props.formdata.days;
+
     props.add_to_cart(
       mytourguideList.name,
       mytourguideList.costPerDay,
       guideId,
       props.formdata.travelers,
       date,
-      checkin,
-      checkout,
-      type,
-      props.formdata.days,
+      "GuideService",
       totalUnit,
-      number
+      props.formdata.days,
+      props.formdata.Checkin,
+      null,
+      null,
+      props.formdata.Checkout,
+      null,
+      null
     );
 
-    type = "EventService";
-    totalUnit = myevent01List.price;
-    number = 1;
+    totalUnit = myevent01List.price * props.formdata.travelers;
+
     props.add_to_cart(
       myevent01List.name,
       myevent01List.price,
       event01Id,
       props.formdata.travelers,
       date,
-      checkin,
-      checkout,
-      type,
-      props.formdata.days,
+      "EventService",
       totalUnit,
-      number
+      props.formdata.travelers,
+      props.formdata.Checkin,
+      null,
+      null,
+      props.formdata.Checkout,
+      null,
+      null
     );
 
-    type = "EventService";
-    totalUnit = myevent02List.price;
+    totalUnit = myevent02List.price * props.formdata.travelers;
+
     props.add_to_cart(
       myevent02List.name,
       myevent02List.price,
       event02Id,
       props.formdata.travelers,
       date,
-      checkin,
-      checkout,
-      type,
-      props.formdata.days,
+      "EventService",
       totalUnit,
-      number
+      props.formdata.travelers,
+      props.formdata.Checkin,
+      null,
+      null,
+      props.formdata.Checkout,
+      null,
+      null
     );
 
-    type = "HotelService";
-    totalUnit =
-      myhotelList.pricePerDay *
-      props.formdata.days *
-      Math.round(props.formdata.travelers / 2);
-    number = props.formdata.days * Math.round(props.formdata.travelers / 2);
+    // Here we will take unit_price=>price of a hotel room for a day
+    // units=>total no. of rooms times no. of days they are booking
+    let unit_price = myhotelList.pricePerDay;
+    let units = props.formdata.days * Math.round(props.formdata.travelers / 2);
+    let total_price = unit_price * units;
+
     props.add_to_cart(
       myhotelList.name,
-      myhotelList.pricePerDay,
+      unit_price,
       hotelId,
       props.formdata.travelers,
       date,
-      checkin,
-      checkout,
-      type,
-      props.formdata.days,
-      totalUnit,
-      number
+      "HotelService",
+      total_price,
+      units,
+      props.formdata.Checkin,
+      null,
+      null,
+      props.formdata.Checkout,
+      null,
+      null
     );
   };
 
@@ -237,11 +250,22 @@ function PackageDetails(props) {
                 <div className="column">
                   <Card>
                     <div className="card-title">{card.title}</div>
-                   {card.title==="Click Below To Get Started" ? <div className="card-body"><center><Link to="/shoppingcart">
-                <button class="btn btn-warning" onClick={handleFormData}>
-                  Get Started!
-                </button>
-              </Link></center></div> : <div className="card-body">{card.description}</div>}
+                    {card.title === "Click Below To Get Started" ? (
+                      <div className="card-body">
+                        <center>
+                          <Link to="/shoppingcart">
+                            <button
+                              class="btn btn-warning"
+                              onClick={handleFormData}
+                            >
+                              Get Started!
+                            </button>
+                          </Link>
+                        </center>
+                      </div>
+                    ) : (
+                      <div className="card-body">{card.description}</div>
+                    )}
                     <Image ratio={card.imageRatio} src={card.image} />
                   </Card>
                 </div>
@@ -379,7 +403,6 @@ function Info() {
   );
 }
 
-
 const mapStateToProps = (state) => {
   return {
     selectId: state.eventpnl.selectId,
@@ -392,148 +415,146 @@ const mapDispatchToProps = (dispatch) => {
     addResData: (reservations) => {
       dispatch({ type: "ADD_RESERVATIONS", reservations: reservations });
     },
+    add_to_cart: (item,unit_price,add_id,no_travellers,Current_date,type,total_price,units,checkin_date,checkin_time,checkin_location,checkout_date,checkout_time,checkout_location) => {
+      dispatch(addToCart(item,unit_price,add_id,no_travellers,Current_date,type,total_price,units,checkin_date,checkin_time,checkin_location,checkout_date,checkout_time,checkout_location));
+    },
     add_to_cart: (
       item,
-      price,
+      unit_price,
       add_id,
       no_travellers,
-      date,
-      checkin,
-      checkout,
+      Current_date,
       type,
-      days,
-      totalUnit,
-      number
+      total_price,
+      units,
+      checkin_date,
+      checkin_time,
+      checkin_location,
+      checkout_date,
+      checkout_time,
+      checkout_location
     ) => {
       dispatch(
         addToCart(
           item,
-          price,
+          unit_price,
           add_id,
           no_travellers,
-          date,
-          checkin,
-          checkout,
+          Current_date,
           type,
-          days,
-          totalUnit,
-          number
+          total_price,
+          units,
+          checkin_date,
+          checkin_time,
+          checkin_location,
+          checkout_date,
+          checkout_time,
+          checkout_location
         )
       );
     },
     add_to_cart: (
       item,
-      price,
+      unit_price,
       add_id,
       no_travellers,
-      date,
-      checkin,
-      checkout,
+      Current_date,
       type,
-      days,
-      totalUnit,
-      number
+      total_price,
+      units,
+      checkin_date,
+      checkin_time,
+      checkin_location,
+      checkout_date,
+      checkout_time,
+      checkout_location
     ) => {
       dispatch(
         addToCart(
           item,
-          price,
+          unit_price,
           add_id,
           no_travellers,
-          date,
-          checkin,
-          checkout,
+          Current_date,
           type,
-          days,
-          totalUnit,
-          number
+          total_price,
+          units,
+          checkin_date,
+          checkin_time,
+          checkin_location,
+          checkout_date,
+          checkout_time,
+          checkout_location
         )
       );
     },
     add_to_cart: (
       item,
-      price,
+      unit_price,
       add_id,
       no_travellers,
-      date,
-      checkin,
-      checkout,
+      Current_date,
       type,
-      days,
-      totalUnit,
-      number
+      total_price,
+      units,
+      checkin_date,
+      checkin_time,
+      checkin_location,
+      checkout_date,
+      checkout_time,
+      checkout_location
     ) => {
       dispatch(
         addToCart(
           item,
-          price,
+          unit_price,
           add_id,
           no_travellers,
-          date,
-          checkin,
-          checkout,
+          Current_date,
           type,
-          days,
-          totalUnit,
-          number
+          total_price,
+          units,
+          checkin_date,
+          checkin_time,
+          checkin_location,
+          checkout_date,
+          checkout_time,
+          checkout_location
         )
       );
     },
     add_to_cart: (
       item,
-      price,
+      unit_price,
       add_id,
       no_travellers,
-      date,
-      checkin,
-      checkout,
+      Current_date,
       type,
-      days,
-      totalUnit,
-      number
+      total_price,
+      units,
+      checkin_date,
+      checkin_time,
+      checkin_location,
+      checkout_date,
+      checkout_time,
+      checkout_location
     ) => {
       dispatch(
         addToCart(
           item,
-          price,
+          unit_price,
           add_id,
           no_travellers,
-          date,
-          checkin,
-          checkout,
+          Current_date,
           type,
-          days,
-          totalUnit,
-          number
-        )
-      );
-    },
-    add_to_cart: (
-      item,
-      price,
-      add_id,
-      no_travellers,
-      date,
-      checkin,
-      checkout,
-      type,
-      days,
-      totalUnit,
-      number
-    ) => {
-      dispatch(
-        addToCart(
-          item,
-          price,
-          add_id,
-          no_travellers,
-          date,
-          checkin,
-          checkout,
-          type,
-          days,
-          totalUnit,
-          number
+          total_price,
+          units,
+          checkin_date,
+          checkin_time,
+          checkin_location,
+          checkout_date,
+          checkout_time,
+          checkout_location
         )
       );
     },

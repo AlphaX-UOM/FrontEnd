@@ -178,7 +178,7 @@ function guidedetailspage(props) {
                     <div className="col-sm"></div>
                     <div className="col-sm"></div>
                       <Link to="/shoppingcart">
-                    <button type="button" className="btn btn-primary " onClick={()=> props.add_to_cart(name1,cost, props.match.params.id,20,date)}>
+                    <button type="button" className="btn btn-primary " onClick={()=> props.add_to_cart(name1,cost, props.match.params.id,20,date,'Guide')}>
                       Book Now
                     </button>
                       </Link>
@@ -207,7 +207,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
 
-    add_to_cart:(item,price,add_id,no_travellers,date) => dispatch(addToCart(item,price,add_id,no_travellers,date))
+    add_to_cart:(item,price,add_id,no_travellers,date,type) => dispatch(addToCart(item,price,add_id,no_travellers,date,type))
   };
 };
 

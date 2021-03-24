@@ -38,6 +38,7 @@ import PackageDetails from '../Components/servicemodules/suggestor/Pages/Update/
 import ResultListLanding from '../Components/servicemodules/suggestor/Pages/Update/ResultPackages/ResultListLanding';
 
 import CategoryLanding from '../Components/servicemodules/event/Component/Update/Category/CategoryLanding';
+import CategoryLanding1 from '../Components/servicemodules/event/Component/Update/Category/DateFilter'; 
 import ItemLanding from '../Components/servicemodules/event/Component/Update/Item/ItemLanding';
 import guidedetailspage from '../Components/servicemodules/guide/components/GuideDetails/guidedetailspage';
 
@@ -72,6 +73,7 @@ const Layout=(props)=> {
                         <Route path="/categorylanding/:id" component={ItemLanding}/>
                         <Route path='/itemlanding' component={ItemLanding}/>
                         <Route path="/categorylanding" component={CategoryLanding}/>
+                        <Route path="/categoryLanding1" component={CategoryLanding1}/>
 
 
                         <Route path='/PostGuideForm' component={PostGuideForm}/>
@@ -91,6 +93,7 @@ const Layout=(props)=> {
                         <Route path="/post/post-transportprovider"component={ PostTransportProviderForm}/>
                         <Route path="/post" component={Post}></Route>
                         <Route path="/login"><Login/></Route>
+                        <Route path="/register"><SignUp/></Route>
                        
                         <Route path="/shoppingcart"><Shoppingcart/></Route>
                         <Route path="/serviceprovider" component={ServiceProvider}/>

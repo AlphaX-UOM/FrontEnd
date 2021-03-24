@@ -22,20 +22,36 @@ const useStyles = makeStyles({
   const [loading, setLoading] = useState(false);
 
   const [total,setTotal]=useState(0);
-  axios
-    .get("https://alphax-api.azurewebsites.net/api/payments")
-    /*  .then((response) => {
-      return response.json();
-    })*/
-    .then((responseData) => {
-      console.log(responseData);
+  // axios
+  //   .get("https://alphax-api.azurewebsites.net/api/payments")
+  //   /*  .then((response) => {
+  //     return response.json();
+  //   })*/
+  //   .then((responseData) => {
+  //     console.log(responseData);
 
-      setPayment(responseData.data);
-     setTotal(responseData.data.reduce((total,pay)=>total+pay.amount,0))
+  //     setPayment(responseData.data);
+  //    setTotal(responseData.data.reduce((total,pay)=>total+pay.amount,0))
 
-      setLoading(false);
+  //     setLoading(false);
 
-    });
+  //   });
+
+
+    useEffect(() => {
+      fetch(
+        `https://alphax-api.azurewebsites.net/api/payments`
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then((responseData) => {
+          setPayment(responseData);
+     setTotal(responseData.reduce((total,pay)=>total+pay.amount,0))
+        });
+    }, []);
+
+
   const classes = useStyles();
   var today = new Date();
   var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();

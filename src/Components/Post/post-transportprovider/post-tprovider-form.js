@@ -1,8 +1,13 @@
 import React,{ Component } from 'react';
 import './post-tprovider-form.css';
-
+import ImageUploader from 'react-images-upload';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios'
+import { storage } from "../../../../src/config/firebaseConfig";
+import Logo1 from "../../../images/vehicle/itemimages/Intermediate.jpg";
+import Logo2 from "../../../images/vehicle/slide/v.jpg";
+import Logo3 from "../../../images/vehicle/slide/suv.jfif";
+import Logo4 from "../../../images/vehicle/slide/Bus.jfif";
 
 class PostTproviderForm extends Component{
     constructor(props) {
@@ -10,89 +15,125 @@ class PostTproviderForm extends Component{
         this.state = {
 
                 name: '',
+                district: '',
+                telephone: '',
                 email: '',
                 address: '',
-                telephone: '',
-                district: '',
                 vehicletype: 'Car',
+                brand:'',
+                model:'',
+                num_seat:'',
+                air_con:'',
+                costperdistance: '',
                 costperday: '',
                 description: '',
 
-            disabled1: false,
-            disabled2: false,
-            disabled3: false,
-            disabled4: false,
 
 
+            pictures: [],
 
-            carvalue:'Car',
-            carcount:'',
-            carcostperday:'',
+            image:null,
+            url:'',
+            progressx:false,
+            progress:''
 
-            vanvalue:'Van',
-            vancount:'',
-            vancostperday:'',
-
-            suvvalue:'Suv',
-            suvcount:'',
-            suvcostperday:'',
-
-            busvalue:'Bus',
-            buscount:'',
-            buscostperday:'',
 
 
 
 
         }
 
+        this.onDrop = this.onDrop.bind(this);
+
     }
+
+    handleChange = e => {
+        if (e.target.files[0]) {
+            this.setState({image:e.target.files[0]});
+        }
+
+    };
+
+     handleUpload = () => {
+
+    };
 
     Changehandler = (event)=>{
         this.setState({ [event.target.name]: event.target.value })
     }
 
-    handlecarClik() {
 
-        this.setState( {disabled1: !this.state.disabled1} )
+    handlehiddenClik(e) {
+        this.setState( {air_con: e.target.checked} )
+
+    }
+    onDrop(picture) {
+        this.setState({
+            pictures: this.state.pictures.concat(picture),
+        });
     }
 
-    handlevanClik() {
-        this.setState( {disabled2: !this.state.disabled2} )
-    }
-    handlesuvClik() {
-        this.setState( {disabled3: !this.state.disabled3} )
-    }
-    handlebusClik() {
-        this.setState( {disabled4: !this.state.disabled4} )
-    }
 
     handleSubmit = e=>{
 
         e.preventDefault();
         console.log(this.state)
 
-        axios
-            .post('http://localhost:5000/api/TransportServices', {
-                name:this.state.name,
-                // Email:this.state.email,
-                district:this.state.district,
-                // Address:this.state.address,
-                pnumber:this.state.telephone,
-                description:this.state.description,
-                vehicleType:this.state.vehicletype,
-                count:2,
-                pricePerDay:parseInt(this.state.costperday),
-                userid:"c9d4c053-49b6-410c-bc78-2d54a9991870",
+        const uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
+        uploadTask.on(
+            "state_changed",
+            snapshot => {
+                const progress = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+                this.setState({ progress: progress});
+            },
+            error => {
+                console.log(error);
+            },
+            () => {
+                storage
+                    .ref(`images`)
+                    .child(this.state.image.name)
+                    .getDownloadURL()
+                    .then(url => {
+                        this.setState({url:url});
+                        this.setState({progressx:true});
+                    });
+            }
+        );
+if(this.state.progressx===true){
+
+}
+        setTimeout(function() { //Start the timer
+            axios
+                .post('https://alphax-api.azurewebsites.net/api/TransportServices', {
+                    name:this.state.name,
+                    district:this.state.district,
+                    pnumber:this.state.telephone,
+                    email:this.state.email,
+                    address:this.state.address,
+                    vehicleType:this.state.vehicletype,
+                    brand:this.state.brand,
+                    model:this.state.model,
+                    noOfSeats:this.state.num_seat,
+                    airCondition:this.state.air_con,
+                    pricePer1KM:parseInt(this.state.costperdistance),
+                    pricePerDay:parseInt(this.state.costperday),
+                    description:this.state.description,
+                    imgURL:this.state.url
+
+                })
+                .then(response => {
+                    console.log(response)
+                    alert("ok");
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }.bind(this), 4000)
 
 
-            })
-            .then(response => {
-                console.log(response)
-            })
-            .catch(error => {
-                console.log(error)
-            })
 
 
     }
@@ -159,7 +200,7 @@ class PostTproviderForm extends Component{
                             </div>
                             <div className="col-sm-3"></div>
                         </div>
-
+                        <hr/>
                         <div className="row formmarge">
                             <div className="col-sm-3"></div>
                             <div className="col-sm-6">
@@ -174,14 +215,190 @@ class PostTproviderForm extends Component{
                                     </select>
                                 </div>
                             </div>
+
+
+
+                            <div className="col-sm-3"></div>
+                        </div>
+
+                        <div className="row formmarge">
+                            <div className="col-sm-3"></div>
+
                             <div className="col-sm-3"></div>
                         </div>
 
 
+                            {
+                                ( this.state.vehicletype === 'Car')
+                                    ?
+                                    <div className="row formmarge">
+                                        <div className="col-sm-3"></div>
+
+                                        <div className="col-sm-3">
+                                            <div className="form-group" >
+                                                <label htmlFor="exampleFormControlSelect1">Brand</label>
+                                                <select className="form-control tm-select"  name="brand" value={this.state.brand} onChange={this.Changehandler}>
+                                                    <option value=""></option>
+                                                    <option value="Toyota">Toyota</option>
+
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-sm-3">
+                                            <div className="form-group">
+                                                <label htmlFor="">Model</label>
+                                                <input type="Text" className="form-control" name="model"
+                                                       value={this.state.model} onChange={this.Changehandler} />
+                                                <small>(optional)</small>
+                                            </div>
+                                        </div>
+                                        <div className="col-sm-3"></div>
+                                    </div>
+                                    :''
+                            }
+                            {
+                                ( this.state.vehicletype === 'Van')
+                                    ?  <div className="row formmarge">
+                                        <div className="col-sm-3"></div>
+
+
+                                        <div className="col-sm-3">
+                                            <div className="form-group" >
+                                                <label htmlFor="exampleFormControlSelect1">Brand</label>
+                                                <select className="form-control tm-select"  name="brand" value={this.state.brand} onChange={this.Changehandler} >
+                                                    <option value=""></option>
+                                                    <option value="Nissan">Nissan</option>
+
+                                                    <option value="Toyota">Toyota</option>
+
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div className="col-sm-3">
+                                            <div className="form-group">
+                                                <label htmlFor="">Model</label>
+                                                <input type="Text" className="form-control" name="model"
+                                                       value={this.state.model} onChange={this.Changehandler} />
+                                                <small>(optional)</small>
+                                            </div>
+                                        </div>
+                                        <div className="col-sm-3"></div>
+                                    </div>
+                                    :''
+                            }
+
+                        {
+                            ( this.state.vehicletype === 'Suv')
+                                ?  <div className="row formmarge">
+                                    <div className="col-sm-3"></div>
+
+
+                                    <div className="col-sm-3">
+                                        <div className="form-group" >
+                                            <label htmlFor="exampleFormControlSelect1">Brand</label>
+                                            <select className="form-control tm-select"  name="brand" value={this.state.brand} onChange={this.Changehandler}>
+                                                <option value=""></option>
+                                                <option value="Nissan">Nissan</option>
+
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div className="col-sm-3">
+                                        <div className="form-group">
+                                            <label htmlFor="">Model</label>
+                                            <input type="Text" className="form-control" name="model"
+                                                   value={this.state.model} onChange={this.Changehandler} />
+                                            <small>(optional)</small>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-3"></div>
+                                </div>
+                                :''
+                        }
+
+                        {
+                            ( this.state.vehicletype === 'Bus')
+                                ?  <div className="row formmarge">
+                                    <div className="col-sm-3"></div>
+
+
+                                    <div className="col-sm-3">
+                                        <div className="form-group" >
+                                            <label htmlFor="exampleFormControlSelect1">Brand</label>
+                                            <select className="form-control tm-select"  name="brand" value={this.state.brand} onChange={this.Changehandler} >
+                                                <option value=""></option>
+                                                <option value="Toyota">Toyota</option>
+
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div className="col-sm-3">
+                                        <div className="form-group">
+                                            <label htmlFor="">Model</label>
+                                            <input type="Text" className="form-control" name="model"
+                                                   value={this.state.model} onChange={this.Changehandler} />
+                                            <small>(optional)</small>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-3"></div>
+                                </div>
+                                :''
+                        }
+
+
+
+
+
+
+
+                        <div className="row formmarge">
+                            <div className="col-sm-3"></div>
+                            <div className="col-sm-6 ">
+                                <label htmlFor="district">Number of seats</label>
+                                <input type="number" className="form-control" name="num_seat"
+                                       value={this.state.num_seat} onChange={this.Changehandler} />
+                            </div>
+                            <div className="col-sm-3"></div>
+                        </div>
+                        <br/>
                         <div className="row formmarge">
                             <div className="col-sm-3"></div>
                             <div className="col-sm-6">
-                                <label htmlFor="district"> costperday</label>
+
+                                <div className="form-check form-check-inline">
+                                    <input className="form-check-input form-group" type="checkbox"
+                                           value="true" name=" checkboxval"   onChange = {e=>this.handlehiddenClik(e)} />
+                                    <div className="input-group-prepend">
+                                        <label className="form-group "><p >Air Condition</p> </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div className="col-sm-3"></div>
+                        </div>
+
+                        <div className="row formmarge">
+                            <div className="col-sm-3"></div>
+                            <div className="col-sm-6">
+                                <label htmlFor="district"> Cost Per 1 km</label>
+                                <input type="number" className="form-control" name="costperdistance"
+                                       value={this.state.costperdistance} onChange={this.Changehandler} />
+                            </div>
+                            <div className="col-sm-3"></div>
+                        </div>
+
+                        <div className="row formmarge">
+                            <div className="col-sm-3"></div>
+                            <div className="col-sm-6">
+                                <label htmlFor="district"> Cost Per day</label>
                                 <input type="number" className="form-control" name="costperday"
                                        value={this.state.costperday} onChange={this.Changehandler} />
                             </div>
@@ -189,156 +406,91 @@ class PostTproviderForm extends Component{
                         </div>
 
                         <div className="row formmarge">
+                        <div className="col-sm-3"></div>
+                        <div className="col-sm-6">
+
+                            <div className="form-group">
+                                <label htmlFor="exampleFormControlTextarea1">Description</label>
+                                <textarea className="form-control" id="exampleFormControlTextarea1" name="description"
+                                          rows="3" value={this.state.description} onChange={this.Changehandler}></textarea>
+                            </div>
+                        </div>
+                        <div className="col-sm-3"></div>
+                    </div>
+
+
+                        {/*<div className="row formmarge">*/}
+                            {/*<div className="col-sm-3"></div>*/}
+                            {/*<div className="col-sm-6">*/}
+
+
+
+
+                                {/*<ImageUploader*/}
+                                    {/*withIcon={true}*/}
+                                    {/*buttonText='Choose images'*/}
+                                    {/*onChange={this.onDrop}*/}
+                                    {/*imgExtension={['.jpg', '.gif', '.png', '.gif','.jpeg']}*/}
+                                    {/*maxFileSize={5242880}*/}
+                                    {/*withPreview={true}*/}
+                                {/*/>*/}
+                            {/*</div>*/}
+                            {/*<div className="col-sm-3"></div>*/}
+                        {/*</div>*/}
+
+                        <div className="row formmarge">
                             <div className="col-sm-3"></div>
                             <div className="col-sm-6">
 
-                                <div className="form-group">
-                                    <label htmlFor="exampleFormControlTextarea1">Description</label>
-                                    <textarea className="form-control" id="exampleFormControlTextarea1" name="description"
-                                              rows="3" value={this.state.description} onChange={this.Changehandler}></textarea>
-                                </div>
+
+
+
+                                <input type="file" onChange={this.handleChange} />
+                                {/*<button onClick={this.handleUpload}>Upload</button>*/}
+
+                                <br/>
+                                <hr/>
+                                {/*{this.state.url}*/}
+                                <img src={this.state.url || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" />
                             </div>
                             <div className="col-sm-3"></div>
                         </div>
-                        <hr/>
-                        <div className="row">
-                            <div className="col-sm-2">
 
-                            </div>
-                            <div className="col-sm-6 ">
-                                <p>
-                                    <small>Select vehicle type</small>
-                                </p>
-                            </div>
-                            <div className="col-sm-2">
-
-                            </div>
-                        </div>
+                        <br />
 
 
-                        <div className="row formmarge">
-                            <div className="col-sm-2">
-                                <div className="form-check form-check-inline">
-                                <input className="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                value="Car" name=" checkboxval"    onClick = {this.handlecarClik.bind(this)}/>
-                                <label className="form-check-label" htmlFor="inlineCheckbox1">Car</label>
-                                </div>
-                            </div>
-                            <div className="col-sm-4">
-                                <div className="col-sm">
-                                    <div className="form-group">
+                        {/*<div className="row formmarge">*/}
+                            {/*<div className="col-sm-2">*/}
+                                {/*<div className="form-check form-check-inline">*/}
+                                {/*<input className="form-check-input" type="checkbox" id="inlineCheckbox1"*/}
+                                {/*value="Car" name=" checkboxval"    onClick = {this.handlecarClik.bind(this)}/>*/}
+                                {/*<label className="form-check-label" htmlFor="inlineCheckbox1">Car</label>*/}
+                                {/*</div>*/}
+                            {/*</div>*/}
+                            {/*<div className="col-sm-4">*/}
+                                {/*<div className="col-sm">*/}
+                                    {/*<div className="form-group">*/}
 
-                                        <select className="form-control tm-select" id="exampleFormControlSelect1"  name="carvalue" value={this.state.carvalue} onChange={this.Changehandler} disabled = {(!this.state.disabled1)? "disabled" : ""} >
-                                            <option value="Car">Car</option>
-
-
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-sm-2 form-group">
-                                <input type="Number" className="form-control" name="carcount" placeholder="No.Vehicles" value={this.state.carcount} onChange={this.Changehandler}  disabled = {(!this.state.disabled1)? "disabled" : ""}/>
-                            </div>
-                            <div className="col-sm-2 form-group">
-                                <input type="number" className="form-control" name="carcostperday" placeholder="Price Per Day" value={this.state.carcostperday} onChange={this.Changehandler} disabled = {(!this.state.disabled1)? "disabled" : ""}/>
-                            </div>
-                            <div className="col-sm-2">
-
-                            </div>
-                        </div>
-
-                        <div className="row formmarge">
-                            <div className="col-sm-2">
-                                <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                           value="Van" name=" checkboxval"    onClick = {this.handlevanClik.bind(this)}/>
-                                    <label className="form-check-label" htmlFor="inlineCheckbox1">Van</label>
-                                </div>
-                            </div>
-                            <div className="col-sm-4">
-                                <div className="col-sm">
-                                    <div className="form-group">
-
-                                        <select className="form-control tm-select" id="exampleFormControlSelect1"  name="vanvalue" value={this.state.vanvalue} onChange={this.Changehandler} disabled = {(!this.state.disabled2)? "disabled" : ""} >
-                                            <option value="Van">Van</option>
+                                        {/*<select className="form-control tm-select" id="exampleFormControlSelect1"  name="carvalue" value={this.state.carvalue} onChange={this.Changehandler} disabled = {(!this.state.disabled1)? "disabled" : ""} >*/}
+                                            {/*<option value="Car">Car</option>*/}
 
 
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-sm-2 form-group">
-                                <input type="Number" className="form-control" name="vancount" placeholder="No.Vehicles" value={this.state.vancount} onChange={this.Changehandler}  disabled = {(!this.state.disabled2)? "disabled" : ""}/>
-                            </div>
-                            <div className="col-sm-2 form-group">
-                                <input type="number" className="form-control" name="vancostperday" placeholder="Price Per Day" value={this.state.vancostperday} onChange={this.Changehandler} disabled = {(!this.state.disabled2)? "disabled" : ""}/>
-                            </div>
-                            <div className="col-sm-2">
+                                        {/*</select>*/}
+                                    {/*</div>*/}
+                                {/*</div>*/}
+                            {/*</div>*/}
+                            {/*<div className="col-sm-2 form-group">*/}
+                                {/*<input type="Number" className="form-control" name="carcount" placeholder="No.Vehicles" value={this.state.carcount} onChange={this.Changehandler}  hidden = {(!this.state.disabled1)? "hidden" : ""}/>*/}
+                            {/*</div>*/}
+                            {/*<div className="col-sm-2 form-group">*/}
+                                {/*<input type="number" className="form-control" name="carcostperday" placeholder="Price Per Day" value={this.state.carcostperday} onChange={this.Changehandler} disabled = {(!this.state.disabled1)? "disabled" : ""}/>*/}
+                            {/*</div>*/}
+                            {/*<div className="col-sm-2">*/}
 
-                            </div>
-                        </div>
-
-                        <div className="row formmarge">
-                            <div className="col-sm-2">
-                                <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                           value="suv" name=" checkboxval" onClick = {this.handlesuvClik.bind(this)}   />
-                                    <label className="form-check-label" htmlFor="inlineCheckbox1">Suv</label>
-                                </div>
-                            </div>
-                            <div className="col-sm-4">
-                                <div className="col-sm">
-                                    <div className="form-group">
-
-                                        <select className="form-control tm-select " id="exampleFormControlSelect1"  name="suvvalue" value={this.state.suvvalue} onChange={this.Changehandler} disabled = {(!this.state.disabled3)? "disabled" : ""} >
-                                            <option value="suv">Suv</option>
+                            {/*</div>*/}
+                        {/*</div>*/}
 
 
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-sm-2 form-group">
-                                <input type="Number" className="form-control" name="suvcount" placeholder="No.Vehicles" value={this.state.suvcount} onChange={this.Changehandler}  disabled = {(!this.state.disabled3)? "disabled" : ""}/>
-                            </div>
-                            <div className="col-sm-2 form-group">
-                                <input type="number" className="form-control" name="suvcostperday" placeholder="Price Per Day" value={this.state.suvcostperday} onChange={this.Changehandler} disabled = {(!this.state.disabled3)? "disabled" : ""}/>
-                            </div>
-                            <div className="col-sm-2">
-
-                            </div>
-                        </div>
-
-                        <div className="row formmarge">
-                            <div className="col-sm-2">
-                                <div className="form-check form-check-inline">
-                                    <input className="form-check-input" type="checkbox" id="inlineCheckbox1"
-                                           value="Bus" name="bus"  onClick = {this.handlebusClik.bind(this)}  />
-                                    <label className="form-check-label" htmlFor="inlineCheckbox1">Bus</label>
-                                </div>
-                            </div>
-                            <div className="col-sm-4">
-                                <div className="col-sm">
-                                    <div className="form-group">
-
-                                        <select className="form-control tm-select" id="exampleFormControlSelect1"  name="busvalue" value={this.state.busvalue} onChange={this.Changehandler} disabled = {(!this.state.disabled4)? "disabled" : ""} placeholder="select">
-                                            <option value="Bus">Bus</option>
-
-
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-sm-2 form-group">
-                                <input type="Number" className="form-control" name="buscount" placeholder="No.Vehicles" value={this.state.buscount} onChange={this.Changehandler}  disabled = {(!this.state.disabled4)? "disabled" : ""}/>
-                            </div>
-                            <div className="col-sm-2 form-group">
-                                <input type="number" className="form-control" name="buscostperday" placeholder="Price Per Day" value={this.state.buscostperday} onChange={this.Changehandler} disabled = {(!this.state.disabled4)? "disabled" : ""}/>
-                            </div>
-                            <div className="col-sm-2">
-
-                            </div>
-                        </div>
 
                         <hr/>
 
@@ -353,7 +505,7 @@ class PostTproviderForm extends Component{
                                 <button className="btn btn-primary" type="submit">Post ad</button>
                             </div>
                         </div>
-                        <hr/>
+
                     </form>
                 </div>
             </div>

@@ -630,3 +630,6 @@ label { font-weight: 700; }
     margin-top: 1px;
     margin-right: 70px;
 }
+.navbar-colorx{
+    color: transparent;
+}

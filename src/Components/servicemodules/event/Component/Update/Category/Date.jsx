@@ -1,18 +1,17 @@
 import React, { useState } from "react";
+
 import Radium from "radium";
 import { Link } from "react-router-dom";
-import Flavour from "./Flavour";
-import { format } from "date-fns";
-import { enGB } from "date-fns/locale";
+
 import { DateRangePickerCalendar, START_DATE } from "react-nice-dates";
 import "react-nice-dates/build/style.css";
 import moment from "moment";
+
 import { connect } from "react-redux";
 
-function Form(props) {
-  const[location,setLocation]=useState();
-  const [aduls, setadults] = useState();
-  const[kids,setKids]=useState();
+function DateForm(props) {
+  const [travellers, setTravelers] = useState();
+  const [budget, setBudget] = useState();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [focus, setFocus] = useState(START_DATE);
@@ -61,20 +60,9 @@ function Form(props) {
 
   console.log("no of days-> " + noOdDates);
 
-  const handleAdults = (event) => {
-    setadults(event.target.value);
-  };
-  const handleKids = (event) => {
-    setKids(event.target.value);
-  };
 
- 
-
-  let formdata = {
-    location: location,
-    aduls: aduls,
-    kids:kids,
-    days: noOdDates,
+  let eventDate1 = {
+    
     Checkin : suggestCheckin,
     Checkout : suggestCheckout
   };
@@ -88,56 +76,27 @@ function Form(props) {
     setEndDate(event.target.value);
     console.log("End Date-> " + event.target.value);
   };
-  const Changehandler = (event) => {
-    setLocation(event.target.value);
-  };
 
   const handleFormData = () => {
-    props.addFormData(formdata);
+    props.addFormData(eventDate1);
   };
-  
   // console.log(noOdDates);
   return (
     <div>
+ 
 
-
-   
-      
-          
-  
-<div>
+     
+       
               <form
                 action="index.html"
                 method="get"
                 className="tm-search-form tm-section-pad-2"
               >
-                <div className="form-row tm-search-form-row">
-                  {/* <div className="form-group tm-form-group tm-form-group-pad tm-form-group-1">
-                    <label htmlFor="inputCity">Location</label>
-                    <select className="form-control tm-select"  name="province"  onChange={Changehandler}>
-                                        <option value="Nothern">Nothern</option>
-                                        <option value="North Cenral">North Cenral</option>
-                                        <option value="North Western">North Western</option>
-                                        <option value="Southern">Southern</option>
-                                        <option value="Sabaragamuwa">Sabaragamuwa</option>
-                                        <option value="Uva">Uva</option>
-                                        <option value="Western">Western</option>
-                                        <option value="Central">Central</option>
-                                        <option value="Eastern">Eastern</option>
-
-                                    </select>
-
-                   
-                  </div> */}
-                 
-               
-                  </div>
-                
-              
+             
 
                 <div className="form-row tm-search-form-row">
                   <div className="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-                    <label htmlFor="inputCheckIn">Arrival Date</label>
+                    <label htmlFor="inputCheckIn">Check In Date</label>
                     <input
                       name="check-in"
                       type="date"
@@ -150,7 +109,7 @@ function Form(props) {
                     />
                   </div>
                   <div className="form-group tm-form-group tm-form-group-pad tm-form-group-3">
-                    <label htmlFor="inputCheckOut">Dipature Date</label>
+                    <label htmlFor="inputCheckOut">Check Out Date</label>
                     <input
                       name="check-out"
                       type="date"
@@ -163,27 +122,27 @@ function Form(props) {
                   </div>
                   <div className="form-group tm-form-group tm-form-group-pad tm-form-group-1">
                     <label htmlFor="btnSubmit">&nbsp;</label>
-                    {
-                   
+                    {budget !== undefined &&
+                    travellers !== undefined &&
                     noOdDates !== undefined ? (
                       <Link
                         type="submit"
-                        to="/categorylanding1"
+                        to="/categorylanding"
                         className="btn btn-primary tm-btn tm-btn-search text-uppercase"
                         id="btnSubmit"
                         onClick={handleFormData}
                       >
-                        Search
+                        Give me a Event
                       </Link>
                     ) : (
                       <Link
                         type="submit"
-                        to="/result"
+                        to="/categorylanding"
                         className="btn btn-primary tm-btn tm-btn-search text-uppercase disabled"
                         id="btnSubmit"
                         onClick={handleFormData}
                       >
-                        Search
+                        Give Me A Event
                       </Link>
                     )}
                   </div>
@@ -191,26 +150,24 @@ function Form(props) {
               </form>
             </div>
 
-        
-            </div>
-         
        
-    
+  
+ 
   );
 }
 
 const mapStateToProps = (state) => {
   return {
-    formeventData: state.eventpnl.formeventData,
+    eventDate1: state.eventpnl.eventDate1,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addFormData: ( formdata) => {
-      dispatch({ type: "ADD_FORM_DATA",  formdata:  formdata });
+    addFormData: (eventDate1) => {
+      dispatch({ type: "ADD_EVENT_DATE", eventDate1: eventDate1 });
     },
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Radium(Form));
+export default connect(mapStateToProps, mapDispatchToProps)(Radium(DateForm));

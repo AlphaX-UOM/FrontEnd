@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import highchartsMap from "highcharts/modules/map";
+import { connect } from "react-redux";
+import { Container, Col, Row } from 'react-bootstrap';
+import districtmap from './images/clo-lanka-tours-day-tours.jpg';
+
 
 highchartsMap(Highcharts);
 
@@ -35,11 +39,16 @@ var data = [
     ['lk-kt', 24]
 ];
 
-
+function Map(props){
+  const [location,setlocation]=useState();
 const mapOptions = {
+  
   chart: {
-    map: "countries/lk/lk-all"
+    map: "countries/lk/lk-all",
+    //backgroundColor: '#006400',
+  
   },
+
   title: {
     text: " "
   },
@@ -51,22 +60,54 @@ const mapOptions = {
   },
   tooltip: {
     headerFormat: "",
-    pointFormat: "lat: {point.lat}, lon: {point.lon}"
+    // pointFormat: "lat: {point.lat}, lon: {point.lon}"
   },
+  plotOptions: {
+    series: {
+  
+        events: {
+            click: function (e) {
+              setlocation(e.point.value);
+              props.addMapData(e.point.value);
+                // var text =  this.name +
+                //         ' ' + e.point.name + '  ' + e.point.value ;
+                      
+                // if (!this.chart.clickLabel) {
+                //     this.chart.clickLabel = this.chart.renderer.label("", 0, 250)
+                //         .css({
+                //             width: '280px'
+                //         })
+                //         // .add();
+                    
+                //       setlocation(e.point.value);
+                //       props.addMapData(e.point.value);
+                // } else {
+                //     this.chart.clickLabel.attr({
+                       
+                //     });
+                // }
+            }
+        }
+    }
+},
+colors:'#008000',
+innerWidth:"100px",
+outerWidth:"100px",
+
   series: [
     {
-      // Use the gb-all map with no data as a basemap
-      name: "Basemap",
+         name: "Basemap",
       mapData: mapDataIE,
       borderColor: "#A0A0A0",
-      nullColor: "rgba(200, 200, 200, 0.3)",
+  nullColor: "rgba((0,100,0))",
       showInLegend: false,
       data:data,
+      color: '#228B22',
       hover: {
-        color: '#BADA55'
+       color: '#006400'
     },
       dataLabels: {
-        enabled: true,
+      //  enabled: true,
       
     }
     },
@@ -74,27 +115,48 @@ const mapOptions = {
       // Specify points using lat/lon
       type: "mapbubble",
       name: "Locations",
-      color: "#4169E1",
-      data: [{ z: 10, keyword: "Galway" }],
+      color: "#006400",
+      data: [],
+    
+       
       cursor: "pointer",
-      point: {
-        events: {
-          click: function () {
-            console.log(this.keyword);
-          }
-        }
-      }
-    }
+   
+    
+  
+}
   ]
 };
 
-const Map = () => (
+
+return(
+  
   <div>
+  
     <HighchartsReact
       constructorType={"mapChart"}
       highcharts={Highcharts}
       options={mapOptions}
+      
+    
     />
+    
   </div>
+     
+  
 );
-export default Map;
+}
+const mapStateToProps = (state) => {
+  return {
+    mapdata: state.eventpnl.mapdata,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addMapData: (mapdata) => {
+      dispatch({ type: "ADD_EVENT_MAP_DATA", mapdata: mapdata });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Map);

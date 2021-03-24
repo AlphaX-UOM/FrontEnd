@@ -10,10 +10,16 @@ export const actions = {
 }
 
 /* Action Creators */ 
-export function addToCart(item, quantity, add_id, no_travellers,date,checkin,checkout,type,days,totalUnit,number) {
+export function addToCart(item, unit_price, add_id, no_travellers,Current_date,type,total_price,units,
+                          checkin_date,checkin_time,checkin_location,checkout_date,checkout_time,checkout_location) {
     return {
         type: actions.ADD_TO_CART,
-        payload: { id: uuidv4(), quantity: quantity, details: item, add_id:add_id, no_travellers:no_travellers,date:date,checkin:checkin,checkout:checkout,type:type,days:days,totalUnit:totalUnit,number:number}
+        payload: { id: uuidv4(), details: item,unit_price: unit_price,  add_id:add_id,
+            no_travellers:no_travellers,Current_date:Current_date,type:type,
+            total_price:total_price,units:units,checkin_date: checkin_date,
+            checkin_time:checkin_time,checkin_location:checkin_location,checkout_date:checkout_date,
+            checkout_time:checkout_time,checkout_location:checkout_location
+        }
     }
 }
 

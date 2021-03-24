@@ -6,11 +6,15 @@ import ItemSlider from './ItemSlider';
 import ItemCheckout from './ItemCheckout';
 import ItemComments from './ItemComments';
 import ItemCheck1 from './ItemCheck1';
+import Rating from '@material-ui/lab/Rating';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
 function ItemLanding(props) {
 
 // console.log("props in itemlanding ->"+props.location.data.id);
 // console.log(props.match.params.id)
+const [value, setValue] = React.useState(3);
 
   return (
     <div>
@@ -20,7 +24,21 @@ function ItemLanding(props) {
         <Container fluid>
             <Row>
                 <Col xs={10} md={7}>
-                    <ItemSlider />
+                    <ItemSlider userid={ props.match.params.id} />
+                    <div>
+        <Box component="fieldset" mb={3} borderColor="transparent">
+       <center>
+       <Rating
+          name="simple-controlled"
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+        />
+       </center>
+       
+      </Box>
+        </div>
                 </Col>
                 <Col xs={8} md={4}>
                     <div><br/></div>
@@ -30,12 +48,18 @@ function ItemLanding(props) {
                     <div><br/></div>
                     <div><br/></div>
                     <div><br/></div>
+     
+                    <div >
                     <ItemComments/>
+        </div>
+
+        
+                 
                 </Col>
             </Row>
         </Container>
         
-        <p style={{textAlign:"center", fontStyle:'italic'}}>Welcome to the ItemLanding</p>
+       
     </div>
   );
 }
