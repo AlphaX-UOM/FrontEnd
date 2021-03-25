@@ -35,7 +35,7 @@ function ItemSlider(props) {
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="https://media-cdn.tripadvisor.com/media/photo-w/1c/72/14/ca/fearless-but-respectful.jpg"
+      src={nameList.imgURL02}
       width="100%" 
       height="500px"
       alt="Third slide"
@@ -46,7 +46,7 @@ function ItemSlider(props) {
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="https://media-cdn.tripadvisor.com/media/photo-w/1c/72/14/c7/loved-seeing-my-son-experience.jpg"
+      src={nameList.imgURL03}
       width="100%" 
       height="500px"
       alt="Third slide"

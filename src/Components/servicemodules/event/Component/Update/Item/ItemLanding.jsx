@@ -23,7 +23,7 @@ const [value, setValue] = React.useState(3);
         
         <Container fluid>
             <Row>
-                <Col xs={10} md={7}>
+                <Col >
                     <ItemSlider userid={ props.match.params.id} />
                     <div>
         <Box component="fieldset" mb={3} borderColor="transparent">
@@ -40,7 +40,7 @@ const [value, setValue] = React.useState(3);
       </Box>
         </div>
                 </Col>
-                <Col xs={8} md={4}>
+                <Col>
                     <div><br/></div>
                     <div><br/></div>
                     <div><br/></div>

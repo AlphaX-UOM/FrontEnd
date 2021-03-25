@@ -31,7 +31,7 @@ function NameListEle(props) {
       style={{ padding: "10px" }}
     >
       <Card style={{ width: "17rem" }} className="backcolor tcolr-guide">
-        <Card.Img variant="top" src={props.avatar} />
+        <Card.Img variant="top" src={props.avatar} style={{width: "100px",height: "100px",borderRadius:"10px",marginTop: "5px",marginLeft: "80px"}}/>
         <Card.Body>
           <Card.Title>{props.name}</Card.Title>
           <hr />

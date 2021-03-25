@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import TableCell from "@material-ui/core/TableCell";
 import Button from "@material-ui/core/Button";
+import Button1 from 'react-bootstrap/Button';
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
@@ -12,11 +13,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../../../../store/lib/actions";
 import connect from "react-redux/es/connect/connect";
 import DatePicker from 'react-date-picker';
+import Badge from "react-bootstrap/Badge";
 
 
 
 function ItemCheck1(props) {
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(0);
+  const [kidquantity, setkidQuantity] = useState(0);
     const { add_to_cart} = props;
     const [nameList, setNameList] = useState([]);
     const [value, onChange] = useState(new Date());
@@ -38,8 +41,15 @@ function ItemCheck1(props) {
 console.log("event price ->"+nameList.price);
   const increaseQuantity = () => {
     let myvar = quantity + 1;
+   // let myvar2=kidquantity+1;
     setQuantity(myvar);
     console.log("Quantity increased-> " + quantity);
+  };
+  const increaseQuantity1 = () => {
+    let myvar = kidquantity + 1;
+   // let myvar2=kidquantity+1;
+    setkidQuantity(myvar);
+    console.log("Quantity increased-> " + kidquantity);
   };
 
   const decreaseQuantity = () => {
@@ -51,6 +61,16 @@ console.log("event price ->"+nameList.price);
       window.alert("Quantity must be at least one.");
     }
   };
+  const decreaseQuantity1 = () => {
+    if (kidquantity > 1) {
+      let myvar = kidquantity - 1;
+      setkidQuantity(myvar);
+      console.log("Quantity decreased-> " + kidquantity);
+    } else {
+      window.alert("Quantity must be at least one.");
+    }
+  };
+
 
   const useStyles = makeStyles((theme) => ({
     container: {
@@ -69,27 +89,30 @@ console.log("event price ->"+nameList.price);
 
 
   const dispatch = useDispatch();
-  const add = (item, quantity) => {
-    dispatch(addToCart(item, quantity));
+  const add = (item, quantity,kidquantity) => {
+    dispatch(addToCart(item, quantity,kidquantity));
   };
 
 
   return (
     <div>
-      <Card className="shadow-sm" style={{ width: "600px" }}>
+      <Card className="shadow-sm" style={{ width: "700px" }}>
         <Container>
           <Row>
             <br>
             </br>
-          <h4>{nameList.name}</h4>
+          <h4><strong>{nameList.name}</strong></h4>
           <Col align="right">
-              <h5>{nameList.price}$/per Adult</h5>
+              <h5><Badge pill variant="warning">{nameList.price}$/per Adult</Badge></h5>
+            </Col>
+            <Col align="right">
+              <h5>{nameList.audience==="All"?<Badge pill variant="warning"> ${nameList.pricePerKid} /per Kid  </Badge>  : <Badge pill variant="danger">Only For Adults</Badge> }</h5>
             </Col>
             <br />
           </Row>
           <Row>
             <Col>
-              <h6>Select Date </h6>
+              <h5>Select Date </h5>
              
       {/* <DatePicker
         onChange={onChange}
@@ -97,13 +120,11 @@ console.log("event price ->"+nameList.price);
       /> */}
    
             </Col>
-            <Col><h6>Adults</h6></Col>
-            <Col><h6>Kids</h6></Col>
+            <Col><h6>Number of Adults</h6></Col>
+            <Col><h6> {nameList.audience==="All"? "Number of Kids" :" " }</h6></Col>
           
           </Row>
-          <Row>
-            <br />
-          </Row>
+        
           <Row>
             {/* <Col>
               <form className={classes.container} noValidate>
@@ -173,8 +194,7 @@ console.log("event price ->"+nameList.price);
               </Col>
 
               <Col>
-          
-              <TableCell align="right">
+              {nameList.audience==="All"? <TableCell align="right">
                 <Button
                   style={{
                     maxWidth: "20px",
@@ -185,7 +205,7 @@ console.log("event price ->"+nameList.price);
                       "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
                     color: "white",
                   }}
-                  onClick={increaseQuantity}
+                  onClick={increaseQuantity1}
                 >
                   +
                 </Button>
@@ -200,7 +220,7 @@ console.log("event price ->"+nameList.price);
                     color: "black",
                   }}
                 >
-                  <EmojiPeopleIcon /> * {quantity}
+                  <EmojiPeopleIcon /> * {kidquantity}
                 </Button>
                 <Button
                   style={{
@@ -212,11 +232,14 @@ console.log("event price ->"+nameList.price);
                       "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
                     color: "white",
                   }}
-                  onClick={decreaseQuantity}
+                  onClick={decreaseQuantity1}
                 >
                   -
                 </Button>
-              </TableCell>
+              </TableCell> :" " }
+
+          
+              
             </Col>
             <Col>
              
@@ -230,7 +253,10 @@ console.log("event price ->"+nameList.price);
                   <br />
                 </div>
                 <Link to="/shoppingcart">
-                <button type="button" class="btn btn-success" onClick={ ()=>add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date)}>
+                <button type="button" class="btn btn-success" onClick={()=>nameList.audience==="All"?add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date,"Event",(quantity*nameList.price),quantity)&add_to_cart(nameList.name,nameList.pricePerKid,nameList.id,kidquantity,date,"Event",(kidquantity*nameList.pricePerKid),kidquantity):
+                add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date,"Event",(quantity*nameList.price),quantity)
+
+              }>
                   <AddShoppingCartIcon />
                   Add to Cart
                 </button>
@@ -263,7 +289,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         // addEventData: (eventData) => { dispatch({type: 'ADD_Event_DATA', eventData: eventData} )}
-        add_to_cart:(item,cost,add_id,no_travellers,date) => dispatch(addToCart(item,cost,add_id,no_travellers,date))
+        add_to_cart:(item,cost,add_id,no_travellers,date,type,tot,unit) => dispatch(addToCart(item,cost,add_id,no_travellers,date,type,tot,unit))
     }
 }
 
