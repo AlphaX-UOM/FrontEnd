@@ -67,7 +67,7 @@ function ItemLanding(props) {
           </Col>
         </Row>
       </Container>
-      <ItemComments />
+      <ItemComments add_id={props.match.params.id}/>
     </div>
   );
 }
