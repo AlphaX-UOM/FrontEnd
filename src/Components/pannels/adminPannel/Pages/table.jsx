@@ -71,19 +71,20 @@ useEffect(() => {
 },[]);
 
 const data = {
-  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul','Aug','Sep','Oct','Nov','Dec'],
+  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul','Aug','Sep','Oct','Nov','Dec'],
   datasets: [
     {
       label: 'My First dataset',
       fill: false,
       lineTension: 0.1,
-      backgroundColor: 'rgba(rgb(255,0,0,1))',
+      // backgroundColor: 'rgba(rgb(255,0,0,1))',
+      backgroundColor:'rgba(75,192,192,1)',
       borderColor: 'rgba(rgb(255,0,0,6))',
       borderCapStyle: 'butt',
       borderDash: [],
       borderDashOffset: 0.0,
       borderJoinStyle: 'miter',
-      pointBorderColor: 'rgba(255,0,0,1)',
+      pointBorderColor: 'rgba(75,192,192,1)',
       pointBackgroundColor: '#fff',
       pointBorderWidth: 1,
       pointHoverRadius: 5,
@@ -93,6 +94,7 @@ const data = {
       pointRadius: 1,
       pointHitRadius: 10,
       data: [eventJan, eventFeb, eventMar, eventApr, eventMay, eventJune, eventJuly,eventAug,eventSept,eventOct,eventNov,eventDecem],
+    
     }
   ]
 };
@@ -102,6 +104,10 @@ const lineOptions = {
     xAxes: [{
       gridLines: {
         display: false,
+        color:'#FFF'
+      },
+      ticks: {
+        fontColor: "#FFF", // this here
       },
     }],
     yAxes: [{
@@ -109,8 +115,10 @@ const lineOptions = {
       gridLines: {
         display: false,
       },
+     
       ticks: {
         beginAtZero: true,
+        fontColor: "#FFF", 
         // Return an empty string to draw the tick line but hide the tick label
         // Return `null` or `undefined` to hide the tick line entirely
         userCallback(value) {
@@ -137,6 +145,7 @@ const lineOptions = {
 const styles = {
   fontFamily: 'sans-serif',
   textAlign: 'center',
+ 
 };
 
 return (

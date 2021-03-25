@@ -95,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
     overflowX: 'hidden',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+     duration:  theme.transitions.duration.leavingScreen,
     }),
     width: theme.spacing(7),
     [theme.breakpoints.up('sm')]: {
@@ -175,9 +175,9 @@ export default function Dashboard() {
             <ChevronLeftIcon />
           </IconButton>
         </div>
-        <Divider />
+      
         <List>{mainListItems}</List>
-        <Divider />
+       
        
       
       </Drawer>

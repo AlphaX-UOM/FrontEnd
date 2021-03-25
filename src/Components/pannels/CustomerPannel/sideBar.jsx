@@ -11,56 +11,55 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import { Link } from 'react-router-dom';;
 export const mainListItems = (
-  <div>
-
-    <Link to="/account">
+<div className="navbar"style={{backgroundColor: '#060b26',height:"600px"}} >
+    <Link to="/account" style={{ color: '#FFF' }}>
                 
            
     <ListItem button>
       <ListItemIcon>
-        <PeopleIcon />
+        <PeopleIcon style={{ color: '#FFF' }}/>
       </ListItemIcon>
       <ListItemText primary="My Account" />
     </ListItem>
     </Link>
-    <Link to="/pass">
+    <Link to="/pass"style={{ color: '#FFF' }}>
                 
            
                 <ListItem button>
                   <ListItemIcon>
-                    <EditIcon />
+                    <EditIcon style={{ color: '#FFF' }}  />
                   </ListItemIcon>
                   <ListItemText primary="Change password" />
                 </ListItem>
                 </Link>
-    <Link to="/reservations">
+    <Link to="/reservations"style={{ color: '#FFF' }}>
     <ListItem button>
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <ShoppingCartIcon style={{ color: '#FFF' }} />
       </ListItemIcon>
       <ListItemText primary="My Reservations" />
     </ListItem>
     </Link>
-    <Link to="/ratings">
+    <Link to="/ratings" style={{ color: '#FFF' }}>
     <ListItem button>
       <ListItemIcon>
-        <PeopleIcon />
+        <PeopleIcon style={{ color: '#FFF' }} />
       </ListItemIcon>
       <ListItemText primary="Ratings" />
     </ListItem>
     </Link>
-    <Link to="/cancelations">
+    <Link to="/cancelations"style={{ color: '#FFF' }}>
     <ListItem button>
       <ListItemIcon>
-        <Cancel />
+        <Cancel style={{ color: '#FFF' }} />
       </ListItemIcon>
       <ListItemText primary="My Cancelations" />
     </ListItem>
     </Link>
-    <Link to="/upgrade">
+    <Link to="/upgrade" style={{ color: '#FFF' }}>
     <ListItem button>
       <ListItemIcon>
-        <Cancel />
+        <Cancel style={{ color: '#FFF' }} />
       </ListItemIcon>
       <ListItemText primary="UPGRADE" />
     </ListItem>

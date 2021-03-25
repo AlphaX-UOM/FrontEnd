@@ -6,50 +6,52 @@ import Cancel from "@material-ui/icons/Cancel";
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
+import './sideBar.css';
 
 
 import { Link } from 'react-router-dom';;
 export const mainListItems = (
-  <div>
-       <Link to="/dashboard">
+  <div className="navbar"style={{backgroundColor: '#060b26',height:"600px"}} >
+     
+       <Link to="/dashboard" style={{ color: '#FFF' }} >
     <ListItem button>
       <ListItemIcon>
-        <DashboardIcon />
+        <DashboardIcon style={{ color: '#FFF' }}/>
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
     </Link>
-    <Link to="/reservations">
+    <Link to="/reservations"style={{ color: '#FFF' }}>
                 
            
     <ListItem button>
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <ShoppingCartIcon style={{ color: '#FFF' }} />
       </ListItemIcon>
       <ListItemText primary="Reservations" />
     </ListItem>
     </Link>
-    <Link to="/user">
+    <Link to="/user"style={{ color: '#FFF' }}>
     <ListItem button>
       <ListItemIcon>
-        <PeopleIcon />
+        <PeopleIcon style={{ color: '#FFF' }} />
       </ListItemIcon>
-      <ListItemText primary="User Details" />
+      <ListItemText primary="User Details" style={{ color: '#FFF' }}/>
     </ListItem>
     </Link>
     <Link to="/cancelations">
     <ListItem button>
       <ListItemIcon>
-        <Cancel />
+        <Cancel style={{ color: '#FFF' }}/>
       </ListItemIcon>
-      <ListItemText primary="Cancelations" />
+      <ListItemText primary="Cancelations" style={{ color: '#FFF' }}/>
     
     </ListItem>
     </Link>
-    <Link to="/upgrade">
+    <Link to="/upgrade"style={{ color: '#FFF' }}>
     <ListItem button>
       <ListItemIcon>
-        <PeopleIcon/>
+        <PeopleIcon style={{ color: '#FFF' }}/>
       </ListItemIcon>
       <ListItemText primary="APPROVE" />
     

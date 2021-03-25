@@ -36,9 +36,9 @@ const SignUp=()=>{
             console.log(state.isvalid);
             if (state.isvalid==true){
                 axios
-                    .post('', {
-                        firstname:state.firstname,
-                        lastname:state.lastname,
+                    .post('https://alphax-api.azurewebsites.net/api/users', {
+                        firstName:state.firstname,
+                        lastName:state.lastname,
                          email:state.email,
                         password:state.password,
                         address:state.address,

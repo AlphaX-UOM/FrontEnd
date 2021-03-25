@@ -100,51 +100,12 @@ const useStyles = makeStyles((theme) => ({
  
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   return (
-    <main className={classes.content}>
-    <div className={classes.appBarSpacer} />
-    <Container maxWidth="lg" className={classes.container}>
-      <Grid container spacing={3}>
-        {/* Chart */}
-        <Grid item xs={12} md={6} lg={6}>
-          <Paper className={fixedHeightPaper}>
-              <Name/>
-       
-          </Paper>
-        </Grid>
-        {/* Recent Deposits */}
-        <Grid item xs={12} md={5} lg={6}>
-          <Paper className={fixedHeightPaper}>
-              <Ratings/>
+   
+  
+   <div>Hello</div>
         
-          </Paper>
-        </Grid>
-        {/* Recent Orders */}
-        <Grid item xs={12} md={4} lg={3}>
-          <Paper className={fixedHeightPaper}>
-        <EventTotal/>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={4} lg={3}>
-          <Paper className={fixedHeightPaper}>
-        <HotelTotal/>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={4} lg={3}>
-          <Paper className={fixedHeightPaper}>
-        <Transport/>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={4} lg={3}>
-          <Paper className={fixedHeightPaper}>
-        <TourGuide/>
-          </Paper>
-        </Grid>
-      </Grid>
-      <Box pt={4}>
-        
-      </Box>
-    </Container>
-  </main>
+   
+ 
   );
 }
 
