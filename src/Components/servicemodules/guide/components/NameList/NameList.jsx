@@ -13,7 +13,7 @@ function NameList(props) {
 
   const [language3x, setLanguage3x] = useState("x");
   const [ratingx, setratingx] = useState("x");
-  const [costx, setcostx] = useState("x");
+  const [costx, setcostx] = useState("x"); 
 
   useEffect(() => {
     console.log(form_language);
