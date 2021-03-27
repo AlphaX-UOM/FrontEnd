@@ -134,9 +134,9 @@ function guidedetailspage(props) {
                   </span>
                   <span className="">
                     <div className="row">
-                      <div className="">Language :</div>
+                      <div className="">Language   :</div>
                       <div className="col">
-                        <div className="">{ nameList.language}</div>
+                        <div className="">   { nameList.language}</div>
                       </div>
                     </div>
                   </span>

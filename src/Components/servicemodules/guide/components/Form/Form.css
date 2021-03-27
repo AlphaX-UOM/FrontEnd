@@ -38,6 +38,8 @@
  
   position: relative;
   background: linear-gradient(90deg, rgb(40, 40, 40) 0%, rgb(17, 17, 17) 100%);
+  border-top-left-radius: 50px;
+  border-bottom-left-radius:50px;
 }
 
 .form1-g {

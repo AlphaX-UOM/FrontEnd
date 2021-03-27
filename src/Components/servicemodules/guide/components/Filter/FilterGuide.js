@@ -47,7 +47,7 @@ render(){
 
                                 <div className="col-sm-12">
                                     <div className="form-group">
-                                        <label htmlFor="">Language</label>
+                                        <label style={{color: '#FFF' }}>Language</label>
                                         <select className="form-control tm-select "  name="language"  onChange={this.Changehandler}>
 
                                             
@@ -65,7 +65,7 @@ render(){
                              
                                 <div className="col-sm-12">
                                     <div className="form-group">
-                                        <label htmlFor="">Price</label>
+                                        <label htmlFor="" style={{color: '#FFF' }}>Price</label>
                                         <select className="form-control tm-select" name="price" onChange={this.Changehandler_02}  >
                                             <option value="All">All</option>
                                             <option value="6000">6000 </option>
@@ -79,7 +79,7 @@ render(){
                                 </div>
                                 <div className="col-sm-12">
                                     <div className="form-group">
-                                        <label htmlFor="">Rating</label>
+                                        <label htmlFor="" style={{color: '#FFF' }}>Rating</label>
                                         <select className="form-control tm-select" name="rating" onChange={this.Changehandler_03}  >
                                             <option value="All">5</option>
                                             <option value=">100">4</option>

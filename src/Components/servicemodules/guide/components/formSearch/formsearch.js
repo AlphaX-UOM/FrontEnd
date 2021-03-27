@@ -50,6 +50,10 @@ const FormSearch = (props) => {
               <h1 style={{ color: "white" }}>Help Us to Select Your Guide!</h1>
             </div>
           </div>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
 
           <div className="row">
             <div className="col-sm-4"></div>
@@ -81,7 +85,7 @@ const FormSearch = (props) => {
             <div className="col-sm-4"></div>
             <div className="col-sm">
                 <div><h3 style={{color: "white"}}>From</h3></div>
-              <div className="form-group">
+              <div  style={{hight:"30px",width:"220px"}}>
                
                 <input
                   type="date"
@@ -93,7 +97,7 @@ const FormSearch = (props) => {
               </div>
               <br/>
               <div><h3 style={{color: "white"}}>To</h3></div>
-              <div className="form-group">
+              <div style={{hight:"30px",width:"220px"}}>
                
                <input
                  type="date"
@@ -105,6 +109,7 @@ const FormSearch = (props) => {
                  min={today}
                />
              </div>
+             <br/>
           </div>
             </div>
             <div className="col-sm-2"></div>
