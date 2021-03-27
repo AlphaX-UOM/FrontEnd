@@ -25,20 +25,31 @@ function NameListEle(props) {
   }));
   const classes = useStyles();
 
+  function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
+
   return (
     <Link
-      to={{ pathname: "/guidedetailspage", data: formdata }}
+        onClick={props.clicked} to={`/guide/${props.userid}`}
       style={{ padding: "10px" }}
     >
-      <Card style={{ width: "17rem" }} className="backcolor tcolr-guide">
-        <Card.Img variant="top" src={props.avatar} />
+      <Card style={{ width: "20rem"  ,height: "30rem" }} className="backcolor tcolr-guide">
+        <Card.Img variant="top" src={props.avatar} style={{width: "100px",height: "100px",borderRadius:"10px",marginTop: "5px",marginLeft: "80px"}}/>
         <Card.Body>
-          <Card.Title>{props.name}</Card.Title>
+          <Card.Title className="font-color">{props.name}</Card.Title>
           <hr />
 
-          <Card.Text>Language: {props.lang}</Card.Text>
-          <Card.Text>Cost Per Day: {props.cost}</Card.Text>
-          <Card.Text>Age: {props.dob}</Card.Text>
+          <Card.Text className="font-color">Language: {props.lang}</Card.Text>
+          <Card.Text className="font-color">Cost Per Day: {props.cost}</Card.Text>
+          <Card.Text className="font-color">Age: {getAge(props.dob)}</Card.Text>
           <Card.Text>
             {" "}
             <Ratings />

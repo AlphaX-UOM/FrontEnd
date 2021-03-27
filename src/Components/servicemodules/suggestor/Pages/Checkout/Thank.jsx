@@ -1,6 +1,11 @@
-import React from 'react';
+import  React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-function thank() {
+function Thank(props) {
+  
+ 
+
+
     return (
         <div>
             <div className="container-fluid" style={{ backgroundColor: "#15ff00f" }}>
@@ -36,4 +41,4 @@ function thank() {
     );
 }
 
-export default thank;
+export default Thank;

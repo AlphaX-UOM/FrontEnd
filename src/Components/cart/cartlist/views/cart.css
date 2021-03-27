@@ -3,6 +3,7 @@
     padding: 0;
     display: flex;
     justify-content: space-evenly;
+    min-height: 60vh;
 }
 table {
     width: 100%;

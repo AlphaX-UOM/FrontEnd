@@ -2,6 +2,7 @@ import React from "react";
 import './ResultComponent.css';
 import { Card,ListGroup,ListGroupItem,Badge } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
 
 
 function resultComponent(props) {
@@ -17,12 +18,17 @@ function resultComponent(props) {
         days:props.days
     }
 
+    const handleFormData = () => {
+        props.addIdData(selectId);
+        props.addTotalData(props.price);
+    }
+
     return (
         <div>
 
             <Card  className="shadow-lg" style={{ width: '18rem', display:'inline-block' }}>
                 <Card.Img variant="top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ2LGg2aZv5E73_NS4xWL9rqarvdMtFEEV3wQ&usqp=CAU" />
-                <Card.Body className="card-body-suggestor">
+                <Card.Body >
                     <Card.Text >
                        <h6>{props.type}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<Badge variant="warning">{props.price}$</Badge></h6> 
                     </Card.Text>
@@ -36,8 +42,8 @@ function resultComponent(props) {
                  <ListGroupItem>Transport Provider(Included 1st KM) :- {props.transport}</ListGroupItem>
                 </ListGroup>
                 <Card.Body className="text-center">
-                    <Link to={{pathname: '/detailedresult',data:selectId}}>
-                        <button class="btn btn-warning">Select This</button>
+                    <Link to='/detailedresult'>
+                        <button class="btn btn-warning" onClick={handleFormData} >Select This</button>
                      </Link>
                 </Card.Body>
             </Card>
@@ -46,4 +52,13 @@ function resultComponent(props) {
     );
 }
 
-export default resultComponent;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addIdData: (selectId) => { dispatch({type: 'ADD_SELECTED_DATA', selectId: selectId} )},
+        addTotalData: (total) => {
+            dispatch({ type: "ADD_PAYPAL_DATA", total: total });
+          }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(resultComponent);

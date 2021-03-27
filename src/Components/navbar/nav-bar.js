@@ -19,7 +19,7 @@ const navbar=(props)=>{
     const {items} = props;
     return(
         <div>
-            <nav className="navbar navbar-expand-lg  navbar-dark bg-dark shadow-sm  " >
+            <nav className="navbar navbar-expand-lg  navbar-dark bg-dark shadow-sm   "  >
                 <Link className="navbar-brand" to="/">
                    <span className="navbar-brand mb-0 h1"> <img src={logo1} alt="" style={{width:"100px"}}/></span>
                 </Link>

@@ -1,5 +1,6 @@
 .debackcolor{
     background-color: rgba(198, 198, 198, 0.26);
+    min-height: 60vh;
 }
 .depad{
     padding: 20px;

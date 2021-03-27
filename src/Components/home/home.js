@@ -25,90 +25,13 @@ const home=()=>{
             <Suggestor/>
 
 
-            {/*<br/>*/}
-            {/*<div className="container ">*/}
-                {/*<div className="row">*/}
-                    {/*<div className="col-md-2"></div>*/}
-
-
-
-                    {/*<div className="col-lg-2">*/}
-                        {/*<Link to="/transport" className="link textdec">*/}
-                            {/*<div className="card  text-center rounded text-c">*/}
-                                {/*<div className="card-body ct ">*/}
-                                    {/*<div >*/}
-                                        {/*<DriveEtaOutlinedIcon/>*/}
-                                    {/*</div>*/}
-                                    {/*<br/>*/}
-                                    {/*<h5 className="card-title ct" style={{fontFamily:"verdana"}}>Find a Vehicle</h5>*/}
-                                {/*</div>*/}
-                            {/*</div>*/}
-                        {/*</Link>*/}
-
-                    {/*</div>*/}
-
-                    {/*<div className="col-lg-2">*/}
-                        {/*<Link to="/guide" className="link textdec">*/}
-                            {/*<div className="card  text-center text-c">*/}
-                                {/*<div className="card-body ct">*/}
-                                    {/*<div>*/}
-                                        {/*<PermIdentityOutlinedIcon/>*/}
-                                    {/*</div>*/}
-                                    {/*<br/>*/}
-                                    {/*<h5 className="card-title ct" style={{fontFamily:"verdana"}}>Find a Tour guide</h5>*/}
-                                {/*</div>*/}
-
-                            {/*</div>*/}
-                        {/*</Link>*/}
-
-                    {/*</div>*/}
-
-                    {/*<div className="col-lg-2">*/}
-                        {/*<Link  to="/events"className="link textdec">*/}
-                            {/*<div className="card  text-center text-c">*/}
-                                {/*<div className="card-body ct">*/}
-                                    {/*<div>*/}
-                                        {/*<EventOutlinedIcon/>*/}
-                                    {/*</div>*/}
-                                    {/*<br/>*/}
-                                    {/*<h5 className="card-title ct" style={{fontFamily:"verdana"}}>Things to do Events</h5>*/}
-                                {/*</div>*/}
-                            {/*</div>*/}
-                        {/*</Link>*/}
-
-                    {/*</div>*/}
-
-                    {/*<div className="col-lg-2">*/}
-                        {/*<Link  to="/hotel" className="link textdec">*/}
-                            {/*<div className="card  text-center text-c">*/}
-                                {/*<div className="card-body ct">*/}
-                                    {/*<div>*/}
-                                        {/*<HotelOutlinedIcon/>*/}
-                                    {/*</div>*/}
-                                    {/*<br/>*/}
-                                    {/*<h5 className="card-title ct" style={{fontFamily:"verdana"}}>Hotels & Resturants</h5>*/}
-                                {/*</div>*/}
-                            {/*</div>*/}
-                        {/*</Link>*/}
-
-                    {/*</div>*/}
-
-                    {/*<div className="col-md-2"></div>*/}
-                {/*</div>*/}
-            {/*</div>*/}
-            {/*<br/>*/}
-            {/*<br/>*/}
-            {/*<div className="container-fluid plan" >*/}
-                {/*<Link to="/transport"><button>xxx</button></Link>*/}
-
-            {/*</div>*/}
 
             <div className="container" id="tm-section-3">
                 <ul className="nav nav-pills tm-tabs-links">
                     <li className="tm-tab-link-li">
                         <div className="tm-tab-link">
                             <Link to="/transport" className="tm-tab-link">
-                                <DriveEtaOutlinedIcon/>
+                                <DriveEtaOutlinedIcon style={{ fontSize: 50 }}/>
                                 <br/>
                                 rides
                             </Link>
@@ -120,7 +43,7 @@ const home=()=>{
                     <li className="tm-tab-link-li">
                         <div className="tm-tab-link" >
                             <Link to="/guide" className="tm-tab-link">
-                                <PermIdentityOutlinedIcon/>
+                                <PermIdentityOutlinedIcon  style={{ fontSize: 50 }}/>
                                 <br/>
                                 guides
                             </Link>
@@ -130,7 +53,7 @@ const home=()=>{
                     <li className="tm-tab-link-li">
                         <div className="tm-tab-link">
                             <Link to="/events" className="tm-tab-link">
-                                <EventOutlinedIcon/>
+                                <EventOutlinedIcon style={{ fontSize: 50 }}/>
                                 <br/>
                                 Events
                             </Link>
@@ -140,7 +63,7 @@ const home=()=>{
                     <li className="tm-tab-link-li">
                         <div  className="tm-tab-link">
                             <Link to="/hotel" className="tm-tab-link">
-                                <HotelOutlinedIcon/>
+                                <HotelOutlinedIcon style={{ fontSize: 50 }}/>
                                 <br/>
                                 Hotels
                             </Link>

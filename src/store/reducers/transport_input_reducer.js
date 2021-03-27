@@ -10,6 +10,7 @@ const initialState = {
     form_drop_time:{},
     form_no_travellers:{},
     form_rounded:{},
+    form_distance_text:{},
 
     error: false
 };
@@ -25,6 +26,7 @@ const get_transport_input_form = (state, action) => {
         form_pickup_date:action.form_pickup_date,
         form_pickup_time:action. form_pickup_time,
         form_rounded:action.form_rounded,
+        form_distance_text:action.form_distance_text,
         error: false
     } );
 

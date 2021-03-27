@@ -4,14 +4,20 @@ import "./guidedetailspage.css";
 // import Logo2 from '../../../../images/vehicle/slide/v.jpg';
 // import Logo3 from '../../../../images/vehicle/slide/suv.jfif';
 // import Logo4 from '../../../../images/vehicle/slide/Bus.jfif';
-
+import connect from "react-redux/es/connect/connect";
 import { Link } from "react-router-dom";
 // import Ratings from '../rating-mod/ratingm'
-
+import { addToCart } from "../../../../../store/lib/actions";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
+import Comments from '../comments/Comments'
 
 function guidedetailspage(props) {
+    const { add_to_cart,dateg} = props;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [commentg,setcommentg]= useState(true)
   // backend dta assinged for these variables
+
+ 
   let name1;
 
   let email;
@@ -22,16 +28,19 @@ function guidedetailspage(props) {
   let Dob;
   let details;
 
-  console.log(props.location.data.userId);
+  // console.log(props.location.data.userId);
+    var today = new Date(),
+
+        date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [nameList, setNameList] = useState([]);
-
+ 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     fetch(
-      "https://alphax-api.azurewebsites.net/api/TourGuideServices/" +
-        props.location.data.userId
+      'https://alphax-api.azurewebsites.net/api/TourGuideServices/' +
+        props.match.params.id
     )
       .then((res) => res.json())
       .then((data) => {
@@ -39,13 +48,34 @@ function guidedetailspage(props) {
       });
   }, []);
 
+    function getAge(dateString) {
+        var today = new Date();
+        var birthDate = new Date(dateString);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
+  const totalcost= ((new Date(dateg.date1.checkoutdate).getTime()-new Date(dateg.date.checkindate).getTime())/(1000 * 3600 * 24)+1)*nameList.costPerDay
+  const unitsx=((new Date(dateg.date1.checkoutdate).getTime()-new Date(dateg.date.checkindate).getTime())/(1000 * 3600 * 24)+1)+"days"
   name1 = nameList.name;
   email = nameList.pnumber;
   Dob = nameList.dob;
   cost = nameList.costPerDay;
   details = nameList.otherDetails;
+  avatar=nameList.imgURL
 
-  console.log(nameList.name);
+  
+  console.log(totalcost);
+ 
+  let comment=(
+    <div hidden={(commentg)? true : ""}>
+        <Comments />
+    </div>
+);
 
   return (
     <div className="">
@@ -63,16 +93,21 @@ function guidedetailspage(props) {
             <div className="col-sm-12">{/* image */}</div>
 
             <div className="col-sm-12">
-              <span className="lead">
-                <div className="row">
+              <span className="lead"> 
+                <div className="row"> 
                   {/* <div className="col-sm"><Ratings/></div> */}
                   <div className="col-sm txtcolorx">Excellent</div>
                 </div>
-
+                <div>
+                  
+                  <br/>
+                <img style={{height:"200px",width:"200px",borderRadius:"30px"}} src={avatar}/>
+                </div>
+                 <br/>
                 <div className="row">
                   <Link>
                     <div className="col txtcolorx">
-                      <small className="iconpad">Customer Reviews</small>
+                      <small className="iconpad" onClick={()=>setcommentg(!commentg)}> Reviews</small>
                       <ChatBubbleOutlineIcon fontSize="small" />
                     </div>
                   </Link>
@@ -94,6 +129,14 @@ function guidedetailspage(props) {
                         <div className="" role="alert">
                           {name1}
                         </div>
+                      </div>
+                    </div>
+                  </span>
+                  <span className="">
+                    <div className="row">
+                      <div className="">Language :</div>
+                      <div className="col">
+                        <div className="">{ nameList.language}</div>
                       </div>
                     </div>
                   </span>
@@ -134,7 +177,7 @@ function guidedetailspage(props) {
                       <div className="">Age :</div>
                       <div className="col">
                         <div className="" role="alert">
-                          {Dob}
+                          {getAge(Dob)}
                         </div>
                       </div>
                     </div>
@@ -158,14 +201,26 @@ function guidedetailspage(props) {
                       </div>
                     </div>
                   </span>
+                  <span className="">
+                            <div className="row txtcolorx">
+                                <div className="col-sm-5 h5"><strong>Total Charge :</strong> </div>
+                                <div className="col-sm-7">
+                                        <div className="h5" >
+                                      Rs { totalcost}
+                                </div>
+                                  </div>
+                            </div>
+
+                        </span>
 
                   <div className="row">
                     <div className="col-sm"></div>
                     <div className="col-sm"></div>
-
-                    <button type="button" className="btn btn-primary ">
+                      <Link to="/shoppingcart">
+                    <button type="button" className="btn btn-primary " onClick={()=> props.add_to_cart(name1,cost, nameList.id,1,date,'Guide',totalcost, unitsx,dateg.date.checkindate,dateg.date1.checkoutdate,nameList.language)}>
                       Book Now
                     </button>
+                      </Link>
                   </div>
                 </div>
               </div>
@@ -177,6 +232,7 @@ function guidedetailspage(props) {
         </div>
 
         <br />
+        {comment}
       </div>
       <br />
     </div>
@@ -184,23 +240,16 @@ function guidedetailspage(props) {
 }
 const mapStateToProps = (state) => {
   return {
-    provider_array: state.transport_reducer.provider,
-    no_travellers: state.transport_input_reducer.form_no_travellers,
-    drop_location: state.transport_input_reducer.form_drop_location,
-    drop_date: state.transport_input_reducer.form_drop_date,
-    drop_time: state.transport_input_reducer.form_drop_time,
-    pickup_location: state.transport_input_reducer.form_pickup_location,
-    pickup_date: state.transport_input_reducer.form_pickup_date,
-    pickup_time: state.transport_input_reducer.form_drop_time,
-    rounded: state.transport_input_reducer.form_rounded,
+    dateg: state.guide_input_reducer.date,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // onInitTransportProvider: (id) => dispatch(actions.initTransportProvider(id)),
-    //  add_to_cart:(item,qty,add_id,no_travellers,date) => dispatch(actions.addToCart(item,qty,add_id,no_travellers,date))
+
+    add_to_cart:(item,price,add_id,no_travellers,date,type,total_price,units,checkin_date,checkout_date,checkout_location) => dispatch(addToCart(item,price,add_id,no_travellers,date,type,total_price,units,checkin_date,checkout_date,checkout_location))
   };
 };
 
-export default guidedetailspage;
+
+export default connect(mapStateToProps, mapDispatchToProps)(  guidedetailspage);
