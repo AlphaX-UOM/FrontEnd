@@ -1,18 +1,15 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Name from './Name';
-import Ratings from './ratings';
-import EventTotal from '../eventTotal';
-import HotelTotal from './hotelTotal';
-import Transport from './TransTotal';
-import TourGuide from './GuideTotal';
-import { Hotel } from '@material-ui/icons';
 
+
+import { Link } from 'react-router-dom';
+
+import { InputLabel } from '@material-ui/core';
+import { connect } from "react-redux";
+
+import { Card } from '@material-ui/core';
+import { CardContent } from '@material-ui/core';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -94,19 +91,110 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
- function Dashboard() {
+function Dashboard(props) {
   const classes = useStyles();
 
- 
+
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   return (
-   
-  
-   <div>Hello</div>
-        
-   
- 
+
+
+    <div>
+
+
+      <div className="row">
+        <div className="col-3">
+          <img src={props.userCred.imgURL} alt="img1" style={{ width: "255px", height: "225px" }}></img>
+        </div>
+        <div className="col-9">
+       <h2>{props.userCred.firstName}  {props.userCred.lastName}</h2>   
+        </div>
+      </div>
+      <br>
+      </br>
+      <br>
+      </br>
+      <div className="row">
+        <div className="col-3">
+          <Link to="/event" style={{ color: 'black' }}>
+            <Card>
+              <CardContent>
+                <div >
+                  <InputLabel>Event Posts</InputLabel>
+                  <InputLabel></InputLabel>
+
+                </div>
+
+
+              </CardContent>
+            </Card>
+          </Link>
+
+        </div>
+
+        <div className="col-3">
+          <Link to="/trans" style={{ color: 'black' }}>
+            <Card>
+              <CardContent>
+                <div >
+                  <InputLabel>Transport Posts</InputLabel>
+
+
+                </div>
+
+
+              </CardContent>
+            </Card>
+          </Link>
+
+        </div>
+
+        <div className="col-3">
+          <Link to="/guide" style={{ color: 'black' }}>
+            <Card>
+              <CardContent>
+                <div >
+                  <InputLabel>Guide Posts</InputLabel>
+
+
+                </div>
+
+
+              </CardContent>
+            </Card>
+          </Link>
+
+        </div>
+
+        <div className="col-3">
+          <Link to="/hotel" style={{ color: 'black' }}>
+            <Card>
+              <CardContent>
+                <div >
+                  <InputLabel>Hotel Posts</InputLabel>
+
+                </div>
+
+
+              </CardContent>
+            </Card>
+          </Link>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
   );
 }
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return {
+    userCred: state.eventpnl.userCred,
+  };
+};
+
+export default connect(mapStateToProps)(Dashboard);

@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { connect } from 'react-redux'
 import RowingIcon from '@material-ui/icons/Rowing';
 import { alignPropType } from "react-bootstrap/esm/DropdownMenu";
-
+import Box from '@material-ui/core/Box'
 function CategoryItem(props) {
   const useStyles = makeStyles({
     root: {
@@ -39,7 +39,8 @@ function CategoryItem(props) {
   const classes = useStyles();
   
   return (
-    <div class="card card-body" style={{ width: "3vw", height: '12vw',  alignItems:"center",
+  
+    <div class="card" style={{ width: "12vw", height: '12vw',  alignItems:"center",
     justifyContent:"center"}}>
       <Link  to={{pathname: '/categorylanding',data:props}}>
         <CardActionArea>
@@ -67,7 +68,10 @@ function CategoryItem(props) {
           </CardContent>
         </CardActionArea>
       </Link>
+
     </div>
+
+  
   );
 }
 

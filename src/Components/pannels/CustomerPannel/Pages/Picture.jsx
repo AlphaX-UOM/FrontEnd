@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import img from './Images/default.jpg';
+import { connect } from "react-redux";
 
 class Picture extends Component{
-    constructor()
+    constructor(props)
     {
-        super();
+        super(props);
         this.state={
             img:img
         }
@@ -34,7 +35,7 @@ class Picture extends Component{
     {
         return(
             <div>
-                <img src={this.state.img} style={{height:"225px"}} alt={this.state.img}/>
+                <img src={this.props.userCred.imgURL} style={{height:"225px"}} alt={this.props.userCred.imgURL}/>
                 <form onSubmit={this.onFormSubmit}  encType="multipart/form-data" >
                     <input className="input_imagem_artigo" type="file"  onChange={this.onChange} />
                    
@@ -44,4 +45,11 @@ class Picture extends Component{
     }
 }
 
-export default Picture;
+const mapStateToProps = (state) => {
+    return {
+      userCred: state.eventpnl.userCred,
+    };
+  };
+  
+  export default connect(mapStateToProps)(Picture);
+  

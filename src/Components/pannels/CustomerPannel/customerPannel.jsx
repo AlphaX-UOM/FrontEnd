@@ -180,8 +180,8 @@ export default function Dashboard(props) {
       
       </Drawer>
  
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
+      <main className={classes.content} style={{backgroundColor:'#6495ED'}}>
+        <div className={classes.appBarSpacer} style={{backgroundColor:'#6495ED'}} />
         <Switch>
      
         <Route path='/reservations'><Reservation myId={props.myId}/></Route>

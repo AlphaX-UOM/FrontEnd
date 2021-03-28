@@ -151,12 +151,15 @@ const Comments = (props) => {
       <hr />
       <div className="container">
         <div className="row">
+          
+
           <div className="col-sm-2"></div>
           <div className="col-sm-10">
             <div className="container">
               <div className="row">
                 <div className="col-md-9">
                   <div className="media g-mb-30 media-comment">
+                    
                     <div className="media-body u-shadow-v18 g-bg-secondary g-pa-30">
                       <div className="g-mb-15">
                         <h5 className="h5 g-color-gray-dark-v1 mb-0 txtcolorx">

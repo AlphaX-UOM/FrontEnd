@@ -253,8 +253,8 @@ console.log("event price ->"+nameList.price);
                   <br />
                 </div>
                 <Link to="/shoppingcart">
-                <button type="button" class="btn btn-success" onClick={()=>nameList.audience==="All"?add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date,"Event",(quantity*nameList.price),quantity)&add_to_cart(nameList.name,nameList.pricePerKid,nameList.id,kidquantity,date,"Event",(kidquantity*nameList.pricePerKid),kidquantity):
-                add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date,"Event",(quantity*nameList.price),quantity)
+                <button type="button" class="btn btn-success" onClick={()=>nameList.audience==="All"?add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date,"EventService",(quantity*nameList.price),quantity,null,null,null,null,null,null)&add_to_cart(nameList.name,nameList.pricePerKid,nameList.id,kidquantity,date,"EventService",(kidquantity*nameList.pricePerKid),kidquantity,null,null,null,null,null,null):
+                add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date,"EventService",(quantity*nameList.price),quantity,null,null,null,null,null,null)
 
               }>
                   <AddShoppingCartIcon />
@@ -289,7 +289,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         // addEventData: (eventData) => { dispatch({type: 'ADD_Event_DATA', eventData: eventData} )}
-        add_to_cart:(item,cost,add_id,no_travellers,date,type,tot,unit) => dispatch(addToCart(item,cost,add_id,no_travellers,date,type,tot,unit))
+        add_to_cart:(item,unit_price,add_id,no_travellers,Current_date,type,total_price,units,checkin_date,checkin_time,checkin_location,checkout_date,checkout_time,checkout_location) => dispatch(addToCart(item,unit_price,add_id,no_travellers,Current_date,type,total_price,units,checkin_date,checkin_time,checkin_location,checkout_date,checkout_time,checkout_location))
     }
 }
 

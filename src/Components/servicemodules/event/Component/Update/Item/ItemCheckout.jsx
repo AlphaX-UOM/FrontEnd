@@ -159,7 +159,7 @@ console.log("event price ->"+props.data.price);
                   <br />
                 </div>
                 <Link to="/shoppingcart">
-                <button type="button" class="btn btn-warning" onClick={ add_to_cart(props.data.name,props.data.price,props.data.id,quantity,date)}>
+                <button type="button" class="btn btn-warning" onClick={ add_to_cart(props.data.name,props.data.price,props.data.id,quantity,date,"EventService",props.data.price*quantity,quantity,null,null,null,null,null,null)}>
                   {/*<AddShoppingCartIcon />*/}
                   Add to Cart
                 </button>
@@ -192,7 +192,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     // addEventData: (eventData) => { dispatch({type: 'ADD_Event_DATA', eventData: eventData} )}
-      add_to_cart:(item,cost,add_id,no_travellers,date) => dispatch(addToCart(item,cost,add_id,no_travellers,date))
+      add_to_cart:(item,unit_price,add_id,no_travellers,Current_date,type,total_price,units,checkin_date,checkin_time,checkin_location,checkout_date,checkout_time,checkout_location) => dispatch(addToCart(item,unit_price,add_id,no_travellers,Current_date,type,total_price,units,checkin_date,checkin_time,checkin_location,checkout_date,checkout_time,checkout_location))
   }
 }
 

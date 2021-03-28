@@ -40,12 +40,15 @@ const EventItem  = ({ posts, loading }) =>  {
    
     <div>
       <center>
+  
       <h4 class="text-uppercase"  style={{ color:"black" }}>Explore SRI LANKA</h4>
       </center>
       <Grid container spacing={2} style={{padding: 24}}>
      
         {posts.map(post => (
+             
             <Grid item xs={12} sm={6} lg={4} xl={3}>
+               <Link onClick={post.clicked} to={`/categorylanding/${post.id}`}  style={{ color: 'black' }}>
 
 <Box borderRadius="30px">
   <Card style={{border: '3px solid black',borderRadius: '5px!important'}}>
@@ -78,14 +81,16 @@ const EventItem  = ({ posts, loading }) =>  {
     </Typography>
 </CardContent>
 <CardActions>
-    <Button size="small" color="primary" href={`/categorylanding/${post.id}`} target="_blank">
+    <Button size="small" color="primary"  target="_blank">
         Go To Event
     </Button> 
 </CardActions>
 
 </Card>
 </Box>
+</Link>
 </Grid>
+
     //       <div className="col-12">
            
     //        <div class="container-fluid py-2" >

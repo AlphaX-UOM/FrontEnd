@@ -11,6 +11,7 @@ import {Card } from '@material-ui/core';
 import {CardContent } from '@material-ui/core';
 import {CardFooter, Form, Col, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import { connect } from "react-redux";
+import axios from 'axios'
 
 
 
@@ -34,7 +35,11 @@ import Alert from './Alert'
 
   _renderModal = () => {
     const onClick = () => {
+   
       this.setState(() => ({ passChangeSuccess: false }))
+
+
+      
     }
 
     return (
@@ -55,10 +60,40 @@ import Alert from './Alert'
     confirmPass,
     setSubmitting,
     resetForm,
+    
   }) => {
     // fake async login
+        console.log("submited")
+
+        axios
+        .put(`https://alphax-api.azurewebsites.net/api/users/${this.props.userCred.id}`, {
+         
+          id: this.props.userCred.id,
+    firstName: this.props.userCred.firstName,
+    lastName: this.props.userCred.lastName,
+    password: newPass,
+    dob: this.props.userCred.dob,
+    address: this.props.userCred.address,
+    email: this.props.userCred.email,
+    contact:this.props.userCred.contact,
+    role:this.props.userCred.role,
+    imgURL: null,
+   
+           
+
+        })
+        .then(response => {
+            console.log(response)
+          
+        })
+        .catch(error => {
+            console.log(error)
+        })
+
+
     setTimeout(async () => {
-      setSubmitting(false)
+      // setSubmitting(false)
+      // console.log("submired")
 
       this.setState(() => ({
         passChangeSuccess: true,
@@ -67,6 +102,8 @@ import Alert from './Alert'
 
       resetForm()
     }, 1000)
+
+    
   }
 
   render() {
@@ -99,7 +136,13 @@ import Alert from './Alert'
             setSubmitting,
             resetForm,
             
-          })
+            
+          }
+          
+          
+          )
+
+          
         }
         render={props => {
           const {
@@ -113,8 +156,14 @@ import Alert from './Alert'
             isSubmitting,
           } = props
           return isSubmitting ? (
+            
+
             <Spinner />
-          ) : (
+            
+           
+            
+          )
+           : (
          
             <center>
                
