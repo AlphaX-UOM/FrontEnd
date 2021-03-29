@@ -1,0 +1,16 @@
+.link{
+    color: black;
+    text-decoration: none;
+}
+.card-title:hover{
+    text-decoration: none;
+}
+.textdec:hover{
+    color: cadetblue;
+    text-decoration: none;
+}
+.listitemimgsize{
+    width: 190px;
+    height: 190px;
+    border-radius: 30px;
+}
