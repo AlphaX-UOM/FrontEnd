@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component } from "react";
-import { storage } from "../../../../src/config/firebaseConfig";
+import { storage } from "../../../../src/config/firebaseConfig"; 
 import "./post-guide.css";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
