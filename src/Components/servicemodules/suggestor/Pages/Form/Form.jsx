@@ -23,6 +23,10 @@ function Form(props) {
 
   var formatadmission = moment(startDate).format("DD-MM-YYYY");
   var formatdischarge = moment(endDate).format("DD-MM-YYYY");
+
+  var suggestCheckin = moment(startDate).format("YYYY-MM-DD");
+  var suggestCheckout = moment(endDate).format("YYYY-MM-DD");
+
   var starts = formatadmission.substring(0, 2);
   var ends = formatdischarge.substring(0, 2);
 
@@ -70,6 +74,8 @@ function Form(props) {
     budget: budget,
     travelers: travellers,
     days: noOdDates,
+    Checkin : suggestCheckin,
+    Checkout : suggestCheckout
   };
 
   const handleStartDate = (event) => {
@@ -224,7 +230,7 @@ function Form(props) {
                     noOdDates !== undefined ? (
                       <Link
                         type="submit"
-                        to="/result"
+                        to="/Resultlistlanding"
                         className="btn btn-primary tm-btn tm-btn-search text-uppercase"
                         id="btnSubmit"
                         onClick={handleFormData}
@@ -234,7 +240,7 @@ function Form(props) {
                     ) : (
                       <Link
                         type="submit"
-                        to="/result"
+                        to="/Resultlistlanding"
                         className="btn btn-primary tm-btn tm-btn-search text-uppercase disabled"
                         id="btnSubmit"
                         onClick={handleFormData}

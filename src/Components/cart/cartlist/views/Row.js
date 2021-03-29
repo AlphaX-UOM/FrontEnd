@@ -1,5 +1,3 @@
-
-
 import { useDispatch, useSelector } from 'react-redux'
 import { updateCart, removeFromCart } from '../../../../store/lib/actions'
 import { Link } from "react-router-dom";

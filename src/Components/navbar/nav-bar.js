@@ -17,6 +17,21 @@ import connect from "react-redux/es/connect/connect";
 
 const navbar=(props)=>{
     const {items} = props;
+
+    const handlepost = (event) => {
+      if (props.userCred.id !== undefined && props.userCred.role==='ServiceProvider'){
+          this.props.history.push('/post')
+      }else if (props.userCred.id !== undefined && props.userCred.role==='Customer'){
+          alert('Please Upgrade your customer  profile to service provide profile  ')
+          this.props.history.push('/login')
+
+      } else if(props.userCred.id !== undefined ){
+          this.props.history.push('/login')
+      }
+
+
+    };
+
     return(
         <div>
             <nav className="navbar navbar-expand-lg  navbar-dark bg-dark shadow-sm   "  >
@@ -34,11 +49,11 @@ const navbar=(props)=>{
                     <li className="nav-item  " style={{width:"100px"}}>
                         <Link className="nav-link " to="/"> <span className="align-text-bottom"><HomeIcon /></span> Home <span className="sr-only">(current)</span></Link>
                     </li>
-                    <li className="nav-item" style={{width:"100px"}}>
+                    {props.userCred.role==="ServiceProvider" || props.userCred.role==="Admin"? <li className="nav-item" style={{width:"100px"}}>
                         <Link className="nav-link" to="/post"><span className="align-text-bottom"><AddCircleIcon/></span>  Post</Link>
-                    </li>
+                    </li>:<p></p>}
                     <li className="nav-item " style={{width:"100px"}}>
-                        <Link className="nav-link" to="/login"><span className="align-text-bottom"><ExitToAppIcon/></span> Sign in</Link>
+                        <Link className="nav-link"  to="/login"><span className="align-text-bottom"><ExitToAppIcon/></span> Sign in</Link>
                     </li>
 
                     <li className="nav-item" style={{width:"100px"}}>
@@ -60,7 +75,8 @@ const navbar=(props)=>{
 };
 const mapStateToProps = (state) => {
     return {
-        items: state.onlineStoreApp.items
+        items: state.onlineStoreApp.items,
+        userCred: state.eventpnl.userCred
     }
 }
 

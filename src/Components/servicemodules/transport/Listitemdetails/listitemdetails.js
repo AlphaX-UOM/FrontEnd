@@ -40,6 +40,7 @@ class Listitemdetails extends Component {
             selectedOption: event.target.value
         });
     }
+
     handlecarClik() {
         this.setState( {hidden1: !this.state.hidden1} )
     }
@@ -102,7 +103,9 @@ class Listitemdetails extends Component {
     render() {
     let comment=(
         <div hidden={(!this.state.hidden1)? "hidden1" : ""}>
-            <Comments />
+            <Comments
+                id={this.props.match.params.id}
+            />
         </div>
     );
 

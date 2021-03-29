@@ -12,6 +12,7 @@ import guide from './store/reducers/guide_input_reducer'
 import onlineStoreApp from './../src/store/lib/reducers';
 import authReducer from './store/reducers/auth';
 import event from '../src/store/event-userpnl/eventReducer'
+import ScrollToTop from './Components/servicemodules/suggestor/SystemModifications/ScrollToTop';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
@@ -33,6 +34,7 @@ const store = createStore(rootReducer,composeEnhancers(
 ReactDOM.render(
   <React.StrictMode>
       <Provider store={store}>
+          {/* <ScrollToTop/> */}
           <App />
       </Provider>
 

@@ -10,6 +10,8 @@ import Typography from "@material-ui/core/Typography";
 import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux'
+import RowingIcon from '@material-ui/icons/Rowing';
+import { alignPropType } from "react-bootstrap/esm/DropdownMenu";
 
 function CategoryItem(props) {
   const useStyles = makeStyles({
@@ -17,7 +19,14 @@ function CategoryItem(props) {
       maxWidth: 345,
     },
     media: {
-      height: 140,
+      width: '5vw',
+      transitionDuration: '0.3s',
+      height: '5vw',
+      alignItems:'center',
+      justifyContent:'center',
+      
+
+     
     },
   });
 
@@ -30,23 +39,30 @@ function CategoryItem(props) {
   const classes = useStyles();
   
   return (
-    <div class="card card-body" style={{ width: "250px" }}>
+    <div class="card card-body" style={{ width: "3vw", height: '12vw',  alignItems:"center",
+    justifyContent:"center"}}>
       <Link  to={{pathname: '/categorylanding',data:props}}>
         <CardActionArea>
+          <cebter>
           <CardMedia
             className={classes.media}
             image={props.url}
+            style={{ alignItems: "center"}}
             title="Contemplative Reptile"
             onClick={CategoryClickHandle}
           />
+          </cebter>
           <CardContent>
             <Typography
               gutterBottom
-              variant="h5"
-              component="h2"
-              style={{ textAlign: "center" }}
+             // variant="h6"
+              component="h3"
+              fontSize="5px !important"
+              style={{ textAlign: "center", fontSize:"5px !important" }}
             >
+             
               {props.name}
+          
             </Typography>
           </CardContent>
         </CardActionArea>

@@ -4,8 +4,15 @@ import { Link } from "react-router-dom";
 import Rating from "@material-ui/lab/Rating";
 import { connect } from "react-redux";
 import Spinner from '../ResultList/Spinner';
+import { addToCart } from "../../../../../store/lib/actions";
 
 function DetailedResultPage(props) {
+
+  const { add_to_cart} = props;
+
+var today = new Date();
+var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
   let tranId = props.selectId.transportId;
   let guideId = props.selectId.guidePlanId;
   let event01Id = props.selectId.event01PlanId;
@@ -154,10 +161,35 @@ function DetailedResultPage(props) {
 
   const handleFormData = () => {
     props.addResData(reservations);
-
     reservations.map((item) => {
       addItem(item);
     });
+let type = 'TransportService';
+let checkin = props.formdata.checkin;
+let checkout = props.formdata.checkout;
+let totalUnit = mytransportList.pricePerDay*props.formdata.days;
+let number = props.formdata.days;
+
+    props.add_to_cart(mytransportList.name,mytransportList.pricePerDay, tranId,props.formdata.travelers,date,checkin,checkout,type,props.formdata.days,totalUnit,number);
+    
+    type = 'GuideService';
+    totalUnit=mytourguideList.costPerDay*props.formdata.days;
+    props.add_to_cart(mytourguideList.name,mytourguideList.costPerDay, guideId,props.formdata.travelers,date,checkin,checkout,type,props.formdata.days,totalUnit,number);
+    
+    type = 'EventService';
+    totalUnit = myevent01List.price;
+    number = 1;
+    props.add_to_cart(myevent01List.name,myevent01List.price, event01Id,props.formdata.travelers,date,checkin,checkout,type,props.formdata.days,totalUnit,number);
+    
+    type = 'EventService';
+    totalUnit = myevent02List.price;
+    props.add_to_cart(myevent02List.name,myevent02List.price, event02Id,props.formdata.travelers,date,checkin,checkout,type,props.formdata.days,totalUnit,number);
+    
+
+    type = 'HotelService';
+    totalUnit = myhotelList.pricePerDay * props.formdata.days * (Math.round((props.formdata.travelers)/2));
+    number = props.formdata.days * (Math.round((props.formdata.travelers)/2));
+    props.add_to_cart(myhotelList.name,myhotelList.pricePerDay, hotelId,props.formdata.travelers,date,checkin,checkout,type,props.formdata.days,totalUnit,number);
 
   };
 
@@ -222,7 +254,7 @@ function DetailedResultPage(props) {
                   This package includes many more events and destinations.
                   Select the package to
                   <p>
-                    <Link to="/payment">
+                    <Link to="/shoppingcart">
                       <button class="btn btn-warning" onClick={handleFormData}>
                         Get Started!
                       </button>
@@ -310,6 +342,21 @@ const mapDispatchToProps = (dispatch) => {
     addResData: (reservations) => {
       dispatch({ type: "ADD_RESERVATIONS", reservations: reservations });
     },
+    add_to_cart:(item,price,add_id,no_travellers,date,checkin,checkout,type,days,totalUnit,number) => {
+      dispatch(addToCart(item,price,add_id,no_travellers,date,checkin,checkout,type,days,totalUnit,number));
+    },
+    add_to_cart:(item,price,add_id,no_travellers,date,checkin,checkout,type,days,totalUnit,number) => {
+      dispatch(addToCart(item,price,add_id,no_travellers,date,checkin,checkout,type,days,totalUnit,number));
+    },
+    add_to_cart:(item,price,add_id,no_travellers,date,checkin,checkout,type,days,totalUnit,number) => {
+      dispatch(addToCart(item,price,add_id,no_travellers,date,checkin,checkout,type,days,totalUnit,number));
+    },
+    add_to_cart:(item,price,add_id,no_travellers,date,checkin,checkout,type,days,totalUnit,number) => {
+      dispatch(addToCart(item,price,add_id,no_travellers,date,checkin,checkout,type,days,totalUnit,number));
+    },
+    add_to_cart:(item,price,add_id,no_travellers,date,checkin,checkout,type,days,totalUnit,number) => {
+      dispatch(addToCart(item,price,add_id,no_travellers,date,checkin,checkout,type,days,totalUnit,number));
+    }
   };
 };
 

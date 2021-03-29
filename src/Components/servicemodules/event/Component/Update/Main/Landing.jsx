@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Title from './Title';
-import Date from './Date';
+
 import CategoryList from './CategoryList';
 import EventList from './EventList';
+import Date from './Date';
 
 function Landing() {
 
@@ -12,10 +13,25 @@ function Landing() {
   return (
     <div>
         <Title />
-        <Date />
+     
+    
         <CategoryList />
+        <br>
+        </br>
+        <br>
+        </br>
+        <div>
+      <center><Date/></center>
+        </div>
+        <div>
+        
+            
+            
         <EventList />
+      
+        </div>
         <p>This is Event Landing</p>
+      
     </div>
   );
 }

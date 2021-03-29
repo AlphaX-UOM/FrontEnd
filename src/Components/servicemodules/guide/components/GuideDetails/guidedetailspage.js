@@ -59,6 +59,7 @@ function guidedetailspage(props) {
   Dob = nameList.dob;
   cost = nameList.costPerDay;
   details = nameList.otherDetails;
+  avatar=nameList.imgURL
 
   console.log(nameList.name);
 
@@ -78,12 +79,17 @@ function guidedetailspage(props) {
             <div className="col-sm-12">{/* image */}</div>
 
             <div className="col-sm-12">
-              <span className="lead">
-                <div className="row">
+              <span className="lead"> 
+                <div className="row"> 
                   {/* <div className="col-sm"><Ratings/></div> */}
                   <div className="col-sm txtcolorx">Excellent</div>
                 </div>
-
+                <div>
+                  
+                  <br/>
+                <img style={{height:"200px",width:"200px",borderRadius:"30px"}} src={avatar}/>
+                </div>
+                 <br/>
                 <div className="row">
                   <Link>
                     <div className="col txtcolorx">

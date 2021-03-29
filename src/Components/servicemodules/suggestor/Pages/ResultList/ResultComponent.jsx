@@ -20,6 +20,7 @@ function resultComponent(props) {
 
     const handleFormData = () => {
         props.addIdData(selectId);
+        props.addTotalData(props.price);
     }
 
     return (
@@ -53,7 +54,10 @@ function resultComponent(props) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addIdData: (selectId) => { dispatch({type: 'ADD_SELECTED_DATA', selectId: selectId} )}
+        addIdData: (selectId) => { dispatch({type: 'ADD_SELECTED_DATA', selectId: selectId} )},
+        addTotalData: (total) => {
+            dispatch({ type: "ADD_PAYPAL_DATA", total: total });
+          }
     }
 }
 

@@ -12,6 +12,8 @@ const initialState = {
     form_rounded:{},
     form_distance_text:{},
 
+
+
     error: false
 };
 
