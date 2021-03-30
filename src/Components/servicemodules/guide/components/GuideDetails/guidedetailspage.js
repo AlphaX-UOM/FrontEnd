@@ -83,152 +83,40 @@ function guidedetailspage(props) {
       <div className="container debackcolor">
         <br />
         <div className="row ">
-          <div className="col-sm-1"></div>
-          <div className="col-sm-4 imgcolor">
-            <br />
-            <div className="col-sm-12 ">
-              {/* <h3 className="txtcolorx">{this.state.providers.name}</h3> */}
-            </div>
-
-            <div className="col-sm-12">{/* image */}</div>
-
-            <div className="col-sm-12">
-              <span className="lead"> 
-                <div className="row"> 
-                  {/* <div className="col-sm"><Ratings/></div> */}
-                  <div className="col-sm txtcolorx">Excellent</div>
-                </div>
-                <div>
-                  
-                  <br/>
-                <img style={{height:"200px",width:"200px",borderRadius:"30px"}} src={avatar}/>
-                </div>
-                 <br/>
-                <div className="row">
-                  <Link>
-                    <div className="col txtcolorx">
-                      <small className="iconpad" onClick={()=>setcommentg(!commentg)}> Reviews</small>
-                      <ChatBubbleOutlineIcon fontSize="small" />
-                    </div>
-                  </Link>
-                </div>
-              </span>
-            </div>
-            <br />
-          </div>
-          <div className="col-sm-7 ">
-            <div className="row ">
-              <div className="col-sm-2"></div>
-              <div className="col-sm ">
-                <div className="depad">
-                  <br />
-                  <span className="">
-                    <div className="row ">
-                      <div className="">Guide Name :</div>
-                      <div className="col ">
-                        <div className="" role="alert">
-                          {name1}
-                        </div>
-                      </div>
-                    </div>
-                  </span>
-                  <span className="">
-                    <div className="row">
-                      <div className="">Language   :</div>
-                      <div className="col">
-                        <div className="">   { nameList.language}</div>
-                      </div>
-                    </div>
-                  </span>
-
-                  <span className="">
-                    <div className="row">
-                      <div className="">Price Per Day :</div>
-                      <div className="col">
-                        <div className="">{cost}</div>
-                      </div>
-                    </div>
-                  </span>
-
-                  <span className="">
-                    <div className="row">
-                      <div className="">TP :</div>
-                      <div className="col">
-                        <div className="" role="alert">
-                          {email}
-                        </div>
-                      </div>
-                    </div>
-                  </span>
-
-                  {/* <span className="">
-                            <div className="row">
-                                <div className=" ">Email :</div>
-                                <div className="col">
-                                    <div className="" role="alert">
-                                       {email}
-                                </div></div>
-                            </div>
-
-                        </span> */}
-
-                  <span className="">
-                    <div className="row">
-                      <div className="">Age :</div>
-                      <div className="col">
-                        <div className="" role="alert">
-                          {getAge(Dob)}
-                        </div>
-                      </div>
-                    </div>
-                  </span>
-
-                  {/* <div className="row">
-                                <div className="">District :</div>
-                                <div className="col">
-                                    <div className="" role="alert">
-                                  
-                                </div>
-                                </div>
-                            </div> */}
-                  <span className="">
-                    <div className="row">
-                      <div className="">Description :</div>
-                      <div className="col">
-                        <div className=" " role="alert">
-                          {details}
-                        </div>
-                      </div>
-                    </div>
-                  </span>
-                  <span className="">
-                            <div className="row txtcolorx">
-                                <div className="col-sm-5 h5"><strong>Total Charge :</strong> </div>
-                                <div className="col-sm-7">
-                                        <div className="h5" >
-                                      Rs { totalcost}
-                                </div>
-                                  </div>
-                            </div>
-
-                        </span>
-
-                  <div className="row">
-                    <div className="col-sm"></div>
-                    <div className="col-sm"></div>
-                      <Link to="/shoppingcart">
-                    <button type="button" className="btn btn-primary " onClick={()=> props.add_to_cart(name1,cost, nameList.id,1,date,'Guide',totalcost, unitsx,dateg.date.checkindate,dateg.date1.checkoutdate,nameList.language)}>
-                      Book Now
-                    </button>
-                      </Link>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-1"></div>
-            </div>
-          </div>
-
-          <div className="col-sm-1"></div>
+        <div className="gudemain border-3px-downy">
+      <div className="overlap-group">
+        <div className="gudeex27"></div>
+        <div className="guidex24">
+          <div className="guidex25 roboto-bold-black-18px">Description&nbsp;&nbsp;:</div>
+          <div className="gudex26 roboto-bold-black-18px">{details}</div>
+        </div>
+        
+        <div className="gudidex23 roboto-bold-black-18px">Telephone&nbsp;&nbsp;&nbsp;&nbsp;:</div>
+        <div className="gudix21 roboto-bold-black-18px"> {email}</div>
+        <Link to="/shoppingcart">
+        <div className="guidex17 smart-layers-pointers " onClick={()=> props.add_to_cart(name1,cost, nameList.id,1,date,'Guide',totalcost, unitsx,dateg.date.checkindate,dateg.date1.checkoutdate,nameList.language)}>
+          <div className="gudex19 roboto-bold-white-18px">Book Now</div>
+        </div>
+        </Link>
+        <div className="guidex16"></div>
+        <Link>
+        <div className="guidex15 roboto-bold-downy-18px smart-layers-pointers " onClick={()=>setcommentg(!commentg)}>Rewiews</div>
+        </Link>
+        <div className="guidex14 roboto-bold-downy-18px">Excellent</div>
+        <div className="guidex13 roboto-bold-black-18px">Guide Name :</div>
+        <div className="guidex11 roboto-bold-black-18px">{name1}</div>
+        <div className="guidex10 roboto-bold-black-18px">Language&nbsp;&nbsp;&nbsp;&nbsp; :</div>
+        <div className="guidex8 roboto-bold-black-18px">{ nameList.language}</div>
+        <div className="guidex7 roboto-bold-black-18px">PricePerDay :</div>
+        <div className="gudidex5 roboto-bold-black-18px">{cost}</div>
+        <div className="guidex71 roboto-bold-black-18px">age&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :</div>
+        <div className="gudidex51 roboto-bold-black-18px"> {getAge(Dob)}</div>
+        <h1 className="guidex4 roboto-bold-downy-24px">Total&nbsp;&nbsp;Charge :&nbsp;&nbsp;{ totalcost}</h1>
+        <ChatBubbleOutlineIcon className="guidex2" fontSize="small" />
+        <img className="gudex1 smart-layers-pointers " src={avatar} />
+      </div>
+    </div>
+          
         </div>
 
         <br />
@@ -253,3 +141,5 @@ const mapDispatchToProps = (dispatch) => {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(  guidedetailspage);
+
+
