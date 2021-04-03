@@ -18,19 +18,19 @@ import connect from "react-redux/es/connect/connect";
 const navbar=(props)=>{
     const {items} = props;
 
-    const handlepost = (event) => {
-      if (props.userCred.id !== undefined && props.userCred.role==='ServiceProvider'){
-          this.props.history.push('/post')
-      }else if (props.userCred.id !== undefined && props.userCred.role==='Customer'){
-          alert('Please Upgrade your customer  profile to service provide profile  ')
-          this.props.history.push('/login')
-
-      } else if(props.userCred.id !== undefined ){
-          this.props.history.push('/login')
-      }
-
-
-    };
+    // const handlepost = (event) => {
+    //   if (props.userCred.id !== undefined && props.userCred.role==='ServiceProvider'){
+    //       this.props.history.push('/post')
+    //   }else if (props.userCred.id !== undefined && props.userCred.role==='Customer'){
+    //       alert('Please Upgrade your customer  profile to service provide profile  ')
+    //       this.props.history.push('/login')
+    //
+    //   } else if(props.userCred.id !== undefined ){
+    //       this.props.history.push('/login')
+    //   }
+    //
+    //
+    // };
 
     return(
         <div>

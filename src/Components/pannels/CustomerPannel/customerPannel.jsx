@@ -14,7 +14,7 @@ import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
+import LinkM from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -27,16 +27,16 @@ import Ratings from './Pages/Ratings';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import PassWord from './Pages/password/passwordForm';
 import Upgrade from './Pages/Upgrade';
-
+import {Link} from 'react-router-dom';
 
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <LinkM color="inherit" href="https://material-ui.com/">
         Your Website
-      </Link>{' '}
+      </LinkM>{' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -158,7 +158,11 @@ export default function Dashboard(props) {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <PowerSettingsNewIcon/>
+            <Link to='/logout'>
+                <PowerSettingsNewIcon/>
+
+            </Link>
+
         </Toolbar>
       </AppBar>
       <Drawer

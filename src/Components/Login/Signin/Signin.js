@@ -243,7 +243,8 @@ function Login(props) {
 
 const mapStateToProps = (state) => {
     return {
-        userCred: state.eventpnl.userCred
+        userCred: state.eventpnl.userCred,
+
     };
   };
 
@@ -252,6 +253,8 @@ const mapDispatchToProps = (dispatch) => {
       addUserData: (userCred) => {
         dispatch({ type: "ADD_USER", userCred: userCred });
       },
+
+
     };
   };
   

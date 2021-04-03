@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,12 +11,13 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import axios from 'axios';
 import AdminPanel from '../pannels/adminPannel/adminpannel';
 import CustomerPanel from '../pannels/CustomerPannel/customerPannel';
 import ServicePanel from '../pannels/serviceProvider/sppannel';
-import { connect } from "react-redux";
+import {connect} from "react-redux";
+import {auth} from '../../store/actions/auth';
 
 function Copyright() {
     return (
@@ -24,7 +25,7 @@ function Copyright() {
             {'Copyright © '}
             <Link color="inherit" href="https://material-ui.com/">
                 Vvisit - Tour Planning System
-        </Link>{' '}
+            </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
         </Typography>
@@ -74,28 +75,27 @@ function Login(props) {
 
     const handleFormData = () => {
         console.log("signinsubmit");
-        
 
-        fetch(`https://alphax-api.azurewebsites.net/api/users`)
-            .then((response) => {
-                return response.json();
-            })
-            .then((responseData) => {
-                
-                responseData = responseData.filter(item => item.email == email && item.password == password);
+        props.onAuth(email, password);
 
-                if (responseData[0] != undefined) {
-                    setUserDetail(responseData[0].id);
-                    setUserType(responseData[0].role);
-                    props.addUserData(responseData[0]);
-                    console.log("new user detail->" + responseData[0].firstName);
-                }
-                else {
-                    console.log("error credentials");
-                }
-            });
-
-            
+        // fetch(`https://alphax-api.azurewebsites.net/api/users`)
+        //     .then((response) => {
+        //         return response.json();
+        //     })
+        //     .then((responseData) => {
+        //
+        //         responseData = responseData.filter(item => item.email == email && item.password == password);
+        //
+        //         if (responseData[0] != undefined) {
+        //             setUserDetail(responseData[0].id);
+        //             setUserType(responseData[0].role);
+        //             props.addUserData(responseData[0]);
+        //             console.log("new user detail->" + responseData[0].firstName);
+        //         }
+        //         else {
+        //             console.log("error credentials");
+        //         }
+        //     });
 
 
         // var axios = require('axios');
@@ -143,43 +143,41 @@ function Login(props) {
         //   });
         // console.log("this is return user Id -> " + userDetail.id);
 
-        console.log("This is reached");
-        console.log("This is reached");
-        console.log("This is reached");
+
     }
 
-    if(userType == "Customer"){
-        return(
-            <CustomerPanel myId={userDetail}/>
+    if (props.isAuthenticated && props.role==="Customer") {
+        console.log(props.userid);
+        return (
+            <CustomerPanel myId={props.userid}/>
         )
     }
 
-    if(userType == "ServiceProvider"){
-        return(
-            <ServicePanel myId={userDetail}/>
+    if (props.isAuthenticated && props.role==="ServiceProvider") {
+        return (
+            <ServicePanel myId={props.userid}/>
         )
     }
 
-    if(userType == "Admin"){
-        return(
-            <AdminPanel myId={userDetail}/>
+    if ( props.isAuthenticated && props.role==="Admin") {
+        return (
+            <AdminPanel myId={props.userid}/>
         )
     }
-
 
 
     return (
         <Grid container component="main" className={classes.root}>
-            <CssBaseline />
-            <Grid item xs={false} sm={4} md={7} className={classes.image} />
+            <CssBaseline/>
+            <Grid item xs={false} sm={4} md={7} className={classes.image}/>
             <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon />
+                        <LockOutlinedIcon/>
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Sign in
-            </Typography>
+                    </Typography>
                     <form className={classes.form} noValidate>
                         <TextField
                             variant="outlined"
@@ -206,7 +204,7 @@ function Login(props) {
                             onChange={e => setPassword(e.target.value)}
                         />
                         <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
+                            control={<Checkbox value="remember" color="primary"/>}
                             label="Remember me"
                         />
                         <Button
@@ -218,12 +216,12 @@ function Login(props) {
                             onClick={handleFormData}
                         >
                             Sign In
-              </Button>
+                        </Button>
                         <Grid container>
                             <Grid item xs>
                                 <Link href="#" variant="body2">
                                     Forgot password?
-                  </Link>
+                                </Link>
                             </Grid>
                             <Grid item>
                                 <Link href="/register" variant="body2">
@@ -232,7 +230,7 @@ function Login(props) {
                             </Grid>
                         </Grid>
                         <Box mt={5}>
-                            <Copyright />
+                            <Copyright/>
                         </Box>
                     </form>
                 </div>
@@ -243,16 +241,24 @@ function Login(props) {
 
 const mapStateToProps = (state) => {
     return {
-        userCred: state.eventpnl.userCred
+        userCred: state.eventpnl.userCred,
+        isAuthenticated: state.auth.token !== null,
+        role:state.auth.role,
+        userid:state.auth.userId,
+        loading: state.auth.loading,
+        error: state.auth.error
+
     };
-  };
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      addUserData: (userCred) => {
-        dispatch({ type: "ADD_USER", userCred: userCred });
-      },
+        addUserData: (userCred) => {
+            dispatch({type: "ADD_USER", userCred: userCred});
+
+        },
+        onAuth: (email, password) => dispatch(auth(email, password))
     };
-  };
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(Login);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

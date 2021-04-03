@@ -3,10 +3,12 @@ import {BrowserRouter,Route,Switch,Redirect} from 'react-router-dom';
 import Navbar from "../Components/navbar/nav-bar";
 import { connect } from 'react-redux'
 import { saveCart } from '../../src/store/lib/actions'
+import { authCheckState } from '../../src/store/actions/auth'
 
 import Post from "../Components/Post/post";
 import Shoppingcart from "../Components/cart/cartlist/views/cart";
 import Login from "../Components/Login/login";
+import Logout from "../Components/Login/Logout/Logout";
 import ServiceProvider from "../Components/Userpanels/ServiceProviderUI/Serviceprovider";
 import Transportinput from "../Components/servicemodules/transport/Transport-input/Transport-input";
 import Transportproviderlist from "../Containers/Transportproviderlist/transportproviderlist";
@@ -55,13 +57,23 @@ const Layout=(props)=> {
     // }
 
     // render () {
+
+    useEffect(() => {
+
+        props.onTryAutoSignup();
+
+    }, []);
+
+
+
         return (
 
                 <div>
                     <Navbar/>
 
                     <Switch>
-                    <Route path='/result' component={ResultList} />
+
+                        <Route path='/result' component={ResultList} />
                         <Route path='/paypal' component={Paypal} />
                         <Route path='/detailedresult' component={DetailedResult} />
                         <Route path='/payment' component={Payment} />
@@ -69,11 +81,11 @@ const Layout=(props)=> {
                         <Route path='/Resultlistlanding' component={ResultListLanding} />
 
 
-                        <Route path='/events' component={Events}/>
-                        <Route path="/categorylanding/:id" component={ItemLanding}/>
-                        <Route path='/itemlanding' component={ItemLanding}/>
-                        <Route path="/categorylanding" component={CategoryLanding}/>
-                        <Route path="/categoryLanding1" component={CategoryLanding1}/>
+                        <Route path='/events' component={Events} />
+                        <Route path="/categorylanding/:id" component={ItemLanding} />
+                        <Route path='/itemlanding' component={ItemLanding} />
+                        <Route path="/categorylanding" component={CategoryLanding} />
+                        <Route path="/categoryLanding1" component={CategoryLanding1} />
 
 
                         <Route path='/PostGuideForm' component={PostGuideForm}/>
@@ -92,6 +104,7 @@ const Layout=(props)=> {
                         <Route path="/post/post-hotel"component={ PosthotelForm}/>
                         <Route path="/post/post-transportprovider"component={ PostTransportProviderForm}/>
                         <Route path="/post" component={Post}></Route>
+                        <Route path="/logout"><Logout/></Route>
                         <Route path="/login"><Login/></Route>
                         <Route path="/register"><SignUp/></Route>
                        
@@ -115,13 +128,15 @@ const Layout=(props)=> {
 
 const mapStateToProps = (state) => {
     return {
-        items: state.items
+        items: state.items,
+        isAuthenticated: state.auth.token !== null
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        saveLocalStorage:  items => { dispatch(saveCart(items)) }
+        saveLocalStorage:  items => { dispatch(saveCart(items)) },
+        onTryAutoSignup: () => dispatch( authCheckState() )
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Layout);

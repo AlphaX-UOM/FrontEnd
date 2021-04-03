@@ -9,6 +9,7 @@ import connect from "react-redux/es/connect/connect";
 import * as actions from '../../../../store/actions/index';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import Geocode from "react-geocode";
+import {Link} from 'react-router-dom'
 class TransportInput extends Component{
 
     constructor(props) {
@@ -264,6 +265,9 @@ class TransportInput extends Component{
                 </div>
 
                 {/*<h1>{this.state.distance_text}</h1>*/}
+                <Link to='/logout'>
+                    <button>logout</button>
+                </Link>
                 <br/>
             </div>
         )
