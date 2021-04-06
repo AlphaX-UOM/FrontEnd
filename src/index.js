@@ -12,6 +12,7 @@ import guide from './store/reducers/guide_input_reducer'
 import onlineStoreApp from './../src/store/lib/reducers';
 import authReducer from './store/reducers/auth';
 import event from '../src/store/event-userpnl/eventReducer'
+import hotelinput from './store/reducers/hotel_input_reducer';
 import ScrollToTop from './Components/servicemodules/suggestor/SystemModifications/ScrollToTop';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
       onlineStoreApp:onlineStoreApp,
         transport_input_reducer:transportinput,
     guide_input_reducer:guide,
+    hotel_input_reducer:hotelinput,
     auth: authReducer,
     eventpnl:event
 });

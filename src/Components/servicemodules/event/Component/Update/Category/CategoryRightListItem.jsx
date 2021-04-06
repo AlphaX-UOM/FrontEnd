@@ -89,7 +89,7 @@ function CategoryRightListItem(props) {
               <div className={classes.controls}>
                 {/* <Button variant="contained" disabled> */}
 
-                <span class="badge bg-warning text-dark">  <AttachMoneyIcon />{props.item.price}</span>
+                <span class="badge bg-warning text-dark">  <AttachMoneyIcon />{props.item.price} Per Adult</span>
 
 
 

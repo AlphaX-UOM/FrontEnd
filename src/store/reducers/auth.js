@@ -15,13 +15,13 @@ const authStart = ( state, action ) => {
 
 const authSuccess = (state, action) => {
     console.log(action);
-    return updateObject( state, { 
+    return updateObject( state, {
         token: action.idToken,
         userId: action.userId,
         role: action.role,
         error: null,
         loading: false
-     } );
+    } );
 };
 
 const authFail = (state, action) => {

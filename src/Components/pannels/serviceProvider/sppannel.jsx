@@ -22,12 +22,19 @@ import { mainListItems} from './sideBar';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Account from '../CustomerPannel/Pages/Account';
 import Services from './Pages/services';
-import Reservations from './Pages/Reservation';
+import Reservations from './../CustomerPannel/Pages/Reservation';
 import Ratings from './Pages/Ratings';
-import Cancelation from './Pages/cancelation';
+import Cancelation from './../CustomerPannel/Pages/cancelation';
 import Sreservation from './Pages/Sreservations';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import DashBoard from './Pages/DashBoard/DashBoard';
+import Event from './Pages/DashBoard/eventPosts';
+import Guide from './Pages/DashBoard/GuideTotal';
+import Hotel from './Pages/DashBoard/hotelTotal';
+import Trans from './Pages/DashBoard/TransTotal';
+import ItemLanding from '../../servicemodules/event/Component/Update/Item/ItemLanding';
+import Transport from '../../servicemodules/transport/Listitemdetails/listitemdetails';
+import GuidePge from '../../servicemodules/guide/components/GuideDetails/guidedetailspage';
 
 
 
@@ -125,7 +132,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+export default function Dashboard(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -138,8 +145,8 @@ export default function Dashboard() {
   return (
     <div className={classes.root}>
         <BrowserRouter>
-      <CssBaseline />
-      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+      {/* <CssBaseline /> */}
+      {/* <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
@@ -160,7 +167,7 @@ export default function Dashboard() {
             </Badge>
           </IconButton>
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
       <Drawer
         variant="permanent"
         classes={{
@@ -179,17 +186,23 @@ export default function Dashboard() {
        
       
       </Drawer>
- 
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
+      <main className={classes.content} >
+        <div className={classes.appBarSpacer}  />
         <Switch>
-        <Route path='/account'> <Account /> </Route>
-        <Route path='/services'><Services/></Route>
-        <Route path='/ratings'><Ratings/></Route>
-        <Route path='/cancelation'><Cancelation/></Route>
-        <Route path='/sreservation'><Sreservation/></Route>
-        <Route path='/reservations'><Reservations/></Route>
-        <Route path='/'><DashBoard/></Route>
+        <Route path='/account'> <Account  myId={props.myId} /> </Route>
+        <Route path='/services'><Services myId={props.myId}/></Route>
+        <Route path='/ratings'><Ratings myId={props.myId}/></Route>
+        <Route path='/cancelation'><Cancelation myId={props.myId}/></Route>
+        <Route path='/sreservation'><Sreservation myId={props.myId}/></Route>
+        <Route path='/reservations'><Reservations myId={props.myId}/></Route>
+        <Route path='/event'><Event myId={props.myId}/></Route>
+        <Route path='/trans'><Trans myId={props.myId}/></Route>
+        <Route path='/guide'><Guide myId={props.myId}/></Route>
+        <Route path='/hotel'><Hotel myId={props.myId}/></Route>
+        <Route path="/translanding/:id" component={Transport}/>
+        <Route path="/guidelanding/:id" component={GuidePge}/>
+        <Route path="/categorylanding/:id" component={ItemLanding}/>
+        <Route path='/'><DashBoard myId={props.myId}/></Route>
        
       
         </Switch>

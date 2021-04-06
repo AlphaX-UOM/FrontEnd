@@ -1,18 +1,17 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Name from './Name';
-import Ratings from './ratings';
-import EventTotal from '../eventTotal';
-import HotelTotal from './hotelTotal';
-import Transport from './TransTotal';
-import TourGuide from './GuideTotal';
-import { Hotel } from '@material-ui/icons';
 
+
+import { Link } from 'react-router-dom';
+
+import { InputLabel } from '@material-ui/core';
+import { connect } from "react-redux";
+
+import { Card } from '@material-ui/core';
+import { CardContent } from '@material-ui/core';
+import Image from 'react-bootstrap/Image'
+import PieChart from './chart/pieChart';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -94,58 +93,121 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
- function Dashboard() {
+function Dashboard(props) {
   const classes = useStyles();
 
- 
+
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   return (
-    <main className={classes.content}>
-    <div className={classes.appBarSpacer} />
-    <Container maxWidth="lg" className={classes.container}>
-      <Grid container spacing={3}>
-        {/* Chart */}
-        <Grid item xs={12} md={6} lg={6}>
-          <Paper className={fixedHeightPaper}>
-              <Name/>
-       
-          </Paper>
-        </Grid>
-        {/* Recent Deposits */}
-        <Grid item xs={12} md={5} lg={6}>
-          <Paper className={fixedHeightPaper}>
-              <Ratings/>
+
+
+    <div>
+
+
+      <div className="row">
+      <div className="col-1">
+          
+        </div>
+        <div className="col-3">
+          <Image src={props.userCred.imgURL} alt="img1" style={{ width: "255px", height: "225px" }}roundedCircle></Image>
+        </div>
+        <div className="col-4">
+       <h2>{props.userCred.firstName}  {props.userCred.lastName}</h2>   
+        </div>
+
+        <div className="col-3">
+          <PieChart myId={props.myId}/>
+     <center>My Post Summary</center>     
+    
+        </div>
+
         
-          </Paper>
-        </Grid>
-        {/* Recent Orders */}
-        <Grid item xs={12} md={4} lg={3}>
-          <Paper className={fixedHeightPaper}>
-        <EventTotal/>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={4} lg={3}>
-          <Paper className={fixedHeightPaper}>
-        <HotelTotal/>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={4} lg={3}>
-          <Paper className={fixedHeightPaper}>
-        <Transport/>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={4} lg={3}>
-          <Paper className={fixedHeightPaper}>
-        <TourGuide/>
-          </Paper>
-        </Grid>
-      </Grid>
-      <Box pt={4}>
-        
-      </Box>
-    </Container>
-  </main>
+      </div>
+      <br>
+      </br>
+      <br>
+      </br>
+      <div className="row">
+      <div className="col-1"></div>
+        <div className="col-2">
+          <Link to="/event"  style={{ color: 'black' }}>
+            <Card style={{backgroundColor:"#AC3E31"}}>
+              <CardContent>
+                <div >
+                  <h3>Event Posts</h3>
+                 
+                </div>
+
+
+              </CardContent>
+            </Card>
+          </Link>
+
+        </div>
+
+        <div className="col-2">
+          <Link to="/trans" style={{ color: 'black' }}>
+          <Card style={{backgroundColor:"#AC3E31"}}>
+              <CardContent>
+                <div >
+                  <h3>Transport</h3>
+
+
+                </div>
+
+
+              </CardContent>
+            </Card>
+          </Link>
+
+        </div>
+
+        <div className="col-2">
+          <Link to="/guide" style={{ color: 'black' }}>
+          <Card style={{backgroundColor:"#AC3E31"}}>
+              <CardContent>
+                <div >
+                  <h3>Guide Posts</h3>
+
+
+                </div>
+
+
+              </CardContent>
+            </Card>
+          </Link>
+
+        </div>
+
+        <div className="col-2">
+          <Link to="/hotel" style={{ color: 'black' }}>
+          <Card style={{backgroundColor:"#AC3E31"}}>
+              <CardContent>
+                <div >
+                  <h3>Hotel Posts</h3>
+
+                </div>
+
+
+              </CardContent>
+            </Card>
+          </Link>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
   );
 }
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return {
+    userCred: state.eventpnl.userCred,
+  };
+};
+
+export default connect(mapStateToProps)(Dashboard);

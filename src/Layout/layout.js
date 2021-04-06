@@ -1,9 +1,9 @@
 import React, { Component,Fragment, useState, useEffect } from 'react';
 import {BrowserRouter,Route,Switch,Redirect} from 'react-router-dom';
 import Navbar from "../Components/navbar/nav-bar";
-import { connect } from 'react-redux'
-import { saveCart } from '../../src/store/lib/actions'
-import { authCheckState } from '../../src/store/actions/auth'
+import { connect } from 'react-redux';
+import { saveCart } from '../../src/store/lib/actions';
+import { authCheckState } from '../../src/store/actions/auth';
 
 import Post from "../Components/Post/post";
 import Shoppingcart from "../Components/cart/cartlist/views/cart";
@@ -19,11 +19,7 @@ import PosthotelForm from "../Components/Post/post-hotels/post-hotels";
 import PostTransportProviderForm from "../Components/Post/post-transportprovider/post-tprovider-form";
 import Home from "../Components/home/home";
 import Footer from "../Components/footer/footer";
-import Adtransportlist from "../Components/Userpanels/ServiceProviderUI/Ad-Trasnport/Ad-Transport-list/Adtransportlist";
-import HotelMain from '../Components/servicemodules/hotel/Component/HotelMain';
-import Result from '../Components/servicemodules/hotel/Result/Result';
-import Details from '../Components/servicemodules/hotel/Details/Details';
-import HotelList from '../Components/servicemodules/hotel/Component/HotelList';
+
 
 import Form from '../Components/servicemodules/guide/components/Form/Form';
 import NameList from '../Components/servicemodules/guide/components/NameList/NameList';
@@ -40,10 +36,19 @@ import PackageDetails from '../Components/servicemodules/suggestor/Pages/Update/
 import ResultListLanding from '../Components/servicemodules/suggestor/Pages/Update/ResultPackages/ResultListLanding';
 
 import CategoryLanding from '../Components/servicemodules/event/Component/Update/Category/CategoryLanding';
-import CategoryLanding1 from '../Components/servicemodules/event/Component/Update/Category/DateFilter'; 
+import CategoryLanding1 from '../Components/servicemodules/event/Component/Update/Category/DateFilter';
 import ItemLanding from '../Components/servicemodules/event/Component/Update/Item/ItemLanding';
 import guidedetailspage from '../Components/servicemodules/guide/components/GuideDetails/guidedetailspage';
 
+import HotelMain from '../Components/servicemodules/hotel/Component/HotelMain';
+import HotelList from '../Components/servicemodules/hotel/Component/HotelList';
+import HotelListItem from '../Components/servicemodules/hotel/Component/HotelListItem';
+import HotelResult from '../Components/servicemodules/hotel/Result/HotelResult';
+import HotelResultItem from '../Components/servicemodules/hotel/Result/HotelResultItem';
+import Rooms from '../Components/servicemodules/hotel/Component/Rooms';
+import RoomResult from '../Components/servicemodules/hotel/Component/RoomResult/RoomResult';
+import RoomResultItem from '../Components/servicemodules/hotel/Component/RoomResult/RoomResultItem';
+import HotelCart from '../Components/servicemodules/hotel/Component/Cart/HotelCart';
 
 const Layout=(props)=> {
     const { items, saveLocalStorage } = props;
@@ -63,17 +68,13 @@ const Layout=(props)=> {
         props.onTryAutoSignup();
 
     }, []);
-
-
-
         return (
 
                 <div>
                     <Navbar/>
 
                     <Switch>
-
-                        <Route path='/result' component={ResultList} />
+                    <Route path='/result' component={ResultList} />
                         <Route path='/paypal' component={Paypal} />
                         <Route path='/detailedresult' component={DetailedResult} />
                         <Route path='/payment' component={Payment} />
@@ -81,11 +82,11 @@ const Layout=(props)=> {
                         <Route path='/Resultlistlanding' component={ResultListLanding} />
 
 
-                        <Route path='/events' component={Events} />
-                        <Route path="/categorylanding/:id" component={ItemLanding} />
-                        <Route path='/itemlanding' component={ItemLanding} />
-                        <Route path="/categorylanding" component={CategoryLanding} />
-                        <Route path="/categoryLanding1" component={CategoryLanding1} />
+                        <Route path='/events' component={Events}/>
+                        <Route path="/categorylanding/:id" component={ItemLanding}/>
+                        <Route path='/itemlanding' component={ItemLanding}/>
+                        <Route path="/categorylanding" component={CategoryLanding}/>
+                        <Route path="/categoryLanding1" component={CategoryLanding1}/>
 
 
                         <Route path='/PostGuideForm' component={PostGuideForm}/>
@@ -94,10 +95,15 @@ const Layout=(props)=> {
                         <Route path="/guide/:id" component={ guidedetailspage}/>
                         <Route path='/guide'>  <Form /> </Route>
 
-                        <Route path="/hotelList"><HotelList/></Route>
-                        <Route path="/result"><Result /></Route>
-                        <Route path="/details"><Details /></Route>
-                        <Route path="/hotel"><HotelMain /></Route>
+                        <Route path="/hotelCart" component={HotelCart}></Route>
+                        <Route path="/roomResultItem" component={RoomResultItem}></Route>
+                        <Route path="/roomResult" component={RoomResult}></Route>
+                        <Route path="/hotelResultItem" component={HotelResultItem}></Route>
+                        <Route path="/hotelResult" component={HotelResult}></Route>
+                        <Route path="/hotelListItem" component={HotelListItem}></Route>
+                        <Route path="/hotelList" component={HotelList}></Route>
+                        <Route path="/rooms" component={Rooms}></Route>
+                        <Route path="/hotel" component={HotelMain}></Route>
 
                         <Route path="/post/post-tourguide"component={ PostguideForm}/>
                         <Route path="/post/post-event"component={ PosteventForm}/>

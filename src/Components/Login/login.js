@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,12 +11,13 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import AdminPanel from '../pannels/adminPannel/adminpannel';
 import CustomerPanel from '../pannels/CustomerPannel/customerPannel';
 import ServicePanel from '../pannels/serviceProvider/sppannel';
-import {connect} from "react-redux";
+import { connect } from "react-redux";
+// import { Link } from 'react-router-dom';
 import {auth} from '../../store/actions/auth';
 
 function Copyright() {
@@ -25,7 +26,7 @@ function Copyright() {
             {'Copyright © '}
             <Link color="inherit" href="https://material-ui.com/">
                 Vvisit - Tour Planning System
-            </Link>{' '}
+        </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
         </Typography>
@@ -75,7 +76,6 @@ function Login(props) {
 
     const handleFormData = () => {
         console.log("signinsubmit");
-
         props.onAuth(email, password);
 
         // fetch(`https://alphax-api.azurewebsites.net/api/users`)
@@ -96,6 +96,8 @@ function Login(props) {
         //             console.log("error credentials");
         //         }
         //     });
+
+            
 
 
         // var axios = require('axios');
@@ -165,19 +167,18 @@ function Login(props) {
         )
     }
 
-
     return (
         <Grid container component="main" className={classes.root}>
-            <CssBaseline/>
-            <Grid item xs={false} sm={4} md={7} className={classes.image}/>
+            <CssBaseline />
+            <Grid item xs={false} sm={4} md={7} className={classes.image} />
             <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon/>
+                        <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Sign in
-                    </Typography>
+            </Typography>
                     <form className={classes.form} noValidate>
                         <TextField
                             variant="outlined"
@@ -204,7 +205,7 @@ function Login(props) {
                             onChange={e => setPassword(e.target.value)}
                         />
                         <FormControlLabel
-                            control={<Checkbox value="remember" color="primary"/>}
+                            control={<Checkbox value="remember" color="primary" />}
                             label="Remember me"
                         />
                         <Button
@@ -216,21 +217,21 @@ function Login(props) {
                             onClick={handleFormData}
                         >
                             Sign In
-                        </Button>
+              </Button>
                         <Grid container>
                             <Grid item xs>
                                 <Link href="#" variant="body2">
                                     Forgot password?
-                                </Link>
+                  </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="/register" variant="body2">
+                                <Link to="/register" variant="body2">
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>
                         </Grid>
                         <Box mt={5}>
-                            <Copyright/>
+                            <Copyright />
                         </Box>
                     </form>
                 </div>
@@ -247,18 +248,16 @@ const mapStateToProps = (state) => {
         userid:state.auth.userId,
         loading: state.auth.loading,
         error: state.auth.error
-
     };
-};
+  };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addUserData: (userCred) => {
-            dispatch({type: "ADD_USER", userCred: userCred});
-
-        },
+      addUserData: (userCred) => {
+        dispatch({ type: "ADD_USER", userCred: userCred });
+      },
         onAuth: (email, password) => dispatch(auth(email, password))
     };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+  };
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(Login);

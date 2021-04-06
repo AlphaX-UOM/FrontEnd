@@ -14,7 +14,7 @@ import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import LinkM from '@material-ui/core/Link';
+import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -27,16 +27,16 @@ import Ratings from './Pages/Ratings';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import PassWord from './Pages/password/passwordForm';
 import Upgrade from './Pages/Upgrade';
-import {Link} from 'react-router-dom';
+
 
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <LinkM color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="https://material-ui.com/">
         Your Website
-      </LinkM>{' '}
+      </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -158,11 +158,7 @@ export default function Dashboard(props) {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-            <Link to='/logout'>
-                <PowerSettingsNewIcon/>
-
-            </Link>
-
+          <PowerSettingsNewIcon/>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -184,8 +180,8 @@ export default function Dashboard(props) {
       
       </Drawer>
  
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
+      <main className={classes.content} style={{backgroundColor:'#6495ED'}}>
+        <div className={classes.appBarSpacer} style={{backgroundColor:'#6495ED'}} />
         <Switch>
      
         <Route path='/reservations'><Reservation myId={props.myId}/></Route>

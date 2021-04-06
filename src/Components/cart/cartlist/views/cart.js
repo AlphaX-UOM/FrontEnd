@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -125,7 +126,7 @@ const useStyles = makeStyles((theme) => ({
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Not signed in!</h2>
-            <p id="transition-modal-description"><a href="/login">Click</a> here to login</p>
+            <p id="transition-modal-description"><Link to="/login">Click</Link> here to login</p>
           </div>
         </Fade>
       </Modal>

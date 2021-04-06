@@ -18,8 +18,8 @@ import Badge from "react-bootstrap/Badge";
 
 
 function ItemCheck1(props) {
-  const [quantity, setQuantity] = useState(0);
-  const [kidquantity, setkidQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  const [kidquantity, setkidQuantity] = useState(1);
     const { add_to_cart} = props;
     const [nameList, setNameList] = useState([]);
     const [value, onChange] = useState(new Date());
@@ -35,8 +35,11 @@ function ItemCheck1(props) {
             });
     }, []);
 
-    var today = new Date(),
-        date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    // var today = new Date(),
+    //     date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+    var today = new Date(nameList.date);
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
 console.log("event price ->"+nameList.price);
   const increaseQuantity = () => {
@@ -112,7 +115,7 @@ console.log("event price ->"+nameList.price);
           </Row>
           <Row>
             <Col>
-              <h5>Select Date </h5>
+              <h5> Date </h5>
              
       {/* <DatePicker
         onChange={onChange}
@@ -141,10 +144,8 @@ console.log("event price ->"+nameList.price);
               </form>
             </Col> */}
             <Col>
-               <DatePicker
-        onChange={onChange}
-        value={value}
-      /> 
+     {date}
+      
             </Col>
             <Col>
               

@@ -5,7 +5,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+import Limnk from '@material-ui/core/Link';
+import { Link } from "react-router-dom";
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -22,9 +23,9 @@ function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
+            <Limnk color="inherit" href="https://material-ui.com/">
                 Vvisit - Tour Planning System
-        </Link>{' '}
+        </Limnk>{' '}
             {new Date().getFullYear()}
             {'.'}
         </Typography>
@@ -221,13 +222,15 @@ function Login(props) {
               </Button>
                         <Grid container>
                             <Grid item xs>
-                                <Link href="#" variant="body2">
+                                <Limnk href="#" variant="body2">
                                     Forgot password?
-                  </Link>
+                  </Limnk>
                             </Grid>
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <Link to="/register">
+                                <Limnk  variant="body2">
                                     {"Don't have an account? Sign Up"}
+                                </Limnk>
                                 </Link>
                             </Grid>
                         </Grid>
@@ -243,8 +246,7 @@ function Login(props) {
 
 const mapStateToProps = (state) => {
     return {
-        userCred: state.eventpnl.userCred,
-
+        userCred: state.eventpnl.userCred
     };
   };
 
@@ -253,8 +255,6 @@ const mapDispatchToProps = (dispatch) => {
       addUserData: (userCred) => {
         dispatch({ type: "ADD_USER", userCred: userCred });
       },
-
-
     };
   };
   

@@ -17,7 +17,6 @@ class TransportInput extends Component{
         var today = new Date(),
 
             date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-
         this.state = {
 
 
@@ -78,7 +77,7 @@ class TransportInput extends Component{
         Geocode.fromAddress(this.state.pickuplocation).then(
             (response) => {
                 let { lat, lng } = response.results[0].geometry.location;
-                // console.log(lat, lng);
+                console.log(lat, lng);
                 this.setState({origin_lat:lat,origin_lang:lng})
 
             },
@@ -109,7 +108,7 @@ class TransportInput extends Component{
                     this.props.transport_input_form(this.state.notravellers,this.state.droplocation,
                         this.state.dropoffdate,this.state.dropofftime,this.state.pickuplocation,this.state.pickupdate,
                         this.state.pickuptime,this.state.rounded,this.state.distance_text);
-                    // console.log('redux insert')
+                    console.log('redux insert')
                     this.props.history.push('/transportproviderlist');
                 }
 
@@ -151,7 +150,7 @@ class TransportInput extends Component{
                     alert("Error was: " + status);
                 } else {
                     const distance=response.rows[0].elements[0].distance.text;
-                    // console.log(distance);
+                    console.log(distance);
                     this.setState({distance_text:distance});
                 }
             }
@@ -173,7 +172,7 @@ class TransportInput extends Component{
         }
 
         today = yyyy + "-" + mm + "-" + dd;
-        // console.log(today);
+        console.log(today);
         return (
             <div>
                 <br/>
@@ -195,19 +194,22 @@ class TransportInput extends Component{
                                            className="form-control" placeholder="Pickup Location"    value={this.state.pickuplocation} onChange={this.Changehandler}
                                            name="pickuplocation" required />
                                 </div>
+
                                 <div className="form-group tm-name-container">
                                     <input   name="contact_name" className="form-control"
                                              placeholder="Pickup Date" disabled/>
                                 </div>
+
                                 <div className="form-group tm-name-container">
                                     <input type="date" id="contact_name" name="pickupdate" className="form-control"
-                                           placeholder="Pickup Date"  value={this.state.pickupdate} onChange={this.Changehandler} min={today}  required/>
+                                           placeholder="Pickup Date"  value={this.state.pickupdate} onChange={this.Changehandler} min={today} required/>
                                 </div>
 
                                 <div className="form-group tm-name-container">
                                     <input   name="contact_name" className="form-control"
-                                             placeholder="Pickup Time" disabled/>
+                                             placeholder="Pickup time" disabled/>
                                 </div>
+
                                 <div className="form-group tm-email-container">
                                     <input type="time" id="contact_email" name="pickuptime" className="form-control"
                                            placeholder="time"     value={this.state.pickuptime} onChange={this.Changehandler} required/>
@@ -215,7 +217,7 @@ class TransportInput extends Component{
 
                                 <div className="form-check form-check-inline">
                                     <input className="form-check-input form-group" type="checkbox"
-                                           value="true" name=" checkboxval"   onChange = {e=>this.handlehiddenClik(e)}  />
+                                           value="true" name=" checkboxval"   onChange = {e=>this.handlehiddenClik(e)} required />
                                     <div className="input-group-prepend">
                                         <label className="form-group "><p >Return  to the same location</p> </label>
                                     </div>
@@ -225,8 +227,8 @@ class TransportInput extends Component{
                                     <input type="text"
                                            className="form-control" placeholder="Drop Off Location"
                                            value={this.state.droplocation} onChange={this.Changehandler}
-                                           name="droplocation"
-                                           required  />
+                                           name="droplocation" required
+                                    />
                                 </div>
 
                                 <div className="form-group tm-name-container">
@@ -263,8 +265,6 @@ class TransportInput extends Component{
                         </div>
                     </div>
                 </div>
-
-                {/*<h1>{this.state.distance_text}</h1>*/}
                 <Link to='/logout'>
                     <button>logout</button>
                 </Link>

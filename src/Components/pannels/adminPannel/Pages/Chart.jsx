@@ -3,7 +3,7 @@ import axios from "axios";
 
 function BarGroup(props) {
   let barPadding = 2;
-  let barColour = "#228B22";
+  let barColour = "#000080";
   let widthScale = (d) => d * 10;
 
   let width = widthScale(props.d.value);
@@ -11,7 +11,7 @@ function BarGroup(props) {
 
   return (
     <g className="bar-group">
-      <text className="name-label" x="-70" y={yMid} alignmentBaseline="middle">
+      <text className="name-label" x="-70" y={yMid} alignmentBaseline="middle"style={{ color: '#FFF' }}>
         {props.d.name}
       </text>
       <rect
@@ -182,7 +182,7 @@ function BarChart() {
   return (
     <svg width="1000" height="300">
       <g className="container">
-        <text className="title" x="20" y="30">
+        <text className="title" x="20" y="30" style={{ color: '#FFF' }}>
           {" "}
           Reservations Per Services
         </text>
