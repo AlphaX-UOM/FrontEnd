@@ -103,12 +103,12 @@ class TransportInput extends Component{
 
         ).then(
             setTimeout(function() { //Start the timer
-                console.log(this.state)
+                // console.log(this.state)
                 if(this.state.distance_text!==''){
                     this.props.transport_input_form(this.state.notravellers,this.state.droplocation,
                         this.state.dropoffdate,this.state.dropofftime,this.state.pickuplocation,this.state.pickupdate,
                         this.state.pickuptime,this.state.rounded,this.state.distance_text);
-                    console.log('redux insert')
+                    // console.log('redux insert')
                     this.props.history.push('/transportproviderlist');
                 }
 
@@ -150,7 +150,7 @@ class TransportInput extends Component{
                     alert("Error was: " + status);
                 } else {
                     const distance=response.rows[0].elements[0].distance.text;
-                    console.log(distance);
+                    // console.log(distance);
                     this.setState({distance_text:distance});
                 }
             }
@@ -172,7 +172,7 @@ class TransportInput extends Component{
         }
 
         today = yyyy + "-" + mm + "-" + dd;
-        console.log(today);
+        // console.log(today);
         return (
             <div>
                 <br/>

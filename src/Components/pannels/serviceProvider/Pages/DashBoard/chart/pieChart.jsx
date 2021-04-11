@@ -10,7 +10,7 @@ import Chart from "chart.js";
     const [hotel, setHotel] = useState(null);
 
     let userId = props.myId;
-    console.log(userId)
+    // console.log(userId)
     useEffect(() => {
         fetch(
             `https://alphax-api.azurewebsites.net/api/eventplannerservices` //`https://alphax-api.azurewebsites.net/api/eventplannerservicereservations/${userId}`
@@ -84,7 +84,7 @@ import Chart from "chart.js";
 
             });
     }, [userId]);
-    console.log(eventList)
+    // console.log(eventList)
 
   useEffect(() => {
     const ctx = document.getElementById("myChart");
