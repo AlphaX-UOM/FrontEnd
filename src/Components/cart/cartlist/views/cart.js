@@ -50,8 +50,18 @@ const useStyles = makeStyles((theme) => ({
   const handleFormData = () => {
     props.addTotalData(subTotal);
     
-    if(props.userCred.id !== undefined){
-      history.push("/paypal");
+    if(props.isAuthenticated){
+
+      fetch(`https://alphax-api.azurewebsites.net/api/users/${props.auth.userId}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseData) => {
+
+        props.addUserData(responseData);
+        history.push("/paypal");
+      });
+
     }
     else{
       setOpen(true);
@@ -136,7 +146,9 @@ const useStyles = makeStyles((theme) => ({
 const mapStateToProps = (state) => {
     return {
         items: state.onlineStoreApp.items,
-        userCred: state.eventpnl.userCred
+        userCred: state.eventpnl.userCred,
+        isAuthenticated: state.auth.token !== null,
+        auth: state.auth
     }
 }
 
@@ -145,8 +157,10 @@ const mapDispatchToProps = (dispatch) => {
         saveLocalStorage:  items => { dispatch(saveCart(items)) },
         addTotalData: (total) => {
           dispatch({ type: "ADD_PAYPAL_DATA", total: total });
-        }
-    }
+        },
+        addUserData: (userCred) => {
+          dispatch({ type: "ADD_USER", userCred: userCred });
+    }}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)( CartPage);

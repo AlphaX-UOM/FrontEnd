@@ -38,7 +38,8 @@ export const mainListItems = (
       <ListItemIcon>
         <ShoppingCartIcon  style={{ color: '#FFF' }}/>
       </ListItemIcon>
-      <ListItemText primary="My Reservations(As a customer)" />
+      <ListItemText primary="My Reservations" />
+      
     </ListItem>
     </Link>
     <Link to="/cancelation"  style={{ color: '#FFF' }}>
@@ -55,7 +56,7 @@ export const mainListItems = (
       <ListItemIcon>
         <ShoppingCartIcon  style={{ color: '#FFF' }}/>
       </ListItemIcon>
-      <ListItemText primary="Reservations(As a Service Provider)" />
+      <ListItemText primary="Service Reservations" />
     </ListItem>
     </Link>
   

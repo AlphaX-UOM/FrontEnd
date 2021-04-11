@@ -100,7 +100,7 @@ function Account(props) {
 
         var axios = require('axios');
 
-        var data = JSON.stringify({ "id": props.userCred.id, "firstName": Customers.firstName === "" ? actualname : Customers.firstName, "lastName": Customers.lastName === "" ? actuallast : Customers.lastName, "password": props.userCred.password, "dob": props.userCred.dob, "address": Customers.address === "" ? actuuaadd : Customers.address, "email": props.userCred.email, "contact": Customers.contact === "" ? actuualTel : Customers.contact, "role": props.userCred.role });
+        var data = JSON.stringify({ "id": props.userCred.id, "firstName": Customers.firstName === "" ? actualname : Customers.firstName, "lastName": Customers.lastName === "" ? actuallast : Customers.lastName, "password": props.userCred.password, "dob": props.userCred.dob, "address": Customers.address === "" ? actuuaadd : Customers.address, "email": props.userCred.email, "contact": Customers.contact === "" ? actuualTel : Customers.contact, "role": props.userCred.role,"imgURL":props.userCred.imgURL });
 
         var config = {
             method: 'put',

@@ -1,9 +1,10 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
 import Rating from "@material-ui/lab/Rating";
+import React, { useEffect, useState } from "react";
 
 function ItemOneComment(props) {
-
+  const [showText, setShowText] = useState(false);
 
 
   return (
@@ -31,12 +32,13 @@ function ItemOneComment(props) {
           <p>{props.data.content}</p>
 
           <hr className="" />
-
+          {props.data.rating===0?"":
           <Rating
             name="read-only"
             value={props.data.rating}
             readOnly
-          />
+          />}
+
         </div>
       </div>
     </div>

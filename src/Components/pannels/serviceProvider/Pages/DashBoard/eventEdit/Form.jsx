@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button'
 import id from 'date-fns/esm/locale/id/index.js';
+import { color } from 'highcharts';
 
 export const Form = ({ onSubmit,data }) => {
    
@@ -138,8 +139,8 @@ console.log(data)
         />
       </div>
       <div className="form-group">
-      <button className="form-control btn btn-primary" type="submit">
-          Submit
+      <button class="btn btn-success" type="submit" >
+        Update
         </button>
       </div>
     </form>

@@ -1,0 +1,9 @@
+.hotel_img_element{
+    max-height: 450px;
+max-width: 450px;
+border-radius: 30px;
+}
+
+.avatar {
+    color: blue;
+}

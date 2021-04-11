@@ -126,7 +126,8 @@ if(this.state.progressx===true){
                 })
                 .then(response => {
                     console.log(response)
-                    alert("ok");
+                    alert("Post added");
+
                 })
                 .catch(error => {
                     console.log(error)
@@ -156,7 +157,7 @@ if(this.state.progressx===true){
                             <div className="col-sm-6 ">
                                 <label htmlFor="name">Business Name</label>
                                 <input type="Text" className="form-control" id="name" name="name"
-                                      value={this.state.name} onChange={this.Changehandler}/>
+                                      value={this.state.name} onChange={this.Changehandler} required/>
                             </div>
                             <div className="col-sm-3">
 
@@ -168,7 +169,7 @@ if(this.state.progressx===true){
                             <div className="col-sm-6">
                                 <label htmlFor="inputEmail4">Email</label>
                                 <input type="email" className="form-control" id="inputEmail4" name="email"
-                                       value={this.state.email} onChange={this.Changehandler}     />
+                                       value={this.state.email} onChange={this.Changehandler}  required   />
                             </div>
                             <div className="col-sm-3"></div>
                         </div>
@@ -177,7 +178,7 @@ if(this.state.progressx===true){
                             <div className="col-sm-6">
                                 <label htmlFor="Address">Address</label>
                                 <input type="Address" name="address" className="form-control" id="Address"
-                                       value={this.state.address} onChange={this.Changehandler}  />
+                                       value={this.state.address} onChange={this.Changehandler} required />
                             </div>
                             <div className="col-sm-3"></div>
                         </div>
@@ -186,7 +187,7 @@ if(this.state.progressx===true){
                             <div className="col-sm-6">
                                 <label htmlFor="pnumber">TelePhone</label>
                                 <input type="number" name="telephone" className="form-control" id="pnumber"
-                                       value={this.state.telephone} onChange={this.Changehandler}   />
+                                       value={this.state.telephone} onChange={this.Changehandler} required  />
                             </div>
                             <div className="col-sm-3"></div>
                         </div>
@@ -196,7 +197,7 @@ if(this.state.progressx===true){
                             <div className="col-sm-6">
                                 <label htmlFor="district">District</label>
                                 <input type="Text" className="form-control" name="district"
-                                       value={this.state.district} onChange={this.Changehandler} />
+                                       value={this.state.district} onChange={this.Changehandler}required />
                             </div>
                             <div className="col-sm-3"></div>
                         </div>
@@ -206,7 +207,7 @@ if(this.state.progressx===true){
                             <div className="col-sm-6">
                                 <div className="form-group">
                                     <label htmlFor="exampleFormControlSelect1">Vehicle type</label>
-                                    <select className="form-control tm-select"  name="vehicletype" value={this.state.vehicletype} onChange={this.Changehandler}>
+                                    <select className="form-control tm-select"  name="vehicletype" value={this.state.vehicletype} onChange={this.Changehandler} required>
                                         <option value="Car">Car</option>
                                         <option value="Van">Van</option>
                                         <option value="Suv">Suv</option>
@@ -237,7 +238,7 @@ if(this.state.progressx===true){
                                         <div className="col-sm-3">
                                             <div className="form-group" >
                                                 <label htmlFor="exampleFormControlSelect1">Brand</label>
-                                                <select className="form-control tm-select"  name="brand" value={this.state.brand} onChange={this.Changehandler}>
+                                                <select className="form-control tm-select"  name="brand" value={this.state.brand} onChange={this.Changehandler} required>
                                                     <option value=""></option>
                                                     <option value="Toyota">Toyota</option>
 
@@ -267,7 +268,7 @@ if(this.state.progressx===true){
                                         <div className="col-sm-3">
                                             <div className="form-group" >
                                                 <label htmlFor="exampleFormControlSelect1">Brand</label>
-                                                <select className="form-control tm-select"  name="brand" value={this.state.brand} onChange={this.Changehandler} >
+                                                <select className="form-control tm-select"  name="brand" value={this.state.brand} onChange={this.Changehandler} required >
                                                     <option value=""></option>
                                                     <option value="Nissan">Nissan</option>
 
@@ -300,7 +301,7 @@ if(this.state.progressx===true){
                                     <div className="col-sm-3">
                                         <div className="form-group" >
                                             <label htmlFor="exampleFormControlSelect1">Brand</label>
-                                            <select className="form-control tm-select"  name="brand" value={this.state.brand} onChange={this.Changehandler}>
+                                            <select className="form-control tm-select"  name="brand" value={this.state.brand} onChange={this.Changehandler} required>
                                                 <option value=""></option>
                                                 <option value="Nissan">Nissan</option>
 
@@ -331,7 +332,7 @@ if(this.state.progressx===true){
                                     <div className="col-sm-3">
                                         <div className="form-group" >
                                             <label htmlFor="exampleFormControlSelect1">Brand</label>
-                                            <select className="form-control tm-select"  name="brand" value={this.state.brand} onChange={this.Changehandler} >
+                                            <select className="form-control tm-select"  name="brand" value={this.state.brand} onChange={this.Changehandler} required >
                                                 <option value=""></option>
                                                 <option value="Toyota">Toyota</option>
 
@@ -364,7 +365,7 @@ if(this.state.progressx===true){
                             <div className="col-sm-6 ">
                                 <label htmlFor="district">Number of seats</label>
                                 <input type="number" className="form-control" name="num_seat"
-                                       value={this.state.num_seat} onChange={this.Changehandler} />
+                                       value={this.state.num_seat} onChange={this.Changehandler} required />
                             </div>
                             <div className="col-sm-3"></div>
                         </div>
@@ -375,7 +376,7 @@ if(this.state.progressx===true){
 
                                 <div className="form-check form-check-inline">
                                     <input className="form-check-input form-group" type="checkbox"
-                                           value="true" name=" checkboxval"   onChange = {e=>this.handlehiddenClik(e)} />
+                                           value="true" name=" checkboxval"   onChange = {e=>this.handlehiddenClik(e)} required />
                                     <div className="input-group-prepend">
                                         <label className="form-group "><p >Air Condition</p> </label>
                                     </div>
@@ -390,7 +391,7 @@ if(this.state.progressx===true){
                             <div className="col-sm-6">
                                 <label htmlFor="district"> Cost Per 1 km</label>
                                 <input type="number" className="form-control" name="costperdistance"
-                                       value={this.state.costperdistance} onChange={this.Changehandler} />
+                                       value={this.state.costperdistance} onChange={this.Changehandler} max='100' required/>
                             </div>
                             <div className="col-sm-3"></div>
                         </div>
@@ -400,7 +401,7 @@ if(this.state.progressx===true){
                             <div className="col-sm-6">
                                 <label htmlFor="district"> Cost Per day</label>
                                 <input type="number" className="form-control" name="costperday"
-                                       value={this.state.costperday} onChange={this.Changehandler} />
+                                       value={this.state.costperday} onChange={this.Changehandler} max='50000' required />
                             </div>
                             <div className="col-sm-3"></div>
                         </div>
@@ -412,7 +413,7 @@ if(this.state.progressx===true){
                             <div className="form-group">
                                 <label htmlFor="exampleFormControlTextarea1">Description</label>
                                 <textarea className="form-control" id="exampleFormControlTextarea1" name="description"
-                                          rows="3" value={this.state.description} onChange={this.Changehandler}></textarea>
+                                          rows="3" value={this.state.description} onChange={this.Changehandler} required></textarea>
                             </div>
                         </div>
                         <div className="col-sm-3"></div>
@@ -451,7 +452,7 @@ if(this.state.progressx===true){
                                 <br/>
                                 <hr/>
                                 {/*{this.state.url}*/}
-                                <img src={this.state.url || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" />
+                                <img src={this.state.url || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" required />
                             </div>
                             <div className="col-sm-3"></div>
                         </div>

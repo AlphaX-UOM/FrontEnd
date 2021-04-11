@@ -34,9 +34,14 @@ const navbar=(props)=>{
                     <li className="nav-item  " style={{width:"100px"}}>
                         <Link className="nav-link " to="/"> <span className="align-text-bottom"><HomeIcon /></span> Home <span className="sr-only">(current)</span></Link>
                     </li>
-                    <li className="nav-item" style={{width:"100px"}}>
+                    {props.role==="ServiceProvider" || props.role==="Admin" && props.isAuthenticated  ? <li className="nav-item" style={{width:"100px"}}>
                         <Link className="nav-link" to="/post"><span className="align-text-bottom"><AddCircleIcon/></span>  Post</Link>
-                    </li>
+                    </li>:<p></p>}
+
+                    {/*{ !props.isAuthenticated  ? <li className="nav-item" style={{width:"100px"}}>*/}
+                        {/*<Link className="nav-link" to="/login"><span className="align-text-bottom"><ExitToAppIcon/></span>  Sign in</Link>*/}
+                    {/*</li>:null}*/}
+
                     <li className="nav-item " style={{width:"100px"}}>
                         <Link className="nav-link" to="/login"><span className="align-text-bottom"><ExitToAppIcon/></span> Sign in</Link>
                     </li>
@@ -60,7 +65,9 @@ const navbar=(props)=>{
 };
 const mapStateToProps = (state) => {
     return {
-        items: state.onlineStoreApp.items
+        items: state.onlineStoreApp.items,
+        isAuthenticated: state.auth.token !== null,
+        role: state.auth.role
     }
 }
 

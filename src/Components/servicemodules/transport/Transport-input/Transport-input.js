@@ -9,6 +9,7 @@ import connect from "react-redux/es/connect/connect";
 import * as actions from '../../../../store/actions/index';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import Geocode from "react-geocode";
+import {Link} from 'react-router-dom'
 class TransportInput extends Component{
 
     constructor(props) {
@@ -191,21 +192,32 @@ class TransportInput extends Component{
                                 <div className="form-group">
                                     <input type="text" id="contact_subject"
                                            className="form-control" placeholder="Pickup Location"    value={this.state.pickuplocation} onChange={this.Changehandler}
-                                           name="pickuplocation" />
+                                           name="pickuplocation" required />
                                 </div>
+
+                                <div className="form-group tm-name-container">
+                                    <input   name="contact_name" className="form-control"
+                                             placeholder="Pickup Date" disabled/>
+                                </div>
+
                                 <div className="form-group tm-name-container">
                                     <input type="date" id="contact_name" name="pickupdate" className="form-control"
-                                           placeholder="Pickup Date"  value={this.state.pickupdate} onChange={this.Changehandler} min={today} />
+                                           placeholder="Pickup Date"  value={this.state.pickupdate} onChange={this.Changehandler} min={today} required/>
+                                </div>
+
+                                <div className="form-group tm-name-container">
+                                    <input   name="contact_name" className="form-control"
+                                             placeholder="Pickup time" disabled/>
                                 </div>
 
                                 <div className="form-group tm-email-container">
                                     <input type="time" id="contact_email" name="pickuptime" className="form-control"
-                                           placeholder="time"     value={this.state.pickuptime} onChange={this.Changehandler}/>
+                                           placeholder="time"     value={this.state.pickuptime} onChange={this.Changehandler} required/>
                                 </div>
 
                                 <div className="form-check form-check-inline">
                                     <input className="form-check-input form-group" type="checkbox"
-                                           value="true" name=" checkboxval"   onChange = {e=>this.handlehiddenClik(e)} />
+                                           value="true" name=" checkboxval"   onChange = {e=>this.handlehiddenClik(e)} required />
                                     <div className="input-group-prepend">
                                         <label className="form-group "><p >Return  to the same location</p> </label>
                                     </div>
@@ -215,7 +227,7 @@ class TransportInput extends Component{
                                     <input type="text"
                                            className="form-control" placeholder="Drop Off Location"
                                            value={this.state.droplocation} onChange={this.Changehandler}
-                                           name="droplocation"
+                                           name="droplocation" required
                                     />
                                 </div>
 
@@ -227,7 +239,7 @@ class TransportInput extends Component{
                                 <div className="form-group tm-email-container">
                                     <input type="date" name="dropoffdate" className="form-control"
                                            placeholder="date"  value={this.state.dropoffdate} onChange={this.Changehandler}
-                                           min={this.state.pickupdate}/>
+                                           min={this.state.pickupdate} required/>
                                 </div>
 
                                 <div className="form-group tm-name-container">
@@ -242,7 +254,7 @@ class TransportInput extends Component{
 
                                 <div className="form-group">
                                     <input type="Number"  name="notravellers"
-                                           className="form-control" placeholder="No Of Travellers" max='20' value={this.state.notravellers} onChange={this.Changehandler} min="0"/>
+                                           className="form-control" placeholder="No Of Travellers" max='20' value={this.state.notravellers} onChange={this.Changehandler} min="0" required/>
                                 </div>
 
 
@@ -253,8 +265,9 @@ class TransportInput extends Component{
                         </div>
                     </div>
                 </div>
-
-                <h1>{this.state.distance_text}</h1>
+                <Link to='/logout'>
+                    <button>logout</button>
+                </Link>
                 <br/>
             </div>
         )

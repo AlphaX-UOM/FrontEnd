@@ -6,19 +6,25 @@ import Box from "@material-ui/core/Box";
 import Comment from "./ItemOneComment";
 import { connect } from "react-redux";
 import axios from "axios";
+import { Card } from "react-bootstrap";
 
 const Comments = (props) => {
   const [commentList, setCommentList] = useState();
-  const [value, setValue] = React.useState(2);
+ 
   const [comment, setComment] = useState();
   const [ordered, setOrdered] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [total, setTotal] = useState(false);
+  const [value, setValue] = useState(0);
+  const [disabled, setDisabled] = useState(true);
 
   const handleFormData = () => {
     // comment post request goes here
+ 
     let commentObject = {
       createdAt: new Date(),
-      rating: value,
+
+      rating:value===total?total:value,
       content: comment,
       userID: props.userCred.id,
       eventPlannerServiceID: props.add_id,
@@ -78,15 +84,43 @@ const Comments = (props) => {
         }
       });
   }, []);
+const [eventlist,setEventList]=useState(null);
+useEffect(() => {
+  fetch(
+      `https://alphax-api.azurewebsites.net/api/eventplannerservicecomments` //`https://alphax-api.azurewebsites.net/api/eventplannerservicereservations/${userId}`
+  )
+
+      .then((response) => {
+          return response.json();
+      })
+      .then((responseData) => {
+
+          //  setEvent(responseData)
+          responseData = responseData.filter(item => item.eventPlannerServiceID === props.add_id);
+          responseData= responseData.filter((ele, ind) => ind === responseData.findIndex(elem => elem.userID === ele.userID))
+          setEventList(responseData.reduce((total, pay) => total + 1, 0));
+          setTotal(responseData.reduce((total,pay)=>total+pay.rating,0))
+       
+
+
+
+      });
+}, [props.add_id]);
+
 
   const commentListComponent = () => {
+
     console.log(commentList.eventPlannerServiceComments);
+     console.log("data=> "+eventlist)
+
     return commentList.eventPlannerServiceComments.map((commentListObject) => {
       return <Comment data={commentListObject} />;
     });
   };
 
   const commentInput = () => {
+
+
     return (
       <div className="col-md-9">
         <div className="media g-mb-30 media-comment">
@@ -105,23 +139,32 @@ const Comments = (props) => {
               </ul>
               <hr />
             </div>
-
-            <TextField
-              id="standard-basic"
-              fullWidth
-              label="Input your comment"
-              onChange={handleInputComment}
-            />
+             <TextField
+                id="standard-basic"
+                fullWidth
+                label="Input your comment"
+                onChange={handleInputComment}
+              />
+           
+     
+      
 
             <hr className="" />
 
             <ul className="list-inline d-sm-flex my-0">
               <li className="list-inline-item g-mr-20">
-                <Rating
-                  name="pristine"
-                  value={value}
-                  onChange={handleInputRating}
-                />
+
+                {eventlist===0?
+<Rating 
+                name="pristine"
+                value={value}
+                onChange={handleInputRating}
+              />:""
+               
+            }
+  
+
+      
               </li>
               <li className="list-inline-item g-mr-20"></li>
               <li className="list-inline-item g-mr-20"></li>
@@ -265,7 +308,8 @@ const Comments = (props) => {
 
                 {commentListComponent()}
                 {/* comment end here */}
-                {props.userCred.id!==undefined && ordered ? commentInput() : <p>login to comment</p> }
+                {props.userCred.id!==undefined && ordered ? commentInput()  : <p>login to comment</p> }
+                
               </div>
             </div>
           </div>

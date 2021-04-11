@@ -8,9 +8,38 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Spinner from "../../ResultList/Spinner";
 import { addToCart } from "../../../../../../store/lib/actions";
-import moment from "moment";
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
+import DialogActions from '@material-ui/core/DialogActions';
+import Listitemdetails from './DetailModal/Listitemdetails/listitemdetails';
+
 
 function PackageDetails(props) {
+
+  const [open, setOpen] = React.useState(false);
+  const [scroll, setScroll] = React.useState('paper');
+
+  const handleClickOpen = (scrollType) => () => {
+    setOpen(true);
+    setScroll(scrollType);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const descriptionElementRef = React.useRef(null);
+  React.useEffect(() => {
+    if (open) {
+      const { current: descriptionElement } = descriptionElementRef;
+      if (descriptionElement !== null) {
+        descriptionElement.focus();
+      }
+    }
+  }, [open]);
+
   const { add_to_cart } = props;
 
   var today = new Date();
@@ -125,6 +154,7 @@ function PackageDetails(props) {
       imageRatio: 730 / 1030,
     },
   ];
+
 
   const handleFormData = () => {
     
@@ -264,7 +294,12 @@ function PackageDetails(props) {
                         </center>
                       </div>
                     ) : (
-                      <div className="card-body">{card.description}</div>
+                      <div className="card-body"><small>{card.description}</small><p><button
+                      class="btn btn-outline-info btn-sm"
+                      onClick={handleClickOpen('paper')}
+                    >
+                      More Details
+                    </button></p></div>
                     )}
                     <Image ratio={card.imageRatio} src={card.image} />
                   </Card>
@@ -272,6 +307,27 @@ function PackageDetails(props) {
               ))}
             </div>
           </div>
+          <Dialog
+          
+          maxWidth={"lg"}
+        open={open}
+        onClose={handleClose}
+        scroll={scroll}
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+      >
+        <DialogTitle id="scroll-dialog-title">Details</DialogTitle>
+        <DialogContent dividers={scroll === 'paper'}>
+         
+            <Listitemdetails />
+
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="secondary">
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
         </Hero>
       </Particles>
     </div>

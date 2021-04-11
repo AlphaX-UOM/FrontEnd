@@ -28,7 +28,7 @@ function Paypal(props) {
   const [error, setError] = useState(null);
   const paypalRef = useRef();
   const [str, setStr] = useState();
-  const [tra, setTra] = useState(false);
+  const [userCred, setuserCred] = useState();
   const [gui, setGui] = useState(false);
   const [ev01, setEv01] = useState(false);
   const [ev02, setEv02] = useState(false);
@@ -36,6 +36,8 @@ function Paypal(props) {
   let GUID = uuidv4();
 
   useEffect(() => {
+
+
     var totals = props.total;
     var myItems = [];
     for (var i = 0; i < props.items.length; i++) {
@@ -350,6 +352,7 @@ const mapStateToProps = (state) => {
     total: state.eventpnl.total,
     userCred: state.eventpnl.userCred,
     items: state.onlineStoreApp.items,
+    auth: state.auth
   };
 };
 

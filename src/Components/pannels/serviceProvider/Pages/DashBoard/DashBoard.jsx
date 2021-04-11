@@ -10,6 +10,8 @@ import { connect } from "react-redux";
 
 import { Card } from '@material-ui/core';
 import { CardContent } from '@material-ui/core';
+import Image from 'react-bootstrap/Image'
+import PieChart from './chart/pieChart';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -103,26 +105,37 @@ function Dashboard(props) {
 
 
       <div className="row">
-        <div className="col-3">
-          <img src={props.userCred.imgURL} alt="img1" style={{ width: "255px", height: "225px" }}></img>
+      <div className="col-1">
+          
         </div>
-        <div className="col-9">
+        <div className="col-3">
+          <Image src={props.userCred.imgURL} alt="img1" style={{ width: "255px", height: "225px" }}roundedCircle></Image>
+        </div>
+        <div className="col-4">
        <h2>{props.userCred.firstName}  {props.userCred.lastName}</h2>   
         </div>
+
+        <div className="col-3">
+          <PieChart myId={props.myId}/>
+     <center>My Post Summary</center>     
+    
+        </div>
+
+        
       </div>
       <br>
       </br>
       <br>
       </br>
       <div className="row">
-        <div className="col-3">
-          <Link to="/event" style={{ color: 'black' }}>
-            <Card>
+      <div className="col-1"></div>
+        <div className="col-2">
+          <Link to="/event"  style={{ color: 'black' }}>
+            <Card style={{backgroundColor:"#AC3E31"}}>
               <CardContent>
                 <div >
-                  <InputLabel>Event Posts</InputLabel>
-                  <InputLabel></InputLabel>
-
+                  <h3>Event Posts</h3>
+                 
                 </div>
 
 
@@ -132,12 +145,12 @@ function Dashboard(props) {
 
         </div>
 
-        <div className="col-3">
+        <div className="col-2">
           <Link to="/trans" style={{ color: 'black' }}>
-            <Card>
+          <Card style={{backgroundColor:"#AC3E31"}}>
               <CardContent>
                 <div >
-                  <InputLabel>Transport Posts</InputLabel>
+                  <h3>Transport</h3>
 
 
                 </div>
@@ -149,12 +162,12 @@ function Dashboard(props) {
 
         </div>
 
-        <div className="col-3">
+        <div className="col-2">
           <Link to="/guide" style={{ color: 'black' }}>
-            <Card>
+          <Card style={{backgroundColor:"#AC3E31"}}>
               <CardContent>
                 <div >
-                  <InputLabel>Guide Posts</InputLabel>
+                  <h3>Guide Posts</h3>
 
 
                 </div>
@@ -166,12 +179,12 @@ function Dashboard(props) {
 
         </div>
 
-        <div className="col-3">
+        <div className="col-2">
           <Link to="/hotel" style={{ color: 'black' }}>
-            <Card>
+          <Card style={{backgroundColor:"#AC3E31"}}>
               <CardContent>
                 <div >
-                  <InputLabel>Hotel Posts</InputLabel>
+                  <h3>Hotel Posts</h3>
 
                 </div>
 

@@ -58,7 +58,7 @@ const Events  = (props) =>  {
 
 
                             <Box borderRadius="30px">
-                                <Card style={{ border: '3px solid black', borderRadius: '5px!important' }}>
+                                <Card style={{ border: '3px solid black', borderRadius: '5px!important',height:"300px" }}>
 
                                     <CardContent style={{ height: "60hv" }}>
                                         <Typography gutterBottom variant="headline" component="h4">
@@ -75,7 +75,7 @@ const Events  = (props) =>  {
                                     </CardContent>
                                     <CardActions>
                                         <Button size="small" color="primary" target="_blank">
-                                            Go To Event
+                                    View Post
  </Button>
                                     </CardActions>
 

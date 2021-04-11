@@ -145,8 +145,8 @@ export default function Dashboard(props) {
   return (
     <div className={classes.root}>
         <BrowserRouter>
-      <CssBaseline />
-      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+      {/* <CssBaseline /> */}
+      {/* <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
@@ -167,7 +167,7 @@ export default function Dashboard(props) {
             </Badge>
           </IconButton>
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
       <Drawer
         variant="permanent"
         classes={{
@@ -186,8 +186,8 @@ export default function Dashboard(props) {
        
       
       </Drawer>
-      <main className={classes.content} style={{backgroundColor:'#6495ED'}}>
-        <div className={classes.appBarSpacer} style={{backgroundColor:'#6495ED'}} />
+      <main className={classes.content} >
+        <div className={classes.appBarSpacer}  />
         <Switch>
         <Route path='/account'> <Account  myId={props.myId} /> </Route>
         <Route path='/services'><Services myId={props.myId}/></Route>
