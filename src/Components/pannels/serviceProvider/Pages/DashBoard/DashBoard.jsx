@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -94,6 +94,32 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Dashboard(props) {
+
+
+
+  let userId = props.myId;
+  const [users, setUsers] = useState([]);
+
+
+  useEffect(() => {
+      fetch(
+          `https://alphax-api.azurewebsites.net/api/users/${userId}` //`https://alphax-api.azurewebsites.net/api/eventplannerservicereservations/${userId}`
+      )
+
+          .then((response) => {
+              return response.json();
+          })
+          .then((responseData) => {
+
+              //  setEvent(responseData)
+            
+              setUsers(responseData);
+              console.log(responseData)
+             
+
+
+          });
+  }, []);
   const classes = useStyles();
 
 
@@ -109,10 +135,10 @@ function Dashboard(props) {
           
         </div>
         <div className="col-3">
-          <Image src={props.userCred.imgURL} alt="img1" style={{ width: "255px", height: "225px" }}roundedCircle></Image>
+          <Image src={users.imgURL} alt="img1" style={{ width: "255px", height: "225px" }}roundedCircle></Image>
         </div>
         <div className="col-4">
-       <h2>{props.userCred.firstName}  {props.userCred.lastName}</h2>   
+       <h2>{users.firstName}  {users.lastName}</h2>   
         </div>
 
         <div className="col-3">

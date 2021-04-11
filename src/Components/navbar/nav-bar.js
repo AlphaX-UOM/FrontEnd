@@ -67,7 +67,8 @@ const mapStateToProps = (state) => {
     return {
         items: state.onlineStoreApp.items,
         isAuthenticated: state.auth.token !== null,
-        role: state.auth.role
+        role: state.auth.role,
+        id: state.auth.userId,
     }
 }
 

@@ -38,8 +38,11 @@ function ItemCheck1(props) {
     // var today = new Date(),
     //     date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
-    var today = new Date(nameList.date);
+    var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+    var act = new Date(nameList.date);
+    var date1 = act.getFullYear() + '-' + (act.getMonth() + 1) + '-' + act.getDate();
 
 console.log("event price ->"+nameList.price);
   const increaseQuantity = () => {
@@ -144,7 +147,7 @@ console.log("event price ->"+nameList.price);
               </form>
             </Col> */}
             <Col>
-     {date}
+     {date1}
       
             </Col>
             <Col>
@@ -254,7 +257,7 @@ console.log("event price ->"+nameList.price);
                   <br />
                 </div>
                 <Link to="/shoppingcart">
-                <button type="button" class="btn btn-success" onClick={()=>nameList.audience==="All"?add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date,"Event",(quantity*nameList.price),quantity)&add_to_cart(nameList.name,nameList.pricePerKid,nameList.id,kidquantity,date,"Event",(kidquantity*nameList.pricePerKid),kidquantity):
+                <button type="button" class="btn btn-success" onClick={()=>nameList.audience==="All"?add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date,"Event",(quantity*nameList.price),quantity)&add_to_cart(nameList.name,nameList.pricePerKid,nameList.id,kidquantity,new Date(),"Event",(kidquantity*nameList.pricePerKid),kidquantity):
                 add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date,"Event",(quantity*nameList.price),quantity)
 
               }>

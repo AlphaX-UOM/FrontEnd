@@ -49,11 +49,17 @@ export const auth = (email, password) => {
             password: password,
             returnSecureToken: true
         };
+        var encoded = btoa(JSON.stringify(authData));
+        // var actual = JSON.parse(atob(encoded))
+        // console.log(actual)
+        const encoded_obj={
+            encoded_item:encoded
+        }
         let url = 'https://alphax-api.azurewebsites.net/api/users/Login';
 
-        axios.post(url, authData)
+        axios.post(url, encoded_obj)
             .then(response => {
-                console.log(response);
+                // console.log(response);
                 const expirationDate = new Date(new Date().getTime() + (3600 * 2 * 1000));
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('expirationDate', expirationDate);

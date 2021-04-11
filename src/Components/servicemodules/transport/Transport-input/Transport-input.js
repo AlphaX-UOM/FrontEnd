@@ -217,7 +217,7 @@ class TransportInput extends Component{
 
                                 <div className="form-check form-check-inline">
                                     <input className="form-check-input form-group" type="checkbox"
-                                           value="true" name=" checkboxval"   onChange = {e=>this.handlehiddenClik(e)} required />
+                                           value="true" name=" checkboxval"   onChange = {e=>this.handlehiddenClik(e)} />
                                     <div className="input-group-prepend">
                                         <label className="form-group "><p >Return  to the same location</p> </label>
                                     </div>

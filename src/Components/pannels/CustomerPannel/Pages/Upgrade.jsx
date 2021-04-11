@@ -37,6 +37,9 @@ const upgradeID = uuidv4();
 
 
 const Upgrade = (props) => {
+
+  let userId = props.myId;
+  const [users, setUsers] = useState([]);
   const [state, setstate] = useState({
     firstName: "",
     lastName: "",
@@ -75,6 +78,28 @@ const Upgrade = (props) => {
 
 
 
+  useEffect(() => {
+    fetch(
+        `https://alphax-api.azurewebsites.net/api/users/${userId}` //`https://alphax-api.azurewebsites.net/api/eventplannerservicereservations/${userId}`
+    )
+
+        .then((response) => {
+            return response.json();
+        })
+        .then((responseData) => {
+
+            //  setEvent(responseData)
+          
+            setUsers(responseData);
+            console.log(responseData)
+            
+
+
+        });
+}, []);
+
+
+
 
   const handleSubmit = e => {
   
@@ -84,8 +109,8 @@ const Upgrade = (props) => {
     if (state.isvalid == true) {
       const apiUrlg = `https://vvisit-d6347-default-rtdb.firebaseio.com/upgrade/${upgradeID}.json`;
       let fireUpgrade = {
-        userId: props.userCred.id,
-        userName: props.userCred.firstName + " " + props.userCred.lastName,
+        userId: users.id,
+        userName: users.firstName + " " + users.lastName,
         nationalID: state.id,
         paypalMail: state.email,
         bankName: state.bank,
@@ -93,15 +118,15 @@ const Upgrade = (props) => {
         bankAccountName: state.username,
         upgradeID: upgradeID,
         requestDate: new Date(),
-        id: props.userCred.id,
-        firstName: props.userCred.firstName,
-        lastName: props.userCred.lastName,
+        id: users.id,
+        firstName: users.firstName,
+        lastName:  users.lastName,
         password: props.userCred.password,
-        dob: props.userCred.dob,
-        address: props.userCred.address,
-        email: props.userCred.email,
-        contact: props.userCred.contact,
-        role: props.userCred.role,
+        dob:  users.dob,
+        address: users.address,
+        email:  users.email,
+        contact:  users.contact,
+        role:  users.role,
       };
       axios.put(apiUrlg, fireUpgrade).then((response) => {
         if (response.status === 200) {

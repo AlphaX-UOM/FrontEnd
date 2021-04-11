@@ -6,6 +6,7 @@ import Cancel from "@material-ui/icons/Cancel";
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 
 
@@ -17,7 +18,7 @@ export const mainListItems = (
            
                 <ListItem button>
                   <ListItemIcon>
-                    <PeopleIcon  style={{ color: '#FFF' }} />
+                    <DashboardIcon  style={{ color: '#FFF' }} />
                   </ListItemIcon>
                   <ListItemText primary="Dashboard" />
                 </ListItem>
@@ -33,6 +34,17 @@ export const mainListItems = (
       <ListItemText primary="My Account" />
     </ListItem>
     </Link>
+
+    <Link to="/pass"  style={{ color: '#FFF' }}>
+                
+           
+                <ListItem button>
+                  <ListItemIcon>
+                    <LockOpenIcon  style={{ color: '#FFF' }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Password" />
+                </ListItem>
+                </Link>
     <Link to="/reservations"  style={{ color: '#FFF' }}>
     <ListItem button>
       <ListItemIcon>

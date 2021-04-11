@@ -68,13 +68,19 @@ const EventItem  = ({ posts, loading }) =>  {
     <div class="badge bg-warning text-dark"> </div>
     </center>
   */}
-    <Box component="fieldset" mb={3} borderColor="transparent">
+    {/* <Box component="fieldset" mb={3} borderColor="transparent">
       
         <Rating name="read-only" value={value} readOnly />
-      </Box>
-   <Badge pill variant="warning">
+      </Box> */}
+      <div>
+<br>
+</br>
+      <Badge pill variant="warning">
    <AttachMoneyIcon />{post.price} Per Adult
   </Badge>
+
+      </div>
+  
 
  
 

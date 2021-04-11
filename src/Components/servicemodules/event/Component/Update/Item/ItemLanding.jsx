@@ -20,7 +20,7 @@ function ItemLanding(props) {
   const [eventlist,setEventList]=useState(null);
 useEffect(() => {
   fetch(
-      `https://alphax-api.azurewebsites.net/api/eventplannerservicecomments` //`https://alphax-api.azurewebsites.net/api/eventplannerservicereservations/${userId}`
+      `https://alphax-api.azurewebsites.net/api/eventplannerserviceratings` //`https://alphax-api.azurewebsites.net/api/eventplannerservicereservations/${userId}`
   )
 
       .then((response) => {
@@ -31,9 +31,8 @@ useEffect(() => {
           //  setEvent(responseData)
           responseData = responseData.filter(item => item.eventPlannerServiceID === props.match.params.id);
           setValue(responseData.reduce((total,pay1)=>total+ pay1.rating,0))
-          responseData= responseData.filter((ele, ind) => ind === responseData.findIndex(elem => elem.userID === ele.userID))
           setTotal(responseData.reduce((total, pay) => total + 1, 0));
-          setValue(responseData.reduce((total,pay1)=>total+ pay1.rating,0))
+       
        
 
 
@@ -59,10 +58,9 @@ useEffect(() => {
                   <Rating
                     name="half-rating-read"
                     value={value/total}
-                    onChange={(event, newValue) => {
-                      setValue(newValue);
-                    }}
-                  />
+                    precision={0.5}
+                  
+                  /> <small>Based on {total} reviews</small>
                 </center>
               </Box>
           

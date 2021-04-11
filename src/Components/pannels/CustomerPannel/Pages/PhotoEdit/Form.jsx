@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import img from './Images/default.jpg';
 import { connect } from "react-redux";
 import axios from 'axios'
-import { storage } from "../../../../../src/config/firebaseConfig";
+import { storage } from "../../../../../../src/config/firebaseConfig";
 
-class Picture extends Component {
+class Form extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -266,4 +265,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps)(Picture);
+export default connect(mapStateToProps)(Form);

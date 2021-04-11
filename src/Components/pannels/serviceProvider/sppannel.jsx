@@ -35,6 +35,7 @@ import Trans from './Pages/DashBoard/TransTotal';
 import ItemLanding from '../../servicemodules/event/Component/Update/Item/ItemLanding';
 import Transport from '../../servicemodules/transport/Listitemdetails/listitemdetails';
 import GuidePge from '../../servicemodules/guide/components/GuideDetails/guidedetailspage';
+import Password from '../CustomerPannel/Pages/password/passwordForm';
 
 
 
@@ -143,7 +144,8 @@ export default function Dashboard(props) {
   };
  
   return (
-    <div className={classes.root}>
+    <div className={classes.root} >
+   
         <BrowserRouter>
       {/* <CssBaseline /> */}
       {/* <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
@@ -192,6 +194,7 @@ export default function Dashboard(props) {
         <Route path='/account'> <Account  myId={props.myId} /> </Route>
         <Route path='/services'><Services myId={props.myId}/></Route>
         <Route path='/ratings'><Ratings myId={props.myId}/></Route>
+        <Route path='/pass'><Password myId={props.myId}/></Route>
         <Route path='/cancelation'><Cancelation myId={props.myId}/></Route>
         <Route path='/sreservation'><Sreservation myId={props.myId}/></Route>
         <Route path='/reservations'><Reservations myId={props.myId}/></Route>

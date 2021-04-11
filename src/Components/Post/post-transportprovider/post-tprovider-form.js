@@ -8,6 +8,10 @@ import Logo1 from "../../../images/vehicle/itemimages/Intermediate.jpg";
 import Logo2 from "../../../images/vehicle/slide/v.jpg";
 import Logo3 from "../../../images/vehicle/slide/suv.jfif";
 import Logo4 from "../../../images/vehicle/slide/Bus.jfif";
+import connect from "react-redux/es/connect/connect";
+
+
+
 
 class PostTproviderForm extends Component{
     constructor(props) {
@@ -121,7 +125,8 @@ if(this.state.progressx===true){
                     pricePer1KM:parseInt(this.state.costperdistance),
                     pricePerDay:parseInt(this.state.costperday),
                     description:this.state.description,
-                    imgURL:this.state.url
+                    imgURL:this.state.url,
+                    UserID: this.props.id
 
                 })
                 .then(response => {
@@ -460,38 +465,6 @@ if(this.state.progressx===true){
                         <br />
 
 
-                        {/*<div className="row formmarge">*/}
-                            {/*<div className="col-sm-2">*/}
-                                {/*<div className="form-check form-check-inline">*/}
-                                {/*<input className="form-check-input" type="checkbox" id="inlineCheckbox1"*/}
-                                {/*value="Car" name=" checkboxval"    onClick = {this.handlecarClik.bind(this)}/>*/}
-                                {/*<label className="form-check-label" htmlFor="inlineCheckbox1">Car</label>*/}
-                                {/*</div>*/}
-                            {/*</div>*/}
-                            {/*<div className="col-sm-4">*/}
-                                {/*<div className="col-sm">*/}
-                                    {/*<div className="form-group">*/}
-
-                                        {/*<select className="form-control tm-select" id="exampleFormControlSelect1"  name="carvalue" value={this.state.carvalue} onChange={this.Changehandler} disabled = {(!this.state.disabled1)? "disabled" : ""} >*/}
-                                            {/*<option value="Car">Car</option>*/}
-
-
-                                        {/*</select>*/}
-                                    {/*</div>*/}
-                                {/*</div>*/}
-                            {/*</div>*/}
-                            {/*<div className="col-sm-2 form-group">*/}
-                                {/*<input type="Number" className="form-control" name="carcount" placeholder="No.Vehicles" value={this.state.carcount} onChange={this.Changehandler}  hidden = {(!this.state.disabled1)? "hidden" : ""}/>*/}
-                            {/*</div>*/}
-                            {/*<div className="col-sm-2 form-group">*/}
-                                {/*<input type="number" className="form-control" name="carcostperday" placeholder="Price Per Day" value={this.state.carcostperday} onChange={this.Changehandler} disabled = {(!this.state.disabled1)? "disabled" : ""}/>*/}
-                            {/*</div>*/}
-                            {/*<div className="col-sm-2">*/}
-
-                            {/*</div>*/}
-                        {/*</div>*/}
-
-
 
                         <hr/>
 
@@ -515,4 +488,18 @@ if(this.state.progressx===true){
 
 };
 
-export default PostTproviderForm;
+const mapStateToProps = (state) => {
+    return {
+        items: state.onlineStoreApp.items,
+        isAuthenticated: state.auth.token !== null,
+        role: state.auth.role,
+        id: state.auth.userId
+
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostTproviderForm);

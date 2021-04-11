@@ -1,10 +1,11 @@
+  
 import React,{ Component } from 'react';
 
 import ImageUploader from 'react-images-upload';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios'
 import { storage } from "../../../../src/config/firebaseConfig";
-
+import { connect } from "react-redux";
 
 class PostTproviderForm extends Component{
     constructor(props) {
@@ -25,7 +26,7 @@ class PostTproviderForm extends Component{
                 imgURL:'',
                 imgURL02:'',
                 imgURL03 :'',
-                userID :'8c38ca3f-1ae6-4a7c-78ec-08d89bf76381',
+                userID :props.userid,
 
                
                
@@ -35,7 +36,11 @@ class PostTproviderForm extends Component{
             pictures: [],
 
             image:null,
+            image1:null,
+            image2:null,
             url:'',
+            url1:'',
+            url2:'',
          
             progressx:false,
             progress:''
@@ -53,6 +58,18 @@ class PostTproviderForm extends Component{
     handleChange = e => {
         if (e.target.files[0]) {
             this.setState({image:e.target.files[0]});
+        }
+
+    };
+    handleChange1 = e => {
+        if (e.target.files[0]) {
+            this.setState({image1:e.target.files[0]});
+        }
+
+    };
+    handleChange2 = e => {
+        if (e.target.files[0]) {
+            this.setState({image2:e.target.files[0]});
         }
 
     };
@@ -99,11 +116,76 @@ class PostTproviderForm extends Component{
                     .ref(`images`)
                     .child(this.state.image.name)
                     .getDownloadURL()
-                    .then((url) => {
-                        this.setState({url:url});
+                    .then((url0) => {
+                        this.setState({url:url0});
                         this.setState({progressx:true});
                         
                     });
+        
+                 
+                  
+                    
+            }
+            
+        );
+
+
+        const uploadTask1 = storage.ref(`images/${this.state.image1.name}`).put(this.state.image1);
+        uploadTask1.on(
+            "state_changed",
+            snapshot => {
+                const progress = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+                this.setState({ progress: progress});
+            },
+            error => {
+                console.log(error);
+            },
+            () => {
+                storage
+                    .ref(`images`)
+                    .child(this.state.image1.name)
+                    .getDownloadURL()
+                    .then((url) => {
+                        this.setState({url1:url});
+                        this.setState({progressx:true});
+                        
+                    });
+             
+            
+                 
+                 
+                  
+                    
+            }
+            
+        );
+        const uploadTask2 = storage.ref(`images/${this.state.image2.name}`).put(this.state.image2);
+        uploadTask2.on(
+            "state_changed",
+            snapshot => {
+                const progress = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+                this.setState({ progress: progress});
+            },
+            error => {
+                console.log(error);
+            },
+            () => {
+                storage
+                    .ref(`images`)
+                    .child(this.state.image2.name)
+                    .getDownloadURL()
+                    .then((url) => {
+                        this.setState({url2:url});
+                        this.setState({progressx:true});
+                        
+                    });
+                
+
+                 
                  
                   
                     
@@ -129,14 +211,14 @@ if(this.state.progressx===true){
                     audience:this.state.audience,
                     otherDetails:this.state.otherDetails,
                     imgURL:this.state.url,
-                    imgURL02:this.state.url,
-                    imgURL03 :this.state.url,
-                   
+                    imgURL02:this.state.url1,
+                    imgURL03 :this.state.url2,
+                    userID:this.props.userid,
 
                 })
                 .then(response => {
                     console.log(response)
-                    alert("ok");
+                    alert("Your Add is successfully posted");
                 })
                 .catch(error => {
                     console.log(error)
@@ -144,14 +226,14 @@ if(this.state.progressx===true){
         }.bind(this), 4000)
 
 
-
-
+console.log(this.props.userid)
     }
 
     render() {
 
         return (
             <div className="container-fluid mback">
+           
                 <br/>
                 <div className="container ">
 
@@ -212,8 +294,9 @@ if(this.state.progressx===true){
                                         <option value="Pilgrims Tour">Pilgrims Tour</option>
                                         <option value="Nature">Nature</option>
                                         <option value="Camping">Camping</option>
-                                        <option value="Camping">Camping</option>
+                                        <option value="Museaum">Museaum</option>
                                         <option value="Wildlife">Wildlife</option>
+                                        <option value="Boat Safari">Boat Safari</option>
 
                                     </select>
                                 </div>
@@ -234,6 +317,7 @@ if(this.state.progressx===true){
                                       
                                     </select>
                                 </div>
+                           
                             </div>
 
 
@@ -360,13 +444,13 @@ if(this.state.progressx===true){
                             <label htmlFor="image">Upload image 2</label>
 
 
-                                <input type="file" onChange={this.handleChange} />
+                                <input type="file" onChange={this.handleChange1} />
                                 {/*<button onClick={this.handleUpload}>Upload</button>*/}
 
                                 <br/>
                                 <hr/>
                                 {/*{this.state.url}*/}
-                                <img src={this.state.url || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" />
+                                <img src={this.state.url1 || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" />
                             </div>
                             <div className="col-sm-3"></div>
                         </div>
@@ -379,13 +463,13 @@ if(this.state.progressx===true){
                             <label htmlFor="image">Upload image 3</label>
 
 
-                                <input type="file" onChange={this.handleChange} />
+                                <input type="file" onChange={this.handleChange2} />
                                 {/*<button onClick={this.handleUpload}>Upload</button>*/}
 
                                 <br/>
                                 <hr/>
                                 {/*{this.state.url}*/}
-                                <img src={this.state.url || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" />
+                                <img src={this.state.url2 || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" />
                             </div>
                             <div className="col-sm-3"></div>
                         </div>
@@ -445,5 +529,15 @@ if(this.state.progressx===true){
     }
 
 };
+const mapStateToProps = (state) => {
+    return {
+        reservations: state.eventpnl.reservations,
+        formdata: state.eventpnl.formdata,
+        total: state.eventpnl.total,
+        userid:state.auth.userId,
+   
+    };
+};
 
-export default PostTproviderForm;
+
+export default connect(mapStateToProps)(PostTproviderForm);;

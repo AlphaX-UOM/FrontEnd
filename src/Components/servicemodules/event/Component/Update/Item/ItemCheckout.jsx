@@ -18,6 +18,10 @@ function ItemCheckout(props) {
     var today = new Date(),
         date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
+        var event = new Date(props.data.name),
+        eventdate = event.getFullYear() + '-' + (event.getMonth() + 1) + '-' + event.getDate();
+
+
   let eventData =[{
     id : props.data.id,
     name : props.data.name,
