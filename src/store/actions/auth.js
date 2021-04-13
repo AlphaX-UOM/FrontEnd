@@ -73,6 +73,7 @@ export const auth = (email, password) => {
             })
             .catch(function (error) {
                 console.log(error);
+                dispatch(authFail(error));
             });
 
 

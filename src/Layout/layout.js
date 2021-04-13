@@ -8,6 +8,7 @@ import { authCheckState } from '../../src/store/actions/auth';
 import Post from "../Components/Post/post";
 import Shoppingcart from "../Components/cart/cartlist/views/cart";
 import Login from "../Components/Login/login";
+import Select_profile from "../Components/Login/profile/select_profile";
 import Logout from "../Components/Login/Logout/Logout";
 import ServiceProvider from "../Components/Userpanels/ServiceProviderUI/Serviceprovider";
 import Transportinput from "../Components/servicemodules/transport/Transport-input/Transport-input";
@@ -49,6 +50,7 @@ import Rooms from '../Components/servicemodules/hotel/Component/Rooms';
 import RoomResult from '../Components/servicemodules/hotel/Component/RoomResult/RoomResult';
 import RoomResultItem from '../Components/servicemodules/hotel/Component/RoomResult/RoomResultItem';
 import HotelCart from '../Components/servicemodules/hotel/Component/Cart/HotelCart';
+import SignIn from "../Components/Login/Signin/Signin";
 
 const Layout=(props)=> {
     const { items, saveLocalStorage } = props;
@@ -112,7 +114,9 @@ const Layout=(props)=> {
                         <Route path="/post" component={Post}></Route>
                         <Route path="/logout"><Logout/></Route>
                         <Route path="/login"><Login/></Route>
+                        <Route path="/select_profile"><Select_profile/></Route>
                         <Route path="/register"><SignUp/></Route>
+                        <Route path="/signin"><SignIn/></Route>
                        
                         <Route path="/shoppingcart"><Shoppingcart/></Route>
                         <Route path="/serviceprovider" component={ServiceProvider}/>

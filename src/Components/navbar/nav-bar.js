@@ -12,6 +12,8 @@ import { Navbar } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
 import { FormControl } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import LockIcon from '@material-ui/icons/Lock';
+import PersonIcon from '@material-ui/icons/Person';
 import logo1 from "../../images/temp/bg lg/bgbanner-logo.png"
 import connect from "react-redux/es/connect/connect";
 
@@ -42,9 +44,21 @@ const navbar=(props)=>{
                         {/*<Link className="nav-link" to="/login"><span className="align-text-bottom"><ExitToAppIcon/></span>  Sign in</Link>*/}
                     {/*</li>:null}*/}
 
-                    <li className="nav-item " style={{width:"100px"}}>
-                        <Link className="nav-link" to="/login"><span className="align-text-bottom"><ExitToAppIcon/></span> Sign in</Link>
-                    </li>
+                    {/*<li className="nav-item " style={{width:"100px"}}>*/}
+                        {/*<Link className="nav-link" to="/login"><span className="align-text-bottom"><ExitToAppIcon/></span> Sign in</Link>*/}
+                    {/*</li>*/}
+                    { !props.isAuthenticated  ? <li className="nav-item" style={{width:"100px"}}>
+                        <Link className="nav-link" to="/signin"><span className="align-text-bottom"><ExitToAppIcon/></span>Sign in</Link>
+                    </li>:<p></p>}
+
+                    { props.isAuthenticated  ? <li className="nav-item" style={{width:"100px"}}>
+                        <Link className="nav-link" to="/select_profile"><span className="align-text-bottom"><PersonIcon/></span>Account</Link>
+                    </li>:<p></p>}
+
+
+                    { props.isAuthenticated  ? <li className="nav-item" style={{width:"100px"}}>
+                        <Link className="nav-link" to='/logout'><span className="align-text-bottom"><LockIcon/></span> Logout</Link>
+                    </li>:<p></p>}
 
                     <li className="nav-item" style={{width:"100px"}}>
                         <span className="badge badge-pill badge-success cartnum" >{items.length > 0 && items.length}</span>

@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import AdminPanel from '../pannels/adminPannel/adminpannel';
-import CustomerPanel from '../pannels/CustomerPannel/customerPannel';
+import Select_profile from './profile/select_profile';
 import ServicePanel from '../pannels/serviceProvider/sppannel';
 import { connect } from "react-redux";
 // import { Link } from 'react-router-dom';
@@ -147,25 +147,18 @@ function Login(props) {
 
 
     }
+    if(props.error!==null){
+        alert('check your password and email')
+    }
 
-    if (props.isAuthenticated && props.role==="Customer") {
-        console.log(props.userid);
+    if (props.isAuthenticated ) {
+
         return (
-            <CustomerPanel myId={props.userid}/>
+            <Select_profile/>
         )
     }
 
-    if (props.isAuthenticated && props.role==="ServiceProvider") {
-        return (
-            <ServicePanel myId={props.userid}/>
-        )
-    }
 
-    if ( props.isAuthenticated && props.role==="Admin") {
-        return (
-            <AdminPanel myId={props.userid}/>
-        )
-    }
 
     return (
         <Grid container component="main" className={classes.root}>
