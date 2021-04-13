@@ -40,15 +40,18 @@ const EventItem  = ({ posts, loading }) =>  {
    
     <div>
       <center>
+  
       <h4 class="text-uppercase"  style={{ color:"black" }}>Explore SRI LANKA</h4>
       </center>
       <Grid container spacing={2} style={{padding: 24}}>
      
         {posts.map(post => (
-            <Grid item xs={12} sm={6} lg={4} xl={3}>
+             
+            <Grid item xs={12} sm={6} lg={4} xl={3} minHeight="60px">
+               <Link onClick={post.clicked} to={`/categorylanding/${post.id}`}  style={{ color: 'black' }}>
 
-<Box borderRadius="30px">
-  <Card style={{border: '3px solid black',borderRadius: '5px!important'}}>
+<Box borderRadius="30px" >
+  <Card style={{border: '3px solid black',borderRadius: '5px!important' , height:"550px"}}>
 <CardMedia style={{height: 0, paddingTop: '56.25%'}}
     // image={"https://www.touropia.com/gfx/d/best-places-to-visit-in-sri-lanka/yala_national_park.jpg?v=1"}
     image={post.imgURL}
@@ -65,27 +68,35 @@ const EventItem  = ({ posts, loading }) =>  {
     <div class="badge bg-warning text-dark"> </div>
     </center>
   */}
-    <Box component="fieldset" mb={3} borderColor="transparent">
+    {/* <Box component="fieldset" mb={3} borderColor="transparent">
       
         <Rating name="read-only" value={value} readOnly />
-      </Box>
-   <Badge pill variant="warning">
-   <AttachMoneyIcon />{post.price}
+      </Box> */}
+      <div>
+<br>
+</br>
+      <Badge pill variant="warning">
+   <AttachMoneyIcon />{post.price} Per Adult
   </Badge>
+
+      </div>
+  
 
  
 
     </Typography>
 </CardContent>
 <CardActions>
-    <Button size="small" color="primary" href={`/categorylanding/${post.id}`} target="_blank">
+    <Button size="small" color="primary"  target="_blank">
         Go To Event
     </Button> 
 </CardActions>
 
 </Card>
 </Box>
+</Link>
 </Grid>
+
     //       <div className="col-12">
            
     //        <div class="container-fluid py-2" >

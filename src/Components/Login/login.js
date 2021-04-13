@@ -17,6 +17,8 @@ import AdminPanel from '../pannels/adminPannel/adminpannel';
 import CustomerPanel from '../pannels/CustomerPannel/customerPannel';
 import ServicePanel from '../pannels/serviceProvider/sppannel';
 import { connect } from "react-redux";
+// import { Link } from 'react-router-dom';
+import {auth} from '../../store/actions/auth';
 
 function Copyright() {
     return (
@@ -74,26 +76,26 @@ function Login(props) {
 
     const handleFormData = () => {
         console.log("signinsubmit");
-        
+        props.onAuth(email, password);
 
-        fetch(`https://alphax-api.azurewebsites.net/api/users`)
-            .then((response) => {
-                return response.json();
-            })
-            .then((responseData) => {
-                
-                responseData = responseData.filter(item => item.email == email && item.password == password);
-
-                if (responseData[0] != undefined) {
-                    setUserDetail(responseData[0].id);
-                    setUserType(responseData[0].role);
-                    props.addUserData(responseData[0]);
-                    console.log("new user detail->" + responseData[0].firstName);
-                }
-                else {
-                    console.log("error credentials");
-                }
-            });
+        // fetch(`https://alphax-api.azurewebsites.net/api/users`)
+        //     .then((response) => {
+        //         return response.json();
+        //     })
+        //     .then((responseData) => {
+        //
+        //         responseData = responseData.filter(item => item.email == email && item.password == password);
+        //
+        //         if (responseData[0] != undefined) {
+        //             setUserDetail(responseData[0].id);
+        //             setUserType(responseData[0].role);
+        //             props.addUserData(responseData[0]);
+        //             console.log("new user detail->" + responseData[0].firstName);
+        //         }
+        //         else {
+        //             console.log("error credentials");
+        //         }
+        //     });
 
             
 
@@ -143,30 +145,27 @@ function Login(props) {
         //   });
         // console.log("this is return user Id -> " + userDetail.id);
 
-        console.log("This is reached");
-        console.log("This is reached");
-        console.log("This is reached");
+
     }
 
-    if(userType == "Customer"){
-        return(
-            <CustomerPanel myId={userDetail}/>
+    if (props.isAuthenticated && props.role==="Customer") {
+        console.log(props.userid);
+        return (
+            <CustomerPanel myId={props.userid}/>
         )
     }
 
-    if(userType == "ServiceProvider"){
-        return(
-            <ServicePanel myId={userDetail}/>
+    if (props.isAuthenticated && props.role==="ServiceProvider") {
+        return (
+            <ServicePanel myId={props.userid}/>
         )
     }
 
-    if(userType == "Admin"){
-        return(
-            <AdminPanel myId={userDetail}/>
+    if ( props.isAuthenticated && props.role==="Admin") {
+        return (
+            <AdminPanel myId={props.userid}/>
         )
     }
-
-
 
     return (
         <Grid container component="main" className={classes.root}>
@@ -243,7 +242,12 @@ function Login(props) {
 
 const mapStateToProps = (state) => {
     return {
-        userCred: state.eventpnl.userCred
+        userCred: state.eventpnl.userCred,
+        isAuthenticated: state.auth.token !== null,
+        role:state.auth.role,
+        userid:state.auth.userId,
+        loading: state.auth.loading,
+        error: state.auth.error
     };
   };
 
@@ -252,6 +256,7 @@ const mapDispatchToProps = (dispatch) => {
       addUserData: (userCred) => {
         dispatch({ type: "ADD_USER", userCred: userCred });
       },
+        onAuth: (email, password) => dispatch(auth(email, password))
     };
   };
   

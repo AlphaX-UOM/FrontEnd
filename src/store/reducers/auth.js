@@ -4,6 +4,7 @@ import { updateObject } from '../utility';
 const initialState = {
     token: null,
     userId: null,
+    role:null,
     error: null,
     loading: false
 };
@@ -13,12 +14,14 @@ const authStart = ( state, action ) => {
 };
 
 const authSuccess = (state, action) => {
-    return updateObject( state, { 
+    // console.log(action);
+    return updateObject( state, {
         token: action.idToken,
         userId: action.userId,
+        role: action.role,
         error: null,
         loading: false
-     } );
+    } );
 };
 
 const authFail = (state, action) => {
@@ -28,11 +31,16 @@ const authFail = (state, action) => {
     });
 }
 
+const authLogout = (state, action) => {
+    return updateObject(state, { token: null, userId: null, role:null });
+};
+
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case actionTypes.AUTH_START: return authStart(state, action);
         case actionTypes.AUTH_SUCCESS: return authSuccess(state, action);
         case actionTypes.AUTH_FAIL: return authFail(state, action);
+        case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
         default:
             return state;
     }

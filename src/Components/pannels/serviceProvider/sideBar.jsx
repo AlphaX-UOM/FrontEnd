@@ -6,71 +6,69 @@ import Cancel from "@material-ui/icons/Cancel";
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 
 
 import { Link } from 'react-router-dom';;
 export const mainListItems = (
-  <div>
-        <Link to="/dash">
+  <div className="navbar"style={{backgroundColor: '#060b26',height:"600px"}}>
+        <Link to="/dash"  style={{ color: '#FFF' }}>
                 
            
                 <ListItem button>
                   <ListItemIcon>
-                    <PeopleIcon />
+                    <DashboardIcon  style={{ color: '#FFF' }} />
                   </ListItemIcon>
                   <ListItemText primary="Dashboard" />
                 </ListItem>
                 </Link>
 
-    <Link to="/account">
+    <Link to="/account"  style={{ color: '#FFF' }}>
                 
            
     <ListItem button>
       <ListItemIcon>
-        <PeopleIcon />
+        <PeopleIcon  style={{ color: '#FFF' }} />
       </ListItemIcon>
       <ListItemText primary="My Account" />
     </ListItem>
     </Link>
-    <Link to="/reservations">
+
+    <Link to="/pass"  style={{ color: '#FFF' }}>
+                
+           
+                <ListItem button>
+                  <ListItemIcon>
+                    <LockOpenIcon  style={{ color: '#FFF' }} />
+                  </ListItemIcon>
+                  <ListItemText primary="Password" />
+                </ListItem>
+                </Link>
+    <Link to="/reservations"  style={{ color: '#FFF' }}>
     <ListItem button>
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <ShoppingCartIcon  style={{ color: '#FFF' }}/>
       </ListItemIcon>
-      <ListItemText primary="My Reservations(As a customer)" />
+      <ListItemText primary="My Reservations" />
+      
     </ListItem>
     </Link>
-    <Link to="/ratings">
+    <Link to="/cancelation"  style={{ color: '#FFF' }}>
     <ListItem button>
       <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="My ratings" />
-    </ListItem>
-    </Link>
-    <Link to="/cancelation">
-    <ListItem button>
-      <ListItemIcon>
-        <Cancel />
+        <Cancel  style={{ color: '#FFF' }} />
       </ListItemIcon>
       <ListItemText primary="My Cancelations" />
     </ListItem>
     </Link>
-    <Link to="/services">
+
+    <Link to="/sreservation"  style={{ color: '#FFF' }}>
     <ListItem button>
       <ListItemIcon>
-        <ShoppingCartIcon/>
+        <ShoppingCartIcon  style={{ color: '#FFF' }}/>
       </ListItemIcon>
-      <ListItemText primary="My Services" />
-    </ListItem>
-    </Link>
-    <Link to="/sreservation">
-    <ListItem button>
-      <ListItemIcon>
-        <ShoppingCartIcon/>
-      </ListItemIcon>
-      <ListItemText primary="Reservations(As a Service Provider)" />
+      <ListItemText primary="Service Reservations" />
     </ListItem>
     </Link>
   

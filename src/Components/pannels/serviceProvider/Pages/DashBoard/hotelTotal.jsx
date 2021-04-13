@@ -1,68 +1,96 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { connect } from "react-redux";
+import { InputLabel } from '@material-ui/core/';
+import { Card } from "react-bootstrap";
+import Box from "@material-ui/core/Box";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import Typography from '@material-ui/core/Typography';
-import {InputLabel} from '@material-ui/core/';
-import { Hotel } from '@material-ui/icons';
-
-  function HotelTotal(props)  {
-    const [loading, setLoading] = useState(false);
-    const [event,setEvent]=useState([]);
-    const[eventTotal,setEventTotal]=useState(0);
-
-   let userID=props.userCred.id;
-
+import Rating, { IconContainerProps } from "@material-ui/lab/Rating";
+import { withStyles } from "@material-ui/core/styles";
+import Grid from '@material-ui/core/Grid'
+import { Link } from "react-router-dom";
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import Button from '@material-ui/core/Button'
+import { AllInclusiveRounded } from '@material-ui/icons';
 
 
-      axios
-
-      .get(`https://alphax-api.azurewebsites.net/api/hotelsservicereservations/Customers?serid=${userID}`)
-      /*  .then((response) => {
-        return response.json();
-      })*/
-      .then((responseData) => {
-        console.log(responseData);
-       
-  
-        setEvent(responseData.data);
-   //  if(responseData.data.userID===userID)
-        setEventTotal(responseData.data.reduce((total,pay)=>total+1,0))
-  
-        setLoading(false);
-  
-      });
-     
-    
-    
-     
-     
 
 
-    
-      return (
-        <div>
-        <InputLabel>   <h4> Total Hotel Reservations</h4></InputLabel>
-        <Typography>   <h5> {eventTotal}</h5></Typography>
-        </div>
-        
-        
-       
+function Events(props) {
+  const [eventList, setEventList] = useState([]);
 
+  let userId = props.myId;
+  useEffect(() => {
+      fetch(
+          `https://alphax-api.azurewebsites.net/api/hotelsservices` //`https://alphax-api.azurewebsites.net/api/eventplannerservicereservations/${userId}`
       )
 
-    }
-    const mapStateToProps = (state) => {
-        return {
-            reservations: state.eventpnl.reservations,
-            formdata: state.eventpnl.formdata,
-            total: state.eventpnl.total,
-            userCred: state.eventpnl.userCred
-        };
-    };
-    
-    
-    export default connect(mapStateToProps)(HotelTotal);
-    
-    
+          .then((response) => {
+              return response.json();
+          })
+          .then((responseData) => {
 
-  
+              //  setEvent(responseData)
+              responseData = responseData.filter(item => item.userID === userId);
+              responseData= responseData.filter((ele, ind) => ind === responseData.findIndex(elem => elem.name === ele.name))
+             
+              setEventList(responseData);
+
+
+
+          });
+  }, [userId]);
+
+
+  return (
+      <div>
+          <Grid container spacing={2} style={{ padding: 24 }}>
+
+              {eventList.map(post => (
+             
+                  <Grid item xs={12} sm={6} lg={4} xl={3}>
+                  
+
+
+                          <Box borderRadius="30px">
+                              <Card style={{ border: '3px solid black', borderRadius: '5px!important',height:"400px" }}>
+
+                                  <CardContent style={{ height: "60hv" }}>
+                                      <Typography gutterBottom variant="headline" component="h4">
+
+                                          {post.name}
+                                      </Typography>
+                                      <Typography component="p">
+                                          {post.otherDetails}
+
+
+
+
+                                      </Typography>
+                                  </CardContent>
+                                  <CardActions>
+                                      <Button size="small" color="primary" target="_blank">
+                                         View Post
+</Button>
+                                  </CardActions>
+
+                              </Card>
+                          </Box>
+                     
+                  </Grid>
+
+
+
+              ))}
+          </Grid>
+
+
+
+
+
+      </div>
+  );
+}
+
+
+export default Events;

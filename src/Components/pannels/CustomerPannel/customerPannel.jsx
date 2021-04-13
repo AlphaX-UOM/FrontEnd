@@ -3,21 +3,15 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
-import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems} from './sideBar';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Reservation from './Pages/Reservation';
@@ -27,7 +21,7 @@ import Ratings from './Pages/Ratings';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import PassWord from './Pages/password/passwordForm';
 import Upgrade from './Pages/Upgrade';
-
+import Home from '../../Login/Logout/Logout';
 
 
 function Copyright() {
@@ -154,13 +148,18 @@ export default function Dashboard(props) {
             Customer Pannel
           </Typography>
           <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
+      
           </IconButton>
-          <PowerSettingsNewIcon/>
+       
+          <PowerSettingsNewIcon/>     
+        
+         
+   
+        
         </Toolbar>
       </AppBar>
+
+  
       <Drawer
         variant="permanent"
         classes={{
@@ -170,7 +169,8 @@ export default function Dashboard(props) {
       >
         <div className={classes.toolbarIcon}>
           <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
+       
+                <ChevronLeftIcon />
           </IconButton>
         </div>
         <Divider />
@@ -181,7 +181,7 @@ export default function Dashboard(props) {
       </Drawer>
  
       <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
+        <div className={classes.appBarSpacer}  />
         <Switch>
      
         <Route path='/reservations'><Reservation myId={props.myId}/></Route>
@@ -189,6 +189,7 @@ export default function Dashboard(props) {
         <Route path='/ratings'><Ratings myId={props.myId}/></Route>
         <Route path='/pass'><PassWord myId={props.myId}/></Route>
         <Route path='/upgrade'><Upgrade myId={props.myId}/></Route>
+     
         <Route path='/'> <Account  myId={props.myId}/> </Route>
         </Switch>
 

@@ -12,17 +12,23 @@ import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../../../../store/lib/actions";
 import connect from "react-redux/es/connect/connect";
-import DatePicker from 'react-date-picker';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import Badge from "react-bootstrap/Badge";
+import MoodBadIcon from '@material-ui/icons/MoodBad';
 
 
 
 function ItemCheck1(props) {
   const [quantity, setQuantity] = useState(0);
   const [kidquantity, setkidQuantity] = useState(0);
+  
+  const[adultTot,setAdultTot]=useState(0);
+  const [startDate, setStartDate] = useState(new Date());
     const { add_to_cart} = props;
     const [nameList, setNameList] = useState([]);
     const [value, onChange] = useState(new Date());
+    const [myevents,setmyEvents]=useState();
 
     useEffect(() => {
         fetch(
@@ -35,15 +41,73 @@ function ItemCheck1(props) {
             });
     }, []);
 
-    var today = new Date(),
-        date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+    
+    useEffect(() => {
+      fetch('https://alphax-api.azurewebsites.net/api/eventplannerservicereservations/')
+      .then((response) => {
+      
+        return response.json();
+      })
+       .then((responseData) => {
+    setmyEvents(responseData);
+      responseData = responseData.filter(item => item.eventPlannerServiceID === nameList.id && (new Date(item.checkIn).getMonth()+1 ===new Date(startDate).getMonth()+1 & new Date(item.checkIn).getDate() ===new Date(startDate).getDate() &(new Date(item.checkIn).getFullYear() ===new Date(startDate).getFullYear())) );
+    
+          setAdultTot(responseData.reduce((total, pay) => total + pay.adultTikets, 0));
+  
+        
+     
+      //   }
+        
+       
+      });
+      console.log("adult tickets=> "+adultTot)
+
+  }, [startDate]);
+
+
+
+    const myhandler = (event) => {
+   
+      setStartDate(event)
+     
+
+     
+
+      }
+      const isWeekendday = date => {
+        const day = date.getDay();
+        return day === 0|| day === 6;
+      };
+
+      const isWeekday = date => {
+        const day = date.getDay();
+        return day !== 0 && day !== 6;
+      };
+
+
+    
+     
+
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+    var time = new Date(nameList.time);
+    var newTime = time.getHours() + ':' + time.getMinutes() 
 
 console.log("event price ->"+nameList.price);
   const increaseQuantity = () => {
-    let myvar = quantity + 1;
-   // let myvar2=kidquantity+1;
+
+
+    if ((nameList.adultTickets-adultTot)>quantity) {
+      let myvar = quantity + 1;
+   
     setQuantity(myvar);
     console.log("Quantity increased-> " + quantity);
+    } else {
+      window.alert("Maximum "+(nameList.adultTickets-adultTot)+" Adult tickets are available");
+    }
+   
   };
   const increaseQuantity1 = () => {
     let myvar = kidquantity + 1;
@@ -96,12 +160,14 @@ console.log("event price ->"+nameList.price);
 
   return (
     <div>
+        <h3><strong>{nameList.name}</strong></h3>
       <Card className="shadow-sm" style={{ width: "700px" }}>
+       
         <Container>
           <Row>
             <br>
             </br>
-          <h4><strong>{nameList.name}</strong></h4>
+        
           <Col align="right">
               <h5><Badge pill variant="warning">{nameList.price}$/per Adult</Badge></h5>
             </Col>
@@ -110,42 +176,59 @@ console.log("event price ->"+nameList.price);
             </Col>
             <br />
           </Row>
+          <Row> </Row>
+          <Col><Button variant="secondary"><h5>Select Date </h5></Button></Col>
+          <Col>  {nameList.frequency==="weekend"? <Badge pill variant="success"> Only weekends </Badge> : nameList.frequency==="week"? <Badge pill variant="success"> Only week days </Badge>:"" }</Col>
+          <Row> </Row>
           <Row>
-            <Col>
-              <h5>Select Date </h5>
-             
-      {/* <DatePicker
-        onChange={onChange}
-        value={value}
-      /> */}
+            
+          <Col>
+        {nameList.frequency==="weekend"? <DatePicker
+               onChange={myhandler}
+      selected={startDate}
+      minDate={new Date()}
+      filterDate={isWeekendday}
    
-            </Col>
-            <Col><h6>Number of Adults</h6></Col>
-            <Col><h6> {nameList.audience==="All"? "Number of Kids" :" " }</h6></Col>
+  
+    /> : nameList.frequency==="week"? <DatePicker
+    onChange={myhandler}
+selected={startDate}
+minDate={new Date()}
+filterDate={isWeekday}
+   
+
+
+/>: <DatePicker
+    onChange={myhandler}
+selected={startDate}
+minDate={new Date()}
+
+   
+
+
+/> }
+              
+             
+             
+    </Col>
+    <Col> <Button variant="secondary"><h5>Time : {newTime}AM</h5></Button></Col>
+
+
+   
+            
+          </Row>
+          <Row>
+
+            <Col><Button variant="secondary"><h6>Adults </h6></Button></Col>
+            <Col><h6> {nameList.audience==="All"?<Button variant="secondary"><h6>Kids </h6></Button> :" " }</h6>
+            {/* <h5><Badge pill variant="warning">only {nameList.adultTickets-adultTot} tickets for Adults</Badge></h5>  */}
+   
+</Col>
           
           </Row>
         
           <Row>
-            {/* <Col>
-              <form className={classes.container} noValidate>
-                <TextField
-                  id="datetime-local"
-                  label="Select Date and Time"
-                  type="datetime-local"
-                  defaultValue="2017-05-24T10:30"
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </form>
-            </Col> */}
-            <Col>
-               <DatePicker
-        onChange={onChange}
-        value={value}
-      /> 
-            </Col>
+         
             <Col>
               
               <TableCell align="right">
@@ -192,6 +275,7 @@ console.log("event price ->"+nameList.price);
                 </Button>
               </TableCell>
               </Col>
+              <Col></Col>
 
               <Col>
               {nameList.audience==="All"? <TableCell align="right">
@@ -252,15 +336,18 @@ console.log("event price ->"+nameList.price);
                 <div>
                   <br />
                 </div>
-                <Link to="/shoppingcart">
-                <button type="button" class="btn btn-success" onClick={()=>nameList.audience==="All"?add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date,"Event",(quantity*nameList.price),quantity)&add_to_cart(nameList.name,nameList.pricePerKid,nameList.id,kidquantity,date,"Event",(kidquantity*nameList.pricePerKid),kidquantity):
-                add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date,"Event",(quantity*nameList.price),quantity)
+            
+                  {(nameList.adultTickets-adultTot)===0 ?<p> Tickets Not Available   <MoodBadIcon/></p>  :    <Link to="/shoppingcart">
+                  <button type="button" class="btn btn-success" onClick={()=>nameList.audience==="All"?add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date,"EventService",(quantity*nameList.price),quantity)&add_to_cart(nameList.name,nameList.pricePerKid,nameList.id,kidquantity,date,"EventService",(kidquantity*nameList.pricePerKid),kidquantity):
+                add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date,"EventService",(quantity*nameList.price),quantity)
 
               }>
                   <AddShoppingCartIcon />
                   Add to Cart
                 </button>
                 </Link>
+                     }
+              
               </div>
             </Col>
             <Col></Col>
@@ -288,7 +375,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // addEventData: (eventData) => { dispatch({type: 'ADD_Event_DATA', eventData: eventData} )}
+      
         add_to_cart:(item,cost,add_id,no_travellers,date,type,tot,unit) => dispatch(addToCart(item,cost,add_id,no_travellers,date,type,tot,unit))
     }
 }

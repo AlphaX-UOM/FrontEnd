@@ -6,10 +6,13 @@ import "./guidedetailspage.css";
 // import Logo4 from '../../../../images/vehicle/slide/Bus.jfif';
 import connect from "react-redux/es/connect/connect";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import Comments from "../comments/Comments"
 // import Ratings from '../rating-mod/ratingm'
 import { addToCart } from "../../../../../store/lib/actions";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
-import Comments from '../comments/Comments'
+import { Filter } from "@material-ui/icons";
+
 
 function guidedetailspage(props) {
     const { add_to_cart,dateg} = props;
@@ -69,11 +72,11 @@ function guidedetailspage(props) {
   avatar=nameList.imgURL
 
   
-  console.log(totalcost);
+
  
   let comment=(
     <div hidden={(commentg)? true : ""}>
-        <Comments />
+        <Comments id={nameList.id} />
     </div>
 );
 
@@ -141,5 +144,6 @@ const mapDispatchToProps = (dispatch) => {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(  guidedetailspage);
+
 
 
