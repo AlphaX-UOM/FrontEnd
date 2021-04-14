@@ -16,18 +16,11 @@ export const fetchTransportProviderFailed = () => {
     };
 };
 
-export const initTransportProvider = (id) => {
-    return dispatch => {
-        // axios.get( 'http://localhost:5000/api/TransportServices/'+id)
-        //     .then( res => {
-        //         console.log(res.data);
-        //         dispatch(setTransportProvider(res.data));
-        //     } )
-        //     .catch( err => {
-        //         dispatch(fetchTransportProviderFailed(err));
-        //     } );
-
-        dispatch(setTransportProvider(id));
+export const getimg_url = (url) => {
+    // console.log(url)
+    return {
+        type: actionTypes.GET_TRANSPORT_IMAGE_URL,
+        transport_imgUrl:url,
     };
 };
 
@@ -49,26 +42,6 @@ export const fetchTransportFailed = () => {
 
 export const initTransport = () => {
     return dispatch => {
-
-
-            // fetch('http://localhost:5000/api/TransportServices')
-            // .then(res => res.json())
-            // .then(response =>{
-            //     const fetchedOrders = [];
-            //     for ( let key in response.data ) {
-            //         fetchedOrders.push( {
-            //             ...response.data[key],
-            //             id: key
-            //         } );
-            //     }
-            //         dispatch(setTransport(fetchedOrders))
-            // }
-            //
-            // ).catch(error => {
-            //
-            // dispatch(fetchTransportFailed(error));
-            // });
-
 
         axios.get( 'https://alphax-api.azurewebsites.net/api/TransportServices' )
             .then( res => {

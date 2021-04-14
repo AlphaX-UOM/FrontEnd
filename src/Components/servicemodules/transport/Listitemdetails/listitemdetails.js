@@ -47,8 +47,10 @@ class Listitemdetails extends Component {
     handlesubmit =(e) =>{
         console.log(this.props.distance_text)
         var txt = this.props.distance_text;
-        var numb = txt.match(/\d/g);
-        numb = numb.join("");
+        var numb = Number(txt.replace(/[^0-9\.]+/g,""));
+        console.log(numb)
+
+
         this.props.add_to_cart(this.state.providers.vehicleType,
             this.state.selectedOption==='Per_day'?this.state.providers.pricePerDay:this.state.providers.pricePer1KM,
             this.state.providers.id,
@@ -80,16 +82,9 @@ class Listitemdetails extends Component {
 
             )
             .catch(error => {
-
                 this.setState({error: true});
             });
-
-        console.log(this.props.no_travellers,this.props.drop_location,this.props.drop_date,this.props.drop_time,this.props.pickup_location,this.props.pickup_date,this.props.pickup_time,this.props.rounded);
-
-
-        // console.log(this.state.travellers)
-            // console.log(this.props);
-            // this.props.onInitTransportProvider(this.props.match.params.id);
+       // console.log(this.props.no_travellers,this.props.drop_location,this.props.drop_date,this.props.drop_time,this.props.pickup_location,this.props.pickup_date,this.props.pickup_time,this.props.rounded);
 
     }
 

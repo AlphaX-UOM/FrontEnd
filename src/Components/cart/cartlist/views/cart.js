@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
  const CartPage = (props) => {
 
-  console.log(props.items);
+  // console.log(props.items);
    let history = useHistory();
 
      const {items, saveLocalStorage } = props;

@@ -17,7 +17,7 @@ import Listitemdetails from "../Components/servicemodules/transport/Listitemdeta
 import PostguideForm from "../Components/Post/post-tourguide/post-guide";
 import PosteventForm from "../Components/Post/post-events/post-events";
 import PosthotelForm from "../Components/Post/post-hotels/post-hotels";
-import PostTransportProviderForm from "../Components/Post/post-transportprovider/post-tprovider-form";
+import PostTransportProviderForm from "../Components/Post/post-transportprovider/temp-post";
 import Home from "../Components/home/home";
 import Footer from "../Components/footer/footer";
 

@@ -172,7 +172,7 @@ const  SignIn=(props)=>{
                             </div>
                             <div className="col-sm-5">
                                 <small>
-                                    <Link to="/signupform" className="second_l">
+                                    <Link to="/register" className="second_l">
                                         Don't have an account? Sign Up
                                     </Link>
                                 </small>
