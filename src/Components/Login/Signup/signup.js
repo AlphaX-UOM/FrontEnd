@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import './signup.css';
 import axios from "axios";
+import {History} from 'react-router-dom';
 
 
 
-
-const SignUp=()=>{
+const SignUp=(props)=>{
     const [state, setstate] = useState({
         firstName: "",
         lastName: "",
@@ -14,11 +14,13 @@ const SignUp=()=>{
         address:"",
         password: "",
         password2: "",
+        dob:'',
         errors: {
             firstName: "",
             lastName: "",
             email: "",
             phonenumber:"",
+            dob:'',
             address:"",
             password: "",
             password2: "",
@@ -33,27 +35,29 @@ const SignUp=()=>{
    const handleSubmit = e=>{
         e.preventDefault();
          errors.lastName==""&&errors.firstName==""&&errors.password2==""&&errors.phonenumber==""&&errors.address==""&&errors.email==""&&errors.password==""?state.isvalid=true:state.isvalid=false;
-            console.log(state.isvalid);
+                // console.log(state.isvalid);
+                // console.log(state);
+
+
             if (state.isvalid==true){
                 axios
                     .post('https://alphax-api.azurewebsites.net/api/users', {
-                        firstName:state.firstname,
-                        lastName:state.lastname,
-                         email:state.email,
+                        firstName:state.firstName,
+                        lastName:state.lastName,
                         password:state.password,
+                        dOB:state.dob,
                         address:state.address,
+                         email:state.email,
                         contact:state.phonenumber,
-                       role:"customer"
-
-
+                       role:"Customer",
+                        imgURL:""
                     })
                     .then(response => {
                         console.log(response)
+                        alert('Register successfully!');
+                        props.history.push('/signin')
                     })
-                    .catch(error => {
-                        console.log(error)
-                    })
-                alert('Demo Form is submited');
+
             }
 
     }
@@ -146,6 +150,7 @@ const SignUp=()=>{
    //      return isValid;
 
 
+
     const formValChange = (event) => {
         event.preventDefault();
         const validEmailRegex = RegExp(
@@ -213,6 +218,17 @@ const SignUp=()=>{
                     });
                 }
                 break;
+            case "dob":
+
+
+                    errors.dob = "";
+                    setstate({
+                        ...state,
+                        dob: value,
+                    });
+
+
+                break;
             case "password":
                 if (value.length < 6) {
                     errors.password = "Password must be 6 characters long!";
@@ -248,26 +264,57 @@ const SignUp=()=>{
     const { errors } = state;
 
 
-        return (
+
+    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+    function dateDiffInDays(a, b) {
+        // Discard the time and time-zone information.
+        const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+        const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+        return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+    }
+    const a = new Date("2017-01-01"),
+        b = new Date("2017-07-25"),
+        difference = dateDiffInDays(a, b);
+
+
+
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+
+    var fifteenYearsAgo = new Date(today);
+    fifteenYearsAgo = fifteenYearsAgo.setFullYear(fifteenYearsAgo.getFullYear()-15);
+    var x =new Date(fifteenYearsAgo)
+    // console.log(x);
+    var ddx = String(x.getDate()).padStart(2, '0');
+    var mmx = String(x.getMonth() + 1).padStart(2, '0');
+    var yyyyx = x.getFullYear();
+
+    var validage = yyyyx + '-' + mmx + '-' + ddx;
+
+    return (
            <div>
                <div className="page-content">
                    <div className="form-v5-content">
                        <form className="form-detail" onSubmit={handleSubmit}>
-                           <h2>Sign Up</h2>
+                           <h2 className='signin_txt_col'>Sign Up</h2>
                            <div className="form-row row">
                                <div className="col-sm-6">
-                                   <label htmlFor="full-name">First Name</label>
+                                   <label htmlFor="full-name" className='signin_txt_col'>First Name</label>
                                    <input type="text" name="firstName"  onChange={formValChange} id="full-name" className="input-text"
                                           placeholder="Your Name" required/>
-                                   <div className="text-danger">{state.errors.firstName}</div>
+                                   <div className="error_msg rounded-pill center">{state.errors.firstName}</div>
                                </div>
 
 
                                <div className="col-sm-6">
-                                   <label htmlFor="full-name">Last Name</label>
+                                   <label htmlFor="full-name" className='signin_txt_col'>Last Name</label>
                                    <input type="text" name="lastName" id="full-name" className="input-text"
                                           placeholder="Your Name"   onChange={formValChange} required/>
-                                   <div className="text-danger">{state.errors.lastName}</div>
+                                   <div className="error_msg rounded-pill center">{state.errors.lastName}</div>
                                </div>
 
                             </div>
@@ -275,31 +322,38 @@ const SignUp=()=>{
 
                                    <div className="col-sm-6">
 
-                                       <label htmlFor="your-email"> Email</label>
+                                       <label htmlFor="your-email" className='signin_txt_col'> Email</label>
                                        <input type="text" name="email" id="your-email" className="input-text"
                                               placeholder="Your Email"  onChange={formValChange} required/>
-                                       <div className="text-danger">{state.errors.email}</div>
+                                       <div className="error_msg rounded-pill center">{state.errors.email}</div>
                                    </div>
 
                                    <div className="col-sm-6">
-                                       <label htmlFor="your-phonenumber">Phone Number</label>
+                                       <label htmlFor="your-phonenumber" className='signin_txt_col'>Phone Number</label>
                                        <input type="number" name="phonenumber" id="your-phonenumber" className="input-text"
                                               placeholder="Your Phone Number"  onChange={formValChange} required />
-                                       <div className="text-danger">{state.errors.phonenumber}</div>
+                                       <div className="error_msg rounded-pill center">{state.errors.phonenumber}</div>
                                    </div>
 
                                </div>
 
                            <div className="form-row row">
 
-                               <div className="col-sm-7">
+                               <div className="col-sm-6">
 
-                                   <label htmlFor="your-address">Address</label>
+                                   <label htmlFor="your-address" className='signin_txt_col'>Address</label>
                                    <input type="text" name="address" id="your-address" className="input-text"
                                           placeholder="Your Address"   onChange={formValChange} required/>
-                                   <div className="text-danger">{state.errors.address}</div>
+                                   <div className="error_msg rounded-pill center">{state.errors.address}</div>
                                </div>
 
+                               <div className="col-sm-6">
+
+                                   <label htmlFor="your-address" className='signin_txt_col'>Date of birth</label>
+                                   <input type="date" name="dob" id="your-dob" className="input-text"
+                                          placeholder=""   onChange={formValChange} required min='1940-01-01' max={validage}/>
+                                   <div className="error_msg rounded-pill center">{state.errors.dob}</div>
+                               </div>
 
                            </div>
 
@@ -307,17 +361,17 @@ const SignUp=()=>{
                            <div className="form-row">
 
                                <div className="col-sm-6">
-                                   <label htmlFor="password">Password</label>
+                                   <label htmlFor="password" className='signin_txt_col'>Password</label>
                                    <input type="password" name="password" id="password" className="input-text"
                                           placeholder="Your Password"   onChange={formValChange} required/>
-                                   <div className="text-danger">{state.errors.password}</div>
+                                   <div className="error_msg rounded-pill center">{state.errors.password}</div>
                                </div>
 
                                <div className="col-sm-6">
-                                   <label htmlFor="password">Confirm Password</label>
+                                   <label htmlFor="password" className='signin_txt_col'>Confirm Password</label>
                                    <input type="password" name="password2" id="Confirm password" className="input-text"
                                           placeholder="Confirm Password"  onChange={formValChange} required/>
-                                   <div className="text-danger">{state.errors.password2}</div>
+                                   <div className="error_msg rounded-pill center">{state.errors.password2}</div>
                                </div>
 
 

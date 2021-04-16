@@ -6,7 +6,7 @@ import Cancel from "@material-ui/icons/Cancel";
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
-import EditIcon from '@material-ui/icons/Edit';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 
 import { Link } from 'react-router-dom';;
@@ -27,7 +27,7 @@ export const mainListItems = (
            
                 <ListItem button>
                   <ListItemIcon>
-                    <EditIcon style={{ color: '#FFF' }}  />
+                    <LockOpenIcon style={{ color: '#FFF' }}  />
                   </ListItemIcon>
                   <ListItemText primary="Change password" />
                 </ListItem>
@@ -40,14 +40,14 @@ export const mainListItems = (
       <ListItemText primary="My Reservations" />
     </ListItem>
     </Link>
-    <Link to="/ratings" style={{ color: '#FFF' }}>
+    {/* <Link to="/ratings" style={{ color: '#FFF' }}>
     <ListItem button>
       <ListItemIcon>
         <PeopleIcon style={{ color: '#FFF' }} />
       </ListItemIcon>
       <ListItemText primary="Ratings" />
     </ListItem>
-    </Link>
+    </Link> */}
     <Link to="/cancelations"style={{ color: '#FFF' }}>
     <ListItem button>
       <ListItemIcon>

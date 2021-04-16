@@ -86,6 +86,7 @@ function CategoryRightListItem(props) {
 
                 </Typography> */}
               </CardContent>
+              
               <div className={classes.controls}>
                 {/* <Button variant="contained" disabled> */}
 
@@ -96,10 +97,10 @@ function CategoryRightListItem(props) {
 
                 {/* </Button> */}
               </div>
-              <Box component="fieldset" mb={3} borderColor="transparent">
+              {/* <Box component="fieldset" mb={3} borderColor="transparent">
       
       <Rating name="read-only" value={value} readOnly />
-    </Box>
+    </Box> */}
             </div>
 
           </Card>

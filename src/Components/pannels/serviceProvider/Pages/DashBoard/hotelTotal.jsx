@@ -53,22 +53,17 @@ function Events(props) {
 
 
                           <Box borderRadius="30px">
-                              <Card style={{ border: '3px solid black', borderRadius: '5px!important',height:"400px" }}>
+                              <Card style={{ border: '3px solid black', borderRadius: '5px!important',height:"150px" }}>
 
-                                  <CardContent style={{ height: "60hv" }}>
-                                      <Typography gutterBottom variant="headline" component="h4">
+                                  <CardContent style={{ height: "50hv" }}>
+                                      <Typography gutterBottom variant="headline" component="h5">
 
                                           {post.name}
                                       </Typography>
-                                      <Typography component="p">
-                                          {post.otherDetails}
-
-
-
-
-                                      </Typography>
+                                     
                                   </CardContent>
                                   <CardActions>
+                             
                                       <Button size="small" color="primary" target="_blank">
                                          View Post
 </Button>

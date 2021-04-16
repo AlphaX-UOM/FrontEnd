@@ -1,6 +1,6 @@
 export {
   initTransport,
-  initTransportProvider,
+    getimg_url,
   set_transport_vehicle_filter,
   set_transport_vehicle_filter_02,
   set_transport_vehicle_filter_03,

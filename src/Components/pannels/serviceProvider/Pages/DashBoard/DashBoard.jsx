@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from 'react-bootstrap/Button';
 
 
 import { Link } from 'react-router-dom';
@@ -94,6 +95,32 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Dashboard(props) {
+
+
+
+  let userId = props.myId;
+  const [users, setUsers] = useState([]);
+
+
+  useEffect(() => {
+      fetch(
+          `https://alphax-api.azurewebsites.net/api/users/${userId}` //`https://alphax-api.azurewebsites.net/api/eventplannerservicereservations/${userId}`
+      )
+
+          .then((response) => {
+              return response.json();
+          })
+          .then((responseData) => {
+
+              //  setEvent(responseData)
+            
+              setUsers(responseData);
+              console.log(responseData)
+             
+
+
+          });
+  }, []);
   const classes = useStyles();
 
 
@@ -109,15 +136,15 @@ function Dashboard(props) {
           
         </div>
         <div className="col-3">
-          <Image src={props.userCred.imgURL} alt="img1" style={{ width: "255px", height: "225px" }}roundedCircle></Image>
+          <Image src={users.imgURL} alt="img1" style={{ width: "255px", height: "225px" }}roundedCircle></Image>
         </div>
         <div className="col-4">
-       <h2>{props.userCred.firstName}  {props.userCred.lastName}</h2>   
+       <h2>{users.firstName}  {users.lastName}</h2>   
         </div>
 
         <div className="col-3">
           <PieChart myId={props.myId}/>
-     <center>My Post Summary</center>     
+     <center>My Posts Summary</center>     
     
         </div>
 
@@ -131,66 +158,30 @@ function Dashboard(props) {
       <div className="col-1"></div>
         <div className="col-2">
           <Link to="/event"  style={{ color: 'black' }}>
-            <Card style={{backgroundColor:"#AC3E31"}}>
-              <CardContent>
-                <div >
-                  <h3>Event Posts</h3>
-                 
-                </div>
-
-
-              </CardContent>
-            </Card>
+        
+            <Button variant="success">Event Posts</Button>
           </Link>
 
         </div>
 
         <div className="col-2">
           <Link to="/trans" style={{ color: 'black' }}>
-          <Card style={{backgroundColor:"#AC3E31"}}>
-              <CardContent>
-                <div >
-                  <h3>Transport</h3>
-
-
-                </div>
-
-
-              </CardContent>
-            </Card>
+        
+                <Button variant="success">Transport Posts</Button>
           </Link>
 
         </div>
 
         <div className="col-2">
           <Link to="/guide" style={{ color: 'black' }}>
-          <Card style={{backgroundColor:"#AC3E31"}}>
-              <CardContent>
-                <div >
-                  <h3>Guide Posts</h3>
-
-
-                </div>
-
-
-              </CardContent>
-            </Card>
+          <Button variant="success">Guide Posts</Button>
           </Link>
 
         </div>
 
         <div className="col-2">
           <Link to="/hotel" style={{ color: 'black' }}>
-          <Card style={{backgroundColor:"#AC3E31"}}>
-              <CardContent>
-                <div >
-                  <h3>Hotel Posts</h3>
-
-                </div>
-
-
-              </CardContent>
-            </Card>
+          <Button variant="success">Hotel Posts</Button>
           </Link>
         </div>
 

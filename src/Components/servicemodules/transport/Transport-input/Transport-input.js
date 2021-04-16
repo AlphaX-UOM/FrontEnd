@@ -56,10 +56,8 @@ class TransportInput extends Component{
 
     handleSubmit =(e) =>{
 
-
          e.preventDefault();
         // this.props.history.push('/transportproviderlist');
-
 
         Geocode.setApiKey('AIzaSyD3hAWVrmMEMeI6xhdtSGCmEJ6FHccdKUk');
         Geocode.setLanguage("en");
@@ -77,7 +75,7 @@ class TransportInput extends Component{
         Geocode.fromAddress(this.state.pickuplocation).then(
             (response) => {
                 let { lat, lng } = response.results[0].geometry.location;
-                console.log(lat, lng);
+                // console.log(lat, lng);
                 this.setState({origin_lat:lat,origin_lang:lng})
 
             },
@@ -88,7 +86,7 @@ class TransportInput extends Component{
             Geocode.fromAddress(this.state.droplocation).then(
                 (response) => {
                     let { lat, lng } = response.results[0].geometry.location;
-                    console.log(lat, lng);
+                    // console.log(lat, lng);
                     this.setState({desti_lat:lat,desti_lang:lng})
                 },
                 (error) => {
@@ -103,36 +101,18 @@ class TransportInput extends Component{
 
         ).then(
             setTimeout(function() { //Start the timer
-                console.log(this.state)
+                // console.log(this.state)
                 if(this.state.distance_text!==''){
                     this.props.transport_input_form(this.state.notravellers,this.state.droplocation,
                         this.state.dropoffdate,this.state.dropofftime,this.state.pickuplocation,this.state.pickupdate,
                         this.state.pickuptime,this.state.rounded,this.state.distance_text);
-                    console.log('redux insert')
+                    // console.log('redux insert')
                     this.props.history.push('/transportproviderlist');
                 }
 
             }.bind(this), 5000),  // this.props.history.push('/transportproviderlist')
 
-
-
         )
-
-
-
-
-
-        // axios
-        //     .post('http://localhost:5000/TransportProvider/Post', {
-        //
-        //     })
-        //     .then(response => {
-        //         console.log(response)
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
-
 
     }
 
@@ -150,7 +130,7 @@ class TransportInput extends Component{
                     alert("Error was: " + status);
                 } else {
                     const distance=response.rows[0].elements[0].distance.text;
-                    console.log(distance);
+                     console.log(distance);
                     this.setState({distance_text:distance});
                 }
             }
@@ -172,7 +152,7 @@ class TransportInput extends Component{
         }
 
         today = yyyy + "-" + mm + "-" + dd;
-        console.log(today);
+        // console.log(today);
         return (
             <div>
                 <br/>
@@ -217,7 +197,7 @@ class TransportInput extends Component{
 
                                 <div className="form-check form-check-inline">
                                     <input className="form-check-input form-group" type="checkbox"
-                                           value="true" name=" checkboxval"   onChange = {e=>this.handlehiddenClik(e)} required />
+                                           value="true" name=" checkboxval"   onChange = {e=>this.handlehiddenClik(e)} />
                                     <div className="input-group-prepend">
                                         <label className="form-group "><p >Return  to the same location</p> </label>
                                     </div>
@@ -265,9 +245,7 @@ class TransportInput extends Component{
                         </div>
                     </div>
                 </div>
-                <Link to='/logout'>
-                    <button>logout</button>
-                </Link>
+
                 <br/>
             </div>
         )

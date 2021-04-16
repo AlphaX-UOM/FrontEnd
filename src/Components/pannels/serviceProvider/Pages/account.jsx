@@ -7,6 +7,7 @@ import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputG
 
 function Account(props) {
     const [serviceProviders, setServiceProviders] = useState({ id: '', firstName: '', lastName: '', password: '', dob: '', address: '', email: '', contact: '', role: '' });
+    console.log(props.id);
     const UpdateEmployee = (e) => {
 
         e.preventDefault();
@@ -50,6 +51,7 @@ function Account(props) {
     return (
         <div>
                 <div className="container">
+    
 		<div className="row">
            
 			<div className="col-12">
@@ -89,7 +91,7 @@ function Account(props) {
 
 
                                     <Form onSubmit={UpdateEmployee}>
-                                    <h4>Edit Details</h4>
+                                    <h4>Edit Details </h4>
                                         <InputGroup className="mb-4">
 
                                             <label>First Name: </label>
@@ -159,7 +161,8 @@ const mapStateToProps = (state) => {
         reservations: state.eventpnl.reservations,
         formdata: state.eventpnl.formdata,
         total: state.eventpnl.total,
-        userCred: state.eventpnl.userCred
+        userCred: state.eventpnl.userCred,
+        id: state.auth.userId,
     };
 };
 

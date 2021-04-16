@@ -39,7 +39,7 @@ function CategoryRightList(props) {
       })
       .then((responseData) => {
       
-        responseData = responseData.filter(item => (new Date(item.date)>=new Date(Checkin))&& new Date(item.date) <=new Date(Checkout));
+        // responseData = responseData.filter(item => (new Date(item.date)>=new Date(Checkin))&& new Date(item.date) <=new Date(Checkout));
        
         setmyeventList (responseData);
         console.log("response data->"+responseData);
@@ -55,26 +55,26 @@ function CategoryRightList(props) {
     return item.name.toLowerCase().includes(search.toLowerCase())
    })
 
-  const filterEvents=filterSearch.filter(item=>{
-    if(auddata===null||auddata==="All")
-    return myeventList;
-    else if(auddata==="family")
-    return item.audience!=="21+"
-    else
-    return item.audience.includes(auddata)
-   })
+  // const filterEvents=filterSearch.filter(item=>{
+  //   if(auddata===null||auddata==="All")
+  //   return myeventList;
+  //   else if(auddata==="family")
+  //   return item.audience!=="21+"
+  //   else
+  //   return item.audience.includes(auddata)
+  //  })
     
-   const filterPrice=filterEvents.filter(item=>{
-    if(pricedata===null||pricedata==="All")
-    return filterEvents;
-    if(pricedata==='5000-')
-    return item.price<=5000.00
-    if(pricedata==='5000+')
-    return item.price>5000.00
-   })
-   const filterDis=filterPrice.filter(item=>{
+  //  const filterPrice=filterEvents.filter(item=>{
+  //   if(pricedata===null||pricedata==="All")
+  //   return filterEvents;
+  //   if(pricedata==='5000-')
+  //   return item.price<=5000.00
+  //   if(pricedata==='5000+')
+  //   return item.price>5000.00
+  //  })
+   const filterDis=filterSearch.filter(item=>{
     if(mapdata===null)
-    return filterEvents
+    return filterSearch
     else
    return item.district.includes(props.eventmapCompare[mapdata])
   })
@@ -94,39 +94,45 @@ function CategoryRightList(props) {
           <Row>
             
             </Row>
-            {<input type="text" placeholder="Search" onChange={e=>setSearch(e.target.value)} style={{width:'1000px', padding: '10px'}}/>  }
+            <center>
+            {<input type="text" placeholder="Search" onChange={e=>setSearch(e.target.value)} style={{width:'600px', padding: '10px'}}/>  }
             <SearchIcon/>
+            </center>
+          
    <Row>
 
 </Row>
+<row>
+  <br>
+  </br>
+</row>
 <Row>
   
   </Row>
           </Col>
           </Row>
-        <Row>
-          <Col >
-            <Dateleft />
-          </Col>
-          </Row>
-          <Row>
         
-        </Row>
+         
         <Row>
-        <Col xs="6">
+          <br>
+          </br>
+          <br>
+          </br>
+          <center>
+          <Col xs="9">
         
-          {filterDis.map((item) => (
-              
-               
-                   <CategoryRightListItem key={item.name} name={item.name} item={item} />
-                   
-                 ))}
+        {filterDis.map((item) => (
+            
+             
+                 <CategoryRightListItem key={item.name} name={item.name} item={item} />
+                 
+               ))}
 
-          
-          </Col>
-          <Col>
-        <Map/>
+        
         </Col>
+          </center>
+    
+      
 
         </Row>
       </Container>

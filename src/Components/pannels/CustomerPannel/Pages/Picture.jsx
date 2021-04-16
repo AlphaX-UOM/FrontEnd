@@ -14,6 +14,7 @@ class Picture extends Component {
 
             image: null,
             url: '',
+            users:[],
 
             progressx: false,
             progress: ''
@@ -91,6 +92,29 @@ class Picture extends Component {
 
     //     );
 
+    componentDidMount() {
+
+
+        fetch(`https://alphax-api.azurewebsites.net/api/users/${this.props.id}`)
+        .then(res => res.json())
+        .then(user =>
+            this.setState({ users:user})
+
+        )
+        .catch(error => {
+
+            this.setState({error: true});
+        });
+
+  
+
+
+    // console.log(this.state.travellers)
+        // console.log(this.props);
+        // this.props.onInitTransportProvider(this.props.match.params.id);
+
+}
+
 
 
 
@@ -159,17 +183,17 @@ class Picture extends Component {
         }
         setTimeout(function () { //Start the timer
             axios
-                .put(`https://alphax-api.azurewebsites.net/api/users/${this.props.userCred.id}`, {
+                .put(`https://alphax-api.azurewebsites.net/api/users/${this.props.id}`, {
 
-                    id: this.props.userCred.id,
-                    firstName: this.props.userCred.firstName,
-                    lastName: this.props.userCred.lastName,
-                    password: this.props.userCred.password,
-                    dob: this.props.userCred.dob,
-                    address: this.props.userCred.address,
-                    email: this.props.userCred.email,
-                    contact: this.props.userCred.contact,
-                    role: this.props.userCred.role,
+                    id: this.state.users.id,
+                    firstName: this.state.users.firstName,
+                    lastName: this.state.users.lastName,
+                    password: this.state.users.password,
+                    dob: this.state.users.dob,
+                    address: this.state.users.address,
+                    email: this.state.users.email,
+                    contact: this.state.users.contact,
+                    role: this.state.users.role,
                     imgURL: this.state.url,
                  
                 })
@@ -191,7 +215,7 @@ class Picture extends Component {
         return (
             <div>
                 <div className="container ">
-
+                   
                     <form className="fback" onSubmit={this.handleSubmit}>
 
 
@@ -238,7 +262,7 @@ class Picture extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        userCred: state.eventpnl.userCred,
+        id: state.auth.userId,
     };
 };
 

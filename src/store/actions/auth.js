@@ -1,6 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
-
+import jwt_decode from "jwt-decode"
 export const authStart = () => {
     return {
         type: actionTypes.AUTH_START
@@ -43,28 +43,40 @@ export const checkAuthTimeout = (expirationTime) => {
 
 export const auth = (email, password) => {
     return dispatch => {
+
         dispatch(authStart());
-        const authData = {
-            email: email,
-            password: password,
-            returnSecureToken: true
-        };
+        var decodedStringBtoA = email+`:`+password;
+        var encodedStringBtoA = btoa(decodedStringBtoA);
         let url = 'https://alphax-api.azurewebsites.net/api/users/Login';
 
-        axios.post(url, authData)
-            .then(response => {
-                console.log(response);
-                const expirationDate = new Date(new Date().getTime() + (3600 * 2 * 1000));
-                localStorage.setItem('token', response.data.token);
-                localStorage.setItem('expirationDate', expirationDate);
-                localStorage.setItem('userId', response.data.id);
-                localStorage.setItem('role', response.data.role);
-                dispatch(authSuccess(response.data.token, response.data.id, response.data.role));
-                dispatch(checkAuthTimeout(3600 * 2));
+        var axios = require('axios');
+        var config = {
+            method: 'post',
+            url: url,
+            headers: {
+                'Authorization': 'Basic '+ encodedStringBtoA,
+            },
+
+        };
+        axios(config)
+            .then(function (response) {
+
+                var decoded = jwt_decode(response.data.token);
+
+                 const expirationDate = new Date(new Date().getTime() + (3600 * 2 * 1000));
+                        localStorage.setItem('token', response.data.token);
+                        localStorage.setItem('expirationDate',new Date(decoded.exp*1000));
+                        localStorage.setItem('userId', decoded.ID);
+                        localStorage.setItem('role', decoded.Role);
+                        dispatch(authSuccess(response.data.token, decoded.ID, decoded.Role));
+                        dispatch(checkAuthTimeout(3600 * 2));
             })
-            .catch(err => {
-                dispatch(authFail(err.response.data.error));
+            .catch(function (error) {
+                console.log(error);
+                dispatch(authFail(error));
             });
+
+
 
     };
 };

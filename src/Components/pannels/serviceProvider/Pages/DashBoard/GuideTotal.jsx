@@ -54,35 +54,32 @@ function Events(props) {
               {eventList.map(post => (
 
                   <Grid item xs={12} sm={6} lg={4} xl={3}>
-                    <Link onClick={post.clicked} to={`/guidelanding/${post.id}`}  style={{ color: 'black' }}>
+               
 
 
                           <Box borderRadius="30px">
-                              <Card style={{ border: '3px solid black', borderRadius: '5px!important',height:"300px" }}>
+                              <Card style={{ border: '3px solid black', borderRadius: '5px!important',height:"150px" }}>
 
-                                  <CardContent style={{ height: "60hv" }}>
-                                      <Typography gutterBottom variant="headline" component="h4">
+                                  <CardContent style={{ height: "50hv" }}>
+                                      <Typography gutterBottom variant="headline" component="h5">
 
                                           {post.name}
                                       </Typography>
-                                      <Typography component="p">
-                                          {post.otherDetails}
-
-
-
-
-                                      </Typography>
+                                   
                                   </CardContent>
                                   <CardActions>
+                                  <Link onClick={post.clicked} to={`/guidelanding/${post.id}`}  style={{ color: 'black' }}>
                                       <Button size="small" color="primary" target="_blank">
                                           View Post
 </Button>
+</Link>
+<Container triggerText={triggerText} onSubmit={onSubmit} data={post.id}/>
                                   </CardActions>
 
                               </Card>
                           </Box>
-                      </Link>
-                      <Container triggerText={triggerText} onSubmit={onSubmit} data={post.id}/>
+                   
+                   
                   </Grid>
 
 

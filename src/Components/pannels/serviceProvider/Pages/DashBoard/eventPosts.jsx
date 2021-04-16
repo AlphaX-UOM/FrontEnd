@@ -11,18 +11,18 @@ import { Link } from "react-router-dom";
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
-import Container  from './eventEdit/container';
+import Container from './eventEdit/container';
 
 
 
 
-const Events  = (props) =>  {
+const Events = (props) => {
     const triggerText = 'Edit Details';
     const onSubmit = (event) => {
-      event.preventDefault(event);
-      console.log(event.target.name.value);
-      console.log(event.target.email.value);
-     
+        event.preventDefault(event);
+        console.log(event.target.name.value);
+        console.log(event.target.email.value);
+
     };
     const [eventList, setEventList] = useState([]);
 
@@ -54,39 +54,37 @@ const Events  = (props) =>  {
                 {eventList.map(post => (
 
                     <Grid item xs={12} sm={6} lg={4} xl={3}>
-                      <Link onClick={post.clicked} to={`/categorylanding/${post.id}`}  style={{ color: 'black' }}>
 
 
-                            <Box borderRadius="30px">
-                                <Card style={{ border: '3px solid black', borderRadius: '5px!important',height:"300px" }}>
+                        <Box borderRadius="30px">
+                            <Card style={{ border: '3px solid black', borderRadius: '5px!important', height: "150px" }}>
 
-                                    <CardContent style={{ height: "60hv" }}>
-                                        <Typography gutterBottom variant="headline" component="h4">
+                                <CardContent style={{ height: "50hv" }}>
+                                    <Typography gutterBottom variant="headline" component="h5">
 
-                                            {post.name}
-                                        </Typography>
-                                        <Typography component="p">
-                                            {post.otherDetails}
+                                        {post.name}
+                                    </Typography>
 
+                                </CardContent>
+                                <CardActions>
+                                    <Link onClick={post.clicked} to={`/categorylanding/${post.id}`} style={{ color: 'black' }}>
 
-
-
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button size="small" color="primary" target="_blank">
-                                    View Post
+                                        <Button size="small" color="primary" target="fill">
+                                            View Post
  </Button>
-                                    </CardActions>
+                                    </Link>
+
+                                    <Container triggerText={triggerText} onSubmit={onSubmit} data={post.id} />
+                                </CardActions>
 
 
-                                </Card>
-                               
-                            </Box>
-                        
-                            </Link>
-                            <Container triggerText={triggerText} onSubmit={onSubmit} data={post.id}/>
-                       
+                            </Card>
+
+                        </Box>
+
+
+
+
                     </Grid>
 
 

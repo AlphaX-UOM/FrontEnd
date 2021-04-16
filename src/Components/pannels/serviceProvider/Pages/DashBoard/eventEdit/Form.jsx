@@ -6,7 +6,7 @@ import { color } from 'highcharts';
 export const Form = ({ onSubmit,data }) => {
    
       const [eventList, setEventList] = useState([]);
-      const[event,setEvent]=useState({ id: '', name: '', businessName: '', price: '', pricePerKid: '', venue: '', district: '',date:'',time:'',eventType:'',audience:'',otherDetails:'',imgURL:'',imgURL02:'',imgURL03:'',userID:''})
+      const[event,setEvent]=useState({ id: '', name: '', businessName: '', price: '', pricePerKid: '',adultTickets:'',kidTickets:'', venue: '', district: '',date:'',time:'',eventType:'',audience:'',otherDetails:'',imgURL:'',imgURL02:'',imgURL03:'',userID:''})
       useEffect(() => {
         fetch(
             `https://alphax-api.azurewebsites.net/api/eventplannerservices/${data}` //`https://alphax-api.azurewebsites.net/api/eventplannerservicereservations/${userId}`
@@ -41,7 +41,7 @@ export const Form = ({ onSubmit,data }) => {
 
         var axios = require('axios');
 
-        var data = JSON.stringify({ "id": eventList.id, "name": event.name === "" ? eventList.name : event.name, "businessName": eventList.businessName ,"price": event.price===""?eventList.price:event.price, "pricePerKid": event.pricePerKid===""?eventList.pricePerKid:event.pricePerKid, "venue": eventList.venue, "district": eventList.district,longitude:eventList.longitude,latitude:eventList.latitude, "date": event.date === "" ? eventList.date : event.date, "time": event.time===""?eventList.time:event.time,"eventType":eventList.eventType,
+        var data = JSON.stringify({ "id": eventList.id, "name": event.name === "" ? eventList.name : event.name, "businessName": eventList.businessName ,"price": event.price===""?eventList.price:event.price, "pricePerKid": event.pricePerKid===""?eventList.pricePerKid:event.pricePerKid,"adultTickets": event.adultTickets===""?eventList.adultTickets:event.adultTickets,"kidTickets": event.kidTickets===""?eventList.kidTickets:event.kidTickets,"venue": eventList.venue, "district": eventList.district,longitude:eventList.longitude,latitude:eventList.latitude, "date": event.date === "" ? eventList.date : event.date, "time": event.time===""?eventList.time:event.time,"eventType":eventList.eventType,
     "audience":event.audience===""?eventList.audience:event.audience,frequency:eventList.frequency,"otherDetails":event.otherDetails===""?eventList.otherDetails:event.otherDetails,"imgURL":eventList.imgURL,"imgURL02":eventList.imgURL02,"imgURL03":eventList.imgURL03,"userID":eventList.userID });
 
 console.log(data)
@@ -105,6 +105,26 @@ console.log(data)
           name="pricePerKid" value={event.pricePerKid} onChange={onChange}
         />
       </div>
+      <div className="form-group">
+        <label htmlFor="text">Adult Tickets</label>
+        <input
+          type="number"
+          className="form-control"
+          id="adultTickets"
+          placeholder={eventList.adultTickets}
+          name="pricePerKid" value={event.adultTickets} onChange={onChange}
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="text">Kid Tickets</label>
+        <input
+          type="number"
+          className="form-control"
+          id="kidTickets"
+          placeholder={eventList.kidTickets}
+          name="pricePerKid" value={event.kidTickets} onChange={onChange}
+        />
+      </div>
 
       <div className="form-group">
         <label htmlFor="text">Audience</label>
@@ -117,16 +137,7 @@ console.log(data)
    
    
     
-      <div className="form-group">
-        <label htmlFor="email">Date</label>
-        <input
-          type="date"
-          className="form-control"
-          id="date"
-          placeholder={eventList.date}
-          name="date" value={event.date} onChange={onChange}
-        />
-      </div>
+
 
       <div className="form-group">
         <label htmlFor="time">Time</label>

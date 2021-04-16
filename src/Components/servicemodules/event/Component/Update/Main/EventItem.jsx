@@ -47,11 +47,11 @@ const EventItem  = ({ posts, loading }) =>  {
      
         {posts.map(post => (
              
-            <Grid item xs={12} sm={6} lg={4} xl={3} minHeight="50px">
+            <Grid item xs={12} sm={6} lg={4} xl={3} minHeight="60px">
                <Link onClick={post.clicked} to={`/categorylanding/${post.id}`}  style={{ color: 'black' }}>
 
 <Box borderRadius="30px" >
-  <Card style={{border: '3px solid black',borderRadius: '5px!important' , height:"500px"}}>
+  <Card style={{border: '3px solid black',borderRadius: '5px!important' , height:"550px"}}>
 <CardMedia style={{height: 0, paddingTop: '56.25%'}}
     // image={"https://www.touropia.com/gfx/d/best-places-to-visit-in-sri-lanka/yala_national_park.jpg?v=1"}
     image={post.imgURL}
@@ -68,13 +68,19 @@ const EventItem  = ({ posts, loading }) =>  {
     <div class="badge bg-warning text-dark"> </div>
     </center>
   */}
-    <Box component="fieldset" mb={3} borderColor="transparent">
+    {/* <Box component="fieldset" mb={3} borderColor="transparent">
       
         <Rating name="read-only" value={value} readOnly />
-      </Box>
-   <Badge pill variant="warning">
+      </Box> */}
+      <div>
+<br>
+</br>
+      <Badge pill variant="warning">
    <AttachMoneyIcon />{post.price} Per Adult
   </Badge>
+
+      </div>
+  
 
  
 

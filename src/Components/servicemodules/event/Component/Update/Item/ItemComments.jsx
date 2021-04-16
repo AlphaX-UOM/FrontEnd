@@ -10,23 +10,46 @@ import { Card } from "react-bootstrap";
 
 const Comments = (props) => {
   const [commentList, setCommentList] = useState();
+  const [rating, setRating] = useState();
  
   const [comment, setComment] = useState();
   const [ordered, setOrdered] = useState(false);
   const [loading, setLoading] = useState(false);
+  const[ratingApi,setRatingApi]=useState([]);
   const [total, setTotal] = useState(false);
   const [value, setValue] = useState(0);
   const [disabled, setDisabled] = useState(true);
+const [users, setUsers] = useState([]);
+var userId=props.userid;
+
+  useEffect(() => {
+      fetch(
+          `https://alphax-api.azurewebsites.net/api/users/${userId}` //`https://alphax-api.azurewebsites.net/api/eventplannerservicereservations/${userId}`
+      )
+
+          .then((response) => {
+              return response.json();
+          })
+          .then((responseData) => {
+
+              //  setEvent(responseData)
+            
+              setUsers(responseData);
+              console.log(responseData)
+          
+
+          });
+  }, []);
 
   const handleFormData = () => {
     // comment post request goes here
  
     let commentObject = {
       createdAt: new Date(),
-
-      rating:value===total?total:value,
       content: comment,
-      userID: props.userCred.id,
+      firstName:users.firstName,
+      lastName:users.lastName,
+      userID: props.userid,
       eventPlannerServiceID: props.add_id,
     };
 
@@ -51,7 +74,67 @@ const Comments = (props) => {
     // setting the rating value
     setValue(event.target.value);
     console.log("rating -> " + event.target.value);
+
+    event.preventDefault();
+
+
+    var axios = require('axios');
+
+    var data = JSON.stringify({ "id": ratingApi.id, "rating": value, "userID":ratingApi.userID,"eventPlannerServiceID":ratingApi.eventPlannerServiceID });
+
+    var config = {
+        method: 'put',
+        url: `https://alphax-api.azurewebsites.net/api/eventplannerserviceratings/${ratingApi.id}`,
+        headers: {
+            'Content-Type': 'application/json',
+
+        },
+        data: data
+    };
+    axios(config)
+        .then(function (response) {
+            console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+   
   };
+
+
+  const handleInputRatingPost = (event) => {
+    // setting the rating value
+    setValue(event.target.value);
+    console.log("rating -> " + event.target.value);
+
+    event.preventDefault();
+
+
+    var axios = require('axios');
+
+    var data = JSON.stringify({ "id": ratingApi.id, "rating": value, "userID":props.userid,"eventPlannerServiceID":props.add_id });
+
+    var config = {
+        method: 'post',
+        url: `https://alphax-api.azurewebsites.net/api/eventplannerserviceratings/`,
+        headers: {
+            'Content-Type': 'application/json',
+
+        },
+        data: data
+    };
+    axios(config)
+        .then(function (response) {
+            console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+   
+  };
+
 
   useEffect(() => {
     fetch(
@@ -72,9 +155,9 @@ const Comments = (props) => {
       .then((res) => res.json())
       .then((data) => {
         
-        if (props.userCred.id !== undefined) {
-          console.log("user -> "+props.userCred.id);
-          data = data.filter( (item) => item.userID === props.userCred.id && item.eventPlannerServiceID === props.add_id );
+        if (props.userid !== undefined) {
+          console.log("user -> "+props.userid);
+          data = data.filter( (item) => item.userID === props.userid && item.eventPlannerServiceID === props.add_id );
 
           if (data[0] !== undefined) {
             setOrdered(true);
@@ -108,6 +191,30 @@ useEffect(() => {
 }, [props.add_id]);
 
 
+
+
+useEffect(() => {
+  fetch('https://alphax-api.azurewebsites.net/api/eventplannerserviceratings')
+    .then((response) => {
+      return response.json();
+    })
+     .then((responseData) => {
+    //   if(mapdata!=null){
+    //     responseData = responseData.filter(item => item.district === props.eventmapCompare[mapdata]);
+    responseData = responseData.filter(item => item.eventPlannerServiceID === props.add_id && item.userID === props.userid);
+      if(responseData[0]!==undefined){
+        setRatingApi(responseData[0]);
+        setRating(responseData.reduce((total, pay) => total + 1, 0));
+
+      }
+   
+    //   }
+      
+     
+    });
+}, []);
+// console.log("rating data=>"+ratingApi.rating)
+
   const commentListComponent = () => {
 
     console.log(commentList.eventPlannerServiceComments);
@@ -122,12 +229,16 @@ useEffect(() => {
 
 
     return (
+
+
       <div className="col-md-9">
+       
+
         <div className="media g-mb-30 media-comment">
           <div className="media-body u-shadow-v18 g-bg-secondary g-pa-30">
             <div className="g-mb-15">
               <h5 className="h5 g-color-gray-dark-v1 mb-0 txtcolorx">
-                {props.userCred.firstName} {props.userCred.lastName}
+                {users.firstName} {users.lastName}
               </h5>
 
               <span className="g-color-gray-dark-v4 g-font-size-12">
@@ -152,20 +263,7 @@ useEffect(() => {
             <hr className="" />
 
             <ul className="list-inline d-sm-flex my-0">
-              <li className="list-inline-item g-mr-20">
-
-                {eventlist===0?
-<Rating 
-                name="pristine"
-                value={value}
-                onChange={handleInputRating}
-              />:""
-               
-            }
-  
-
       
-              </li>
               <li className="list-inline-item g-mr-20"></li>
               <li className="list-inline-item g-mr-20"></li>
               <li className="list-inline-item g-mr-20"></li>
@@ -193,15 +291,63 @@ useEffect(() => {
     <div>
       <hr />
       <div className="container">
+  
         <div className="row">
+
           
 
-          <div className="col-sm-2"></div>
+          <div className="col-sm-2">
+      
+          </div>
           <div className="col-sm-10">
             <div className="container">
               <div className="row">
                 <div className="col-md-9">
-                  <div className="media g-mb-30 media-comment">
+                 
+                  {/* {rating=== 1?          
+                <Rating 
+                name="pristine"
+                value={ratingApi.rating}
+                onChange={handleInputRating}
+              />:"hii"}
+                  */}
+
+<div className="g-mb-15">
+              <h5 className="h5 g-color-gray-dark-v1 mb-0 txtcolorx">
+                {users.firstName} {users.lastName}
+              </h5>
+
+              <span className="g-color-gray-dark-v4 g-font-size-12">
+                {new Date().toISOString().slice(0, 10)}
+              </span>
+
+              <ul className="list-inline d-sm-flex my-0">
+                <li className="list-inline-item ml-auto">
+                  <center>
+
+                  {props.userid!==undefined && ordered ? rating===1? <Rating 
+                name="simple-controlled"
+                value={ratingApi.rating}
+                onChange={handleInputRating}
+                
+              />:<Rating 
+              name="simple-controlled"
+              value={0}
+              onChange={handleInputRatingPost}
+              
+            /> : <p>login to Rating</p> }
+                  </center>
+            
+                </li>
+              </ul>
+              <hr />
+            </div>
+             
+
+
+
+         
+                  {/* <div className="media g-mb-30 media-comment">
                     
                     <div className="media-body u-shadow-v18 g-bg-secondary g-pa-30">
                       <div className="g-mb-15">
@@ -228,31 +374,10 @@ useEffect(() => {
                       </p>
 
                       <hr className="" />
-
-                      <ul className="list-inline d-sm-flex my-0">
-                        <li className="list-inline-item g-mr-20">
-                          <a
-                            className="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover"
-                            href="#!"
-                          >
-                            <i className="fa fa-thumbs-up g-pos-rel g-top-1 g-mr-3 txtcolorx "></i>
-                            178
-                          </a>
-                        </li>
-                        <li className="list-inline-item g-mr-20">
-                          <a
-                            className="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover"
-                            href="#!"
-                          >
-                            <i className="fa fa-thumbs-down g-pos-rel g-top-1 g-mr-3 txtcolorx"></i>
-                            34
-                          </a>
-                        </li>
-                      </ul>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
-
+{/* 
                 <div className="col-md-9">
                   <div className="media g-mb-30 media-comment">
                     <div className="media-body u-shadow-v18 g-bg-secondary g-pa-30">
@@ -265,9 +390,7 @@ useEffect(() => {
                           5 days ago
                         </span>
 
-                        <ul className="list-inline d-sm-flex my-0">
-                          <li className="list-inline-item ml-auto"></li>
-                        </ul>
+                    
                         <hr />
                       </div>
 
@@ -281,34 +404,18 @@ useEffect(() => {
                       <hr className="" />
 
                       <ul className="list-inline d-sm-flex my-0">
-                        <li className="list-inline-item g-mr-20">
-                          <a
-                            className="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover"
-                            href="#!"
-                          >
-                            <i className="fa fa-thumbs-up g-pos-rel g-top-1 g-mr-3 txtcolorx "></i>
-                            178
-                          </a>
-                        </li>
-                        <li className="list-inline-item g-mr-20">
-                          <a
-                            className="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover"
-                            href="#!"
-                          >
-                            <i className="fa fa-thumbs-down g-pos-rel g-top-1 g-mr-3 txtcolorx"></i>
-                            34
-                          </a>
-                        </li>
+                    
+                  
                       </ul>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 {/* another comment starts */}
 
                 {commentListComponent()}
                 {/* comment end here */}
-                {props.userCred.id!==undefined && ordered ? commentInput()  : <p>login to comment</p> }
+                {props.userid!==undefined && ordered ? commentInput()  : <p>login to comment</p> }
                 
               </div>
             </div>
@@ -323,6 +430,8 @@ useEffect(() => {
 const mapStateToProps = (state) => {
   return {
     userCred: state.eventpnl.userCred,
+    userid:state.auth.userId,
+   
   };
 };
 
