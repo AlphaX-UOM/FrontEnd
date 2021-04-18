@@ -55,7 +55,6 @@ function Account(props) {
                 console.log(responseData)
                 props.addUserData(responseData);
 
-
             });
     }, []);
 

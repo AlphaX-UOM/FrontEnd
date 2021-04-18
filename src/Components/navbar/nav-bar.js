@@ -5,6 +5,9 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {Link} from 'react-router-dom';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import ServiceNotifications from '../Notifications/ServiceNotifications'; 
+import CustomerNotifications from '../Notifications/CustomerNotifications'; 
 
 import { Button } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
@@ -55,6 +58,14 @@ const navbar=(props)=>{
                         <Link className="nav-link" to="/select_profile"><span className="align-text-bottom"><PersonIcon/></span>Account</Link>
                     </li>:<p></p>}
 
+                    { props.role==="ServiceProvider" && props.isAuthenticated  ? <li className="nav-item">
+                        <p className="nav-link" to="/select_profile"><span className="align-text-bottom"><ServiceNotifications myId={props.id}/></span></p>
+                    </li>:<p></p>}
+
+                    { props.role==="Customer" && props.isAuthenticated  ? <li className="nav-item">
+                        <p className="nav-link" to="/select_profile"><span className="align-text-bottom"><CustomerNotifications myId={props.id}/></span></p>
+                    </li>:<p></p>}
+
 
                     { props.isAuthenticated  ? <li className="nav-item" style={{width:"100px"}}>
                         <Link className="nav-link" to='/logout'><span className="align-text-bottom"><LockIcon/></span> Logout</Link>
@@ -62,7 +73,7 @@ const navbar=(props)=>{
 
                     <li className="nav-item" style={{width:"100px"}}>
                         <span className="badge badge-pill badge-success cartnum" >{items.length > 0 && items.length}</span>
-                        <Link className="nav-link" to="/shoppingcart"><span className="align-text-bottom "><ShoppingCartIcon/></span></Link>
+                        <Link className="nav-link" to="/shoppingcart"><span className="align-text-bottom "><ShoppingCartIcon/>Cart</span></Link>
                         {/*<Link to="/" className="nav-link ">*/}
                         {/*<ShoppingCartIcon/>*/}
                         {/*</Link>*/}
