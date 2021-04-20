@@ -8,6 +8,8 @@ import Paper from '@material-ui/core/Paper';
 import Orders from './table';
 import TotalAmmount from './TotalAmount';
 import Chart from './Chart';
+import PieChart from './pieChart';
+import Typography from '@material-ui/core/Typography';
 
 
 const drawerWidth = 240;
@@ -73,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    height: '100vh',
+    height: '150vh',
     overflow: 'auto',
   },
   container: {
@@ -93,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
 
  function Dashboard() {
   const classes = useStyles();
-
+  var current=new Date().getFullYear()
  
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   return (
@@ -102,15 +104,35 @@ const useStyles = makeStyles((theme) => ({
     <Container maxWidth="lg" className={classes.container} >
        <Grid container spacing={2}>
         {/* Chart */}
-        <Grid item xs={12} md={8} lg={9}>
-          <Paper className={fixedHeightPaper}style={{backgroundColor: '#0bb2d4',color:'white'}}>
+        <Grid item xs={4} md={4} lg={6}>
+          <Paper style={{backgroundColor: '#17b3a3',color:'white',height:'350px'}}>
+          <center>
+            <Typography component="p" variant="h5">
+       Reservation Per Services
+      </Typography>
+      <Typography color="textSecondary" className={classes.depositContext}>
+        Current Year: {current}
+      </Typography>
+            </center>
          <Chart/>
           </Paper>
         </Grid>
         {/* Recent Deposits */}
-        <Grid item xs={12} md={4} lg={3}>
-          <Paper className={fixedHeightPaper}style={{backgroundColor: '#17b3a3',color:'white'}}>
+        <Grid item xs={9} md={4} lg={3}>
+          <Paper className={fixedHeightPaper}style={{backgroundColor: '#49DE94',color:'white',height:'350px'}}>
           <TotalAmmount/>
+          </Paper>
+        </Grid>
+
+        <Grid item xs={12} md={4} lg={3}>
+          <Paper style={{backgroundColor: '#0bb2d4',color:'white',height:'350px'}}>
+            <center>
+            <Typography component="p" variant="h5">
+       Posts Summary
+      </Typography>
+            </center>
+          
+          <PieChart/>
           </Paper>
         </Grid>
         {/* Recent Orders */}

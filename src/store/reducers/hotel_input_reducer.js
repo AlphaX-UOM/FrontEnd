@@ -8,10 +8,15 @@ const initialState = {
     capacity: {},
 
     district_filter:null,
-    price_filter:null,
+    star_filter:null,
 
     pricerange_filter:null,
     stars_filter:null,
+
+    name: {},
+    checkIn: {},
+    checkOut: {},
+    stars:{},
    
     error: false
 };
@@ -37,10 +42,10 @@ const set_hotel_district_filter = (state,action) => {
     });
 };
 
-const set_hotel_price_filter = (state,action) => {
-    console.log("reducer"+action.price_filter);
+const set_hotel_star_filter = (state,action) => {
+    console.log("reducer"+action.star_filter);
     return updateObject(state, {
-        price_filter:action.price_filter,
+        star_filter:action.star_filter,
         error: false
     });
 };
@@ -61,13 +66,27 @@ const set_hotel_stars_filter = (state,action) => {
     });
 };
 
+const get_hotel_listitem_selected = (state, action) => {
+    console.log("reducer"+action.name);
+
+    return updateObject(state, {
+        name: action.name,
+        checkIn: action.checkIn,
+        checkOut: action.checkOut,
+        stars: action.stars,
+        error: false
+    });
+
+};
+
 const hotel_input_reducer = (state = initialState, action) => {
     switch ( action.type ) {
         case actionTypes.GET_HOTEL_INPUT_FORM: return get_hotel_input_form(state, action);
         case actionTypes.SET_HOTEL_DISTRICT_FILTER: return set_hotel_district_filter(state,action);
-        case actionTypes.SET_HOTEL_PRICE_FILTER: return set_hotel_price_filter(state,action);
+        case actionTypes.SET_HOTEL_STAR_FILTER: return set_hotel_star_filter(state,action);
         case actionTypes.SET_HOTEL_PRICERANGE_FILTER: return set_hotel_pricerange_filter(state,action);
         case actionTypes.SET_HOTEL_STARS_FILTER: return set_hotel_stars_filter(state,action);
+        case actionTypes.GET_HOTEL_LISTITEM_SELECTED: return get_hotel_listitem_selected(state,action);
         default: return state;
     }
 };

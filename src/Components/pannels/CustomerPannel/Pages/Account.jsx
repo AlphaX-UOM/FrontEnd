@@ -55,6 +55,7 @@ function Account(props) {
                 console.log(responseData)
                 props.addUserData(responseData);
 
+
             });
     }, []);
 
@@ -179,6 +180,7 @@ function Account(props) {
         <div className="container">
             <center>
                 <div className="row">
+                   
                     <div class="col-sm-2" >
 
 

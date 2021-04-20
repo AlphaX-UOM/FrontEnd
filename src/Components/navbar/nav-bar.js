@@ -73,7 +73,7 @@ const navbar=(props)=>{
 
                     <li className="nav-item" style={{width:"100px"}}>
                         <span className="badge badge-pill badge-success cartnum" >{items.length > 0 && items.length}</span>
-                        <Link className="nav-link" to="/shoppingcart"><span className="align-text-bottom "><ShoppingCartIcon/>Cart</span></Link>
+                        <Link className="nav-link" to="/shoppingcart"><span className="align-text-bottom "><ShoppingCartIcon/></span></Link>
                         {/*<Link to="/" className="nav-link ">*/}
                         {/*<ShoppingCartIcon/>*/}
                         {/*</Link>*/}

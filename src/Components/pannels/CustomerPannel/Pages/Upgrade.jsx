@@ -156,13 +156,13 @@ const Upgrade = (props) => {
       /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
     );
     const validIdRegex = RegExp(
-      /^[1-9]{9}?|[V]$/
+      /^[0-9]{9}?[V]$/
     );
     const validAccountRegex = RegExp(
       /^[0-9]{10}|[0-9]{12}$/
     );
     const validPnumRegex = RegExp(
-      /^[0-9\b]+$/
+      /^[0-9]{10}?$/
     );
     const { name, value } = event.target;
     let errors = { ...state.errors };
@@ -201,18 +201,18 @@ const Upgrade = (props) => {
         }
         
         break;
-        case "account":
-          if (!validAccountRegex.test(value)) {
-            errors.account = "Account Number is not valid!";
-          } else {
-            errors.account = "";
-            setstate({
-              ...state,
-              account: value,
-            });
-          }
+        // case "account":
+        //   if (!validAccountRegex.test(value)) {
+        //     errors.account = "Account Number is not valid!";
+        //   } else {
+        //     errors.account = "";
+        //     setstate({
+        //       ...state,
+        //       account: value,
+        //     });
+        //   }
           
-          break;
+        //   break;
 
         case "id":
         if (!validIdRegex.test(value)) {
@@ -312,7 +312,7 @@ const Upgrade = (props) => {
               <div className="form-row row">
                 <label htmlFor="national-id"> Account Number</label>
                 <input type="text" name="account" id="account" className="input-text"
-                  placeholder="Account Number" onChange={formValChange} required />
+                  placeholder="Account Number" onChange={formValChange} />
                 <div className="text-danger">{state.errors.account}</div>
               </div>
               <div className="form-row row">
