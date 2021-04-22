@@ -47,7 +47,7 @@ export const auth = (email, password) => {
         dispatch(authStart());
         var decodedStringBtoA = email+`:`+password;
         var encodedStringBtoA = btoa(decodedStringBtoA);
-        let url = 'https://alphax-api.azurewebsites.net/api/users/Login';
+        let url = 'https://alphax-api.azurewebsites.net/api/users/LoginProtected';
 
         var axios = require('axios');
         var config = {
