@@ -74,8 +74,8 @@ function Form(props) {
     budget: budget,
     travelers: travellers,
     days: noOdDates,
-    Checkin : suggestCheckin,
-    Checkout : suggestCheckout
+    Checkin: suggestCheckin,
+    Checkout: suggestCheckout,
   };
 
   const handleStartDate = (event) => {
@@ -94,52 +94,6 @@ function Form(props) {
   // console.log(noOdDates);
   return (
     <div>
-      {/*<br />*/}
-      {/*<div className="container " >*/}
-      {/*<div className="row" style={{ padding: "10px" }}>*/}
-      {/**/}
-      {/*<div className="col-5">*/}
-      {/*<div className="card shadow-lg" >*/}
-      {/*<DateRangePickerCalendar startDate={startDate} endDate={endDate} focus={focus} onStartDateChange={setStartDate} onEndDateChange={setEndDate} onFocusChange={handleFocusChange} locale={enGB} />*/}
-      {/*</div>*/}
-      {/*</div>*/}
-      {/**/}
-      {/*<div className="col-5">*/}
-      {/*<br/>*/}
-      {/*<br/>*/}
-      {/*<div className="input-group mb-1">*/}
-      {/*<div className="input-group-prepend">*/}
-      {/*<span className="input-group-text" id="basic-addon1">No. Of Travellers</span>*/}
-      {/*</div>*/}
-      {/*<input type="number" onChange={handleChange} min="0" className="form-control" aria-label="Username"*/}
-      {/*aria-describedby="basic-addon1" />*/}
-      {/*</div>*/}
-      {/**/}
-      {/*<br />*/}
-
-      {/*<Flavour />*/}
-      {/*<br />*/}
-      {/*<br/>*/}
-
-      {/**/}
-      {/*<div className="input-group mb-3">*/}
-      {/*<div className="input-group-prepend">*/}
-      {/*<span className="input-group-text" id="basic-addon1">Budget $</span>*/}
-      {/*</div>*/}
-      {/*<input type="number" onChange={handleInputBudget} className="form-control" aria-label="Username"*/}
-      {/*aria-describedby="basic-addon1" min="0" step="1" placeholder="0" />*/}
-      {/*</div>*/}
-      {/**/}
-      {/*<br/>*/}
-      {/*<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tab"></span>&nbsp;&nbsp;<span class="tab"></span>&nbsp;&nbsp;<Link to={{ pathname: "/result", data: formdata }} ><button type="button" className="btn btn-warning rounded">Give me a plan</button></Link></p>*/}
-      {/**/}
-      {/**/}
-      {/*</div>*/}
-      {/*<div className="col-2"></div>*/}
-
-      {/*</div>*/}
-      {/*</div>*/}
-
       <section className="tm-banner">
         <div className="tm-container-outer tm-banner-bg">
           <div className="container">
