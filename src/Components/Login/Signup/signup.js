@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './signup.css';
 import axios from "axios";
-import {History} from 'react-router-dom';
 
 
 
@@ -41,7 +40,7 @@ const SignUp=(props)=>{
 
             if (state.isvalid==true){
                 axios
-                    .post('https://alphax-api.azurewebsites.net/api/users', {
+                    .post('https://alphax-api.azurewebsites.net/api/users/RegisterProtected', {
                         firstName:state.firstName,
                         lastName:state.lastName,
                         password:state.password,
@@ -55,7 +54,6 @@ const SignUp=(props)=>{
                     .then(response => {
                         console.log(response)
                         alert('Register successfully!');
-                        props.history.push('/signin')
                     })
 
             }

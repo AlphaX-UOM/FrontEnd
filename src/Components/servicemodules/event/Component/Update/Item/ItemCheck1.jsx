@@ -179,7 +179,7 @@ console.log("event price ->"+nameList.price);
               <h5><Badge pill variant="warning">{nameList.price}$/per Adult</Badge></h5>
             </Col>
             <Col align="right">
-              <h5>{nameList.audience==="All"?<Badge pill variant="warning"> ${nameList.pricePerKid} /per Kid  </Badge>  : <Badge pill variant="danger">Only For Adults</Badge> }</h5>
+              <h5>{nameList.audience==="All"?<Badge pill variant="warning"> ${nameList.pricePerKid} /per( kids below 12)  </Badge>  : <Badge pill variant="danger">Only For Adults</Badge> }</h5>
             </Col>
             <br />
           </Row>
