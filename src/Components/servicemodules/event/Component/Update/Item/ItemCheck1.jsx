@@ -368,9 +368,9 @@ minDate={new Date()}
           </div>
           <div>
             <ul>
-              <li>No refunds for tickets</li>
+             
               <li>Low Price Guarantee</li>
-              <li>Reserve Now & Pay Later</li>
+        
             </ul>
           </div>
         </Container>
