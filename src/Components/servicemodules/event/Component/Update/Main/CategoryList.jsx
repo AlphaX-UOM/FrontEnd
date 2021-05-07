@@ -19,7 +19,8 @@ function CategoryList() {
     {
       id:2,
       type:"Beach Party",
-      name:'Beaches',
+      name:" Beaches (Diving ,Snorkeling,surfing)",
+      
       img: 'https://png.pngtree.com/png-vector/20190425/ourmid/pngtree-beach-icon-vector-illustration-in-line-style-for-any-purpose-png-image_981872.jpg',
       link: 'path'
     },
@@ -53,9 +54,9 @@ function CategoryList() {
     },
     {
       id:7,
-      type:"Wildlife",
-      name:'wildlife',
-      img: 'https://cdn1.vectorstock.com/i/1000x1000/15/35/animal-farm-pet-wildlife-zoo-icon-vector-18751535.jpg',
+      type:"Culture",
+      name:'Culture & Foods',
+      img: 'https://www.kindpng.com/picc/m/66-669503_dinner-food-kitchen-meal-restaurant-icon-meal-icon.png',
       link: 'path'
     }
   ]

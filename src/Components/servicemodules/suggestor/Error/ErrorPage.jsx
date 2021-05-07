@@ -44,7 +44,7 @@ export default function ErrorPage() {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">Sorry! No Reults</h2>
+            <h2 id="transition-modal-title">Sorry! No Results</h2>
               <SearchIcon />
               <p id="transition-modal-description">
                 You can change values and try again!

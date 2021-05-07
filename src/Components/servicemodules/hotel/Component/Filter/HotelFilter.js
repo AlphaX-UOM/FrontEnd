@@ -125,9 +125,9 @@ const mapDispatchToProps = (dispatch) => {
         hotel_filter_district: (filter_district) => {
             dispatch(actions.set_hotel_district_filter(filter_district));
         },
-        hotel_filter_price: (filter_price) => {
-            dispatch(actions.set_hotel_price_filter(filter_price));
-        },
+        // hotel_filter_price: (filter_price) => {
+        //     dispatch(actions.set_hotel_price_filter(filter_price));
+        // },
     };
 };
 

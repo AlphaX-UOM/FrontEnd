@@ -106,6 +106,9 @@ const initialState = {
     auddata:null,
     pricedata:null,
     searchdata:null,
+    item:{
+
+    },
 
 }
 const rootReducer = (state = initialState, action) => {
@@ -202,6 +205,14 @@ const rootReducer = (state = initialState, action) => {
            
             ...state,
             pricedata: action.pricedata
+        }
+    }
+    if (action.type === 'Package_Detail_Popup') {
+        
+        return {
+           
+            ...state,
+            item: action.item
         }
     }
     return state;

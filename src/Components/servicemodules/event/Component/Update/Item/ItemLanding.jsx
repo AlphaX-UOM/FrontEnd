@@ -42,7 +42,7 @@ useEffect(() => {
 
   return (
     <div>
-      <Title />
+      <p>   </p>
       <div>
         <br />
       </div>
@@ -60,7 +60,7 @@ useEffect(() => {
                     value={value/total}
                     precision={0.5}
                   
-                  /> <small>Based on {total} reviews</small>
+                  /> <small> {total} reviews</small>
                 </center>
               </Box>
           

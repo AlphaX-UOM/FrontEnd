@@ -16,17 +16,21 @@ class PostTproviderForm extends Component{
                 businessName: '',
                 price: '',
                 pricePerKid: '',
+                adultTickets: 0,
+                kidTickets: 0,
                 venue: '',
                 district: '',
                 date: '',
                 time: '',
                 eventType:'',
                 audience:'All',
+                frequency:'All',
                 otherDetails:'',
                 imgURL:'',
                 imgURL02:'',
                 imgURL03 :'',
                 userID :props.userid,
+
 
                
                
@@ -203,13 +207,16 @@ if(this.state.progressx===true){
                     businessName:this.state.businessName,
                     price:parseInt(this.state.price),
                     pricePerKid:parseInt(this.state.pricePerKid),
+                    adultTickets: this.state.adultTickets,
+                    kidTickets: this.state.kidTickets,
                     venue:this.state.venue,
                     district:this.state.district,
-                    date: this.state.date,
+                    date: new Date(),
                     time: this.state.time,
                     eventType:this.state.eventType,
                     audience:this.state.audience,
                     otherDetails:this.state.otherDetails,
+                    frequency:this.state.frequency,
                     imgURL:this.state.url,
                     imgURL02:this.state.url1,
                     imgURL03 :this.state.url2,
@@ -295,7 +302,7 @@ console.log(this.props.userid)
                                         <option value="Nature">Nature</option>
                                         <option value="Camping">Camping</option>
                                         <option value="Museaum">Museaum</option>
-                                        <option value="Wildlife">Wildlife</option>
+                                        <option value="Culture">Culture & Foods</option>
                                         <option value="Boat Safari">Boat Safari</option>
 
                                     </select>
@@ -314,6 +321,26 @@ console.log(this.props.userid)
                                     <select className="form-control tm-select"  name="audience" value={this.state.audience} onChange={this.Changehandler}>
                                         <option value="All">All</option>
                                         <option value="21+">21+</option>
+                                      
+                                    </select>
+                                </div>
+                           
+                            </div>
+
+
+
+                            <div className="col-sm-3"></div>
+                        </div>
+
+                        <div className="row formmarge">
+                            <div className="col-sm-3"></div>
+                            <div className="col-sm-6">
+                                <div className="form-group">
+                                    <label htmlFor="exampleFormControlSelect1">Frequency</label>
+                                    <select className="form-control tm-select"  name="frequency" value={this.state.frequency} onChange={this.Changehandler}>
+                                        <option value="All">All</option>
+                                        <option value="week">Only week days</option>
+                                        <option value="weekend">Only weekend </option>
                                       
                                     </select>
                                 </div>
@@ -367,13 +394,23 @@ console.log(this.props.userid)
                         <div className="row formmarge">
                             <div className="col-sm-3"></div>
                             <div className="col-sm-6">
-                                <label htmlFor="inputEmail4">Date</label>
-                                <input type="date" className="form-control" id="date" name="date"
-                                    value={this.state.date} onChange={this.Changehandler} />
+                                <label htmlFor="adultTickets"> Adult tickets</label>
+                                <input type="number" className="form-control" name="adultTickets"
+                                       value={this.state.adultTickets} onChange={this.Changehandler} />
                             </div>
-                            <div className="col-sm-4"></div>
+                            <div className="col-sm-3"></div>
                         </div>
-
+                        <div className="row formmarge">
+                            <div className="col-sm-3"></div>
+                            <div className="col-sm-6">
+                                <label htmlFor="kidTickets"> Kids Tickets</label>
+                                <input type="number" className="form-control" name="kidTickets"
+                                       value={this.state.kidTickets} onChange={this.Changehandler} />
+                            </div>
+                            <div className="col-sm-3"></div>
+                        </div>
+                  
+                       
                         <div className="row formmarge">
                             <div className="col-sm-3"></div>
                             <div className="col-sm-6">

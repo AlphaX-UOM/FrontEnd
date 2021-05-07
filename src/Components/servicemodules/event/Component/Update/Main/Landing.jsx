@@ -5,14 +5,14 @@ import Title from './Title';
 import CategoryList from './CategoryList';
 import EventList from './EventList';
 import Date from './Date';
-
+import Map from '../Category/SriLanka/map'
 function Landing() {
 
 
 
   return (
     <div>
-        <Title />
+       
      
     
         <CategoryList />
@@ -21,7 +21,15 @@ function Landing() {
         <br>
         </br>
         <div>
-      <center><Date/></center>
+        <Link
+                      
+                        to="/categorylanding1"
+                      
+                      >
+                         <Map/>
+        
+                      </Link>
+     
         </div>
         <div>
         
@@ -30,7 +38,7 @@ function Landing() {
         <EventList />
       
         </div>
-        <p>This is Event Landing</p>
+      
       
     </div>
   );

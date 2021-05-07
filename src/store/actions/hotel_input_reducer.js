@@ -23,13 +23,14 @@ export const set_hotel_district_filter = (district ) => {
     };
 };
 
-export const set_hotel_price_filter = (price) => {
-    console.log(price);
+export const set_hotel_star_filter = (star) => {
+    console.log(star);
     return {
-        type: actionTypes.SET_HOTEL_PRICE_FILTER,
-       price_filter:price,
+        type: actionTypes.SET_HOTEL_STAR_FILTER,
+       star_filter:star,
     };
 };
+
 
 export const set_hotel_pricerange_filter = (pricerange) => {
     console.log(pricerange);
@@ -44,5 +45,17 @@ export const set_hotel_stars_filter = (stars) => {
     return {
         type: actionTypes.SET_HOTEL_STARS_FILTER,
         stars_filter:stars,
+    };
+};
+
+export const get_hotel_listitem_selected = ( name, checkIn, checkOut, stars ) => {
+    console.log("action");
+    console.log(name);
+    return {
+        type: actionTypes.GET_HOTEL_LISTITEM_SELECTED,
+        name: name,
+        checkIn: checkIn,
+        checkOut: checkOut,
+        stars: stars,
     };
 };

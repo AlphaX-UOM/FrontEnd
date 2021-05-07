@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './signup.css';
 import axios from "axios";
-import {History} from 'react-router-dom';
 
 
 
@@ -41,26 +40,20 @@ const SignUp=(props)=>{
 
             if (state.isvalid==true){
                 axios
-                    .post('https://alphax-api.azurewebsites.net/api/users', {
-                        firstName:state.firstname,
-                        lastName:state.lastname,
+                    .post('https://alphax-api.azurewebsites.net/api/users/RegisterProtected', {
+                        firstName:state.firstName,
+                        lastName:state.lastName,
                         password:state.password,
                         dOB:state.dob,
                         address:state.address,
                          email:state.email,
                         contact:state.phonenumber,
-                       role:"customer",
+                       role:"Customer",
                         imgURL:""
                     })
                     .then(response => {
                         console.log(response)
                         alert('Register successfully!');
-                        props.history.push('/signin')
-                    })
-                    .catch(error => {
-                        console.log(error)
-                        alert('fill the form again and submit');
-
                     })
 
             }

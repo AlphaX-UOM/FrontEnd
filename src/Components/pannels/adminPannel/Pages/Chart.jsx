@@ -3,7 +3,7 @@ import axios from "axios";
 
 function BarGroup(props) {
   let barPadding = 2;
-  let barColour = "#000080";
+  let barColour = "#FFD700";
   let widthScale = (d) => d * 10;
 
   let width = widthScale(props.d.value);
@@ -33,6 +33,7 @@ function BarGroup(props) {
 }
 
 function BarChart() {
+  var current=new Date().getFullYear()
 
   const [loading, setLoading] = useState(false);
   const [totalGuide, setTotalGuide] = useState(null);
@@ -68,7 +69,7 @@ function BarChart() {
           return response.json();
         })
         .then((responseData) => {
-          setTouGuide(responseData);
+          responseData=(responseData.filter(item => ((new Date(item.checkIn).getFullYear() ===current))));
       setTotalGuide(responseData.reduce((total, pay) => total + 1, 0));
         });
     }, []);
@@ -99,7 +100,7 @@ function BarChart() {
           return response.json();
         })
         .then((responseData) => {
-          setEvent(responseData);
+          responseData=(responseData.filter(item => ((new Date(item.checkIn).getFullYear() ===current))));
           setEventTotal(responseData.reduce((total, pay) => total + 1, 0));
         });
     }, []);
@@ -128,7 +129,7 @@ function BarChart() {
           return response.json();
         })
         .then((responseData) => {
-          setTransport(responseData);
+          responseData=(responseData.filter(item => ((new Date(item.checkIn).getFullYear() ===current))));
           setTotalHote(responseData.reduce((total, pay) => total + 1, 0));
         });
     }, []);
@@ -158,7 +159,7 @@ function BarChart() {
           return response.json();
         })
         .then((responseData) => {
-          sethotels(responseData);
+          responseData=(responseData.filter(item => ((new Date(item.checkIn).getFullYear() ===current))));
           setTotalTransport(responseData.reduce((total, pay) => total + 1, 0));
         });
     }, []);
@@ -182,9 +183,10 @@ function BarChart() {
   return (
     <svg width="1000" height="300">
       <g className="container">
-        <text className="title" x="20" y="30" style={{ color: '#FFF' }}>
+        <text className="title" x="7" y="25" style={{ color: '#FFF' }}>
           {" "}
-          Reservations Per Services
+          
+       
         </text>
         <g className="chart" transform="translate(100,60)">
           {barGroups}

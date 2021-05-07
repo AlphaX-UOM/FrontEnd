@@ -13,7 +13,7 @@ function EventList(props) {
   const [myeventList, setmyeventList] = useState([]);
   const[count,setconunt]=useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(6);
+  const [postsPerPage, setPostsPerPage] = useState(3);
   const [loading, setLoading] = useState(false);
 
 

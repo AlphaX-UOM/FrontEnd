@@ -4,38 +4,19 @@ import Thank from "./Thank";
 import { connect } from "react-redux";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-import moment from "moment";
 
 function Paypal(props) {
   let displayTotal = props.total;
-  // const items = useSelector(state => state.items);
-  // let itemsCart = props.items;
-  // const [Ttotal, setTotal] = useState(
-  //   itemsCart[0].quantity * itemsCart[0].number +
-  //     itemsCart[1].quantity * itemsCart[1].number +
-  //     itemsCart[2].quantity * itemsCart[2].number +
-  //     itemsCart[3].quantity * itemsCart[3].number +
-  //     itemsCart[4].quantity * itemsCart[4].number
-  // );
-
-  // const product = {
-  //   // price: props.total,
-  //   price: 6,
-  //   description: "Payment for Smart Travel System",
-  // };
 
   const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState(null);
   const paypalRef = useRef();
   const [str, setStr] = useState();
-  const [tra, setTra] = useState(false);
-  const [gui, setGui] = useState(false);
-  const [ev01, setEv01] = useState(false);
-  const [ev02, setEv02] = useState(false);
-  const [hot, sethot] = useState(false);
   let GUID = uuidv4();
 
   useEffect(() => {
+
+
     var totals = props.total;
     var myItems = [];
     for (var i = 0; i < props.items.length; i++) {
@@ -350,6 +331,7 @@ const mapStateToProps = (state) => {
     total: state.eventpnl.total,
     userCred: state.eventpnl.userCred,
     items: state.onlineStoreApp.items,
+    auth: state.auth
   };
 };
 

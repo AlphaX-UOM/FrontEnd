@@ -43,7 +43,8 @@ const[eventDecem1,setEventDecem1]=useState(null);
 // var  responseData10;
 // var  responseData11;
 // var  responseData12;
-
+var current=new Date().getFullYear()
+var previous=current-1
 
 useEffect(() => {
   fetch(
@@ -53,54 +54,54 @@ useEffect(() => {
       return response.json();
     })
     .then((responseData) => {
-        // responseData1 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='01');
-        setEventJan (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='01'& (new Date(item.date).getFullYear() =='2020')).reduce((total,pay)=>total+pay.amount,0));
-        // responseData2 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='02');
-        setEventFeb (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='02'&(new Date(item.date).getFullYear() =='2020')).reduce((total,pay)=>total+pay.amount,0));
-        // responseData3 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='03');
-        setEventMar (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='03'&(new Date(item.date).getFullYear() =='2020')).reduce((total,pay)=>total+pay.amount,0));
-        // responseData4 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='04');
-        setEventApr (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='04'&(new Date(item.date).getFullYear() =='2020')).reduce((total,pay)=>total+pay.amount,0));
-        // responseData5 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='05');
-        setEventMay (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='05'&(new Date(item.date).getFullYear() =='2020')).reduce((total,pay)=>total+pay.amount,0));
-        // responseData6 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='06');
-        setEventJune (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='06'&(new Date(item.date).getFullYear() =='2020')).reduce((total,pay)=>total+pay.amount,0));
-        // responseData7 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='07');
-        setEventJuly (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='07'&(new Date(item.date).getFullYear() =='2020')).reduce((total,pay)=>total+pay.amount,0));
-        // responseData8 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='08');
-        setEventAug (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='08'&(new Date(item.date).getFullYear() =='2020')).reduce((total,pay)=>total+pay.amount,0));
+     
+        setEventJan (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='01'& (new Date(item.date).getFullYear() ===previous)).reduce((total,pay)=>total+pay.amount,0));
+       
+        setEventFeb (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='02'&(new Date(item.date).getFullYear() ===previous)).reduce((total,pay)=>total+pay.amount,0));
+       
+        setEventMar (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='03'&(new Date(item.date).getFullYear() ===previous)).reduce((total,pay)=>total+pay.amount,0));
+      
+        setEventApr (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='04'&(new Date(item.date).getFullYear() ===previous)).reduce((total,pay)=>total+pay.amount,0));
+     
+        setEventMay (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='05'&(new Date(item.date).getFullYear() ===previous)).reduce((total,pay)=>total+pay.amount,0));
+     
+        setEventJune (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='06'&(new Date(item.date).getFullYear() ===previous)).reduce((total,pay)=>total+pay.amount,0));
+       
+        setEventJuly (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='07'&(new Date(item.date).getFullYear() ===previous)).reduce((total,pay)=>total+pay.amount,0));
+ 
+        setEventAug (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='08'&(new Date(item.date).getFullYear() ===previous)).reduce((total,pay)=>total+pay.amount,0));
         // responseData9 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='09');
-        setEventSept (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='09'&(new Date(item.date).getFullYear() =='2020')).reduce((total,pay)=>total+pay.amount,0));
+        setEventSept (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='09'&(new Date(item.date).getFullYear() ===previous)).reduce((total,pay)=>total+pay.amount,0));
         // responseData10 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='10');
-        setEventOct (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='10'&(new Date(item.date).getFullYear() =='2020')).reduce((total,pay)=>total+pay.amount,0));
+        setEventOct (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='10'&(new Date(item.date).getFullYear() ===previous)).reduce((total,pay)=>total+pay.amount,0));
         // responseData11 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='11');
-        setEventNov (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='11'&(new Date(item.date).getFullYear() =='2020')).reduce((total,pay)=>total+pay.amount,0));
+        setEventNov (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='11'&(new Date(item.date).getFullYear() ===previous)).reduce((total,pay)=>total+pay.amount,0));
         // responseData12 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='12');
-        setEventDecem (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='12'&(new Date(item.date).getFullYear() =='2020')).reduce((total,pay)=>total+pay.amount,0));
+        setEventDecem (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='12'&(new Date(item.date).getFullYear() ===previous)).reduce((total,pay)=>total+pay.amount,0));
 
-        setEventJan1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='01'& (new Date(item.date).getFullYear() =='2021')).reduce((total,pay)=>total+pay.amount,0));
+        setEventJan1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='01'& (new Date(item.date).getFullYear() ===current)).reduce((total,pay)=>total+pay.amount,0));
         // responseData2 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='02');
-        setEventFeb1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='02'&(new Date(item.date).getFullYear() =='2021')).reduce((total,pay)=>total+pay.amount,0));
+        setEventFeb1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='02'&(new Date(item.date).getFullYear() ===current)).reduce((total,pay)=>total+pay.amount,0));
         // responseData3 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='03');
-        setEventMar1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='03'&(new Date(item.date).getFullYear() =='2021')).reduce((total,pay)=>total+pay.amount,0));
+        setEventMar1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='03'&(new Date(item.date).getFullYear() ===current)).reduce((total,pay)=>total+pay.amount,0));
         // responseData4 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='04');
-        setEventApr1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='04'&(new Date(item.date).getFullYear() =='2021')).reduce((total,pay)=>total+pay.amount,0));
+        setEventApr1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='04'&(new Date(item.date).getFullYear() ===current)).reduce((total,pay)=>total+pay.amount,0));
         // responseData5 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='05');
-        setEventMay1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='05'&(new Date(item.date).getFullYear() =='2021')).reduce((total,pay)=>total+pay.amount,0));
+        setEventMay1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='05'&(new Date(item.date).getFullYear() ===current)).reduce((total,pay)=>total+pay.amount,0));
         // responseData6 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='06');
-        setEventJune1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='06'&(new Date(item.date).getFullYear() =='2021')).reduce((total,pay)=>total+pay.amount,0));
+        setEventJune1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='06'&(new Date(item.date).getFullYear() ===current)).reduce((total,pay)=>total+pay.amount,0));
         // responseData7 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='07');
-        setEventJuly1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='07'&(new Date(item.date).getFullYear() =='2021')).reduce((total,pay)=>total+pay.amount,0));
+        setEventJuly1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='07'&(new Date(item.date).getFullYear() ===current)).reduce((total,pay)=>total+pay.amount,0));
         // responseData8 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='08');
-        setEventAug1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='08'&(new Date(item.date).getFullYear() =='2021')).reduce((total,pay)=>total+pay.amount,0));
+        setEventAug1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='08'&(new Date(item.date).getFullYear() ===current)).reduce((total,pay)=>total+pay.amount,0));
         // responseData9 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='09');
-        setEventSept1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='09'&(new Date(item.date).getFullYear() =='2021')).reduce((total,pay)=>total+pay.amount,0));
+        setEventSept1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='09'&(new Date(item.date).getFullYear() ===current)).reduce((total,pay)=>total+pay.amount,0));
         // responseData10 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='10');
-        setEventOct1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='10'&(new Date(item.date).getFullYear() =='2021')).reduce((total,pay)=>total+pay.amount,0));
+        setEventOct1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='10'&(new Date(item.date).getFullYear() ===current)).reduce((total,pay)=>total+pay.amount,0));
         // responseData11 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='11');
-        setEventNov1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='11'&(new Date(item.date).getFullYear() =='2021')).reduce((total,pay)=>total+pay.amount,0));
+        setEventNov1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='11'&(new Date(item.date).getFullYear() ===current)).reduce((total,pay)=>total+pay.amount,0));
         // responseData12 = responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='12');
-        setEventDecem1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='12'&(new Date(item.date).getFullYear() =='2021')).reduce((total,pay)=>total+pay.amount,0));
+        setEventDecem1 (responseData.filter(item =>  (new Date(item.date).getMonth()+1) =='12'&(new Date(item.date).getFullYear() ===current)).reduce((total,pay)=>total+pay.amount,0));
        
         console.log("response data->"+responseData);
     });
@@ -179,14 +180,13 @@ const lineOptions = {
       ticks: {
         beginAtZero: true,
         fontColor: "#FFF", 
-        // Return an empty string to draw the tick line but hide the tick label
-        // Return `null` or `undefined` to hide the tick line entirely
+      
         userCallback(value) {
-          // Convert the number to a string and splite the string every 3 charaters from the end
+     
           value = value.toString();
           value = value.split(/(?=(?:...)*$)/);
 
-          // Convert the array to a string and format the output
+     
           value = value.join(' ');
           return `$.${value}`;
         },
@@ -213,8 +213,8 @@ return (
   <h4>Revenue Per Month</h4>
   <div>
   <div style={styles}>
-  <h6 style={{color:'rgb(173,216,230)'}}> 2020 </h6>
-    <h6 style={{color:'rgb(238,130,238)'}}> 2021 </h6>
+  <h6 style={{color:'rgb(173,216,230)'}}> Previous Year : {previous} </h6>
+    <h6 style={{color:'rgb(238,130,238)'}}> Current Year : {current} </h6>
   
   <Line data={data} options={lineOptions}  />
 

@@ -5,6 +5,9 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {Link} from 'react-router-dom';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import ServiceNotifications from '../Notifications/ServiceNotifications'; 
+import CustomerNotifications from '../Notifications/CustomerNotifications'; 
 
 import { Button } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
@@ -53,6 +56,14 @@ const navbar=(props)=>{
 
                     { props.isAuthenticated  ? <li className="nav-item" style={{width:"100px"}}>
                         <Link className="nav-link" to="/select_profile"><span className="align-text-bottom"><PersonIcon/></span>Account</Link>
+                    </li>:<p></p>}
+
+                    { props.role==="ServiceProvider" && props.isAuthenticated  ? <li className="nav-item">
+                        <p className="nav-link" to="/select_profile"><span className="align-text-bottom"><ServiceNotifications myId={props.id}/></span></p>
+                    </li>:<p></p>}
+
+                    { props.role==="Customer" && props.isAuthenticated  ? <li className="nav-item">
+                        <p className="nav-link" to="/select_profile"><span className="align-text-bottom"><CustomerNotifications myId={props.id}/></span></p>
                     </li>:<p></p>}
 
 

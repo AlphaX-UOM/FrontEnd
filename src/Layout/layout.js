@@ -7,7 +7,6 @@ import { authCheckState } from '../../src/store/actions/auth';
 
 import Post from "../Components/Post/post";
 import Shoppingcart from "../Components/cart/cartlist/views/cart";
-import Login from "../Components/Login/login";
 import Select_profile from "../Components/Login/profile/select_profile";
 import Logout from "../Components/Login/Logout/Logout";
 import ServiceProvider from "../Components/Userpanels/ServiceProviderUI/Serviceprovider";
@@ -51,6 +50,8 @@ import RoomResult from '../Components/servicemodules/hotel/Component/RoomResult/
 import RoomResultItem from '../Components/servicemodules/hotel/Component/RoomResult/RoomResultItem';
 import HotelCart from '../Components/servicemodules/hotel/Component/Cart/HotelCart';
 import SignIn from "../Components/Login/Signin/Signin";
+import Forgotpassword from "../Components/Login/forgot password/forgot_password";
+import Passwordreset from "../Components/Login/PasswordReset/PasswordReset";
 
 const Layout=(props)=> {
     const { items, saveLocalStorage } = props;
@@ -113,9 +114,10 @@ const Layout=(props)=> {
                         <Route path="/post/post-transportprovider"component={ PostTransportProviderForm}/>
                         <Route path="/post" component={Post}></Route>
                         <Route path="/logout"><Logout/></Route>
-                        <Route path="/login"><Login/></Route>
                         <Route path="/select_profile"><Select_profile/></Route>
                         <Route path="/register"><SignUp/></Route>
+                        <Route path="/passwordreset/:id"><Passwordreset/></Route>
+                        <Route path="/forgotpassword"><Forgotpassword/></Route>
                         <Route path="/signin"><SignIn/></Route>
                        
                         <Route path="/shoppingcart"><Shoppingcart/></Route>

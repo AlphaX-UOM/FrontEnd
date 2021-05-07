@@ -12,12 +12,12 @@ import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
 import Comments from '../comments/Comments'
 
 function guidedetailspage(props) {
-    const { add_to_cart,dateg} = props;
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [commentg,setcommentg]= useState(true)
+  const { add_to_cart, dateg } = props;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [commentg, setcommentg] = useState(true)
   // backend dta assinged for these variables
 
- 
+
   let name1;
 
   let email;
@@ -29,18 +29,18 @@ function guidedetailspage(props) {
   let details;
 
   // console.log(props.location.data.userId);
-    var today = new Date(),
+  var today = new Date(),
 
-        date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [nameList, setNameList] = useState([]);
- 
+
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     fetch(
       'https://alphax-api.azurewebsites.net/api/TourGuideServices/' +
-        props.match.params.id
+      props.match.params.id
     )
       .then((res) => res.json())
       .then((data) => {
@@ -48,34 +48,34 @@ function guidedetailspage(props) {
       });
   }, []);
 
-    function getAge(dateString) {
-        var today = new Date();
-        var birthDate = new Date(dateString);
-        var age = today.getFullYear() - birthDate.getFullYear();
-        var m = today.getMonth() - birthDate.getMonth();
-        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-        }
-        return age;
+  function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
     }
+    return age;
+  }
 
-  const totalcost= ((new Date(dateg.date1.checkoutdate).getTime()-new Date(dateg.date.checkindate).getTime())/(1000 * 3600 * 24)+1)*nameList.costPerDay
-  const unitsx=((new Date(dateg.date1.checkoutdate).getTime()-new Date(dateg.date.checkindate).getTime())/(1000 * 3600 * 24)+1)
+  const totalcost = ((new Date(dateg.date1.checkoutdate).getTime() - new Date(dateg.date.checkindate).getTime()) / (1000 * 3600 * 24) + 1) * nameList.costPerDay
+  const unitsx = ((new Date(dateg.date1.checkoutdate).getTime() - new Date(dateg.date.checkindate).getTime()) / (1000 * 3600 * 24) + 1)
   name1 = nameList.name;
   email = nameList.pnumber;
   Dob = nameList.dob;
   cost = nameList.costPerDay;
   details = nameList.otherDetails;
-  avatar=nameList.imgURL
+  avatar = nameList.imgURL
 
-  
+
   console.log(totalcost);
- 
-  let comment=(
-    <div hidden={(commentg)? true : ""}>
-        <Comments />
+
+  let comment = (
+    <div hidden={(commentg) ? true : ""}>
+      <Comments />
     </div>
-);
+  );
 
   return (
     <div className="">
@@ -93,21 +93,21 @@ function guidedetailspage(props) {
             <div className="col-sm-12">{/* image */}</div>
 
             <div className="col-sm-12">
-              <span className="lead"> 
-                <div className="row"> 
+              <span className="lead">
+                <div className="row">
                   {/* <div className="col-sm"><Ratings/></div> */}
                   <div className="col-sm txtcolorx">Excellent</div>
                 </div>
                 <div>
-                  
-                  <br/>
-                <img style={{height:"200px",width:"200px",borderRadius:"30px"}} src={avatar}/>
+
+                  <br />
+                  <img style={{ height: "200px", width: "200px", borderRadius: "30px" }} src={avatar} />
                 </div>
-                 <br/>
+                <br />
                 <div className="row">
                   <Link>
                     <div className="col txtcolorx">
-                      <small className="iconpad" onClick={()=>setcommentg(!commentg)}> Reviews</small>
+                      <small className="iconpad" onClick={() => setcommentg(!commentg)}> Reviews</small>
                       <ChatBubbleOutlineIcon fontSize="small" />
                     </div>
                   </Link>
@@ -136,7 +136,7 @@ function guidedetailspage(props) {
                     <div className="row">
                       <div className="">Language   :</div>
                       <div className="col">
-                        <div className="">   { nameList.language}</div>
+                        <div className="">   {nameList.language}</div>
                       </div>
                     </div>
                   </span>
@@ -202,25 +202,25 @@ function guidedetailspage(props) {
                     </div>
                   </span>
                   <span className="">
-                            <div className="row txtcolorx">
-                                <div className="col-sm-5 h5"><strong>Total Charge :</strong> </div>
-                                <div className="col-sm-7">
-                                        <div className="h5" >
-                                      Rs { totalcost}
-                                </div>
-                                  </div>
-                            </div>
+                    <div className="row txtcolorx">
+                      <div className="col-sm-5 h5"><strong>Total Charge :</strong> </div>
+                      <div className="col-sm-7">
+                        <div className="h5" >
+                          Rs {totalcost}
+                        </div>
+                      </div>
+                    </div>
 
-                        </span>
+                  </span>
 
                   <div className="row">
                     <div className="col-sm"></div>
                     <div className="col-sm"></div>
-                      <Link to="/shoppingcart">
-                    <button type="button" className="btn btn-primary " onClick={()=> props.add_to_cart(name1,cost,nameList.id,1,date,"GuideService",totalcost, unitsx,dateg.date.checkindate,null,null,dateg.date1.checkoutdate,null,null)}>
-                      Book Now
+                    <Link to="/shoppingcart">
+                      <button type="button" className="btn btn-primary " onClick={() => props.add_to_cart(name1, cost, nameList.id, 1, date, "GuideService", totalcost, unitsx, dateg.date.checkindate, null, null, dateg.date1.checkoutdate, null, null)}>
+                        Book Now
                     </button>
-                      </Link>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -247,9 +247,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
 
-    add_to_cart:(item,unit_price,add_id,no_travellers,Current_date,type,total_price,units,checkin_date,checkin_time,checkin_location,checkout_date,checkout_time,checkout_location) => dispatch(addToCart(item,unit_price,add_id,no_travellers,Current_date,type,total_price,units,checkin_date,checkin_time,checkin_location,checkout_date,checkout_time,checkout_location))
+    add_to_cart: (item, unit_price, add_id, no_travellers, Current_date, type, total_price, units, checkin_date, checkin_time, checkin_location, checkout_date, checkout_time, checkout_location) => dispatch(addToCart(item, unit_price, add_id, no_travellers, Current_date, type, total_price, units, checkin_date, checkin_time, checkin_location, checkout_date, checkout_time, checkout_location))
   };
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(  guidedetailspage);
+export default connect(mapStateToProps, mapDispatchToProps)(guidedetailspage);

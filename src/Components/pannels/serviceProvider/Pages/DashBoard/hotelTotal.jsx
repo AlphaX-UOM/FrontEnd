@@ -12,12 +12,20 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import { AllInclusiveRounded } from '@material-ui/icons';
+import Container from './HotelEdit/container';
 
 
 
 
 function Events(props) {
   const [eventList, setEventList] = useState([]);
+  const triggerText = 'Edit Details';
+  const onSubmit = (event) => {
+    event.preventDefault(event);
+    console.log(event.target.name.value);
+    console.log(event.target.email.value);
+
+};
 
   let userId = props.myId;
   useEffect(() => {
@@ -53,25 +61,23 @@ function Events(props) {
 
 
                           <Box borderRadius="30px">
-                              <Card style={{ border: '3px solid black', borderRadius: '5px!important',height:"400px" }}>
+                              <Card style={{ border: '3px solid black', borderRadius: '5px!important',height:"150px" }}>
 
-                                  <CardContent style={{ height: "60hv" }}>
-                                      <Typography gutterBottom variant="headline" component="h4">
+                                  <CardContent style={{ height: "50hv" }}>
+                                      <Typography gutterBottom variant="headline" component="h5">
 
                                           {post.name}
                                       </Typography>
-                                      <Typography component="p">
-                                          {post.otherDetails}
-
-
-
-
-                                      </Typography>
+                                     
                                   </CardContent>
                                   <CardActions>
-                                      <Button size="small" color="primary" target="_blank">
-                                         View Post
+                                  <Link onClick={post.clicked} to={`/hotelList/${post.id}`} style={{ color: 'black' }}>
+
+<Button size="small" color="primary" target="fill">
+    View Post
 </Button>
+</Link>
+<Container triggerText={triggerText} onSubmit={onSubmit} data={post.id} />
                                   </CardActions>
 
                               </Card>

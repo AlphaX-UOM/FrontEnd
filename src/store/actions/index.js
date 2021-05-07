@@ -15,9 +15,10 @@ export { guide_input_form } from "./guide_input_reducer";
 export { auth, logout, authCheckState  } from "./auth";
 
 export {
-    get_hotel_input_form ,
-    set_hotel_district_filter,
-    set_hotel_price_filter,
-    set_hotel_pricerange_filter,
-    set_hotel_stars_filter,
+  get_hotel_input_form ,
+  set_hotel_district_filter,
+  set_hotel_star_filter,
+  set_hotel_pricerange_filter,
+  set_hotel_stars_filter,
+  get_hotel_listitem_selected,
 } from "./hotel_input_reducer";

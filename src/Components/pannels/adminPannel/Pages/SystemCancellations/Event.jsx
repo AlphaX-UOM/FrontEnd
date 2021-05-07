@@ -15,6 +15,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import axios from "axios";
+import Popup from '../ApproveCancellation/popupModel';
+import { connect } from "react-redux";
 
 
 
@@ -56,7 +58,7 @@ const useStyles = makeStyles({
 
 
 
-export default function Event() {
+function Event(props) {
 
 
    
@@ -82,6 +84,8 @@ export default function Event() {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
+  const [value, setValue] = useState(false);
+  const [popup, setPopup] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -91,10 +95,7 @@ export default function Event() {
     setOpen(false);
   };
 
-  let trueBool = true;
-  let falseBool = false;
-
-  const [value, setValue] = useState(false);
+ 
 
   const handleApproveChange = (event) => {
     var isTrueSet = (event.target.value == 'true');
@@ -104,26 +105,30 @@ export default function Event() {
 
 
   const handleUpdateFund = (event) => {
-    console.log("submit data"+event.cancellation.isApproved);
-    let CancelData = {
-      id : event.cancellation.id,
-      isApproved : value,
-      date : event.cancellation.date,
-      userID : event.cancellation.userID,
-      reservationID : event.cancellation.reservationID,
-    }
 
-    axios
-      .put(
-        `https://alphax-api.azurewebsites.net/api/cancellations/${event.cancellation.id}`,
-        CancelData
-      )
-      .then(response =>  {
-        console.log(response);
-      });
+    let adminPopup = true;
+    props.adminCancelPop(adminPopup);
+
+    let cancelData = {
+      reservationName : event.eventPlannerService.name,
+      customerID : event.userID,
+      payment : event.price,
+      canDate : event.cancellation.date,
+      okey : 'YES',
+      policy : 'This is a service policy',
+      paymentID : event.paymentID,
+      cancellation : event.cancellation
+    }
+    props.adminCancelData(cancelData);
+    setPopup(true);
+
   };
 
-
+  if((props.adminPopup)&&(props.adminRefundData.paymentID!==undefined)){
+    return(
+       <Popup />
+    );
+  }
 
   return (
       <div>
@@ -139,6 +144,7 @@ export default function Event() {
             <StyledTableCell align="right">Date</StyledTableCell>
             <StyledTableCell align="right">Price</StyledTableCell>
             <StyledTableCell align="right">Refunded</StyledTableCell>
+            <StyledTableCell align="right"></StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -153,44 +159,37 @@ export default function Event() {
               <StyledTableCell align="right">{row.eventPlannerService.venue}</StyledTableCell>
               <StyledTableCell align="right">{row.eventPlannerService.date}</StyledTableCell>
               <StyledTableCell align="right">{row.eventPlannerService.price}$</StyledTableCell>
-              <StyledTableCell align="right">
+              <StyledTableCell align="right">{row.cancellation.isApproved.toString()}</StyledTableCell>
               
-
-<select  onChange={handleApproveChange}>
-            <option value={(row.cancellation.isApproved === false) ? false.toString() : true.toString()} > {(row.cancellation.isApproved === false) ? false.toString() : true.toString()} </option>
-            <option value={(row.cancellation.isApproved === false) ? true.toString() : false.toString()} > {(row.cancellation.isApproved === false) ? true.toString() : false.toString()} </option>
-          </select>
-              </StyledTableCell>
-              <StyledTableCell align="right"><Button variant="contained" color="secondary" value= {row} onClick={() => handleUpdateFund(row)}>
-        Update
-      </Button></StyledTableCell>
+              <StyledTableCell align="right">
+                  {row.cancellation.isApproved.toString()==='false' ? <Button variant="contained" color="secondary" value={row} onClick={() => handleUpdateFund(row)}> Update</Button> : <Button variant="contained" disabled>Updated</Button> }
+                </StyledTableCell>
               
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-    <Dialog
-    open={open}
-    onClose={handleClose}
-    aria-labelledby="alert-dialog-title"
-    aria-describedby="alert-dialog-description"
-  >
-    <DialogTitle id="alert-dialog-title">{"Cancel this event service?"}</DialogTitle>
-    <DialogContent>
-      <DialogContentText id="alert-dialog-description">
-        Are you sure you want to cancel this service? A refund will not issued for this service.
-      </DialogContentText>
-    </DialogContent>
-    <DialogActions>
-      <Button onClick={handleClose} color="primary">
-        Disagree
-      </Button>
-      <Button onClick={handleClose} color="primary" autoFocus>
-        Agree
-      </Button>
-    </DialogActions>
-  </Dialog>
   </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    adminPopup: state.eventpnl.adminPopup,
+    adminRefundData: state.eventpnl.adminRefundData
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    adminCancelPop: (adminPopup) => {
+      dispatch({ type: "Admin_Popup", adminPopup: adminPopup });
+    },
+    adminCancelData: (cancelData) => {
+      dispatch({ type: "Admin_Refund_Data", adminRefundData: cancelData });
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Event);

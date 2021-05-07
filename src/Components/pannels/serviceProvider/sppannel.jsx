@@ -20,13 +20,12 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems} from './sideBar';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Account from '../CustomerPannel/Pages/Account';
+import Account from './Pages/account';
 import Services from './Pages/services';
 import Reservations from './../CustomerPannel/Pages/Reservation';
 import Ratings from './Pages/Ratings';
 import Cancelation from './../CustomerPannel/Pages/cancelation';
 import Sreservation from './Pages/Sreservations';
-import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import DashBoard from './Pages/DashBoard/DashBoard';
 import Event from './Pages/DashBoard/eventPosts';
 import Guide from './Pages/DashBoard/GuideTotal';
@@ -34,9 +33,9 @@ import Hotel from './Pages/DashBoard/hotelTotal';
 import Trans from './Pages/DashBoard/TransTotal';
 import ItemLanding from '../../servicemodules/event/Component/Update/Item/ItemLanding';
 import Transport from '../../servicemodules/transport/Listitemdetails/listitemdetails';
+import HotelResult from '../../servicemodules/hotel/Result/HotelResult'
 import GuidePge from '../../servicemodules/guide/components/GuideDetails/guidedetailspage';
-import Password from '../CustomerPannel/Pages/password/passwordForm';
-
+import Password from './Pages/password/passwordForm';
 
 
 function Copyright() {
@@ -205,8 +204,9 @@ export default function Dashboard(props) {
         <Route path="/translanding/:id" component={Transport}/>
         <Route path="/guidelanding/:id" component={GuidePge}/>
         <Route path="/categorylanding/:id" component={ItemLanding}/>
+        <Route path="/hotelList/:id" component={HotelResult}/>
         <Route path='/'><DashBoard myId={props.myId}/></Route>
-       
+      
       
         </Switch>
 

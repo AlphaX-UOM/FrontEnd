@@ -47,7 +47,7 @@ export const auth = (email, password) => {
         dispatch(authStart());
         var decodedStringBtoA = email+`:`+password;
         var encodedStringBtoA = btoa(decodedStringBtoA);
-        let url = 'https://alphax-api.azurewebsites.net/api/users/Login';
+        let url = 'https://alphax-api.azurewebsites.net/api/users/LoginProtected';
 
         var axios = require('axios');
         var config = {
@@ -70,9 +70,17 @@ export const auth = (email, password) => {
                         localStorage.setItem('role', decoded.Role);
                         dispatch(authSuccess(response.data.token, decoded.ID, decoded.Role));
                         dispatch(checkAuthTimeout(3600 * 2));
+                        console.log(response)
             })
             .catch(function (error) {
-                console.log(error);
+                var str = error.toString();
+                var res = str.replace(/\D/g, "");
+                if(res==='400') {
+                    alert('Check Email and Password');
+                }else if (res === '401'){
+                    alert('Please Confirm your email')
+                }
+                // alert(error);
                 dispatch(authFail(error));
             });
 
@@ -99,3 +107,7 @@ export const authCheckState = () => {
         }
     };
 };
+
+
+
+

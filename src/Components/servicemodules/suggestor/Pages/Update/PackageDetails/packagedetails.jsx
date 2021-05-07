@@ -8,9 +8,40 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Spinner from "../../ResultList/Spinner";
 import { addToCart } from "../../../../../../store/lib/actions";
-import moment from "moment";
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
+import DialogActions from '@material-ui/core/DialogActions';
+import Listitemdetails from './DetailModal/MainLandingModal/listitemdetails';
+
+
 
 function PackageDetails(props) {
+
+  const [open, setOpen] = React.useState(false);
+  const [scroll, setScroll] = React.useState('paper');
+
+  const handleClickOpen = (scrollType,event) => () => {
+    props.packageDetailModal(event);
+    setOpen(true);
+    setScroll(scrollType);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const descriptionElementRef = React.useRef(null);
+  React.useEffect(() => {
+    if (open) {
+      const { current: descriptionElement } = descriptionElementRef;
+      if (descriptionElement !== null) {
+        descriptionElement.focus();
+      }
+    }
+  }, [open]);
+
   const { add_to_cart } = props;
 
   var today = new Date();
@@ -91,40 +122,53 @@ function PackageDetails(props) {
     {
       title: "Transport Service 🚙 " + mytransportList.name,
       description: mytransportList.description,
-      image: "https://6jlvz1j5q3.csb.app/undraw_collection.svg",
+      image: mytransportList.imgURL,
       imageRatio: 784 / 1016,
+      item:mytransportList,
+      type:"Transport Service"
     },
     {
       title: "Hotel Service 🏨" + myhotelList.name,
       description: myhotelList.otherDetails,
-      image: "https://6jlvz1j5q3.csb.app/undraw_upload.svg",
+      image: myhotelList.hotelImgURL,
       imageRatio: 839 / 1133,
+      item:myhotelList,
+      type:"Hotel Service"
     },
     {
       title: "Tour Guide 🤵" + mytourguideList.name,
       description: mytourguideList.otherDetails,
-      image: "https://6jlvz1j5q3.csb.app/undraw_static_assets.svg",
+      image: mytourguideList.imgURL,
       imageRatio: 730 / 1030,
+      item:mytourguideList,
+      type:"Tour Guide Service"
     },
     {
       title: "Event 01 🏖️" + myevent01List.name,
       description: myevent01List.otherDetails,
-      image: "https://6jlvz1j5q3.csb.app/undraw_static_assets.svg",
+      image: myevent01List.imgURL,
       imageRatio: 730 / 1030,
+      item:myevent01List,
+      type:"Event Service"
     },
     {
       title: "Click Below To Get Started",
       description: myevent02List.otherDetails,
       image: "https://6jlvz1j5q3.csb.app/undraw_static_assets.svg",
       imageRatio: 730 / 1030,
+      item:myevent02List,
+      type:"Transport Service"
     },
     {
       title: "Event 02 🏞️" + myevent02List.name,
       description: myevent02List.otherDetails,
-      image: "https://6jlvz1j5q3.csb.app/undraw_static_assets.svg",
+      image: myevent02List.imgURL,
       imageRatio: 730 / 1030,
+      item:myevent02List,
+      type:"Event Service"
     },
   ];
+
 
   const handleFormData = () => {
     
@@ -264,7 +308,12 @@ function PackageDetails(props) {
                         </center>
                       </div>
                     ) : (
-                      <div className="card-body">{card.description}</div>
+                      <div className="card-body"><small>{card.description}</small><p><button
+                      class="btn btn-outline-info btn-sm"
+                      onClick={handleClickOpen('paper',card)}
+                    >
+                      More Details
+                    </button></p></div>
                     )}
                     <Image ratio={card.imageRatio} src={card.image} />
                   </Card>
@@ -272,6 +321,25 @@ function PackageDetails(props) {
               ))}
             </div>
           </div>
+          <Dialog
+          
+          maxWidth={"lg"}
+        open={open}
+        onClose={handleClose}
+        scroll={scroll}
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+      >
+        <DialogTitle id="scroll-dialog-title">Details</DialogTitle>
+        <DialogContent dividers={scroll === 'paper'}>
+            <Listitemdetails/>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="secondary">
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
         </Hero>
       </Particles>
     </div>
@@ -412,6 +480,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    packageDetailModal:(event)=>{
+      dispatch({type:"Package_Detail_Popup",item:event});
+    },
     addResData: (reservations) => {
       dispatch({ type: "ADD_RESERVATIONS", reservations: reservations });
     },

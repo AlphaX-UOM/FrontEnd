@@ -1,26 +1,23 @@
 import './signin.css';
 import {Link} from 'react-router-dom'
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import connect from "react-redux/es/connect/connect";
 import * as actions from '../../../store/actions/index';
 import Select_profile from "../profile/select_profile";
 import {auth} from "../../../store/actions/index";
 
-const  SignIn=(props)=>{
-    const { onAuth} = props;
+const SignIn = (props) => {
+    const {onAuth} = props;
     const [state, setstate] = useState({
 
 
         email: "",
         password: "",
-
         errors: {
-
             email: "",
             password: "",
-
         },
-        isvalid:false
+        isvalid: false
     });
     // Changehandler = (event)=>{
     //     // this.setState({ [event.target.name]: event.target.value })
@@ -34,31 +31,37 @@ const  SignIn=(props)=>{
     //     },()=>{this.validate()});
     // }
 
-    const  handleSubmit = e=>{
+    const handleSubmit = e => {
         e.preventDefault();
-        errors.email==""&&errors.password==""?state.isvalid=true:state.isvalid=false;
-        console.log(state.isvalid);
-        if (state.isvalid==true){
+        errors.email == "" && errors.password == "" ? state.isvalid = true : state.isvalid = false;
+        // console.log(state.isvalid);
+        if (state.isvalid == true) {
             console.log(state);
             // onAuth(state.email,state.password);
             props.onAuth(state.email, state.password);
-        }
 
+        }
+        // setTimeout(function() { //Start the timer
+        //     if (props.isAuthenticated){
+        //         return;
+        //     }else {
+        //
+        //     }
+        //
+        // }.bind(this), 5000)
+        //Start the timer
 
 
     }
 
-
-
-    const  formValChange = (event) => {
+    const formValChange = (event) => {
         event.preventDefault();
         const validEmailRegex = RegExp(
             /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
         );
-        const { name, value } = event.target;
-        let errors = { ...state.errors };
+        const {name, value} = event.target;
+        let errors = {...state.errors};
         switch (name) {
-
 
             case "email":
                 // if (!validEmailRegex.test(value)) {
@@ -102,16 +105,11 @@ const  SignIn=(props)=>{
     };
 
 
+    const {errors} = state;
 
 
-    const { errors } =state;
 
-    if(props.error!==null){
-        alert('check your password and email')
-    }
-
-    if (props.isAuthenticated ) {
-
+    if (props.isAuthenticated) {
         return (
             <Select_profile/>
         )
@@ -130,7 +128,7 @@ const  SignIn=(props)=>{
                             <div className="col-sm-8">
                                 <label htmlFor="your-email" className='signin_txt_col'> Email</label>
                                 <input type="text" name="email" id="your-email" className="input-text"
-                                       placeholder="Your Email"  onChange={formValChange} required/>
+                                       placeholder="Your Email" onChange={formValChange} required/>
                                 <div className="error_msg rounded-pill center">{state.errors.email}</div>
                             </div>
                             <div className="col-sm-2"></div>
@@ -152,10 +150,9 @@ const  SignIn=(props)=>{
                         </div>
 
 
-
                         <div className="form-row-last">
 
-                            <input type="submit" name="register" className="register" value="Sign In" />
+                            <input type="submit" name="register" className="register" value="Sign In"/>
 
 
                         </div>
@@ -164,9 +161,9 @@ const  SignIn=(props)=>{
                             <div className="col-sm-2"></div>
                             <div className="col-sm-4">
                                 <small>
-                                    <a href="" className="sign_a second_l ">
+                                    <Link to="/forgotpassword" className="sign_a second_l ">
                                         Forgot password?
-                                    </a>
+                                    </Link>
                                 </small>
 
                             </div>
@@ -194,8 +191,8 @@ const mapStateToProps = (state) => {
     return {
         userCred: state.eventpnl.userCred,
         isAuthenticated: state.auth.token !== null,
-        role:state.auth.role,
-        userid:state.auth.userId,
+        role: state.auth.role,
+        userid: state.auth.userId,
         loading: state.auth.loading,
         error: state.auth.error
     };
@@ -204,7 +201,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         addUserData: (userCred) => {
-            dispatch({ type: "ADD_USER", userCred: userCred });
+            dispatch({type: "ADD_USER", userCred: userCred});
         },
         onAuth: (email, password) => dispatch(auth(email, password))
     };

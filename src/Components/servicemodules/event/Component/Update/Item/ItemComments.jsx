@@ -191,30 +191,6 @@ useEffect(() => {
 }, [props.add_id]);
 
 
-// useEffect(() => {
-//   fetch(
-//       "https://alphax-api.azurewebsites.net/api/eventplannerserviceratings" //`https://alphax-api.azurewebsites.net/api/eventplannerservicereservations/${userId}`
-//   )
-
-//       .then((response) => {
-//           return response.json();
-//       })
-//       .then((responseData) => {
-
-
-//           // responseData = responseData.filter(item => item.eventPlannerServiceID === props.add_id && item.userID === props.userid);
-//           setRatingApi(responseData)
-//           // console.log("rating=>"+responseData)
-          
-
-//           // setRating(responseData.reduce((total, pay) => total + 1, 0));
-        
-
-
-
-//       });
-// }, []);
-
 
 
 useEffect(() => {
