@@ -64,10 +64,10 @@ function CategoryRightList(props) {
        const filterPrice=filterAud.filter(item=>{
         if(pricedata===null||pricedata==="All")
         return filterAud;
-        if(pricedata==='5000-')
-        return item.price<=5000.00
-        if(pricedata==='5000+')
-        return item.price>5000.00
+        if(pricedata==='500-')
+        return item.price<=500.00
+        if(pricedata==='500+')
+        return item.price>500.00
        })
    
 

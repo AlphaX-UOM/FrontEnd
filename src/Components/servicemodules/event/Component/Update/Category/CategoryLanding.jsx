@@ -92,8 +92,8 @@ const changeSearch = (event) => {
     <label htmlFor="inputCity">Price</label>
     <select className="form-control tm-select"  name="price"  onChange={ChangePrice}  >
                         <option value="All">All</option>
-                        <option value="5000-">Less than $5000</option>
-                        <option value="5000+">Greater than $5000</option>
+                        <option value="500-">Less than $500</option>
+                        <option value="500+">Greater than $500</option>
                         
 
                     </select>
