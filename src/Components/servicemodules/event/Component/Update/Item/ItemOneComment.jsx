@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import Rating from "@material-ui/lab/Rating";
 import React, { useEffect, useState } from "react";
-
+import connect from "react-redux/es/connect/connect"; 
 function ItemOneComment(props) {
   const [showText, setShowText] = useState(false);
   const [users, setUsers] = useState([]);
@@ -60,13 +60,20 @@ console.log("my Id: "+props.data.userID)
             value={props.data.rating}
             readOnly
           />} */}
+          
 
         </div>
       </div>
     </div>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    userCred: state.eventpnl.userCred,
+    userid:state.auth.userId,
+   
+  };
+};
 
 
-
-export default ItemOneComment;
+export default connect(mapStateToProps) (ItemOneComment);
