@@ -355,7 +355,7 @@ const Upgrade = (props) => {
              >
                <Fade in={open}>
                  <div className={classes.paper}>
-                   <h4 id="transition-modal-title">Your request has been successfully submitted! </h4>
+                   <h4 id="transition-modal-title"> successfully submitted! </h4>
                   
                  </div>
                </Fade>

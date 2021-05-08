@@ -12,12 +12,16 @@ import { Card } from '@material-ui/core';
 import { CardContent } from '@material-ui/core';
 import Image from 'react-bootstrap/Image'
 import HomeIcon from '@material-ui/icons/Home';
+import Modal from "react-bootstrap/Modal";
 
 
 
 function Account(props) {
     let userId = props.myId;
+    const [show, setShow] = useState(false);
 
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const triggerText = 'Change Photo';
     const onSubmit = (event) => {
@@ -132,7 +136,11 @@ function Account(props) {
     const actuallast = users.lastName;
     const actuualTel = users.contact;
     const actuuaadd = users.address;
+    const UpdatedCom = (e) => {
+        e.preventDefault();
+        setShow(true);
 
+    }
 
 
     const UpdateEmployee = (e) => {
@@ -145,7 +153,8 @@ function Account(props) {
 
         var axios = require('axios');
 
-        var data = JSON.stringify({ "id": users.id, "firstName": Customers.firstName === "" ? actualname : Customers.firstName, "lastName": Customers.lastName === "" ? actuallast : Customers.lastName, "password": users.password, "dob": users.dob, "address": Customers.address === "" ? actuuaadd : Customers.address, "email": users.email, "contact": Customers.contact === "" ? actuualTel : Customers.contact, "role": users.role, "imgURL": users.imgURL });
+        var data = JSON.stringify({ "id": users.id, "firstName": Customers.firstName === "" ? actualname : Customers.firstName, "lastName": Customers.lastName === "" ? actuallast : Customers.lastName, "password": users.password,"passwordHash":users.passwordHash,
+        "passwordSalt":users.passwordSalt,"verified":users.verified, "dob": users.dob, "address": Customers.address === "" ? actuuaadd : Customers.address, "email": users.email, "contact": Customers.contact === "" ? actuualTel : Customers.contact, "role": users.role, "imgURL": users.imgURL });
 
         var config = {
             method: 'put',
@@ -163,8 +172,8 @@ function Account(props) {
             .catch(function (error) {
                 console.log(error);
             });
-
-        alert("Updated Successfully!")
+setShow(false);
+       
 
 
     };
@@ -219,7 +228,7 @@ function Account(props) {
 
                     
                     <div class="col-sm-8 ">
-                    <form  onSubmit={UpdateEmployee}>
+                    <form  onSubmit={UpdatedCom}>
                         <div class="row ">
                             <div class="col-sm-1"></div>
                             <div class="col-1 "  style={{color:"green"}}><AccountBoxIcon></AccountBoxIcon></div>
@@ -283,7 +292,7 @@ function Account(props) {
                             <div class="col-sm-5"></div>
                             <div class="col-sm-4"></div>
                             <div class="col-sm-3">
-                                <button className="btn btn-danger " type='submit'>Save</button>
+                                <button className="btn btn-danger " type='submit'>Update</button>
                             </div>
                         </div>
 
@@ -367,101 +376,38 @@ function Account(props) {
 
                 <div className="row">
 
-                    {/* <div className="col-6">
-
-
-
-
-
-
-
-
-
-                        <Card >
-
-                            <CardContent >
-
-
-                                <Form onSubmit={UpdateEmployee}>
-                    
-                                    <InputLabel>  <h4 className="d-block" style={{ fontsize: "1.5rem", fontWeight: "bold" }}>Edit Details</h4></InputLabel>
-
-
-                                    <div className="form-row row">
-
-                                        <label htmlFor="your-Fist-name"> First Name</label>
-                                        <Input type="text" placeholder={users.firstName} name="firstName" id="firstName" value={Customers.firstName} onChange={onChange} />
-
-                                    </div>
-                                    <br></br>
-
-                                    <div className="form-row row">
-                                        <label htmlFor="your-Last-name"> Last Name</label>
-                                        <Input type="text" placeholder={users.lastName} name="lastName" id="lastName" value={Customers.lastName} onChange={onChange} />
-
-                                    </div>
-                                    <br></br>
-                                    <div className="form-row row">
-                                        <label htmlFor="telephone"> Telephone</label>
-
-                                        <Input type="text" placeholder={users.contact} name="contact" id="contact" value={Customers.contact} onChange={onChange} />
-                                    </div>
-                                    <br></br>
-                                    <div className="form-row row">
-                                        <label htmlFor="address"> Address</label>
-
-                                        <Input type="text" placeholder={users.address} name="address" id="address" value={Customers.address} onChange={onChange} />
-                                    </div>
-                                    <br></br>
-
-                                    <Row>
-
-                                    </Row>
-                                    <Row>
-                                        <div className="form-row row">
-                                            <br>
-                                            </br>
-                                            <br></br>
-
-
-                                            <Col xs="12" sm="12">
-
-
-                                            </Col>
-
-                                            <Col xs="30" sm="12">
-                                                <center>
-                                                    <Button type="submit" className="btn btn-info mb-1" block><span>Update</span></Button>
-                                                </center>
-
-
-
-                                            </Col>
-                                        </div>
-                                    </Row>
-
-
-
-
-                                </Form>
-                            </CardContent>
-                        </Card>
-
-
-
-
-
-
-                    </div> */}
-
+              
                 </div>
             </center>
+
+               
+ <div>
+        <Modal show={show} onHide={handleClose}>
+     
+        <Modal.Body>Are you sure want to update?</Modal.Body>
+        <Modal.Footer>
+        <button className="btn btn-danger " type='submit'onClick={handleClose}>Close</button>
+          <button className="btn btn-success" type='submit' onClick={UpdateEmployee}>   Save Changes
+        </button>
+         
+        </Modal.Footer>
+      </Modal>
+
+ </div>
         </div>
+
+
+
+
+   
+  
+
 
 
 
     );
 }
+
 
 
 const mapDispatchToProps = (dispatch) => {
