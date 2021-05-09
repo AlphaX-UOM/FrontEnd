@@ -78,17 +78,24 @@ function CategoryList() {
 
   return (
     <div>
-      
+      <center>
       <div class="container-fluid py-2"style={{ width: "90rem" }}>
       <h3 class="font-weight-light">Browse by Category</h3>
-      <div class="d-flex flex-row flex-nowrap"> 
+      <center>
+      <div class="d-flex flex-row flex-nowrap justify-content-center"> 
           {categoryListComponent()}
           </div>
+
+      </center>
+   
 
           <p></p>  
       
      
       </div>
+      </center>
+      
+  
           
       
     </div>
