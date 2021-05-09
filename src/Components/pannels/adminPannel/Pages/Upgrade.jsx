@@ -71,11 +71,15 @@ export default function Upgrade() {
       firstName: params.firstName,
       lastName: params.lastName,
       password: params.password,
+      passwordHash:params.passwordHash,
+      passwordSalt:params.passwordSalt,
+      verified:params.verified,
       dob: params.dob,
       address: params.address,
       email: params.email,
       contact: params.contact,
       role: "ServiceProvider",
+      imgURL:params.imgURL,
     });
 
     var config = {
@@ -153,6 +157,7 @@ axios(config)
                   }}
                 >
                   APPROVE
+                  
                 </Button>
               </StyledTableCell>
             </StyledTableRow>

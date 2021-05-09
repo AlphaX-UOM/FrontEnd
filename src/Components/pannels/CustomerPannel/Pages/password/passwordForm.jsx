@@ -95,6 +95,7 @@ import Alert from './Alert'
 
         var decodedStringBtoA = currentPass+`:`+newPass;
         var encodedStringBtoA = btoa(decodedStringBtoA);
+        var status= false;
         let url = `https://alphax-api.azurewebsites.net/api/users/PasswordChange/${this.props.id}`;
 
         var axios = require('axios');
@@ -114,6 +115,7 @@ import Alert from './Alert'
               }
             else  if (response.status === 400) {
                 console.log("OldPaassword Wrong");
+                status=true;
               }
              else if (response.status === 204) {
                 console.log("Saved!");
@@ -165,16 +167,16 @@ initialValues={{
   newPass: '',
   confirmPass: '',
 }}
-// validationSchema={object().shape({
+validationSchema={object().shape({
 
-//   currentPass: string()
-//   .oneOf([ref('oldPassword')], 'Passwords do not match')
-//   .required('Current password is required'),
-//   newPass: string().required('New password is required'),
-//   confirmPass: string()
-//     .oneOf([ref('newPass')], 'Passwords do not match')
-//     .required('Password is required'),
-// })}
+  currentPass: string()
+   .oneOf([ref('currentPass')], 'Passwords do not match')
+  .required('Current password is required'),
+  newPass: string().required('New password is required'),
+  confirmPass: string()
+    .oneOf([ref('newPass')], 'Passwords do not match')
+    .required('Password is required'),
+})}
 onSubmit={(
   { currentPass, newPass, confirmPass },
   { setSubmitting, resetForm }

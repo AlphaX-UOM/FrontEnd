@@ -91,33 +91,42 @@ import Alert from './Alert'
     
   }) => {
     // fake async login
-        console.log("submited")
+        
 
-        axios
-        .put(`https://alphax-api.azurewebsites.net/api/users/${this.props.id}`, {
-         
-          id: this.state.users.id,
-    firstName: this.state.users.firstName,
-    lastName: this.state.users.lastName,
-    password: newPass,
-    dob: this.state.users.dob,
-    address: this.state.users.address,
-    email: this.state.users.email,
-    contact:this.state.users.contact,
-    role:this.state.users.role,
-    imgURL: this.state.users.imgURL,
-   
-           
+        var decodedStringBtoA = currentPass+`:`+newPass;
+        var encodedStringBtoA = btoa(decodedStringBtoA);
+        let url = `https://alphax-api.azurewebsites.net/api/users/PasswordChange/${this.props.id}`;
 
-        })
-        .then(response => {
-            console.log(response)
-          
-        })
-        .catch(error => {
-            console.log(error)
-        })
+        var axios = require('axios');
+        var config = {
+            method: 'put',
+            url: url,
+            headers: {
+                'Authorization': 'Basic '+ encodedStringBtoA,
+            },
 
+        };
+
+        axios(config)
+            .then(function (response) {
+              if (response.status ===404) {
+                console.log(" ID Not found");
+              }
+            else  if (response.status === 400) {
+                console.log("OldPaassword Wrong");
+              }
+             else if (response.status === 204) {
+                console.log("Saved!");
+              }
+              else {
+                console.log("No Idea!!!");
+              }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+  
 
     setTimeout(async () => {
       // setSubmitting(false)
@@ -159,7 +168,7 @@ initialValues={{
 validationSchema={object().shape({
 
   currentPass: string()
-  .oneOf([ref('oldPassword')], 'Passwords do not match')
+  .oneOf([ref('currentPass')], 'Passwords do not match')
   .required('Current password is required'),
   newPass: string().required('New password is required'),
   confirmPass: string()
@@ -234,15 +243,15 @@ render={props => {
             value={values.currentPass}
             onChange={handleChange}
             onBlur={handleBlur}
-            error={Boolean(touched.currentPass && errors.currentPass)}
+            // error={Boolean(touched.currentPass && errors.currentPass)}
            
           />
           <FormHelperText
-            error={Boolean(touched.currentPass && errors.currentPass)}
+            // error={Boolean(touched.currentPass && errors.currentPass)}
           >
-            {touched.currentPass && errors.currentPass
+            {/* {touched.currentPass && errors.currentPass
               ? errors.currentPass
-              : ''}
+              : ''} */}
              
           </FormHelperText>
         </FormControl>

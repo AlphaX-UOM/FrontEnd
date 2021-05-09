@@ -121,12 +121,16 @@ const Upgrade = (props) => {
         id: users.id,
         firstName: users.firstName,
         lastName:  users.lastName,
-        password: props.userCred.password,
+        password: users.password,
+        passwordHash:users.passwordHash,
+        passwordSalt:users.passwordSalt,
+        verified:users.verified,
         dob:  users.dob,
         address: users.address,
         email:  users.email,
         contact:  users.contact,
         role:  users.role,
+        imgURL:users.imgURL,
       };
       axios.put(apiUrlg, fireUpgrade).then((response) => {
         if (response.status === 200) {
