@@ -10,6 +10,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   typography: {
@@ -113,7 +114,7 @@ export default function ServiceNotifications(props) {
                 Your service {noti.serName} booked for {noti.bookedDate}{" "}
                 cancelled by {noti.custName}
                 <br />
-                <small>in {noti.createdDate}</small>
+                <small>{moment(noti.createdDate).fromNow()}</small>
               </small>
             </Typography>
             <Divider />
@@ -137,7 +138,7 @@ export default function ServiceNotifications(props) {
                 {noti.serName} reserved for {noti.bookedDate} cancelled
                 sucessfully
                 <br />
-                <small>in {noti.createdDate}</small>
+                <small>{moment(noti.createdDate).fromNow()}</small>
               </small>
             </Typography>
             <Divider />
@@ -161,7 +162,7 @@ export default function ServiceNotifications(props) {
                 Your service {noti.serName} booked for {noti.bookedDate} by{" "}
                 {noti.custName}
                 <br />
-                <small>created in {noti.createdDate}</small>
+                <small>{moment(noti.createdDate).fromNow()}</small>
               </small>
             </Typography>
             <Divider />
@@ -184,7 +185,7 @@ export default function ServiceNotifications(props) {
               <small>
                 {noti.serName} reserved for {noti.bookedDate} sucessfully
                 <br />
-                <small>created in {noti.createdDate}</small>
+                <small>{moment(noti.createdDate).fromNow()}</small>
               </small>
             </Typography>
             <Divider />
