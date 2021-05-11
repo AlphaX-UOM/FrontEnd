@@ -325,17 +325,48 @@ useEffect(() => {
                 <li className="list-inline-item ml-auto">
                   <center>
 
-                  {props.userid!==undefined && ordered ? rating===1? <Rating 
+                  {props.userid!==undefined && ordered ? rating===1? 
+                  <div>
+                    <Rating 
                 name="simple-controlled"
                 value={ratingApi.rating}
                 onChange={handleInputRating}
                 
-              />:<Rating 
+              />
+              <p>
+                  <button
+              type="button"
+              class="btn btn-outline-success"
+              onClick={handleInputRating}
+            >
+              Edit Your Rate
+            </button>
+
+              </p>
+                    </div>
+            
+              
+              :
+              <div>
+                 <Rating 
               name="simple-controlled"
               value={0}
               onChange={handleInputRatingPost}
               
-            /> : <p>login to Rating</p> }
+            /> 
+              <p>
+                  <button
+              type="button"
+              class="btn btn-outline-success"
+              onClick={handleInputRatingPost}
+            >
+              Submit Your Rate
+            </button>
+
+              </p>
+
+              </div>
+             : <p>login to Rating</p> }
                   </center>
             
                 </li>

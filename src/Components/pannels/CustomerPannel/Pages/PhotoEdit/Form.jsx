@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import axios from 'axios'
 import { storage } from "../../../../../../src/config/firebaseConfig";
+import Modal from "react-bootstrap/Modal";
 
 class Form extends Component {
     constructor(props) {
@@ -16,80 +17,26 @@ class Form extends Component {
             users:[],
 
             progressx: false,
-            progress: ''
+            progress: '',
+            show:false,
+
         }
         // this.createImage=this.createImage.bind(this);
         // this.onChange = this.onChange.bind(this);
         this.onDrop = this.onDrop.bind(this);
+        this.showModal = this.showModal.bind(this);
+        this.hideModal = this.hideModal.bind(this);
 
     }
-
-    // onChange(e){
-    //     let files = e.target.files || e.dataTransfer.files;
-
-    //     if (!files.length)
-    //     return;
-    //     this.createImage(files[0]);
-    // }
-
-
-    // onChange = e => {
-    //     if (e.target.files[0]) {
-    //         this.setState({image:e.target.files[0]});
-    //     }
-
-    //     onDrop(picture) {
-    //         this.setState({
-    //             pictures: this.state.pictures.concat(picture),
-    //         });
-    //     }
+    showModal = () => {
+        this.setState({ show: true });
+      };
+    
+      hideModal = () => {
+        this.setState({ show: false });
+      };
 
 
-    // // createImage(file){
-
-    // //     let reader = new FileReader();
-    // //     reader.onload = (e) => {
-    // //         this.setState({img: e.target.result});
-    // //     };
-    // //     reader.readAsDataURL(file);
-
-    // // }
-
-
-    // onFormSubmit = e=>{
-
-    //     e.preventDefault();
-    //     console.log(this.state)
-
-    //     const uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
-    //     uploadTask.on(
-    //         "state_changed",
-    //         snapshot => {
-    //             const progress = Math.round(
-    //                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-    //             );
-    //             this.setState({ progress: progress});
-    //         },
-    //         error => {
-    //             console.log(error);
-    //         },
-    //         () => {
-    //             storage
-    //                 .ref(`images`)
-    //                 .child(this.state.image.name)
-    //                 .getDownloadURL()
-    //                 .then((url0) => {
-    //                     this.setState({url:url0});
-    //                     this.setState({progressx:true});
-
-    //                 });
-
-
-
-
-    //         }
-
-    //     );
 
     componentDidMount() {
 
@@ -124,7 +71,16 @@ class Form extends Component {
 
     };
 
+ UpdatedCom = (e) => {
+    e.preventDefault();
+    this.setState({ show: true })
 
+}
+ UpdatedCom = (e) => {
+    e.preventDefault();
+    this.setState({ show: true })
+
+}
 
     handleUpload = () => {
 
@@ -141,7 +97,7 @@ class Form extends Component {
 
 
     handleSubmit = e => {
-
+      
         e.preventDefault();
         console.log(this.state)
 
@@ -172,6 +128,8 @@ class Form extends Component {
 
 
             }
+            
+
 
         );
 
@@ -190,6 +148,9 @@ class Form extends Component {
                     password: this.state.users.password,
                     dob: this.state.users.dob,
                     address: this.state.users.address,
+                    passwordHash:this.state.users.passwordHash,
+                    passwordSalt:this.state.users.passwordSalt,
+                    verified:this.state.users.verified,
                     email: this.state.users.email,
                     contact: this.state.users.contact,
                     role: this.state.users.role,
@@ -198,15 +159,16 @@ class Form extends Component {
                 })
                 .then(response => {
                     console.log(response)
-                    alert("ok");
+                    this.setState({ show: true })
+                 
+                 
                 })
                 .catch(error => {
                     console.log(error)
                 })
         }.bind(this), 4000)
 
-        console.log("hello")
-
+     
 
     }
 
@@ -253,6 +215,19 @@ class Form extends Component {
 
                     </form>
                 </div>
+                <div>
+        <Modal show={this.state.show} onHide={this.hideModal}>
+     
+        <Modal.Body>Uploaded Successfully!</Modal.Body>
+        <Modal.Footer>
+        <button className="btn btn-danger " type='submit'onClick={this.hideModal}>Close</button>
+        
+       
+         
+        </Modal.Footer>
+      </Modal>
+
+ </div>
 
             </div>
         )
