@@ -59,7 +59,7 @@ class TransportInput extends Component{
          e.preventDefault();
         // this.props.history.push('/transportproviderlist');
 
-        Geocode.setApiKey('AIzaSyD3hAWVrmMEMeI6xhdtSGCmEJ6FHccdKUk');
+        Geocode.setApiKey('AIzaSyA9kaoXWR-wbDQ05evINUpttdrnUrXqFtc');
         Geocode.setLanguage("en");
 
 
@@ -129,9 +129,15 @@ class TransportInput extends Component{
                 if (status !== "OK") {
                     alert("Error was: " + status);
                 } else {
-                    const distance=response.rows[0].elements[0].distance.text;
-                     console.log(distance);
-                    this.setState({distance_text:distance});
+                    try {
+
+                        let  distance=response.rows[0].elements[0].distance.text;
+                        // console.log(status);
+                        this.setState({distance_text:distance});
+                    }catch (e) {
+                        alert('Enter the proper locations')
+                    }
+
                 }
             }
 
@@ -153,6 +159,25 @@ class TransportInput extends Component{
 
         today = yyyy + "-" + mm + "-" + dd;
         // console.log(today);
+
+
+
+
+        today = yyyy + '-' + mm + '-' + dd;
+        // var newDate = new Date(date.setMonth(date.getMonth()+8));
+
+        var fifteenYearsAgo = new Date(today);
+
+        fifteenYearsAgo = fifteenYearsAgo.setMonth(fifteenYearsAgo.getMonth()+6);
+        var x =new Date(fifteenYearsAgo)
+        var ddx = x.getDate();
+        var mmx = x.getMonth() + 1; //January is 0!
+        var yyyyx = x.getFullYear();
+        // console.log(x);
+
+
+        var validage = yyyyx + '-' + mmx + '-' + ddx;
+        // console.log(today);
         return (
             <div>
                 <br/>
@@ -172,7 +197,7 @@ class TransportInput extends Component{
                                 <div className="form-group">
                                     <input type="text" id="contact_subject"
                                            className="form-control" placeholder="Pickup Location"    value={this.state.pickuplocation} onChange={this.Changehandler}
-                                           name="pickuplocation" required />
+                                           name="pickuplocation" required maxLength={20} />
                                 </div>
 
                                 <div className="form-group tm-name-container">
@@ -182,7 +207,7 @@ class TransportInput extends Component{
 
                                 <div className="form-group tm-name-container">
                                     <input type="date" id="contact_name" name="pickupdate" className="form-control"
-                                           placeholder="Pickup Date"  value={this.state.pickupdate} onChange={this.Changehandler} min={today} required/>
+                                           placeholder="Pickup Date"  value={this.state.pickupdate} onChange={this.Changehandler} min={today} required max={validage}/>
                                 </div>
 
                                 <div className="form-group tm-name-container">
@@ -207,7 +232,7 @@ class TransportInput extends Component{
                                     <input type="text"
                                            className="form-control" placeholder="Drop Off Location"
                                            value={this.state.droplocation} onChange={this.Changehandler}
-                                           name="droplocation" required
+                                           name="droplocation" required maxLength={20}
                                     />
                                 </div>
 
@@ -265,5 +290,5 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(GoogleApiWrapper({apiKey:'AIzaSyD3hAWVrmMEMeI6xhdtSGCmEJ6FHccdKUk'})(withRouter(TransportInput)));
+export default connect(mapStateToProps, mapDispatchToProps)(GoogleApiWrapper({apiKey:'AIzaSyA9kaoXWR-wbDQ05evINUpttdrnUrXqFtc'})(withRouter(TransportInput)));
 //export default connect(mapStateToProps, mapDispatchToProps)(withRouter(TransportInput));

@@ -36,7 +36,7 @@ const listitem=(props)=>{
                                             </div>
 
                                             <div className="col-sm-4">
-                                                <p className="tm-text-gray"><Ratings/></p>
+
                                             </div>
                                         </div>
                                     </div>
@@ -55,7 +55,7 @@ const listitem=(props)=>{
                                         <div className="row">
                                             <div className="col-sm-6">
                                                 <div className="row txtcolorx">
-                                                    <div className="col-sm">per 1KM : <small>(LKR) </small> <strong> {props.pricePer1KM}</strong> </div>
+                                                    <div className="col-sm">per 1KM :  <strong>($) {props.pricePer1KM}</strong> </div>
 
 
                                                 </div>
@@ -63,7 +63,7 @@ const listitem=(props)=>{
 
                                             <div className="col-sm-6">
                                                 <div className="row txtcolorx">
-                                                    <div className="col-sm">per day :  <small>(LKR) </small><strong> {props.pricePerDay}</strong>  </div>
+                                                    <div className="col-sm">per day :  <strong>($) {props.pricePerDay}</strong>  </div>
 
                                                 </div>
                                             </div>

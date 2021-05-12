@@ -13,9 +13,9 @@ const Table = ({items}) => {
             <th scope="col" width="150">Type</th>
 
           <th width="150">No.Customers</th>
-            <th width="150">Price P. Unit(LKR)</th>
+            <th width="150">Price P. Unit($)</th>
             <th width="150">No.Units</th>
-          <th width="150">Total price(LKR)</th>
+          <th width="150">Total price($)</th>
         </tr>
           </thead>
         {

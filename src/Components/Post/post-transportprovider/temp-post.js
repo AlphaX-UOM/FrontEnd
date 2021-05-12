@@ -130,21 +130,6 @@ const Temppost=(props)=> {
                .then(response => {
                    console.log(response)
                    alert("Post added");
-                   // setstate({name:''})
-                   // setstate({district:''})
-                   // setstate({telephone:''})
-                   // setstate({email:''})
-                   // setstate({address:''})
-                   // setstate({brand:''})
-                   // setstate({model:''})
-                   // setstate({num_seat:''})
-                   // setstate({airCondition:''})
-                   // setstate({costperdistance:''})
-                   // setstate({costperday:''})
-                   // setstate({description:''})
-                   // setstate({url:''})
-                   // setstate({vehicletype:'Car'})
-
 
                })
                .catch(error => {
@@ -280,185 +265,28 @@ const Temppost=(props)=> {
                             <div className="col-sm-3"></div>
                         </div>
 
+                        <div className="row formmarge">
+                            <div className="col-sm-3"></div>
 
-                        {
-                            (state.vehicletype === 'Car')
-                                ?
-                                <div className="row formmarge">
-                                    <div className="col-sm-3"></div>
+                            <div className="col-sm-3">
+                                <div className="form-group">
+                                    <label htmlFor="exampleFormControlSelect1">Brand</label>
 
-                                    <div className="col-sm-3">
-                                        <div className="form-group">
-                                            <label htmlFor="exampleFormControlSelect1">Brand</label>
-                                            <select className="form-control tm-select" name="brand" value={state.brand}
-                                                    onChange={formValChange} required>
-                                                <option value=""></option>
-                                                <option value="Audi">Audi</option>
-                                                <option value="BMW">BMW</option>
-                                                <option value="Fiat">Fiat</option>
-                                                <option value="Ford">Ford</option>
-                                                <option value="Honda">Honda</option>
-                                                <option value="Hyundai">Hyundai</option>
-                                                <option value="Kia">Kia</option>
-                                                <option value="Lexus">Lexus</option>
-                                                <option value="Maruti">Maruti</option>
-                                                <option value="Mazda">Mazda</option>
-                                                <option value="Mercedes Benz">Mercedes Benz</option>
-                                                <option value="Micro">Micro</option>
-                                                <option value="Mitsubishi">Mitsubishi</option>
-                                                <option value="Nissan">Nissan</option>
-                                                <option value="Renault">Renault</option>
-                                                <option value="Subaru">Subaru</option>
-                                                <option value="Suzuki">Suzuki</option>
-                                                <option value="Tata">Tata</option>
-                                                <option value="Tesla">Tesla</option>
-                                                <option value="Toyota">Toyota</option>
-                                                <option value="volvo">volvo</option>
-                                                <option value="Other">Other</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-sm-3">
-                                        <div className="form-group">
-                                            <label htmlFor="">Model</label>
-                                            <input type="Text" className="form-control" name="model"
-                                                   value={state.model} onChange={formValChange}/>
-                                            <small>(optional)</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-sm-3"></div>
+                                    <input type="Text" className="form-control" name="brand"
+                                           value={state.brand} onChange={formValChange}  maxLength='20' required/>
                                 </div>
-                                : ''
-                        }
-                        {
-                            (state.vehicletype === 'Van')
-                                ? <div className="row formmarge">
-                                    <div className="col-sm-3"></div>
+                            </div>
 
-
-                                    <div className="col-sm-3">
-                                        <div className="form-group">
-                                            <label htmlFor="exampleFormControlSelect1">Brand</label>
-                                            <select className="form-control tm-select" name="brand" value={state.brand}
-                                                    onChange={formValChange} required>
-                                                <option value=""></option>
-
-                                                <option value="Micro">Micro</option>
-                                                <option value="Mazda">Mazda</option>
-                                                <option value="Nissan">Nissan</option>
-                                                <option value="Toyota">Toyota</option>
-                                                <option value="Suzuki">Suzuki</option>
-
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-sm-3">
-                                        <div className="form-group">
-                                            <label htmlFor="">Model</label>
-                                            <input type="Text" className="form-control" name="model"
-                                                   value={state.model} onChange={formValChange}/>
-                                            <small>(optional)</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-sm-3"></div>
+                            <div className="col-sm-3">
+                                <div className="form-group">
+                                    <label htmlFor="">Model</label>
+                                    <input type="Text" className="form-control" name="model"
+                                           value={state.model} onChange={formValChange}  maxLength='10'/>
+                                    <small>(optional)</small>
                                 </div>
-                                : ''
-                        }
-
-                        {
-                            (state.vehicletype === 'Suv')
-                                ? <div className="row formmarge">
-                                    <div className="col-sm-3"></div>
-
-
-                                    <div className="col-sm-3">
-                                        <div className="form-group">
-                                            <label htmlFor="exampleFormControlSelect1">Brand</label>
-                                            <select className="form-control tm-select" name="brand" value={state.brand}
-                                                    onChange={formValChange} required>
-                                                <option value=""></option>
-                                                <option value="Audi">Audi</option>
-                                                <option value="BMW">BMW</option>
-                                                <option value="Fiat">Fiat</option>
-                                                <option value="Ford">Ford</option>
-                                                <option value="Honda">Honda</option>
-                                                <option value="Hyundai">Hyundai</option>
-                                                <option value="Kia">Kia</option>
-                                                <option value="Land Rover">Land Rover</option>
-                                                <option value="Mercedes Benz">Mercedes Benz</option>
-                                                <option value="Micro">Micro</option>
-                                                <option value="Mitsubishi">Mitsubishi</option>
-                                                <option value="Mahendra">Mahendra</option>
-                                                <option value="Nissan">Nissan</option>
-                                                <option value="Subaru">Subaru</option>
-                                                <option value="Suzuki">Suzuki</option>
-                                                <option value="Tata">Tata</option>
-                                                <option value="Toyota">Toyota</option>
-                                                <option value="volvo">volvo</option>
-                                                <option value="Other">Other</option>
-
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-sm-3">
-                                        <div className="form-group">
-                                            <label htmlFor="">Model</label>
-                                            <input type="Text" className="form-control" name="model"
-                                                   value={state.model} onChange={formValChange}/>
-                                            <small>(optional)</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-sm-3"></div>
-                                </div>
-                                : ''
-                        }
-
-                        {
-                            (state.vehicletype === 'Bus')
-                                ? <div className="row formmarge">
-                                    <div className="col-sm-3"></div>
-
-
-                                    <div className="col-sm-3">
-                                        <div className="form-group">
-                                            <label htmlFor="exampleFormControlSelect1">Brand</label>
-                                            <select className="form-control tm-select" name="brand" value={state.brand}
-                                                    onChange={formValChange} required>
-                                                <option value=""></option>
-                                                <option value="Ashoka Leyland">Ashoka Leyland</option>
-                                                <option value="Eicher">Eicher</option>
-                                                <option value="Hino">Hino</option>
-                                                <option value="Izusu">Isuzu</option>
-                                                <option value="Kinglong">Kinglong</option>
-                                                <option value="Mahendra">Mahendra</option>
-                                                <option value="Micro">Micro</option>
-                                                <option value="Mitsubishi">Mitsubishi</option>
-                                                <option value="Nissan">Nissan</option>
-                                                <option value="Tata">Tata</option>
-                                                <option value="Toyota">Toyota</option>
-                                                <option value="Volvo">Volvo</option>
-                                                <option value="Other">Other</option>
-
-
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-sm-3">
-                                        <div className="form-group">
-                                            <label htmlFor="">Model</label>
-                                            <input type="Text" className="form-control" name="model"
-                                                   value={state.model} onChange={formValChange}/>
-                                            <small>(optional)</small>
-                                        </div>
-                                    </div>
-                                    <div className="col-sm-3"></div>
-                                </div>
-                                : ''
-                        }
+                            </div>
+                            <div className="col-sm-3"></div>
+                        </div>
 
 
                         <div className="row formmarge">
@@ -475,11 +303,6 @@ const Temppost=(props)=> {
                             <div className="col-sm-3"></div>
                             <div className="col-sm-4">
 
-
-                                    {/*<input className="form-check-input form-group" type="checkbox"*/}
-                                           {/*value="true" name=" checkboxval" onChange={e => handlehiddenClik(e)}*/}
-                                           {/*required/>*/}
-
                                         <label className="form-group "><p>Air Condition</p></label>
 
                                     <select className="form-control tm-select" name="air_con"
@@ -488,9 +311,7 @@ const Temppost=(props)=> {
                                         <option value="true">Available</option>
                                         <option value="false">Not Available</option>
 
-
                                     </select>
-
 
                             </div>
                             <div className="col-sm-3"></div>
@@ -499,9 +320,9 @@ const Temppost=(props)=> {
                         <div className="row formmarge">
                             <div className="col-sm-3"></div>
                             <div className="col-sm-6">
-                                <label htmlFor="district"> Cost Per 1 km</label>
+                                <label htmlFor="district"> Cost Per 1 km ($)</label>
                                 <input type="number" className="form-control" name="costperdistance"
-                                       value={state.costperdistance} onChange={formValChange} min='0' max='100'
+                                       value={state.costperdistance} onChange={formValChange} min='0.0' max='5' step='0.1'
                                        required/>
                             </div>
                             <div className="col-sm-3"></div>
@@ -510,9 +331,9 @@ const Temppost=(props)=> {
                         <div className="row formmarge">
                             <div className="col-sm-3"></div>
                             <div className="col-sm-6">
-                                <label htmlFor="district"> Cost Per day</label>
+                                <label htmlFor="district"> Cost Per day ($)</label>
                                 <input type="number" className="form-control" name="costperday"
-                                       value={state.costperday} onChange={formValChange} min='0' max='50000' required/>
+                                       value={state.costperday} onChange={formValChange} min='0' max='200' required/>
                             </div>
                             <div className="col-sm-3"></div>
                         </div>
