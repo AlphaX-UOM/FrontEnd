@@ -21,6 +21,7 @@ const Comments = (props) => {
   const [disabled, setDisabled] = useState(true);
 const [users, setUsers] = useState([]);
 var userId=props.userid;
+console.log("User ID Props"+ props.userid)
 
   useEffect(() => {
       fetch(
@@ -325,7 +326,7 @@ useEffect(() => {
                 <li className="list-inline-item ml-auto">
                   <center>
 
-                  {props.userid!==undefined && ordered ? rating===1? 
+                  {userId!==null && ordered ? rating===1? 
                   <div>
                     <Rating 
                 name="simple-controlled"
@@ -446,7 +447,8 @@ useEffect(() => {
 
                 {commentListComponent()}
                 {/* comment end here */}
-                {props.userid!==undefined && ordered ? commentInput()  : <p>login to comment</p> }
+                {props.userid!==null&& ordered ? commentInput()  : <p>login to comment</p> }
+        
                 
               </div>
             </div>
