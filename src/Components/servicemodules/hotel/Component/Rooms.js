@@ -8,7 +8,6 @@ import RoomFilter from '../Component/Filter/RoomFilter';
 import './Rooms.css';
 import { SettingsSystemDaydreamSharp } from '@material-ui/icons';
 
-import * as actions from "../../../../store/lib/actions";
 import connect from "react-redux/es/connect/connect";
 
 
@@ -70,7 +69,7 @@ const Rooms = (props) => {
     })
 
     const filterByStars = filterByPriceRange.filter(room=>{
-        if(stars_filter === null){
+        if(stars_filter === null || stars_filter === "All"){
             return filterByPriceRange;
         }else if(stars_filter === "1"){
             return room.stars == 1
@@ -105,6 +104,7 @@ const Rooms = (props) => {
                         capacity={room.capacity}
                         features={room.features}
                         pricePerDay={room.pricePerDay}
+                        stars={room.stars}
                     />
                 </div>
             );
@@ -135,7 +135,7 @@ const Rooms = (props) => {
                 </div>
                 <div className="col-1"></div>
             </div>
-            
+            <br/>
         </div>
         
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import * as actions from '../../../../../store/actions/index';
+import './HotelFilter.css';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from "@material-ui/core/Paper";
@@ -14,20 +15,22 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 
+import { Dropdown } from 'bootstrap';
+
 function Filter(props) {
-    const { hotel_filter_district,  hotel_filter_price } = props;
+    const { hotel_filter_district, hotel_filter_star } = props;
 
     const [filter_district, setFilterDistrict] = useState();
-    const [filter_price, setFilterPrice] = useState();
+    const [filter_star, setFilterStar] = useState();
 
     const handleDistrict = (event) => {
         setFilterDistrict(event.target.value);
         props.hotel_filter_district(event.target.value);
     }
 
-    const handlePrice = (event) => {
-        setFilterPrice(event.target.value);
-        props.hotel_filter_price(event.target.value);
+    const handleStar = (event) => {
+        setFilterStar(event.target.value);
+        props.hotel_filter_star(event.target.value);
     }
 
 
@@ -35,40 +38,60 @@ function Filter(props) {
     return (
         <div className="select_filter">
             <Grid container spacing={3} direction="column">
-                <Grid item xs={12} >
-                    <Paper className="paper">
+                <Grid item xs={12}>
+                    <Paper className="hotelfilter_paper" style={{backgroundColor:' #69c6ba'}}>
                         <br />
                         <FormControl component="fieldset">
-                            <FormLabel component="legend">Sort by Price</FormLabel>
-                            <RadioGroup aria-label="sort-price" onChange={handlePrice} >
+                            <FormLabel component="legend"><strong>Sort by Star</strong></FormLabel>
+                            <hr/>
+                            <RadioGroup aria-label="sort-star" onChange={handleStar}>
                                 <FormControlLabel
                                     value="All"
                                     control={<Radio />}
                                     label="All"
                                 />
                                 <FormControlLabel
-                                    value="15000-"
+                                    value="1"
                                     control={<Radio />}
-                                    label="Less than or equal to RS.15000"
+                                    label="1 star"
                                 />
                                 <FormControlLabel
-                                    value="15000+"
+                                    value="2"
                                     control={<Radio />}
-                                    label="Greater than Rs.15000"
+                                    label="2 stars"
+                                />
+                                <FormControlLabel
+                                    value="3"
+                                    control={<Radio />}
+                                    label="3 stars"
+                                />
+                                <FormControlLabel
+                                    value="4"
+                                    control={<Radio />}
+                                    label="4 stars"
+                                />
+                                <FormControlLabel
+                                    value="5"
+                                    control={<Radio />}
+                                    label="5 stars"
                                 />
                             </RadioGroup>
                         </FormControl>
-                        <br />
                     </Paper>
+                    <br />
                 </Grid>
+
+
+
+
                 <Grid item xs={12}>
-                    <Paper className="paper">
+                    <Paper className="hotelfilter_paper" style={{backgroundColor:' #69c6ba'}}>
                         <br />
-                        <FormControl component="fieldset" className=".hotelfilter_select">
-                        <FormLabel component="legend">Sort by District</FormLabel>
-                            
+                        <FormControl component="fieldset" className=".hotelfilter_select" style={{padding:'30px'}}>
+                            <FormLabel component="legend"><strong>Sort by District</strong></FormLabel>
+
                             <Select
-                                
+
                                 labelId="demo-simple-select-helper-label"
                                 id="demo-simple-select-helper"
                                 onChange={handleDistrict}
@@ -100,12 +123,14 @@ function Filter(props) {
                                 <MenuItem value="Trincomalee">Trincomalee</MenuItem>
                                 <MenuItem value="Vavuniya">Vavuniya</MenuItem>
                             </Select>
-                          
+
                         </FormControl>
+                        <br />
                     </Paper>
-                    <br />
                 </Grid>
             </Grid>
+
+            <br/>
         </div>
 
 
@@ -125,9 +150,9 @@ const mapDispatchToProps = (dispatch) => {
         hotel_filter_district: (filter_district) => {
             dispatch(actions.set_hotel_district_filter(filter_district));
         },
-        // hotel_filter_price: (filter_price) => {
-        //     dispatch(actions.set_hotel_price_filter(filter_price));
-        // },
+        hotel_filter_star: (filter_star) => {
+            dispatch(actions.set_hotel_star_filter(filter_star));
+        },
     };
 };
 

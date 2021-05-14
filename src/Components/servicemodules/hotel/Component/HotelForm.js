@@ -4,6 +4,9 @@ import {Link} from 'react-router-dom';
 import SearchIcon from '@material-ui/icons/Search';
 import Button from '@material-ui/core/Button';
 
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContentText from '@material-ui/core/DialogContentText';
 
 import connect from "react-redux/es/connect/connect";
 import * as actions from '../../../../store/actions/index';
@@ -37,6 +40,50 @@ const HotelForm = (props) => {
         setNumofGuests(event.target.value);
         console.log("numofguests : "+event.target.value)
     }
+
+    const [path, setPath] = useState();
+
+    const SimpleDialog = (props) => {
+
+        const { onClose, open } = props;
+
+
+        const handleListItemClick = () => {
+            onClose();
+        };
+
+        return (
+            <Dialog aria-labelledby="simple-dialog-title" open={open}>
+                <DialogContentText id="alert-dialog-description" style={{padding:"10px"}}>
+                    Please fill all the required details.
+            </DialogContentText>
+
+
+                <Button onClick={() => handleListItemClick()} color="primary">
+                    ok
+                </Button>
+
+
+            </Dialog>
+        );
+    }
+
+
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        if (checkIn == '' || checkOut == '' || district == '' || numofguests == '') {
+            setOpen(true);
+        } else {
+            setPath('./rooms');
+        }
+
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
     
     // const handleSubmit = () =>{
     //     props.hotel_input_form(district, checkIn, checkOut, numofguests);
@@ -77,6 +124,7 @@ const HotelForm = (props) => {
                                                 id="inputCheckOut"
                                                 placeholder="Where are you going?"
                                                 onChange={handleDistrict}
+                                                required
                                             />
 
 
@@ -91,7 +139,7 @@ const HotelForm = (props) => {
                                             id="inputCheckIn"
                                             placeholder="Check In"
                                             onChange={handleCheckin}
-
+                                            required
                                         />
                                     </div>
                                     <div className="form-group tm-form-group tm-form-group-pad tm-form-group-2-hotel">
@@ -103,7 +151,7 @@ const HotelForm = (props) => {
                                             id="inputCheckOut"
                                             placeholder="Check Out"
                                             onChange={handleCheckout} min={checkIn}
-
+                                            required
                                         />
                                     </div>
 
@@ -118,6 +166,7 @@ const HotelForm = (props) => {
                                                 min="0"
                                                 placeholder="0"
                                                 onChange={handleNumofGuests} min="0"
+                                                required
                                             />
                                         </div>
 
@@ -128,15 +177,18 @@ const HotelForm = (props) => {
 
                                         <Link
                                             type="submit"
-                                            to={{ pathname:"/rooms" ,data:formData}}
+                                            to={{ pathname:path ,data:formData}}
                                             className="btn btn-primary tm-btn-hotel tm-btn-search-hotel text-uppercase "
                                             id="btnSubmit"
                                             
                                         >
-                                            <Button onClick={ hotel_input_form(district,checkIn,checkOut,numofguests)}>
+                                            <Button onClick={() => {
+                                                hotel_input_form(district,checkIn,checkOut,numofguests);
+                                                handleClickOpen();
+                                            } }>
                                             <SearchIcon/>
                                             </Button>
-                                            
+                                            <SimpleDialog open={open} onClose={handleClose} />
                                         </Link>
 
                                     </div>
@@ -152,6 +204,7 @@ const HotelForm = (props) => {
                                             className="btn btn-primary tm-btn-hotel tm-btn-search-hotel text-uppercase "
                                             id="btnSubmit">
                                 <Button >Click here to view Available Hotels</Button>
+                                
                                 </Link>
                             
                             </div>

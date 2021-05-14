@@ -7,23 +7,14 @@ import {Link} from 'react-router-dom';
 import HotelFilter from '../Component/Filter/HotelFilter';
 import connect from "react-redux/es/connect/connect";
 
-import Grid from '@material-ui/core/Grid';
-import Paper from "@material-ui/core/Paper";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import Radio from "@material-ui/core/Radio";
-import FormLabel from "@material-ui/core/FormLabel";
-import SearchIcon from '@material-ui/icons/Search';
-
-
+import TextField from '@material-ui/core/TextField';
 
 const HotelList = (props) => {
 
     //https://alphax-api.azurewebsites.net/api/hotelsservices/Res?arrival=2020-01-01&&departure=2020-01-01&&capacity=2
     //https://alphax-api.azurewebsites.net/api/hotelsservices/Res?arrival=${arrival}&&departure=${departure}&&capacity=${capacity}
 
-    const { district_filter, price_filter } = props;
+    const { district_filter, star_filter } = props;
 
     const [hotels, setHotels] = useState([]);
     const [search, setSearch] = useState('');
@@ -54,10 +45,12 @@ const HotelList = (props) => {
 
 
     const filterHotels = pp.filter(item => {
+        console.log('filter');
         return item.name.toLowerCase().includes(search.toLowerCase())
     })
 
     const filterByDistrict = filterHotels.filter(item=>{
+        console.log('filter');
         if(district_filter === null || district_filter === "All"){
             return filterHotels;
         }else{
@@ -65,46 +58,25 @@ const HotelList = (props) => {
         }
     })
 
-    const filterByPrice = filterByDistrict.filter(item =>{
-        if(price_filter === null || price_filter === "All"){
+    const filterByStar = filterByDistrict.filter(item=>{
+        if(star_filter === null || star_filter === "All"){
             return filterByDistrict;
-        }else if(price_filter === "15000-"){
-            return item.pricePerDay <= 15000
+        }else if(star_filter === "1"){
+            return item.stars == 1
+        }else if(star_filter === "2"){
+            return item.stars == 2
+        }else if(star_filter === "3"){
+            return item.stars == 3
+        }else if(star_filter === "4"){
+            return item.stars == 4
         }else{
-            return item.pricePerDay > 15000
+            return item.stars == 5
         }
     })
 
-    //let Hotels = filterHotels
-    // const hotelsComponent = (e) => {
-    //     if (e.target.value === '' && e.target.value === 'all') {
-    //         return Hotels = filterHotels;
-    //     } else if (e.target.value === 'Low to High') {
-    //         return Hotels = filterHotels.sort((a, b) => a.pricePerDay > b.pricePerDay ? 1 : -1);
-    //     } else if (e.target.value === 'High to Low') {
-    //         return Hotels = filterHotels.sort((a, b) => a.pricePerDay < b.pricePerDay ? 1 : -1);
-    //     }
-    //     return Hotels.map((hotel) => {
-    //         return (
-    //             <div>
-    //                 <HotelListItem
-    //                     key={hotel.key}
-    //                     id={hotel.id}
-    //                     name={hotel.name}
-    //                     venue={hotel.venue}
-    //                     pricePerDay={hotel.pricePerDay}
-    //                     district={hotel.district}
-    //                     pnumber={hotel.pnumber}
-    //                     features={hotel.features}
-    //                     otherDetails={hotel.otherDetails}
-    //                     roomTypeId={hotel.roomType}
-    //                     imgURL={hotel.imgURL}
-    //                 ></HotelListItem>
-    //             </div>
-    //         );
-    //     });
-    // };
-
+    const sortAlphabetical = filterByStar.sort(function (a,b){
+        return a.name.localeCompare(b.name);
+    })
     
     const handleCheckin = (event) =>{
         setCheckIn(event.target.value);
@@ -116,32 +88,45 @@ const HotelList = (props) => {
         console.log("checkOut : "+event.target.value)
     }
     
+
     
     
     const hotelsComponent = () => {
 
-        return filterByPrice.map((hotel) => {
+        return sortAlphabetical.map((hotel) => {
             return (
                 <div>
                     <HotelListItem
                         key={hotel.key}
                         id={hotel.id}
                         name={hotel.name}
-                        venue={hotel.venue}
+                        addressLine01={hotel.addressLine01}
+                        addressLine02={hotel.addressLine02}
+                        stars={hotel.stars}
                         pricePerDay={hotel.pricePerDay}
                         district={hotel.district}
                         pnumber={hotel.pnumber}
+                        contactName={hotel.contactName}
+                        altPnumber={hotel.altPnumber}
+                        languages={hotel.languages}
+                        roomType={hotel.roomType}
+                        numOfRooms={hotel.numOfRooms}
+                        bedType={hotel.bedType}
+                        capacity={hotel.capacity}
                         features={hotel.features}
+                        amenities={hotel.amenities}
                         otherDetails={hotel.otherDetails}
-                        roomTypeId={hotel.roomType}
-                        imgURL={hotel.imgURL}
+                        hotelImgURL={hotel.hotelImgURL}
+                        roomIngURL01={hotel.roomImgURL01}
+                        roomImgURL02={hotel.roomImgURL02}
+                        roomImgURL03={hotel.roomImgURL03}
                         checkIn={checkIn}
                         checkOut={checkOut}
                     ></HotelListItem>
                 </div>
             );
         });
-    };
+    }
 
 
 
@@ -156,11 +141,11 @@ const HotelList = (props) => {
 
             <div className="container">
                 <div className="row tm-banner-row" id="tm-section-search">
-                    <form className="tm-search-form1 tm-section-pad-2" >
+                    <form className="hotellist-tm-search-form1 tm-section-pad-2" >
                         <div className="form-row tm-search-form-row">
 
-                            <div className="form-group tm-form-group tm-form-group-pad1 tm-form-group-6">
-                                <label htmlFor="inputCheckIn" className="tm_form_label_search_hotel" >Check In </label>
+                            <div className="form-group tm-form-group hotellist-tm-form-group-pad1 hotellist-tm-form-group-6">
+                                <label htmlFor="inputCheckIn" className="tm-form-label-search" >Check In </label>
                                 <input
                                     name="check-in"
                                     type="date"
@@ -172,8 +157,8 @@ const HotelList = (props) => {
                                 />
                             </div>
 
-                            <div className="form-group tm-form-group tm-form-group-pad tm-form-group-6">
-                                <label className="tm_form_label_search_hotel" htmlFor="inputCheckOut">Check Out </label>
+                            <div className="form-group tm-form-group tm-form-group-pad hotellist-tm-form-group-6">
+                                <label className="tm-form-label-search" htmlFor="inputCheckOut">Check Out </label>
                                 <input
                                     name="check-out"
                                     type="date"
@@ -198,25 +183,28 @@ const HotelList = (props) => {
                         </div>
                     </div>
                 </div>
-                <div className="tm-banner-overlay1"></div>
+                <div className="hotellist-tm-banner-overlay1"></div>
 
             </div>
 
             <br/>
 
+            
 
             <div className="text-center">
-                <input type="text" className='shadow-lg ' placeholder="Search by keyword" onChange={e => setSearch(e.target.value)} style={{ width: '800px', padding: '20px', alignSelf: 'center', borderRadius: '15px' }} />
+                <input type="text" className=" hotellist-shadow-lg " placeholder="Search By Hotel Name" onChange={e => setSearch(e.target.value)} />
             </div>
+            <br/>
+            <br/>
+
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-3">
-                        <div className="root">
+                        <div className="hotellist_root">
                             <HotelFilter></HotelFilter>
                         </div>
                     </div>
-                    <div className="col-1"></div>
-                    <div className="col-7">
+                    <div className="col-8">
                         <br />
                         <div className="container">
                             {hotelsComponent()}
@@ -234,14 +222,15 @@ const HotelList = (props) => {
 
 }
 
+
 const mapStateToProps = (state) => {
         return {
             district_filter: state.hotel_input_reducer.district_filter,
-            price_filter: state.hotel_input_reducer.price_filter,
-        }
-    }
+            star_filter: state.hotel_input_reducer.star_filter,
+        };
+    };
     
-    const mapDispatchToProps = (dispatch) => {
+    const mapDispatchToProps = dispatch => {
         return {
             //
         };
@@ -250,34 +239,3 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, mapDispatchToProps)(HotelList);
 
 
-// GROUP CODE
-
-//  let pp = arr.filter( (ele, ind) => ind === arr.findIndex( elem => elem.jobid === ele.jobid && elem.id === ele.id))
-
-//  const groupBy = (key) => (array) =>
-//  array.reduce((objectsByKeyValue, obj) => {
-//    const value = obj[key];
-//    objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
-//    return objectsByKeyValue;
-//  }, {});
-
-// const groupByBrand = groupBy("name");
-
-// console.log(
-//  JSON.stringify(
-//    {
-//      hotelsByName: groupByBrand(hotels)
-//    },
-//    null,
-//    2
-//  )
-// ); 
-
-// const groups = hotels.reduce((groups, item) => {
-//     const group = (groups[item.name] || []);
-//     group.push(item);
-//     groups[item.name] = group;
-//     return groups;
-//   }, {});
-
-//   console.log(groups);

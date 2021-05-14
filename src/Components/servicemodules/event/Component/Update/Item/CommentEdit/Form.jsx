@@ -99,10 +99,7 @@ console.log(data)
      
         <Modal.Body>Upadated Successfully!</Modal.Body>
         <Modal.Footer>
-        <button className="btn btn-danger " type='submit'onClick={handleClose}>Close</button>
-        
-  
-         
+        <button className="btn btn-danger " type='submit'onClick={handleClose}>Close</button>  
         </Modal.Footer>
       </Modal>
 
