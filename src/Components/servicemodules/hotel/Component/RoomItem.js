@@ -16,6 +16,7 @@ import image1 from '../../../../images/hotel-img/deluxe-room.jpg';
 import ReviewIcon from '@material-ui/icons/FavoriteBorder';
 import { CheckOutlined, FormatAlignCenter, PinDropSharp } from '@material-ui/icons';
 import Result from '../Result/HotelResult';
+import StarRoundedIcon from '@material-ui/icons/StarRounded';
 
 
 const RoomItem = (props) => {
@@ -26,10 +27,15 @@ const RoomItem = (props) => {
 
     return (
         <div>
-            <Card className="c1" style={{ backgroundColor: " #69c6ba", alignItems: 'center' }}>
+            <Card className="roomitem-c1" style={{  alignItems: 'center' }}>
                 <CardContent>
+                <Grid container justify="flex-end">
+                                    <Grid item>                                        
+                                    <Typography variant="subtitle1" className="roomitem_stars" ><StarRoundedIcon color="secondary"/>{props.stars}<span> stars</span></Typography>
+                                    </Grid>
+                                </Grid>
                     <Typography gutterBottom variant="h5" component="h2">
-                        {props.name} - {props.roomType} room
+                        {props.name} - {props.roomType}
                                 </Typography>
                 </CardContent>
                 <CardActionArea>
@@ -45,7 +51,7 @@ const RoomItem = (props) => {
                             <p><span className="text-body">Number of Guests:</span>{props.capacity}</p>
                             <Grid container spacing={3}>
                                 <Grid item xs={6}>
-                                    <p><span className="text-body"><ReviewIcon />Reviews</span> </p>
+                                    {/* <p><span className="text-body"><ReviewIcon />Reviews</span> </p> */}
                                 </Grid>
                                 <Grid item xs={6}>
                                     <p><span className="text-body">Price per day:</span>{props.pricePerDay}</p>
@@ -62,6 +68,7 @@ const RoomItem = (props) => {
                     </Link>
                 </CardActions>
             </Card>
+            
         </div>
     );
 }

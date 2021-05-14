@@ -33,7 +33,7 @@ import Hotel from './Pages/DashBoard/hotelTotal';
 import Trans from './Pages/DashBoard/TransTotal';
 import ItemLanding from '../../servicemodules/event/Component/Update/Item/ItemLanding';
 import Transport from '../../servicemodules/transport/Listitemdetails/listitemdetails';
-import HotelResult from '../../servicemodules/hotel/Result/HotelResult'
+import HotelViewPost from '../serviceProvider/Pages/DashBoard/hotelviewpost';
 import GuidePge from '../../servicemodules/guide/components/GuideDetails/guidedetailspage';
 import Password from './Pages/password/passwordForm';
 
@@ -204,7 +204,7 @@ export default function Dashboard(props) {
         <Route path="/translanding/:id" component={Transport}/>
         <Route path="/guidelanding/:id" component={GuidePge}/>
         <Route path="/categorylanding/:id" component={ItemLanding}/>
-        <Route path="/hotelList/:id" component={HotelResult}/>
+        <Route path="/hotelviewpost" component={HotelViewPost}/>
         <Route path='/'><DashBoard myId={props.myId}/></Route>
       
       

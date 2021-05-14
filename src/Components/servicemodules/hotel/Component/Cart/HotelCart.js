@@ -5,6 +5,11 @@ import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
 import { addToCart } from "../../../../../store/lib/actions";
 
+import HouseIcon from '@material-ui/icons/House';
+import LocalHotelIcon from '@material-ui/icons/LocalHotel';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import TodayRoundedIcon from '@material-ui/icons/TodayRounded';
+import EventRoundedIcon from '@material-ui/icons/EventRounded';
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -14,9 +19,14 @@ import Typography from '@material-ui/core/Typography';
 import ShoppingCartItcon from '@material-ui/icons/ShoppingCart';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemText from '@material-ui/core/ListItemText';
+
 const HotelCart = (props) => {
 
-  const { add_to_cart} = props;
+  const { add_to_cart } = props;
 
   
 
@@ -27,6 +37,7 @@ const HotelCart = (props) => {
     let numofRooms = props.location.data.numofRooms;
     let checkIn = props.location.data.checkIn;
     let checkOut = props.location.data.checkOut;
+    let ImgURL02 = props.location.data.ImgURL02;
 
     var today = new Date(),
 
@@ -58,25 +69,81 @@ const HotelCart = (props) => {
                 <Typography component="h5" variant="h5" className="hotelcart_title">
                   CheckOut Details
                 </Typography>
-                    Selected Hotel: {name}
-                <Typography component="h6">
-                </Typography>
-                    Selected RoomType: {roomType}
-                <Typography component="h6">
-                    Selected Num.of Rooms: {numofRooms}
-                </Typography>
-                <Typography component="h6">
-                    Check In Date: {checkIn}
-                </Typography>
-                <Typography component="h6">
-                    Check Out Date: {checkOut}
-                </Typography>
+                <hr/>
+
+                <List>
+                  <ListItem>
+                    <ListItemAvatar>
+                      <HouseIcon/>
+                    </ListItemAvatar>
+                    <ListItemText>
+                      Selected Hotel: 
+                    </ListItemText>
+                    <ListItemText>
+                      {name}
+                    </ListItemText>
+                  </ListItem>
+
+                  <ListItem>
+                    <ListItemAvatar>
+                      <LocalHotelIcon/>
+                    </ListItemAvatar>
+                    <ListItemText>
+                      Selected Room Type: 
+                    </ListItemText>
+                    <ListItemText>
+                      {roomType}
+                    </ListItemText>
+                  </ListItem>
+
+                  <ListItem>
+                    <ListItemAvatar>
+                      <AddCircleIcon/>
+                    </ListItemAvatar>
+                    <ListItemText>
+                      Selected Num.of Rooms: 
+                    </ListItemText>
+                    <ListItemText>
+                    {numofRooms}
+                    </ListItemText>
+                  </ListItem>
+
+                  <ListItem>
+                    <ListItemAvatar>
+                      <TodayRoundedIcon/>
+                    </ListItemAvatar>
+                    <ListItemText>
+                      Check In Date: 
+                    </ListItemText>
+                    <ListItemText>
+                    {checkIn}
+                    </ListItemText>
+                  </ListItem>
+
+                  <ListItem>
+                    <ListItemAvatar>
+                      <EventRoundedIcon/>
+                    </ListItemAvatar>
+                    <ListItemText>
+                      Check Out Date: 
+                    </ListItemText>
+                    <ListItemText>
+                    {checkOut}
+                    </ListItemText>
+                  </ListItem>
+
+                </List>
+                    
+                
+                    
+          
+      
                 
                 
               </CardContent>
               <div className="hotelcart_control">
                 <Link to="/shoppingcart">
-                <Button onClick={()=> props.add_to_cart(name, pricePerDay, id,'',date,'Hotel', (numofDays(checkIn,checkOut)*pricePerDay),numofRooms,
+                <Button onClick={()=> props.add_to_cart(name, pricePerDay, id,numofDays(checkIn,checkOut),date,'Hotel', ((numofDays(checkIn,checkOut)*pricePerDay)*numofRooms),numofRooms,
                           checkIn,'','',checkOut,'','')}>
                 <ShoppingCartItcon className="hotelcart_icon" />
                     <Typography>Click Here to Add to Cart</Typography>
@@ -87,9 +154,9 @@ const HotelCart = (props) => {
                 
               </div>
             </div>
-            <CardMedia
+            <CardMedia image={ImgURL02}
               className="hotelcart_cover"
-              image={image}
+              
               title="Live from space album cover"
             />
           </Card>

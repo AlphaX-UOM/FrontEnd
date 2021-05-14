@@ -1,10 +1,4 @@
-.button{
-    align-items: center;
-}
-
-
-
-.tm-banner-overlay1 {
+.hotellist-tm-banner-overlay1 {
     z-index: 1;
     height: 50%;
     width: 100%;
@@ -15,7 +9,7 @@
     background: rgba(0, 0, 0, 0.2);
 }
 
-.tm-search-form1 {
+.hotellist-tm-search-form1 {
     background-color: #f5f6f6;
     padding: 25px 25px 15px;
     width: 70%;
@@ -25,6 +19,18 @@
     border-radius: 50px;
 }
 
-.tm-form-group-6 { width: 50%; }
+.hotellist-tm-form-group-6 { width: 50%; }
 
-.tm-form-group-pad1 { padding: 0 30px; }
+.hotellist-tm-form-group-pad1 { padding: 0 30px; }
+
+.hotellist-shadow-lg:focus{
+    outline: orangered;
+}
+
+.hotellist-shadow-lg {
+    width: 800px;
+    padding: 20px;
+    align-self: center;
+    border-radius: 15px;
+    border-color: #69c6ba;
+}
