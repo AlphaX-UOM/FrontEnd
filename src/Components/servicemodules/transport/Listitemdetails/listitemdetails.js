@@ -16,6 +16,7 @@ import Comments from '../comments/comments'
 import Listitem from "../Listitem/listitem";
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import {History} from 'react-router-dom';
+import Ratingimport from '../comments/displayratings'
 
 class Listitemdetails extends Component {
     constructor() {
@@ -95,11 +96,12 @@ class Listitemdetails extends Component {
 
 
     render() {
-    let comment=(
-        <div hidden={(!this.state.hidden1)? "hidden1" : ""}>
-            <Comments />
-        </div>
-    );
+        let comment=(
+            <div hidden={(!this.state.hidden1)? "hidden1" : ""}>
+                <Comments add_id={this.props.match.params.id} />
+            </div>
+        );
+
 
 
 
@@ -148,9 +150,10 @@ class Listitemdetails extends Component {
                         <span className="lead">
                             <div className="row">
 
-                                <div className="col-sm"><Ratings/></div>
+                                <div className="col-sm">
+                                    <Ratingimport id={this.props.match.params.id}/>
 
-
+                                </div>
                             </div>
 
                             <div className="row">
@@ -276,7 +279,7 @@ class Listitemdetails extends Component {
                                 <div className="col-sm-5 h5"><strong>Price Per 1KM :</strong> </div>
                                 <div className="col-sm-7">
                                         <div className="h5" >
-                                      Rs {this.state.providers.pricePer1KM}
+                                      $ {this.state.providers.pricePer1KM}
                                 </div>
                                   </div>
                             </div>
@@ -288,7 +291,7 @@ class Listitemdetails extends Component {
                                 <div className="col-sm-5 h5"><strong>Price Per Day :</strong> </div>
                                 <div className="col-sm-7">
                                         <div className="h5" >
-                                      Rs {this.state.providers.pricePerDay}
+                                      $ {this.state.providers.pricePerDay}
                                 </div>
                                   </div>
                             </div>
