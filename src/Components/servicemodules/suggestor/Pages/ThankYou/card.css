@@ -1,0 +1,356 @@
+@import url("https://fonts.googleapis.com/css?family=Lato");
+
+/* default */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+/* .flip-card-container */
+.tflip-card-container {
+  --hue: 150;
+  --primary: hsl(var(--hue), 50%, 50%);
+  --white-1: hsl(0, 0%, 90%);
+  --white-2: hsl(0, 0%, 80%);
+  --dark: hsl(var(--hue), 25%, 10%);
+  --grey: hsl(0, 0%, 50%);
+
+  width: 300px;
+  height: 450px;
+
+  perspective: 1000px;
+}
+
+/* Float four columns side by side */
+.tcolumn {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.trow {
+  margin: 0 -5px;
+}
+
+/* Clear floats after the columns */
+.trow:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* .flip-card */
+.tflip-card {
+  width: inherit;
+  height: inherit;
+
+  position: relative;
+  transform-style: preserve-3d;
+  transition: 0.6s 0.1s;
+}
+
+/* hover and focus-within states */
+.tflip-card-container:hover .tflip-card,
+.tflip-card-container:focus-within .tflip-card {
+  transform: rotateY(180deg);
+}
+
+/* .card-... */
+.tcard-front,
+.tcard-back {
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+
+  background: var(--dark);
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+
+  backface-visibility: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .card-front */
+.tcard-front {
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+/* .card-back */
+.tcard-back {
+  transform: rotateY(180deg);
+  z-index: 1;
+}
+
+/* figure */
+tfigure {
+  z-index: -1;
+}
+
+/* figure, .img-bg */
+tfigure,
+.timg-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+}
+
+/* img */
+timg {
+  height: 100%;
+  border-radius: 24px;
+}
+
+/* figcaption */
+tfigcaption {
+  display: block;
+
+  width: auto;
+  margin-top: 12%;
+  padding: 8px 22px;
+
+  font-weight: bold;
+  line-height: 1.6;
+  letter-spacing: 2px;
+  word-spacing: 6px;
+  text-align: right;
+
+  position: absolute;
+  top: 0;
+  right: 12px;
+
+  color: var(--white-1);
+  background: hsla(var(--hue), 25%, 10%, 0.5);
+}
+
+/* .img-bg */
+.timg-bg {
+  background: hsla(var(--hue), 25%, 10%, 0.5);
+}
+
+.tcard-front .timg-bg {
+  clip-path: polygon(0 20%, 100% 40%, 100% 100%, 0 100%);
+}
+
+.tcard-front .timg-bg::before {
+  content: "";
+
+  position: absolute;
+  top: 34%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(18deg);
+
+  width: 100%;
+  height: 6px;
+  border: 1px solid var(--primary);
+  border-left-color: transparent;
+  border-right-color: transparent;
+
+  transition: 0.1s;
+}
+
+.tcard-back .timg-bg {
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0 60%);
+}
+
+/* hover state */
+.tflip-card-container:hover .tcard-front .timg-bg::before {
+  width: 6px;
+  border-left-color: var(--primary);
+  border-right-color: var(--primary);
+}
+
+/* ul */
+tul {
+  padding-top: 50%;
+  margin: 0 auto;
+  width: 70%;
+  height: 100%;
+
+  list-style: none;
+  color: var(--white-1);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* li */
+tli {
+  width: 100%;
+  margin-top: 12px;
+  padding-bottom: 12px;
+
+  font-size: 14px;
+  text-align: center;
+
+  position: relative;
+}
+
+tli:nth-child(2n) {
+  color: var(--white-2);
+}
+
+tli:not(:last-child)::after {
+  content: "";
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 1px;
+
+  background: currentColor;
+  opacity: 0.2;
+}
+
+/* button */
+tbutton {
+  font-family: inherit;
+  font-weight: bold;
+  color: var(--white-1);
+
+  letter-spacing: 2px;
+
+  padding: 9px 20px;
+  border: 1px solid var(--grey);
+  border-radius: 1000px;
+  background: transparent;
+  transition: 0.3s;
+
+  cursor: pointer;
+}
+
+tbutton:hover,
+tbutton:focus {
+  color: var(--primary);
+  background: hsla(var(--hue), 25%, 10%, 0.2);
+  border-color: currentColor;
+}
+
+tbutton:active {
+  transform: translate(2px);
+}
+
+/* .design-container */
+.tdesign-container {
+  --tr: 90;
+  --op: 0.5;
+
+  width: 100%;
+  height: 100%;
+
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  pointer-events: none;
+}
+
+/* .design */
+.tdesign {
+  display: block;
+
+  background: var(--grey);
+  position: absolute;
+
+  opacity: var(--op);
+  transition: 0.3s;
+}
+
+.tdesign--1,
+.tdesign--2,
+.tdesign--3,
+.tdesign--4 {
+  width: 1px;
+  height: 100%;
+}
+
+.tdesign--1,
+.tdesign--2 {
+  top: 0;
+  transform: translateY(calc((var(--tr) - (var(--tr) * 2)) * 1%));
+}
+
+.tdesign--1 {
+  left: 20%;
+}
+
+.tdesign--2 {
+  left: 80%;
+}
+
+.tdesign--3,
+.tdesign--4 {
+  bottom: 0;
+  transform: translateY(calc((var(--tr) + (var(--tr) - var(--tr))) * 1%));
+}
+
+.tdesign--3 {
+  left: 24%;
+}
+
+.tdesign--4 {
+  left: 76%;
+}
+
+.tdesign--5,
+.tdesign--6,
+.tdesign--7,
+.tdesign--8 {
+  width: 100%;
+  height: 1px;
+}
+
+.tdesign--5,
+.tdesign--6 {
+  left: 0;
+  transform: translateX(calc((var(--tr) - (var(--tr) * 2)) * 1%));
+}
+
+.tdesign--5 {
+  top: 41%;
+}
+
+.tdesign--6 {
+  top: 59%;
+}
+
+.tdesign--7,
+.tdesign--8 {
+  right: 0;
+  transform: translateX(calc((var(--tr) + (var(--tr) - var(--tr))) * 1%));
+}
+
+.tdesign--7 {
+  top: 44%;
+}
+
+.tdesign--8 {
+  top: 56%;
+}
+
+/* states */
+tbutton:hover + .tdesign-container,
+tbutton:active + .tdesign-container,
+tbutton:focus + .tdesign-container {
+  --tr: 20;
+  --op: 0.7;
+}

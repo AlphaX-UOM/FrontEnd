@@ -9,7 +9,7 @@ const SignUp=(props)=>{
         firstName: "",
         lastName: "",
         email: "",
-        phonenumber:"",
+        contact:"",
         address:"",
         password: "",
         password2: "",
@@ -18,7 +18,7 @@ const SignUp=(props)=>{
             firstName: "",
             lastName: "",
             email: "",
-            phonenumber:"",
+            contact:"",
             dob:'',
             address:"",
             password: "",
@@ -33,7 +33,7 @@ const SignUp=(props)=>{
 
    const handleSubmit = e=>{
         e.preventDefault();
-         errors.lastName==""&&errors.firstName==""&&errors.password2==""&&errors.phonenumber==""&&errors.address==""&&errors.email==""&&errors.password==""?state.isvalid=true:state.isvalid=false;
+         errors.lastName==""&&errors.firstName==""&&errors.password2==""&&errors.contact==""&&errors.address==""&&errors.email==""&&errors.password==""?state.isvalid=true:state.isvalid=false;
                 // console.log(state.isvalid);
                 // console.log(state);
 
@@ -44,10 +44,10 @@ const SignUp=(props)=>{
                         firstName:state.firstName,
                         lastName:state.lastName,
                         password:state.password,
-                        dOB:state.dob,
+                        dob:state.dob,
                         address:state.address,
                          email:state.email,
-                        contact:state.phonenumber,
+                        contact:state.contact,
                        role:"Customer",
                         imgURL:""
                     })
@@ -194,14 +194,14 @@ const SignUp=(props)=>{
                 }
                 break;
 
-            case "phonenumber":
+            case "contact":
                 if (!validPnumRegex.test(value)) {
-                    errors.phonenumber = "Phonenumber is not valid!";
+                    errors.contact = "Phonenumber is not valid!";
                 } else {
-                    errors.phonenumber = "";
+                    errors.contact = "";
                     setstate({
                         ...state,
-                        phonenumber: value,
+                        contact: value,
                     });
                 }
                 break;
@@ -327,10 +327,10 @@ const SignUp=(props)=>{
                                    </div>
 
                                    <div className="col-sm-6">
-                                       <label htmlFor="your-phonenumber" className='signin_txt_col'>Phone Number</label>
-                                       <input type="number" name="phonenumber" id="your-phonenumber" className="input-text"
+                                       <label htmlFor="contact" className='signin_txt_col'>Phone Number</label>
+                                       <input type="number" name="contact" id="contact" className="input-text"
                                               placeholder="Your Phone Number"  onChange={formValChange} required />
-                                       <div className="error_msg rounded-pill center">{state.errors.phonenumber}</div>
+                                       <div className="error_msg rounded-pill center">{state.errors.contact}</div>
                                    </div>
 
                                </div>

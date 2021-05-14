@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Card } from "react-bootstrap";
-import Thank from "./Thank";
+import Thank from "../ThankYou/Thank";
 import { connect } from "react-redux";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";

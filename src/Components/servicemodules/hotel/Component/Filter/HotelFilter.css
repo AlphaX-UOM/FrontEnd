@@ -1,14 +1,6 @@
-.g1{
-    flex-grow: 1;
-}
-
-.root{
-    padding-top: 50px;
-}
-
-.paper{
+.hotelfilter_paper{
+    width: 250px;
     text-align: center;
-    background-color: beige;
 }
 
 .hotelfilter_select{

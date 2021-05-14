@@ -1,50 +1,5 @@
-.img{
-    background-image:url('../../../../images/hotel-img/india.jpg');
-    background-repeat: no-repeat;
-    background-position: center center;
-   
-    
-    height: 100px;
-}
-
-.details-hotel{
-    border-width: 10px;
-    border-color: black;
-}
-
-.button-room{
-    width: 80%;
-}
-
-
-
-
-.tableName{
-    width: 15%;
-}
-
-.tableBeds{
-    width: 7%;
-}
-
-.tableGuests{
-    width: 7%;
-}
-
-.tableSpecs{
-    width: 40%;
-}
-
-.tablePrice{
-    width: 10%;
-}
-
-.a{
-    width: 11%;
-}
-
-.b{
-    align-content: center;
+.hotelresult-cardheader{
+    background-color: #69C6BA;
 }
 
 

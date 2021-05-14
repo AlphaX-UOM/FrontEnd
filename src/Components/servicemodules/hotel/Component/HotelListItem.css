@@ -1,9 +1,26 @@
-.hotel_img_element{
+.hotellistitem-hotel_img_element{
     max-height: 450px;
 max-width: 450px;
-border-radius: 30px;
+
+padding: 5px;
+padding-top: 20px;
 }
 
-.avatar {
-    color: blue;
+.hotellistitem-avatar {
+    color: rgb(5, 71, 39);
+}
+
+.hotellistitem_district{
+    font-size: 50px;
+}
+
+.hotellistitem-img{
+    justify-content: center;
+    align-content: center;
+}
+
+.hotellistitem-tm-recommended-title{
+    color: #096917;
+    size: 10px;
+    font-style: oblique;
 }
