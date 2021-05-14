@@ -41,7 +41,7 @@ const Passwordreset=(props)=>{
 
             var axios = require('axios');
             var config = {
-                method: 'post',
+                method: 'put',
                 url: url,
                 headers: {
                     'Authorization': 'Basic '+ encodedStringBtoA,

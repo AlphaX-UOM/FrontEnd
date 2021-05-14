@@ -4,6 +4,8 @@ import Thank from "./Thank";
 import { connect } from "react-redux";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
+import { useDispatch } from 'react-redux'
+import { resetCart } from '../../../../../store/lib/actions'
 
 function Paypal(props) {
   let displayTotal = props.total;
@@ -12,6 +14,7 @@ function Paypal(props) {
   const [error, setError] = useState(null);
   const paypalRef = useRef();
   const [str, setStr] = useState();
+  const dispatch = useDispatch()
   let GUID = uuidv4();
 
   useEffect(() => {
@@ -278,9 +281,7 @@ function Paypal(props) {
                 });
             }
           }
-
-          // localStorage.removeItem("name of localStorage variable you want to remove");
-          window.localStorage.clear();
+          dispatch(resetCart())
         },
         onError: (err) => {
           setError(err);

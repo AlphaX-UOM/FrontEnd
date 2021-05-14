@@ -76,9 +76,11 @@ export const auth = (email, password) => {
                 var str = error.toString();
                 var res = str.replace(/\D/g, "");
                 if(res==='400') {
-                    alert('Check Email and Password');
+                    alert('The password that entered is incorrect.');
                 }else if (res === '401'){
                     alert('Please Confirm your email')
+                }else if (res === '404'){
+                    alert('The email address you entered is not connected to an account. Please Register!')
                 }
                 // alert(error);
                 dispatch(authFail(error));
