@@ -37,7 +37,7 @@
 .form-content-right-g {
  
   position: relative;
-  background: linear-gradient(90deg, rgb(40, 40, 40) 0%, rgb(17, 17, 17) 100%);
+  background: linear-gradient(90deg, rgb(47, 173, 157) 0%, rgb(47, 173, 157) 100%);
   border-top-left-radius: 50px;
   border-bottom-left-radius:50px;
 }
@@ -100,11 +100,22 @@
 
 
 .form-input-btn-g {
-  width: 100px;
+  width: 240px;
   height: 30px;
 
   border-radius: 15px;
   background: #69C6BA;
+  outline: none;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+}
+.form-input-btn-g23 {
+  width: 240px;
+  height: 30px;
+
+  border-radius: 15px;
+  background: #ca5f21;
   outline: none;
   border: none;
   color: #fff;
@@ -120,4 +131,3 @@
   );
   transition: all 0.4s ease-out;
 }
-

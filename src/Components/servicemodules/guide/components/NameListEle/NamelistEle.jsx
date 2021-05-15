@@ -40,26 +40,7 @@ function NameListEle(props) {
 
   return (
    <div>
-      {/* <Card style={{ width: "22rem"  ,height: "30rem",borderColor: "1px solid",backgroundColor:"white",borderWidth: "1px"}} className="backcolor tcolr-guide">
-        <Card.Img variant="top" src={props.avatar} style={{width: "150px",height: "150px",borderRadius:"10px",marginTop: "5px",marginLeft: "65px"}}/>
-        <Card.Body>
-          <Card.Title className="font-color">{name}</Card.Title>
-          <hr />
-
-          <Card.Text className="font-color">Language: {props.lang}</Card.Text>
-        
-          <Card.Text className="font-color">Age: {getAge(props.dob)}</Card.Text>
-            <div style={{flexDirection:"row",marginLeft: "50px"}}>
-          <Card.Text className="font-color"  style={{color: "#69C6BA",fontWeight:"bold"}}>  {props.cost}</Card.Text>
-         
-          </div>
-          <br/>
-          <Card.Text>
-            {" "}
-            <Ratings />
-          </Card.Text>
-        </Card.Body>
-      </Card> */}
+      
       <form className="frame-2" >
         <div className="overlap-group">
           <div className="rectangle-1"></div>
@@ -71,7 +52,7 @@ function NameListEle(props) {
           <img variant="top" src={avatar}  className="rectangle-4"/>
           <div className="frame-1">
             <div className="overlap-group1" style={{ backgroundImage: `url(${overlapGroup1})` }}>
-              <div className="price roboto-bold-black-14px">{cost}</div>
+              <div className="price roboto-bold-black-14px">${cost}</div>
             </div>
           </div>
           <Link

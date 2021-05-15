@@ -1,46 +1,52 @@
 import React, { useState, useEffect } from "react";
 import "./guidedetailspage.css";
-// import Logo1 from '../../../../images/vehicle/itemimages/Intermediate.jpg';
-// import Logo2 from '../../../../images/vehicle/slide/v.jpg';
-// import Logo3 from '../../../../images/vehicle/slide/suv.jfif';
-// import Logo4 from '../../../../images/vehicle/slide/Bus.jfif';
 import connect from "react-redux/es/connect/connect";
 import { Link } from "react-router-dom";
-// import Ratings from '../rating-mod/ratingm'
+import axios from "axios"; 
 import { addToCart } from "../../../../../store/lib/actions";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
-import Comments from '../comments/Comments'
+import Comments from "../comments/comments";
+import Ratingimport from "../comments/displayratings"
+import Rating from "@material-ui/lab/Rating";
+
 
 function guidedetailspage(props) {
-  const { add_to_cart, dateg } = props;
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [commentg, setcommentg] = useState(true)
+    const { add_to_cart,dateg} = props;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [commentg,setcommentg]= useState(true)
   // backend dta assinged for these variables
+  console.log("🚀 ~ file: guidedetailspage.js ~ line 21 ~ guidedetailspage ~ props.match.params.id", props.match.params.id)
 
-
+  let comment=(
+    <div hidden={(commentg)? true : ""}>
+        <Comments add_id={props.match.params.id} />
+       
+    </div>
+);
+ 
   let name1;
 
   let email;
   let lang;
-  let Rating;
+  
   let cost;
   let avatar;
   let Dob;
   let details;
 
   // console.log(props.location.data.userId);
-  var today = new Date(),
+    var today = new Date(),
 
-    date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [nameList, setNameList] = useState([]);
-
+ 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     fetch(
       'https://alphax-api.azurewebsites.net/api/TourGuideServices/' +
-      props.match.params.id
+        props.match.params.id
     )
       .then((res) => res.json())
       .then((data) => {
@@ -48,34 +54,30 @@ function guidedetailspage(props) {
       });
   }, []);
 
-  function getAge(dateString) {
-    var today = new Date();
-    var birthDate = new Date(dateString);
-    var age = today.getFullYear() - birthDate.getFullYear();
-    var m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
+    function getAge(dateString) {
+        var today = new Date();
+        var birthDate = new Date(dateString);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
     }
-    return age;
-  }
 
-  const totalcost = ((new Date(dateg.date1.checkoutdate).getTime() - new Date(dateg.date.checkindate).getTime()) / (1000 * 3600 * 24) + 1) * nameList.costPerDay
-  const unitsx = ((new Date(dateg.date1.checkoutdate).getTime() - new Date(dateg.date.checkindate).getTime()) / (1000 * 3600 * 24) + 1)
+  const totalcost= ((new Date(dateg.date1.checkoutdate).getTime()-new Date(dateg.date.checkindate).getTime())/(1000 * 3600 * 24)+1)*nameList.costPerDay
+  const unitsx=((new Date(dateg.date1.checkoutdate).getTime()-new Date(dateg.date.checkindate).getTime())/(1000 * 3600 * 24)+1)+"days"
   name1 = nameList.name;
   email = nameList.pnumber;
   Dob = nameList.dob;
   cost = nameList.costPerDay;
   details = nameList.otherDetails;
-  avatar = nameList.imgURL
+  avatar=nameList.imgURL
 
+  
 
-  console.log(totalcost);
-
-  let comment = (
-    <div hidden={(commentg) ? true : ""}>
-      <Comments />
-    </div>
-  );
+ 
+  
 
   return (
     <div className="">
@@ -83,156 +85,48 @@ function guidedetailspage(props) {
       <div className="container debackcolor">
         <br />
         <div className="row ">
-          <div className="col-sm-1"></div>
-          <div className="col-sm-4 imgcolor">
-            <br />
-            <div className="col-sm-12 ">
-              {/* <h3 className="txtcolorx">{this.state.providers.name}</h3> */}
-            </div>
-
-            <div className="col-sm-12">{/* image */}</div>
-
-            <div className="col-sm-12">
-              <span className="lead">
-                <div className="row">
-                  {/* <div className="col-sm"><Ratings/></div> */}
-                  <div className="col-sm txtcolorx">Excellent</div>
-                </div>
-                <div>
-
-                  <br />
-                  <img style={{ height: "200px", width: "200px", borderRadius: "30px" }} src={avatar} />
-                </div>
-                <br />
-                <div className="row">
-                  <Link>
-                    <div className="col txtcolorx">
-                      <small className="iconpad" onClick={() => setcommentg(!commentg)}> Reviews</small>
-                      <ChatBubbleOutlineIcon fontSize="small" />
-                    </div>
-                  </Link>
-                </div>
-              </span>
-            </div>
-            <br />
-          </div>
-          <div className="col-sm-7 ">
-            <div className="row ">
-              <div className="col-sm-2"></div>
-              <div className="col-sm ">
-                <div className="depad">
-                  <br />
-                  <span className="">
-                    <div className="row ">
-                      <div className="">Guide Name :</div>
-                      <div className="col ">
-                        <div className="" role="alert">
-                          {name1}
-                        </div>
-                      </div>
-                    </div>
-                  </span>
-                  <span className="">
-                    <div className="row">
-                      <div className="">Language   :</div>
-                      <div className="col">
-                        <div className="">   {nameList.language}</div>
-                      </div>
-                    </div>
-                  </span>
-
-                  <span className="">
-                    <div className="row">
-                      <div className="">Price Per Day :</div>
-                      <div className="col">
-                        <div className="">{cost}</div>
-                      </div>
-                    </div>
-                  </span>
-
-                  <span className="">
-                    <div className="row">
-                      <div className="">TP :</div>
-                      <div className="col">
-                        <div className="" role="alert">
-                          {email}
-                        </div>
-                      </div>
-                    </div>
-                  </span>
-
-                  {/* <span className="">
-                            <div className="row">
-                                <div className=" ">Email :</div>
-                                <div className="col">
-                                    <div className="" role="alert">
-                                       {email}
-                                </div></div>
-                            </div>
-
-                        </span> */}
-
-                  <span className="">
-                    <div className="row">
-                      <div className="">Age :</div>
-                      <div className="col">
-                        <div className="" role="alert">
-                          {getAge(Dob)}
-                        </div>
-                      </div>
-                    </div>
-                  </span>
-
-                  {/* <div className="row">
-                                <div className="">District :</div>
-                                <div className="col">
-                                    <div className="" role="alert">
-                                  
-                                </div>
-                                </div>
-                            </div> */}
-                  <span className="">
-                    <div className="row">
-                      <div className="">Description :</div>
-                      <div className="col">
-                        <div className=" " role="alert">
-                          {details}
-                        </div>
-                      </div>
-                    </div>
-                  </span>
-                  <span className="">
-                    <div className="row txtcolorx">
-                      <div className="col-sm-5 h5"><strong>Total Charge :</strong> </div>
-                      <div className="col-sm-7">
-                        <div className="h5" >
-                          Rs {totalcost}
-                        </div>
-                      </div>
-                    </div>
-
-                  </span>
-
-                  <div className="row">
-                    <div className="col-sm"></div>
-                    <div className="col-sm"></div>
-                    <Link to="/shoppingcart">
-                      <button type="button" className="btn btn-primary " onClick={() => props.add_to_cart(name1, cost, nameList.id, 1, date, "GuideService", totalcost, unitsx, dateg.date.checkindate, null, null, dateg.date1.checkoutdate, null, null)}>
-                        Book Now
-                    </button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-1"></div>
-            </div>
-          </div>
-
-          <div className="col-sm-1"></div>
+        <div className="gudemain border-3px-downy">
+      <div className="overlap-group">
+        <div className="gudeex27"></div>
+        <div className="guidex24">
+          <div className="guidex25 roboto-bold-black-18px">Description&nbsp;&nbsp;:</div>
+          <div className="gudex26 roboto-bold-black-18px">{details}</div>
+        </div>
+        
+        <div className="gudidex23 roboto-bold-black-18px">Telephone&nbsp;&nbsp;&nbsp;&nbsp;:</div>
+        <div className="gudix21 roboto-bold-black-18px"> {email}</div>
+        <Link to="/shoppingcart">
+        <div className="guidex17 smart-layers-pointers " onClick={() => props.add_to_cart(name1, cost, nameList.id, 1, date, "GuideService", totalcost, unitsx, dateg.date.checkindate, null, null, dateg.date1.checkoutdate, null, null)}>
+          <div className="gudex19 roboto-bold-white-18px">Book Now</div>
+        </div>
+        </Link>
+        <div className="guidex16"></div>
+        <Link>
+        <div className="guidex15 roboto-bold-downy-18px smart-layers-pointers " onClick={()=>setcommentg(!commentg)}>Rewiews</div>
+        </Link>
+       
+        <div className="guidex14 roboto-bold-downy-18px">Excellent</div>
+        <div style={{paddingLeft:"100px"}} className="guidex14 roboto-bold-downy-18px">  <Ratingimport id={props.match.params.id}/>
+</div>
+        <div className="guidex13 roboto-bold-black-18px">Guide Name :</div>
+        <div className="guidex11 roboto-bold-black-18px">{name1}</div>
+        <div className="guidex10 roboto-bold-black-18px">Language&nbsp;&nbsp;&nbsp;&nbsp; :</div>
+        <div className="guidex8 roboto-bold-black-18px">{ nameList.language}</div>
+        <div className="guidex7 roboto-bold-black-18px">PricePerDay :</div>
+        <div className="gudidex5 roboto-bold-black-18px">{cost}</div>
+        <div className="guidex71 roboto-bold-black-18px">age&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :</div>
+        <div className="gudidex51 roboto-bold-black-18px"> {getAge(Dob)}</div>
+        <h1 className="guidex4 roboto-bold-downy-24px">Total&nbsp;&nbsp;Charge :&nbsp;&nbsp;{ totalcost}</h1>
+        <ChatBubbleOutlineIcon className="guidex2" fontSize="small" />
+        <img className="gudex1 smart-layers-pointers " src={avatar} />
+      </div>
+    </div>
+          
         </div>
 
         <br />
         {comment}
+       {/* < Comments userid={nameList.userID} add_id={nameList.id} /> */}
       </div>
       <br />
     </div>
@@ -252,4 +146,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(guidedetailspage);
+export default connect(mapStateToProps, mapDispatchToProps)(  guidedetailspage);

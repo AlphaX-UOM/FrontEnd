@@ -1,3 +1,4 @@
+  
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Calendar from "react-calendar";
@@ -10,8 +11,8 @@ import { guide_input_form } from "../../../../../store/actions/guide_input_reduc
 const FormSearch = (props) => {
   const { guideform } = props;
   
-  const [state, setState] = useState({checkindate:''});
-  const [state1, setState1] = useState({checkoutdate:''});
+  const [state, setState] = useState({checkindate:null}); 
+  const [state1, setState1] = useState({checkoutdate:null});
   
 
   
@@ -26,6 +27,11 @@ const FormSearch = (props) => {
      date: state,
      date1: state1,
   };
+  let check =false
+  if(state.checkindate !== null && state1.checkoutdate !== null){
+    check = true;
+  }
+  
  
  
 
@@ -106,19 +112,12 @@ const FormSearch = (props) => {
                  className="form-control"
                  placeholder="checkoutdate" 
                  value={state1.checkoutdate} onChange={handleInputdate1} 
-                 min={today}
+                 min={state.checkindate}
                />
              </div>
              <br/>
-          </div>
-            </div>
-            <div className="col-sm-2"></div>
-           
-
-          <div className="row form-group">
-            <div className="col-sm-6"></div>
-            <div className="col-sm-2 d-flex justify-content-center">
-              <Link to={{ pathname: "/NameList", data: formdata }} className="">
+             <div  >
+              {check?  <Link to={{ pathname: "/NameList", data: formdata }} className="">
                 {" "}
                 <button
                   type="button"
@@ -127,8 +126,23 @@ const FormSearch = (props) => {
                 >
                   Search
                 </button>
-              </Link>
+              </Link>: <button
+                  type="button"
+                  className="form-input-btn-g23 "
+                 
+                >
+                 Enter date to continue
+                </button>}
+            
             </div>
+          </div>
+            </div>
+            <div className="col-sm-2"></div>
+           
+
+          <div className="row form-group" >
+          
+           
             <div className="col-sm-3"></div>
           </div>
         </div>
