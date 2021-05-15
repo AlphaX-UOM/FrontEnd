@@ -9,6 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
+import Modal from "react-bootstrap/Modal";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -50,6 +51,10 @@ export default function Upgrade() {
   const classes = useStyles();
   const[load,setLoad] = useState(false);
   const [upgradeRequest, setUpgradeRequest] = useState([]);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     const apiUrl =
@@ -78,6 +83,9 @@ export default function Upgrade() {
       address: params.address,
       email: params.email,
       contact: params.contact,
+      bankName:params.bankName,
+      accountNo:params.bankAccount,
+      nic:params.nationalID,
       role: "ServiceProvider",
       imgURL:params.imgURL,
     });
@@ -115,12 +123,15 @@ axios(config)
       .catch(function (error) {
         console.log(error);
       });
-    alert("Successfully updated");
+  
     setLoad(true);
+    handleShow();
   };
 
   return (
-    <TableContainer component={Paper}>
+    <div>
+
+<TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
@@ -159,11 +170,27 @@ axios(config)
                   APPROVE
                   
                 </Button>
+
+                <div>
+        <Modal show={show} onHide={handleClose}>
+     
+        <Modal.Body>Upgraded Successfully </Modal.Body>
+        <Modal.Footer>
+        <button className="btn btn-danger " type='submit'onClick={handleClose}>Close</button>
+        
+         
+        </Modal.Footer>
+      </Modal>
+
+ </div>
               </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
+
+    </div>
+ 
   );
 }
