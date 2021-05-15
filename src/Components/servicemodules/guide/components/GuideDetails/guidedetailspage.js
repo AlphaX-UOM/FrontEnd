@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "axios"; 
 import { addToCart } from "../../../../../store/lib/actions";
 import ChatBubbleOutlineIcon from "@material-ui/icons/ChatBubbleOutline";
-import Comments from "../comments/comments";
+import Comments from "../comments/Comments";
 import Ratingimport from "../comments/displayratings"
 import Rating from "@material-ui/lab/Rating";
 
