@@ -68,11 +68,11 @@ render(){
                                         <label htmlFor="" style={{color: '#FFF' }}>Price</label>
                                         <select className="form-control tm-select" name="price" onChange={this.Changehandler_02}  >
                                             <option value="All">All</option>
-                                            <option value="6000">6000 </option>
-                                            <option value="5000">5000 </option>
-                                            <option value="4000">4000</option>
-                                            <option value="3000">3000</option>
-                                            <option value="2500">2500</option>
+                                            <option value="30">30 </option>
+                                            <option value="25">25 </option>
+                                            <option value="20">20</option>
+                                            <option value="15">15</option>
+                                            <option value="10">10</option>
 
                                         </select>
                                     </div>

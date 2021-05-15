@@ -51,16 +51,16 @@ function NameList(props) {
       price_type_fil === null ||  price_type_fil=== "All"
     )
       return Filterguide;
-    else if ( price_type_fil==="2500" )
-      return item.costPerDay=== 2500;
-    else if (price_type_fil === "3000")
-      return item.costPerDay=== 3000;
-    else if (price_type_fil === "4000")
-      return item.costPerDay === 4000;
-      else if (price_type_fil === "5000")
-      return item.costPerDay === 5000;
-      else if (price_type_fil === "6000")
-      return item.costPerDay === 6000;
+    else if ( price_type_fil==="25" )
+      return item.costPerDay=== 25;
+    else if (price_type_fil === "30")
+      return item.costPerDay=== 30;
+    else if (price_type_fil === "20")
+      return item.costPerDay === 20;
+      else if (price_type_fil === "15")
+      return item.costPerDay === 15;
+      else if (price_type_fil === "10")
+      return item.costPerDay === 10;
     else return item.costPerDay.includes( price_type_fil);
   });
 

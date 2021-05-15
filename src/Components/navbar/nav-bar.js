@@ -17,7 +17,7 @@ import { FormControl } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import LockIcon from '@material-ui/icons/Lock';
 import PersonIcon from '@material-ui/icons/Person';
-import logo1 from "../../images/temp/bg lg/bgbanner-logo.png"
+import logo1 from "../../images/temp/bg lg/Vvisitlogo.png"
 import connect from "react-redux/es/connect/connect";
 
 const navbar=(props)=>{
