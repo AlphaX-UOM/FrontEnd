@@ -117,6 +117,22 @@ const RoomResultItem = (props) => {
         setOpen(false);
     };
 
+    const amenitylist = typeof props.amenities === "string" ? props.amenities.split(',') : ""
+
+    const amenityitem = Object.entries(amenitylist).map(([key, value]) => {
+        return (
+            <ListItem>
+                <ListItemAvatar>
+                <CheckIcon />
+                </ListItemAvatar>
+                <ListItemText>
+                    {value}
+                </ListItemText>
+            </ListItem>
+        );
+
+    });
+
 
     let data = {
         id: props.id,
@@ -202,7 +218,7 @@ const RoomResultItem = (props) => {
                             <div className="col-sm-6">
                                 Amenities:
         <List>
-                                    {props.amenities}
+                                    {amenityitem}
                                 </List>
                             </div>
                             <div className="col-sm-6">

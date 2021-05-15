@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import './RoomResult.css';
 import RoomResultItem from './RoomResultItem';
 import RoomResultContacts from './RoomResultContacts';
+import RoomResultFeatures from './RoomResultFeatures';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import _ from "lodash";
+import RoomRating from './RoomResultRating';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -78,16 +80,15 @@ const RoomResult = (props) => {
 
     }
 
-    // const roomResultFeatures = () => {       
-    //         return(
-    //             <div>
-    //                 <RoomResultFeatures
-    //                     key={roomResult.key}
-    //                     roomfeatures={roomResult.features}
-    //                 />                      
-    //             </div>
-    //         );     
-    // }
+    const roomResultFeatures = () => {       
+            return(
+                <div>
+                    <RoomResultFeatures
+                        roomfeatures={roomResult.features}
+                    />                      
+                </div>
+            );     
+    }
 
     const roomResultContacts = () => {
         return (
@@ -101,25 +102,7 @@ const RoomResult = (props) => {
         );
     }
 
-
-    const featurearray = roomResult.features;
-    const feature_array = typeof featurearray === "string" ? featurearray.split(',') : ""
-
-    const fitems = () => {
-        return feature_array.map((fitem) => {
-            return (
-                <ListItem>
-                    <ListItemAvatar>
-                        <CheckIcon />
-                    </ListItemAvatar>
-                    <ListItemText>
-                        {fitem}
-                    </ListItemText>
-                </ListItem>
-            );
-        });
-    }
-
+  
 
 
     return (
@@ -131,7 +114,13 @@ const RoomResult = (props) => {
                 <br />
             </div>
 
-
+<div className="container">
+                <br />
+                <RoomRating
+                id={roomResult.id}
+                />
+                <br />
+            </div>
 
 
 
@@ -177,7 +166,7 @@ const RoomResult = (props) => {
                             <Card.Body>
                                 <div>
                                 <List>
-                                    {fitems}
+                                    {roomResultFeatures()}
                                 </List>
                                 </div>                               
                             </Card.Body>
