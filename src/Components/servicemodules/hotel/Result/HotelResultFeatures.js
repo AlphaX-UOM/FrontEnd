@@ -12,7 +12,7 @@ const HotelResultFeatures = (props) => {
 
     const array = props.features.split(",");
 
-    console.log(array);
+    console.log(typeof(array));
 
     const featureItems = array.map((feature) =>
             <ListItem>

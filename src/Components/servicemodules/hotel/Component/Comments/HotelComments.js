@@ -13,6 +13,7 @@ const HotelComments = (props) => {
 
     const [commentList, setCommentList] = useState();
     const [rating, setRating] = useState();
+    const [roomlist, setRoomList] = useState(null);
 
     const [comment, setComment] = useState();
     const [ordered, setOrdered] = useState(false);
@@ -46,14 +47,83 @@ const HotelComments = (props) => {
             });
     }, []);
 
+    useEffect(() => {
+        fetch(
+            "https://alphax-api.azurewebsites.net/api/hotelsservices/GetHotelDetails/" +
+            props.add_id
+        )
+            .then((res) => res.json())
+            .then((data) => {
+                setCommentList(data);
+                setLoading(false);
+            });
+    }, [loading]);
+
+    useEffect(() => {
+        fetch(
+            "https://alphax-api.azurewebsites.net/api/hotelsservicereservations"
+        )
+            .then((res) => res.json())
+            .then((data) => {
+
+                if (props.userid !== undefined) {
+                    console.log("user -> " + props.userid);
+                    data = data.filter((item) => item.userID === props.userid && item.hotelsServiceID === props.add_id);
+
+                    if (data[0] !== undefined) {
+                        setOrdered(true);
+                    } else {
+                        setOrdered(false);
+                    }
+                }
+            });
+    }, []);
+
+
+
+    useEffect(() => {
+        fetch(
+            `https://alphax-api.azurewebsites.net/api/hotelsservicecomments` //`https://alphax-api.azurewebsites.net/api/eventplannerservicereservations/${userId}`
+        )
+
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseData) => {
+
+                //  setEvent(responseData)
+                responseData = responseData.filter(item => item.hotelsServiceID === props.add_id);
+                responseData = responseData.filter((ele, ind) => ind === responseData.findIndex(elem => elem.userID === ele.userID))
+                setRoomList(responseData.reduce((total, pay) => total + 1, 0));
+                setTotal(responseData.reduce((total, pay) => total + pay.rating, 0))
+            });
+    }, [props.add_id]);
+
+    useEffect(() => {
+        fetch('https://alphax-api.azurewebsites.net/api/hotelsserviceratings')
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseData) => {
+                //   if(mapdata!=null){
+                //     responseData = responseData.filter(item => item.district === props.eventmapCompare[mapdata]);
+                responseData = responseData.filter(item => item.hotelsServiceID === props.add_id && item.userID === props.userid);
+                if (responseData[0] !== undefined) {
+                    setRatingApi(responseData[0]);
+                    setRating(responseData.reduce((total, pay) => total + 1, 0));
+
+                }
+
+            });
+    }, []);
+
+
     const handleFormData = () => {
         // comment post request goes here
 
         let commentObject = {
             createdAt: new Date(),
             content: comment,
-            firstName: users.firstName,
-            lastName: users.lastName,
             userID: props.userid,
             hotelsServiceID: props.add_id,  
         };
@@ -66,6 +136,8 @@ const HotelComments = (props) => {
             .then(function (response) {
                 console.log(response);
                 setLoading(true);
+                setComment('');
+                alert('submitted')
             });
 
     };
@@ -130,84 +202,17 @@ const HotelComments = (props) => {
         axios(config)
             .then(function (response) {
                 console.log(JSON.stringify(response.data));
+                alert('submitted');
             })
             .catch(function (error) {
                 console.log(error);
             });
     };
 
-    useEffect(() => {
-        fetch(
-            "https://alphax-api.azurewebsites.net/api/hotelsservices/GetHotelDetails/" +
-            props.add_id
-        )
-            .then((res) => res.json())
-            .then((data) => {
-                setCommentList(data);
-                setLoading(false);
-            });
-    }, [loading]);
+    
 
-    useEffect(() => {
-        fetch(
-            "https://alphax-api.azurewebsites.net/api/hotelsservicereservations"
-        )
-            .then((res) => res.json())
-            .then((data) => {
+    
 
-                if (props.userid !== undefined) {
-                    console.log("user -> " + props.userid);
-                    data = data.filter((item) => item.userID === props.userid && item.hotelsServiceID === props.add_id);
-
-                    if (data[0] !== undefined) {
-                        setOrdered(true);
-                    } else {
-                        setOrdered(false);
-                    }
-                }
-            });
-    }, []);
-
-    const [roomlist, setRoomList] = useState(null);
-
-    useEffect(() => {
-        fetch(
-            `https://alphax-api.azurewebsites.net/api/hotelsservicecomments` //`https://alphax-api.azurewebsites.net/api/eventplannerservicereservations/${userId}`
-        )
-
-            .then((response) => {
-                return response.json();
-            })
-            .then((responseData) => {
-
-                //  setEvent(responseData)
-                responseData = responseData.filter(item => item.hotelsServiceID === props.add_id);
-                responseData = responseData.filter((ele, ind) => ind === responseData.findIndex(elem => elem.userID === ele.userID))
-                setRoomList(responseData.reduce((total, pay) => total + 1, 0));
-                setTotal(responseData.reduce((total, pay) => total + pay.rating, 0))
-            });
-    }, [props.add_id]);
-
-    useEffect(() => {
-        fetch('https://alphax-api.azurewebsites.net/api/hotelsserviceratings')
-            .then((response) => {
-                return response.json();
-            })
-            .then((responseData) => {
-                //   if(mapdata!=null){
-                //     responseData = responseData.filter(item => item.district === props.eventmapCompare[mapdata]);
-                responseData = responseData.filter(item => item.hotelsServiceID === props.add_id && item.userID === props.userid);
-                if (responseData[0] !== undefined) {
-                    setRatingApi(responseData[0]);
-                    setRating(responseData.reduce((total, pay) => total + 1, 0));
-
-                }
-
-                //   }
-
-
-            });
-    }, []);
 
     const commentListComponent = () => {
 
@@ -346,10 +351,11 @@ const HotelComments = (props) => {
                                     </div>
                                 </div>
 
-
+                                {users.id !== undefined && ordered ? commentInput() : <p>login to comment</p>}
+                                <hr/>
                                 {commentListComponent()}
                                 {/* comment end here */}
-                                {users.id !== undefined && ordered ? commentInput() : <p>login to comment</p>}
+                                
 
                             </div>
                         </div>
@@ -366,7 +372,7 @@ const mapStateToProps = (state) => {
     return {
       userCred: state.eventpnl.userCred,
       userid: state.auth.userId,
-  
+      isAuthenticated: state.auth.token !== null,
     };
   };
   

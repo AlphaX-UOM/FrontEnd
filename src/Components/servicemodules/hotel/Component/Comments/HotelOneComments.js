@@ -2,13 +2,30 @@ import { Link } from "react-router-dom";
 import Rating from "@material-ui/lab/Rating";
 import React, { useEffect, useState } from "react";
 import connect from "react-redux/es/connect/connect";
+import Container from './CommentEdit/container';
+import Modal from "react-bootstrap/Modal";
 
 function HotelOneComments(props) {
 
     const [showText, setShowText] = useState(false);
     const [users, setUsers] = useState([]);
+
+    
     
     var userId = props.data.userID;
+
+    const [show, setShow] = useState(false);
+
+const handleClose = () => setShow(false);
+const handleShow = () => setShow(true);
+
+const triggerText = 'Edit';
+const onSubmit = (event) => {
+    event.preventDefault(event);
+    console.log(event.target.name.value);
+    console.log(event.target.email.value);
+
+};
 
     useEffect(() => {
         fetch(
@@ -28,6 +45,39 @@ function HotelOneComments(props) {
 
             });
     }, []);
+
+    var cId=props.data.id;
+
+    const DeleteComment = (e) => {
+
+        e.preventDefault();
+      
+      
+        var axios = require('axios');
+        var cId=props.data.id;
+      
+        
+        var config = {
+            method: 'delete',
+            url: `https://alphax-api.azurewebsites.net/api/eventplannerservicecomments/${cId}`,
+            headers: {
+                'Content-Type': 'application/json',
+      
+            },
+            
+        };
+        axios(config)
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+      
+      handleClose();
+      
+      };
+
 
     console.log("my Id: " + props.data.userID)
     return (
@@ -63,8 +113,40 @@ function HotelOneComments(props) {
             readOnly
           />} */}
 
+{props.userid===props.data.userID?
+                   <Container triggerText={triggerText} onSubmit={onSubmit} data={cId} />:
+                 " "
+                  }
+
+{props.userid===props.data.userID?
+                   <button
+                   type="button"
+                   class="btn btn-outline-danger"
+                   onClick={handleShow}
+                  
+                 > Delete 
+                 </button>:
+                 " "
+                  }
+                 
+
 
                 </div>
+
+                <div>
+        <Modal show={show} onHide={handleClose}>
+     
+        <Modal.Body>Are you sure want to Delete?</Modal.Body>
+        <Modal.Footer>
+        <button className="btn btn-danger " type='submit'onClick={handleClose}>Close</button>
+          <button className="btn btn-success" type='submit' onClick={DeleteComment}>   Delete
+        </button>
+         
+        </Modal.Footer>
+      </Modal>
+
+ </div>
+
             </div>
         </div>
     );

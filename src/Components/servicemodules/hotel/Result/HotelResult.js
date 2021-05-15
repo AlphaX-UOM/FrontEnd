@@ -4,6 +4,7 @@ import HotelResultItem from './HotelResultItem';
 import HotelResultFeatures from './HotelResultFeatures';
 import HotelResultContacts from './HotelResultContacts';
 import HotelResultComment from './HotelResultComments';
+import HotelRating from './HotelResultRating';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import _ from "lodash";
@@ -33,7 +34,7 @@ const HotelResult = (props) => {
 
     useEffect(() => {
         Axios
-            .get('https://alphax-api.azurewebsites.net/api/hotelsservices/Check?arrival='+checkIn+'&&departure='+checkOut)
+            .get('https://alphax-api.azurewebsites.net/api/hotelsservices')
             .then((responseData) => {
                 console.log(responseData);
                 setRooms(responseData.data);
@@ -92,6 +93,20 @@ const HotelResult = (props) => {
         });       
     }
 
+    const ratingsComponent = () => {
+        return rooms.filter(room => room.name === name).map((room) => {
+            return (
+
+                <div>
+                    <HotelRating
+                        id={room.id}
+                        name={room.name}
+                    />
+                </div>
+            );
+        });       
+    }
+
     let group = rooms.filter((ele, ind) => ind === rooms.findIndex(elem => elem.name === ele.name))
 
     const roomsFeatures = () => {
@@ -125,6 +140,10 @@ const HotelResult = (props) => {
             <br/>
             <div className="container">
             <h3 style={{color:"#0f3221"}}>{name}</h3>
+            </div>
+
+            <div className="container">
+            {ratingsComponent()}
             </div>
 
             <br />
@@ -197,6 +216,7 @@ const HotelResult = (props) => {
             <hr/>
             <div className="container">
                 {commentsComponent()}
+                
             </div>
 
         </div>

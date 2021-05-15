@@ -8,27 +8,35 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 const RoomResultFeatures = (props) => {
 
-    console.log(props.features);
 
-    const array1 = props.features.split(",");
 
-    console.log(array1);
+    console.log(typeof (props.roomfeatures));
 
-    const featureItems1 = array1.map((feature1) =>
+
+
+    const array1 = typeof props.roomfeatures === "string" ? props.roomfeatures.split(',') : ""
+
+    console.log(typeof (array1));
+
+    const items = Object.entries(array1).map(([key, value]) => {
+        return (
             <ListItem>
                 <ListItemAvatar>
                     <StarBorderRoundedIcon />
                 </ListItemAvatar>
                 <ListItemText>
-                    {feature1}
+                    {value}
                 </ListItemText>
             </ListItem>
-    );
+        );
+
+    });
+  
 
     return (
         <div>
             <List>
-                {featureItems1}
+                {items}
             </List>
         </div>
     );

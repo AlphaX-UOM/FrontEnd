@@ -34,15 +34,6 @@ const HotelResultContacts = (props) => {
                     </ListItemText>
                 </ListItem>
 
-                <ListItem>
-                    <ListItemAvatar>
-                        <AlternateEmailRoundedIcon/>
-                    </ListItemAvatar>
-                    <ListItemText>
-                        email Address
-                    </ListItemText>
-                </ListItem>
-
             </List>
         </div>
     );

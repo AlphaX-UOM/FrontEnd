@@ -39,9 +39,12 @@ const HotelResultItem = (props) => {
         </ListItem>
     );
 
+    // 'https://alphax-api.azurewebsites.net/api/hotelsservicereservations/HotelRes?arrival=' + props.checkIn + '&&departure=' + props.checkOut + '&&serveId=' + props.id'
+    // https://alphax-api.azurewebsites.net/api/hotelsservicereservations/ReservedRooms?arrival=2021/05/07&&departure=2021/05/14&&hotelId=d6c45f8a-c8d2-4f60-3d58-08d8f274801b
+
     useEffect(() => {
         Axios
-            .get('https://alphax-api.azurewebsites.net/api/hotelsservicereservations/HotelRes?arrival=' + props.checkIn + '&&departure=' + props.checkOut + '&&serveId=' + props.id)
+            .get('https://alphax-api.azurewebsites.net/api/hotelsservicereservations/ReservedRooms?arrival='+props.checkIn+'&&departure='+props.checkOut+'&&hotelId=d6c45f8a-c8d2-4f60-3d58-08d8f274801b')
             .then((responseData) => {
                 console.log("booking")
                 console.log(responseData);
@@ -115,21 +118,24 @@ const HotelResultItem = (props) => {
         ImgURL02: props.roomImgURL02,
     }
 
-    const totalBookings = 0;
+    let filterBookings = bookings.filter(item=>{
+        return (item.hotelsServiceID == props.id)
+    })
+
+    let totalBookings = 0;
 
     const count = () => {
-        if (bookings === null) {
+        if (filterBookings === null) {
             return totalBookings;
         } else {
-            return bookings.map((booking) => {
+            return filterBookings.map((booking) => {
                 return (
-                    totalBookings = totalBookings + booking.numofRooms
+                    
+                    totalBookings = totalBookings + booking.noOfRooms
                 );
             });
         }
     }
-
-
 
 
     return (

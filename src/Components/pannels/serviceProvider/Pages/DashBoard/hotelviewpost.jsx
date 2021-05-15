@@ -1,24 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { InputLabel } from '@material-ui/core/';
-import { Card } from "react-bootstrap";
-import Box from "@material-ui/core/Box";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import Typography from '@material-ui/core/Typography';
-import Rating, { IconContainerProps } from "@material-ui/lab/Rating";
-import { withStyles } from "@material-ui/core/styles";
-import Grid from '@material-ui/core/Grid'
-import { Link } from "react-router-dom";
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import Button from '@material-ui/core/Button'
-import { AllInclusiveRounded } from '@material-ui/icons';
+import Axios from 'axios';
+
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+
 import Container from './HotelEdit/container';
 
+const HotelViewPost = (props) => {
 
+    console.log(props.location.data);
+   
+    const [addList, setAddList] = useState([]);
 
-
-function Events(props) {
-    const [eventList, setEventList] = useState([]);
     const triggerText = 'Edit Details';
     const onSubmit = (event) => {
         event.preventDefault(event);
@@ -27,10 +22,9 @@ function Events(props) {
 
     };
 
-    let userId = props.myId;
     useEffect(() => {
         fetch(
-            `https://alphax-api.azurewebsites.net/api/hotelsservices` //`https://alphax-api.azurewebsites.net/api/eventplannerservicereservations/${userId}`
+            `https://alphax-api.azurewebsites.net/api/hotelsservices`
         )
 
             .then((response) => {
@@ -38,66 +32,153 @@ function Events(props) {
             })
             .then((responseData) => {
 
-                //  setEvent(responseData)
-                responseData = responseData.filter(item => item.userID === userId);
-                responseData = responseData.filter((ele, ind) => ind === responseData.findIndex(elem => elem.name === ele.name))
+                responseData = responseData.filter(add => add.name === props.location.data);
 
-                setEventList(responseData);
-
-
-
+                setAddList(responseData);
             });
-    }, [userId]);
+    }, []);
 
 
     return (
-        <div>
-            <Grid container spacing={2} style={{ padding: 24 }}>
 
-                {eventList.map(post => (
+        <div className="container">
 
-                    <Grid item xs={12} sm={6} lg={4} xl={3}>
+            <div className="row" style={{ flexGrow: "1", padding:"10px"}}>
+
+<Grid containner container
+  direction="row"
+  justify="flex-start"
+  alignItems="flex-start"
+  spacing={2}
+  >
+
+                    {addList.map((add, index) => (
 
 
+    
+                        <Grid item xs={6}>
 
-                        <Box borderRadius="30px">
-                            <Card style={{ border: '3px solid black', borderRadius: '5px!important', height: "150px" }}>
+                            <Paper style={{backgroundColor:"#dbe1de"}}>
 
-                                <CardContent style={{ height: "50hv" }}>
-                                    <Typography gutterBottom variant="headline" component="h5">
+                            <TableRow>
+                                    <TableCell>
+                                    <h4 style={{textAlign:"center"}}>Post {index+1}</h4>
+                                    </TableCell>
+                                    <TableCell align="left">
+                                    <Container triggerText={triggerText} onSubmit={onSubmit} data={add.id}/>   
+                                    </TableCell>
+                                </TableRow> 
 
-                                        {post.name}
-                                    </Typography>
+                            
+           
+                            
+                                    <hr/>
+                                <TableRow>
+                                    <TableCell>
+                                        Room Type
+                                    </TableCell>
+                                    <TableCell>
+                                        {add.roomType}
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        Number of Rooms
+                                    </TableCell>
+                                    <TableCell>
+                                        {add.numOfRooms}
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        Price Per Day
+                                    </TableCell>
+                                    <TableCell>
+                                        {add.pricePerDay}
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        Number of guest can stay
+                                    </TableCell>
+                                    <TableCell>
+                                        {add.capacity}
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        Bed Type
+                                    </TableCell>
+                                    <TableCell>
+                                        {add.bedType}
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        Amenities
+                                    </TableCell>
+                                    <TableCell>
+                                        {add.amenities}
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                    Room Type Image 01
+                                    </TableCell>
+                                    <TableCell>
+                                    <img
+                                                className="d-block w-100"
+                                                src={add.roomImgURL01}
+                                            />
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                    Room Type Image 02
+                                    </TableCell>
+                                    <TableCell>
+                                    <img
+                                                className="d-block w-100"
+                                                src={add.roomImgURL02}
+                                            />
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                    Room Type Image 03
+                                    </TableCell>
+                                    <TableCell>
+                                    <img
+                                                className="d-block w-100"
+                                                src={add.roomImgURL03}
+                                            />
+                                    </TableCell>
+                                </TableRow>
 
-                                </CardContent>
-                                <CardActions>
-                                    <Link  to={{ pathname: "./hotelviewpost", data:post.name }} style={{ color: 'black' }}>
-
-                                        <Button size="small" color="primary" target="fill">
-                                            View Post
-                                        </Button>
-                                    </Link>
+                                <br/>
+                             
                                     
+                                
+
                                     
-                                </CardActions>
+                            </Paper>
 
-                            </Card>
-                        </Box>
-
-                    </Grid>
+                            <br />
 
 
+                        </Grid>
+                        
+                       
 
-                ))}
-            </Grid>
-
-
-
-
-
+                    ))}
+                     </Grid>
+                </div>
+              
+                
         </div>
     );
 }
 
+export default HotelViewPost;
 
-export default Events;
+
