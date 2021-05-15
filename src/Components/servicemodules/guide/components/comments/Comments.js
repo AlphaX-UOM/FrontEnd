@@ -16,6 +16,8 @@ const Comments = (props) => {
     const [commentList, setCommentList] = useState();
   
     const [ordered, setOrdered] = useState(false);
+    console.log("🚀 ~ file: comments.js ~ line 19 ~ Comments ~ ordered", ordered)
+    
     const [rating, setRating] = useState();
     const [eventlist,setEventList]=useState(null);
     const [comment, setComment] = useState('');
@@ -27,6 +29,7 @@ const Comments = (props) => {
     const [disabled, setDisabled] = useState(true);
 
     var userId=props.userid;
+   
 // console.log(userId)
 
     useEffect(() => {
@@ -37,7 +40,7 @@ const Comments = (props) => {
                 return response.json();
             })
             .then((responseData) => {
-                console.log("🚀 ~ file: comments.js ~ line 39 ~ .then ~ responseData", responseData)
+               
                 setUsers(responseData);
                
             });
@@ -76,7 +79,7 @@ const Comments = (props) => {
                     if (data[0] !== undefined) {
                         setOrdered(true);
                     } else {
-                        setOrdered(false);
+                        setOrdered(true);
                     }
                 }
             });
@@ -85,7 +88,7 @@ const Comments = (props) => {
 
     useEffect(() => {
         fetch(
-            `https://alphax-api.azurewebsites.net/api/transportServiceComments` //`https://alphax-api.azurewebsites.net/api/eventplannerservicereservations/${userId}`
+            `https://alphax-api.azurewebsites.net/api/tourguideServiceComments` //`https://alphax-api.azurewebsites.net/api/eventplannerservicereservations/${userId}`
         )
             .then((response) => {
                 return response.json();
@@ -93,7 +96,7 @@ const Comments = (props) => {
             .then((responseData) => {
 
                 //  setEvent(responseData)
-                responseData = responseData.filter(item => item.transportServiceID === props.add_id);
+                responseData = responseData.filter(item => item.tourGuideServiceID === props.add_id);
                 responseData= responseData.filter((ele, ind) => ind === responseData.findIndex(elem => elem.userID === ele.userID))
                 setEventList(responseData.reduce((total, pay) => total + 1, 0));
                 setTotal(responseData.reduce((total,pay)=>total+pay.rating,0))
@@ -102,14 +105,14 @@ const Comments = (props) => {
     }, [props.add_id]);
 
     useEffect(() => {
-        fetch('https://alphax-api.azurewebsites.net/api/transportServiceRatings')
+        fetch('https://alphax-api.azurewebsites.net/api/tourguideServiceRatings')
             .then((response) => {
                 return response.json();
             })
             .then((responseData) => {
                 //   if(mapdata!=null){
                 //     responseData = responseData.filter(item => item.district === props.eventmapCompare[mapdata]);
-                responseData = responseData.filter(item => item.transportServiceID === props.add_id && item.userID === props.userid);
+                responseData = responseData.filter(item => item.tourGuideServiceID === props.add_id && item.userID === props.userid);
                 if(responseData[0]!==undefined){
                     setRatingApi(responseData[0]);
                     setRating(responseData.reduce((total, pay) => total + 1, 0));
@@ -131,11 +134,11 @@ const Comments = (props) => {
             createdAt: new Date(),
             content: comment,
             userID: userId,
-            transportServiceID: props.add_id,
+            tourguideServiceID: props.add_id,
         };
 
         axios.post(
-                "https://alphax-api.azurewebsites.net/api/transportServiceComments",
+                "https://alphax-api.azurewebsites.net/api/tourguideServiceComments",
                 commentObject
             ).then(function(response) {
                 console.log(response);
@@ -162,10 +165,10 @@ const Comments = (props) => {
         event.preventDefault();
 
         var axios = require('axios');
-        var data = JSON.stringify({ "id": ratingApi.id, "rating": value, "userID":ratingApi.userID,"transportServiceID":ratingApi.transportServiceID });
+        var data = JSON.stringify({ "id": ratingApi.id, "rating": value, "userID":ratingApi.userID,"tourguideServiceID":ratingApi.tourGuideServiceID });
         var config = {
             method: 'put',
-            url: `https://alphax-api.azurewebsites.net/api/transportServiceRatings/${ratingApi.id}`,
+            url: `https://alphax-api.azurewebsites.net/api/tourguideServiceRatings/${ratingApi.id}`,
             headers: {
                 'Content-Type': 'application/json',
             },
