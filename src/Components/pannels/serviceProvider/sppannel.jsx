@@ -35,7 +35,7 @@ import ItemLanding from '../../servicemodules/event/Component/Update/Item/ItemLa
 import Transport from '../../servicemodules/transport/Listitemdetails/listitemdetails';
 import HotelViewPost from '../serviceProvider/Pages/DashBoard/hotelviewpost';
 import GuidePge from '../../servicemodules/guide/components/GuideDetails/guidedetailspage';
-import Password from './Pages/password/passwordForm';
+import Password from '../CustomerPannel/Pages/password/passwordForm';
 
 
 function Copyright() {

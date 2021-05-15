@@ -7,12 +7,10 @@ import { FormControl } from '@material-ui/core';
 import { FormHelperText } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import {Paper } from '@material-ui/core';
-import {Card } from '@material-ui/core';
-import {CardContent } from '@material-ui/core';
 import {CardFooter, Form, Col, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import { connect } from "react-redux";
 import axios from 'axios'
-
+import Modal from "react-bootstrap/Modal";
 
 
 import Spinner from './Spinner'
@@ -24,9 +22,13 @@ import Alert from './Alert'
         this.state = {
             passChangeSuccess: false,
             users:[],
+            name:"Text",
+            show:false, 
+        
           
+        
           }
-          
+           
          
       }
       
@@ -59,7 +61,17 @@ import Alert from './Alert'
       passChangeSuccess: false,
     }))
   }
+  _handleClose = () => {
+    this.setState(() => ({
+      show: false,
+    }))
+  }
 
+  _handleShow = () => {
+    this.setState(() => ({
+      show: true,
+    }))
+  }
   _renderModal = () => {
     const onClick = () => {
    
@@ -68,7 +80,7 @@ import Alert from './Alert'
 
       
     }
-
+   
     return (
       <Alert
         isOpen={this.state.passChangeSuccess}
@@ -95,7 +107,9 @@ import Alert from './Alert'
 
         var decodedStringBtoA = currentPass+`:`+newPass;
         var encodedStringBtoA = btoa(decodedStringBtoA);
-        var status= false;
+
+      
+      
         let url = `https://alphax-api.azurewebsites.net/api/users/PasswordChange/${this.props.id}`;
 
         var axios = require('axios');
@@ -108,48 +122,59 @@ import Alert from './Alert'
 
         };
 
+    
         axios(config)
-            .then(function (response) {
-              if (response.status ===404) {
-                console.log(" ID Not found");
-              }
-            else  if (response.status === 400) {
-                console.log("OldPaassword Wrong");
-                status=true;
-              }
-             else if (response.status === 204) {
-                console.log("Saved!");
-              }
-              else {
-                console.log("No Idea!!!");
-              }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        
+        .then((response) => {
+        
+          setTimeout(async () => {
+           
+            this.setState(() => ({
+              passChangeSuccess: true,
+              
+            }))
+          
+      
+            resetForm()
+          }, 1000)
+          
+        })
 
+            .catch(error => {
+              console.log("Error:" + error.message);
+
+              var str = error.toString();
+                var res = str.replace(/\D/g, "");
+                  if(res==='400') {
+                     setTimeout(async () => {
+          
+                this.setState(() => ({
+                  show:true,
+                  
+                }))
+              
+          
+                resetForm()
+              }, 1000)
+
+                  }
+               
+             
+             
+            })
+    
   
 
-    setTimeout(async () => {
-      // setSubmitting(false)
-      // console.log("submired")
 
-      this.setState(() => ({
-        passChangeSuccess: true,
-        
-      }))
 
-      resetForm()
-    }, 1000)
-
-    
+  
   }
+  
  
   render() {
     
 
 
-    console.log("password "+this.props.userCred.password)
   
 
   
@@ -162,7 +187,7 @@ import Alert from './Alert'
 
 initialValues={{
 
- oldPassword:this.props.userCred.password,
+ oldPassword:"",
   currentPass: '',
   newPass: '',
   confirmPass: '',
@@ -237,7 +262,7 @@ render={props => {
             error={Boolean(touched.currentPass && errors.currentPass)}
           >
             {'Current Password'}
-          </InputLabel>
+          </InputLabel>     
           <Input
             id="password-current"
             name="currentPass"
@@ -245,15 +270,15 @@ render={props => {
             value={values.currentPass}
             onChange={handleChange}
             onBlur={handleBlur}
-            // error={Boolean(touched.currentPass && errors.currentPass)}
+               
            
           />
           <FormHelperText
-            // error={Boolean(touched.currentPass && errors.currentPass)}
+             error={Boolean(touched.currentPass && errors.currentPass)}
           >
-            {/* {touched.currentPass && errors.currentPass
+             {touched.currentPass && errors.currentPass
               ? errors.currentPass
-              : ''} */}
+              : ''} 
              
           </FormHelperText>
         </FormControl>
@@ -329,7 +354,23 @@ render={props => {
     </Paper>
 
     </Row>
+
+
+    <div>
+<Modal show={this.state.show} onHide={this._handleClose}>
+
+<Modal.Header> Current Password is not correct! </Modal.Header>
+<Modal.Footer>
+<button className="btn btn-danger " type='submit'onClick={this._handleClose}>Close</button>
+
+ 
+</Modal.Footer>
+</Modal>
+
+</div>
     </center>
+
+
  
    
   )

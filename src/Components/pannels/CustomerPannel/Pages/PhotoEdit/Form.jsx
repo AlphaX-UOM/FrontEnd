@@ -167,6 +167,7 @@ class Form extends Component {
                     console.log(error)
                 })
         }.bind(this), 4000)
+        
 
      
 
@@ -177,7 +178,7 @@ class Form extends Component {
             <div>
                 <div className="container ">
                    
-                    <form className="fback" onSubmit={this.handleSubmit}>
+                    <div>
 
 
                         <div className="row formmarge">
@@ -209,23 +210,27 @@ class Form extends Component {
 
                             </div>
                             <div className="col-sm-2-center">
-                                <button className="btn btn-primary" type="submit">Upload Image</button>
+                                <button className="btn btn-primary" type="submit" onClick={this.handleSubmit}>Upload Image</button>
                             </div>
                         </div>
+                        
+   
+                    </div>
 
-                    </form>
+                    <Modal show={this.state.show} onHide={this.hideModal}>
+
+<Modal.Header> Successfully uploaded your image!</Modal.Header>
+<Modal.Footer>
+<button className="btn btn-danger " type='submit'onClick={this.hideModal}>Close</button>
+
+ 
+</Modal.Footer>
+</Modal>
+
+                
                 </div>
                 <div>
-        <Modal show={this.state.show} onHide={this.hideModal}>
-     
-        <Modal.Body>Uploaded Successfully!</Modal.Body>
-        <Modal.Footer>
-        <button className="btn btn-danger " type='submit'onClick={this.hideModal}>Close</button>
         
-       
-         
-        </Modal.Footer>
-      </Modal>
 
  </div>
 
