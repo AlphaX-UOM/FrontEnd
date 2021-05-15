@@ -59,19 +59,19 @@ render(){
                                     </div>
                                 </div>
                                 <hr/>
-                                <div className="col-sm-12">
-                                    <div className="form-group">
-                                        <label htmlFor="">Ratings</label>
-                                        <select className="form-control tm-select"  name="" >
-                                            <option value="All">All</option>
-                                            <option value="5">5</option>
-                                            <option value="4">4</option>
-                                            <option value="3">3</option>
-                                            <option value="2">2</option>
+                                {/*<div className="col-sm-12">*/}
+                                    {/*<div className="form-group">*/}
+                                        {/*<label htmlFor="">Ratings</label>*/}
+                                        {/*<select className="form-control tm-select"  name="" >*/}
+                                            {/*<option value="All">All</option>*/}
+                                            {/*<option value="5">5</option>*/}
+                                            {/*<option value="4">4</option>*/}
+                                            {/*<option value="3">3</option>*/}
+                                            {/*<option value="2">2</option>*/}
 
-                                        </select>
-                                    </div>
-                                </div>
+                                        {/*</select>*/}
+                                    {/*</div>*/}
+                                {/*</div>*/}
 
                                 <div className="col-sm-12">
                                     <div className="form-group">

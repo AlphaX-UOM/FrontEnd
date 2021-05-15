@@ -197,7 +197,7 @@ class TransportInput extends Component{
                                 <div className="form-group">
                                     <input type="text" id="contact_subject"
                                            className="form-control" placeholder="Pickup Location"    value={this.state.pickuplocation} onChange={this.Changehandler}
-                                           name="pickuplocation" required maxLength={20} />
+                                           name="pickuplocation" required maxLength={50} />
                                 </div>
 
                                 <div className="form-group tm-name-container">
@@ -232,7 +232,7 @@ class TransportInput extends Component{
                                     <input type="text"
                                            className="form-control" placeholder="Drop Off Location"
                                            value={this.state.droplocation} onChange={this.Changehandler}
-                                           name="droplocation" required maxLength={20}
+                                           name="droplocation" required maxLength={50}
                                     />
                                 </div>
 

@@ -297,6 +297,12 @@ class Listitemdetails extends Component {
                             </div>
 
                         </span>
+                                            <p><u>Note</u></p>
+                                            <small style={{color:"red"}}>
+                                                Vvisit distance Price Calculation is based on pickup and drop off locations. Calculated distance price
+                                                can be changed on vehicle's location  and the pick up location.
+                                            </small>
+
                                             <hr/>
 
                                                 <form onSubmit={this.handlesubmit}>

@@ -30,12 +30,14 @@ const Comments = (props) => {
 
     useEffect(() => {
         fetch(
-            "https://alphax-api.azurewebsites.net/api/users/" + userId
-            ).then((response) => {
+            `https://alphax-api.azurewebsites.net/api/users/${userId}` //`https://alphax-api.azurewebsites.net/api/eventplannerservicereservations/${userId}`
+        )
+            .then((response) => {
                 return response.json();
-            }).then((responseData) => {
+            })
+            .then((responseData) => {
                 setUsers(responseData);
-                // console.log(responseData)
+                console.log(responseData)
             });
     }, []);
 
