@@ -38,7 +38,7 @@ const Table = () => {
     }
 
     const renderHeader = () => {
-        let headerElement = ['First Name', 'Last Name', 'dob', 'email', 'address', 'contact', 'role']
+        let headerElement = ['First Name', 'Last Name', 'dob', 'email', 'Bank Name','Account No','NIC','address', 'contact', 'role']
 
         return headerElement.map((key, index) => {
             return <th key={index}>{key.toUpperCase()}</th>
@@ -46,7 +46,7 @@ const Table = () => {
     }
 
     const renderBody = () => {
-        return employees && employees.map(({ id, firstName, lastName, dob, email, address, contact, role }) => {
+        return employees && employees.map(({ id, firstName, lastName, dob, email, bankName,accountNo,nic,address, contact, role }) => {
             if(role==="ServiceProvider")
             return (
                 <tr key={id}>
@@ -55,6 +55,9 @@ const Table = () => {
                     <td>{lastName}</td>
                     <td>{dob}</td>
                     <td>{email}</td>
+                    <td>{bankName}</td>
+                    <td>{accountNo}</td>
+                    <td>{nic}</td>
                     <td>{address}</td>
                     <td>{contact}</td>
                     <td>{role}</td>
