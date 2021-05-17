@@ -18,110 +18,46 @@ function EventList(props) {
 
 
 
-
   useEffect(() => {
-
-
-    const fetchPosts = async () => {
-      setLoading(true);
-      const res = await axios.get("https://alphax-api.azurewebsites.net/api/eventplannerservices/");
-      setmyeventList(res.data);
-      setLoading(false);
-    };
-
-    fetchPosts();
-    
-    
-    // fetch(`https://alphax-api.azurewebsites.net/api/eventplannerservices/`)
-
-    //   .then((response ) => {
-
-    //     return response.json();
-    //   })
-    //   .then((responseData) => {
-     
-    //       setmyeventList(responseData);
-    //       setLoading(false);
-     
-     
-    
-
-      
-       
-    //   });
+    fetch('https://alphax-api.azurewebsites.net/api/eventplannerservices')
+      .then((response) => {
+        return response.json();
+      })
+       .then((responseData) => {
+      //   if(mapdata!=null){
+      //     responseData = responseData.filter(item => item.district === props.eventmapCompare[mapdata]);
+         setmyeventList(responseData);
+      //   }
+        
+        setmyeventList(responseData);
+      });
   }, []);
+
+
+  const filterSort=myeventList.sort((a,b)=>{
+
+    if (a.name < b.name) {
+      console.log("Hello");
+      return -1;
+    }
+    if (a.name > b.name) {
+      console.log("Hii");
+      return 1;
+    }
+    console.log("What");
+    return 0;
+
+  
+  })
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = myeventList.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = filterSort.slice(indexOfFirstPost, indexOfLastPost);
 
   // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
-//   const EventListComponent = () => {
-    
-    
-   
-//     return myeventList.map((aCat,index) => {
 
-
- 
-        
-//         return (
-//           <div>
- 
-//           <EventItem
-  
-//             item={aCat}
-//             key={aCat.id}
-//             name={aCat.name}
-//             price={aCat.price}
-//             img="https://www.touropia.com/gfx/d/best-places-to-visit-in-sri-lanka/yala_national_park.jpg?v=1"
-//           />
-        
-//         </div>
-       
-//         );
-
-      
-  
-
-     
-      
-   
-//     });
-//   };
-
-//   return (
-    
-
-  
-//     <Container>
-      
-      	
-//     <div className="col-12">
-//     <CardColumns fluid="md">
-//     <div class="container-fluid py-2" >
-  
-      
-//       <div>{EventListComponent(
-        
- 
-     
-//       )
-       
-
-//    }
-   
-//       </div>
-      
-//       </div>
-//       </CardColumns>
-  
-//   </div>
-//   </Container>
-  
-//   );
-// }
 return (
   <div className="container mt-5">
    
@@ -129,7 +65,7 @@ return (
     <Pagination
       currentPage={currentPage}
       postsPerPage={postsPerPage}
-      totalPosts={myeventList.length}
+      totalPosts={filterSort.length}
       paginate={paginate}
     />
   </div>

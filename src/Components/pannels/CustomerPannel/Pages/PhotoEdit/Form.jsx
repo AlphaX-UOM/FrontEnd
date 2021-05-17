@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import axios from 'axios'
 import { storage } from "../../../../../../src/config/firebaseConfig";
 import Modal from "react-bootstrap/Modal";
+import ImgUP from './img_up';
 
 class Form extends Component {
     constructor(props) {
@@ -14,15 +15,13 @@ class Form extends Component {
 
             image: null,
             url: '',
-            users:[],
+            users: [],
 
             progressx: false,
             progress: '',
-            show:false,
+            show: false,
 
         }
-        // this.createImage=this.createImage.bind(this);
-        // this.onChange = this.onChange.bind(this);
         this.onDrop = this.onDrop.bind(this);
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
@@ -30,11 +29,11 @@ class Form extends Component {
     }
     showModal = () => {
         this.setState({ show: true });
-      };
-    
-      hideModal = () => {
+    };
+
+    hideModal = () => {
         this.setState({ show: false });
-      };
+    };
 
 
 
@@ -42,24 +41,22 @@ class Form extends Component {
 
 
         fetch(`https://alphax-api.azurewebsites.net/api/users/${this.props.id}`)
-        .then(res => res.json())
-        .then(user =>
-            this.setState({ users:user})
+            .then(res => res.json())
+            .then(user =>
+                this.setState({ users: user })
 
-        )
-        .catch(error => {
+            )
+            .catch(error => {
 
-            this.setState({error: true});
-        });
-
-  
+                this.setState({ error: true });
+            });
 
 
-    // console.log(this.state.travellers)
-        // console.log(this.props);
-        // this.props.onInitTransportProvider(this.props.match.params.id);
 
-}
+
+
+
+    }
 
 
 
@@ -71,16 +68,16 @@ class Form extends Component {
 
     };
 
- UpdatedCom = (e) => {
-    e.preventDefault();
-    this.setState({ show: true })
+    UpdatedCom = (e) => {
+        e.preventDefault();
+        this.setState({ show: true })
 
-}
- UpdatedCom = (e) => {
-    e.preventDefault();
-    this.setState({ show: true })
+    }
+    UpdatedCom = (e) => {
+        e.preventDefault();
+        this.setState({ show: true })
 
-}
+    }
 
     handleUpload = () => {
 
@@ -97,41 +94,9 @@ class Form extends Component {
 
 
     handleSubmit = e => {
-      
+
         e.preventDefault();
         console.log(this.state)
-
-        const uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
-        uploadTask.on(
-            "state_changed",
-            snapshot => {
-                const progress = Math.round(
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                );
-                this.setState({ progress: progress });
-            },
-            error => {
-                console.log(error);
-            },
-            () => {
-                storage
-                    .ref(`images`)
-                    .child(this.state.image.name)
-                    .getDownloadURL()
-                    .then((url0) => {
-                        this.setState({ url: url0 });
-                        this.setState({ progressx: true });
-
-                    });
-
-
-
-
-            }
-            
-
-
-        );
 
 
 
@@ -148,28 +113,28 @@ class Form extends Component {
                     password: this.state.users.password,
                     dob: this.state.users.dob,
                     address: this.state.users.address,
-                    passwordHash:this.state.users.passwordHash,
-                    passwordSalt:this.state.users.passwordSalt,
-                    verified:this.state.users.verified,
+                    passwordHash: this.state.users.passwordHash,
+                    passwordSalt: this.state.users.passwordSalt,
+                    verified: this.state.users.verified,
                     email: this.state.users.email,
                     contact: this.state.users.contact,
                     role: this.state.users.role,
-                    imgURL: this.state.url,
-                 
+                    imgURL: this.props.imgurl,
+
                 })
                 .then(response => {
                     console.log(response)
                     this.setState({ show: true })
-                 
-                 
+
+
                 })
                 .catch(error => {
                     console.log(error)
                 })
         }.bind(this), 4000)
-        
 
-     
+
+
 
     }
 
@@ -177,28 +142,15 @@ class Form extends Component {
         return (
             <div>
                 <div className="container ">
-                   
+
                     <div>
 
 
                         <div className="row formmarge">
                             <div className="col-sm-3"></div>
-                            <div className="col-sm-6">
 
-                           
-
-
-                                <input type="file" onChange={this.handleChange}
-                             />
-                          
-
-
-                                <br />
-                                <hr />
-                                {/*{this.state.url}*/}
-                                <img src={this.state.url || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" />
-                            </div>
                             <div className="col-sm-3"></div>
+                            <ImgUP />
                         </div>
 
 
@@ -213,26 +165,26 @@ class Form extends Component {
                                 <button className="btn btn-primary" type="submit" onClick={this.handleSubmit}>Upload Image</button>
                             </div>
                         </div>
-                        
-   
+
+
                     </div>
 
                     <Modal show={this.state.show} onHide={this.hideModal}>
 
-<Modal.Header> Successfully uploaded your image!</Modal.Header>
-<Modal.Footer>
-<button className="btn btn-danger " type='submit'onClick={this.hideModal}>Close</button>
+                        <Modal.Header> Successfully uploaded your Profile Image!</Modal.Header>
+                        <Modal.Footer>
+                            <button className="btn btn-danger " type='submit' onClick={this.hideModal}>Close</button>
 
- 
-</Modal.Footer>
-</Modal>
 
-                
+                        </Modal.Footer>
+                    </Modal>
+
+
                 </div>
                 <div>
-        
 
- </div>
+
+                </div>
 
             </div>
         )
@@ -242,6 +194,7 @@ class Form extends Component {
 const mapStateToProps = (state) => {
     return {
         id: state.auth.userId,
+        imgurl: state.panel_reducer.imgUrl,
     };
 };
 

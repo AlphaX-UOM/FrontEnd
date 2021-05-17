@@ -6,6 +6,7 @@ import {useHistory} from 'react-router-dom';
 import axios from 'axios'
 import { storage } from "../../../../src/config/firebaseConfig";
 import { connect } from "react-redux";
+import Imgup from './img_up'
 
 class PostTproviderForm extends Component{
     constructor(props) {
@@ -103,99 +104,99 @@ class PostTproviderForm extends Component{
         e.preventDefault();
         console.log(this.state)
 
-        const uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
-        uploadTask.on(
-            "state_changed",
-            snapshot => {
-                const progress = Math.round(
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                );
-                this.setState({ progress: progress});
-            },
-            error => {
-                console.log(error);
-            },
-            () => {
-                storage
-                    .ref(`images`)
-                    .child(this.state.image.name)
-                    .getDownloadURL()
-                    .then((url0) => {
-                        this.setState({url:url0});
-                        this.setState({progressx:true});
+        // const uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
+        // uploadTask.on(
+        //     "state_changed",
+        //     snapshot => {
+        //         const progress = Math.round(
+        //             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        //         );
+        //         this.setState({ progress: progress});
+        //     },
+        //     error => {
+        //         console.log(error);
+        //     },
+        //     () => {
+        //         storage
+        //             .ref(`images`)
+        //             .child(this.state.image.name)
+        //             .getDownloadURL()
+        //             .then((url0) => {
+        //                 this.setState({url:url0});
+        //                 this.setState({progressx:true});
                         
-                    });
+        //             });
         
                  
                   
                     
-            }
+        //     }
             
-        );
+        // );
 
 
-        const uploadTask1 = storage.ref(`images/${this.state.image1.name}`).put(this.state.image1);
-        uploadTask1.on(
-            "state_changed",
-            snapshot => {
-                const progress = Math.round(
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                );
-                this.setState({ progress: progress});
-            },
-            error => {
-                console.log(error);
-            },
-            () => {
-                storage
-                    .ref(`images`)
-                    .child(this.state.image1.name)
-                    .getDownloadURL()
-                    .then((url) => {
-                        this.setState({url1:url});
-                        this.setState({progressx:true});
+        // const uploadTask1 = storage.ref(`images/${this.state.image1.name}`).put(this.state.image1);
+        // uploadTask1.on(
+        //     "state_changed",
+        //     snapshot => {
+        //         const progress = Math.round(
+        //             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        //         );
+        //         this.setState({ progress: progress});
+        //     },
+        //     error => {
+        //         console.log(error);
+        //     },
+        //     () => {
+        //         storage
+        //             .ref(`images`)
+        //             .child(this.state.image1.name)
+        //             .getDownloadURL()
+        //             .then((url) => {
+        //                 this.setState({url1:url});
+        //                 this.setState({progressx:true});
                         
-                    });
+        //             });
              
             
                  
                  
                   
                     
-            }
+        //     }
             
-        );
-        const uploadTask2 = storage.ref(`images/${this.state.image2.name}`).put(this.state.image2);
-        uploadTask2.on(
-            "state_changed",
-            snapshot => {
-                const progress = Math.round(
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                );
-                this.setState({ progress: progress});
-            },
-            error => {
-                console.log(error);
-            },
-            () => {
-                storage
-                    .ref(`images`)
-                    .child(this.state.image2.name)
-                    .getDownloadURL()
-                    .then((url) => {
-                        this.setState({url2:url});
-                        this.setState({progressx:true});
+        // );
+        // const uploadTask2 = storage.ref(`images/${this.state.image2.name}`).put(this.state.image2);
+        // uploadTask2.on(
+        //     "state_changed",
+        //     snapshot => {
+        //         const progress = Math.round(
+        //             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        //         );
+        //         this.setState({ progress: progress});
+        //     },
+        //     error => {
+        //         console.log(error);
+        //     },
+        //     () => {
+        //         storage
+        //             .ref(`images`)
+        //             .child(this.state.image2.name)
+        //             .getDownloadURL()
+        //             .then((url) => {
+        //                 this.setState({url2:url});
+        //                 this.setState({progressx:true});
                         
-                    });
+        //             });
                 
 
                  
                  
                   
                     
-            }
+        //     }
             
-        );
+        // );
 if(this.state.progressx===true){
 
 }
@@ -217,9 +218,9 @@ if(this.state.progressx===true){
                     audience:this.state.audience,
                     otherDetails:this.state.otherDetails,
                     frequency:this.state.frequency,
-                    imgURL:this.state.url,
-                    imgURL02:this.state.url1,
-                    imgURL03 :this.state.url2,
+                    imgURL:this.props.imgurl,
+                    imgURL02:this.props.imgurl1,
+                    imgURL03 :this.props.imgurl2,
                     userID:this.props.userid,
 
                 })
@@ -455,20 +456,20 @@ console.log(this.props.userid)
                             {/*<div className="col-sm-3"></div>*/}
                         {/*</div>*/}
 
-                        <div className="row formmarge">
+                        {/* <div className="row formmarge">
                             <div className="col-sm-3"></div>
                             <div className="col-sm-6">
 
                             <label htmlFor="image">Upload image 1</label>
 
 
-                                <input type="file" onChange={this.handleChange} />
+                                <input type="file" onChange={this.handleChange} /> */}
                                 {/*<button onClick={this.handleUpload}>Upload</button>*/}
 
-                                <br/>
-                                <hr/>
+                                {/* <br/>
+                                <hr/> */}
                                 {/*{this.state.url}*/}
-                                <img src={this.state.url || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" />
+                                {/* <img src={this.state.url || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" />
                             </div>
                             <div className="col-sm-3"></div>
                         </div>
@@ -481,13 +482,13 @@ console.log(this.props.userid)
                             <label htmlFor="image">Upload image 2</label>
 
 
-                                <input type="file" onChange={this.handleChange1} />
+                                <input type="file" onChange={this.handleChange1} /> */}
                                 {/*<button onClick={this.handleUpload}>Upload</button>*/}
 
-                                <br/>
+                                {/* <br/> */}
                                 <hr/>
                                 {/*{this.state.url}*/}
-                                <img src={this.state.url1 || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" />
+                                {/* <img src={this.state.url1 || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" />
                             </div>
                             <div className="col-sm-3"></div>
                         </div>
@@ -500,16 +501,16 @@ console.log(this.props.userid)
                             <label htmlFor="image">Upload image 3</label>
 
 
-                                <input type="file" onChange={this.handleChange2} />
+                                <input type="file" onChange={this.handleChange2} /> */}
                                 {/*<button onClick={this.handleUpload}>Upload</button>*/}
 
-                                <br/>
-                                <hr/>
+                                {/* <br/>
+                                <hr/> */}
                                 {/*{this.state.url}*/}
-                                <img src={this.state.url2 || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" />
+                                {/* <img src={this.state.url2 || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" />
                             </div>
                             <div className="col-sm-3"></div>
-                        </div>
+                        </div> */}
 
 
                         {/*<div className="row formmarge">*/}
@@ -543,7 +544,7 @@ console.log(this.props.userid)
                             {/*</div>*/}
                         {/*</div>*/}
 
-
+                        <Imgup/>
 
                         <hr/>
 
@@ -568,13 +569,19 @@ console.log(this.props.userid)
 };
 const mapStateToProps = (state) => {
     return {
-        reservations: state.eventpnl.reservations,
-        formdata: state.eventpnl.formdata,
-        total: state.eventpnl.total,
-        userid:state.auth.userId,
-   
-    };
-};
+        items: state.onlineStoreApp.items,
+        isAuthenticated: state.auth.token !== null,
+        role: state.auth.role,
+        id: state.auth.userId,
+        imgurl:state.event_reducer.imgUrl,
+        imgurl1:state.event_reducer.imgUrl1,
+        imgurl2:state.event_reducer.imgUrl2,
 
+    }
+}
 
-export default connect(mapStateToProps)(PostTproviderForm);;
+const mapDispatchToProps = (dispatch) => {
+    return {}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostTproviderForm);
