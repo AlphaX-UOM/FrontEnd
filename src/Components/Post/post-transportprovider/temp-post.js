@@ -389,7 +389,8 @@ const mapStateToProps = (state) => {
         isAuthenticated: state.auth.token !== null,
         role: state.auth.role,
         id: state.auth.userId,
-        imgurl:state.transport_reducer. imgUrl
+        imgurl:state.transport_reducer.imgUrl,
+   
 
     }
 }
