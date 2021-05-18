@@ -20,7 +20,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems} from './sideBar';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Account from './Pages/account';
+import Account from '../CustomerPannel/Pages/Account';
 import Services from './Pages/services';
 import Reservations from './../CustomerPannel/Pages/Reservation';
 import Ratings from './Pages/Ratings';
@@ -146,29 +146,7 @@ export default function Dashboard(props) {
     <div className={classes.root} >
    
         <BrowserRouter>
-      {/* <CssBaseline /> */}
-      {/* <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Service Provider Pannel
-          </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-              <PowerSettingsNewIcon/>
-            </Badge>
-          </IconButton>
-        </Toolbar>
-      </AppBar> */}
+  
       <Drawer
         variant="permanent"
         classes={{

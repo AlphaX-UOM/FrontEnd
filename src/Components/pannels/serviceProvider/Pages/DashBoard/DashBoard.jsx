@@ -2,17 +2,27 @@ import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from 'react-bootstrap/Button';
+import Typography from '@material-ui/core/Typography';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 
 import { Link } from 'react-router-dom';
 
 import { InputLabel } from '@material-ui/core';
 import { connect } from "react-redux";
-
+import Container from '@material-ui/core/Container';
 import { Card } from '@material-ui/core';
 import { CardContent } from '@material-ui/core';
 import Image from 'react-bootstrap/Image'
 import PieChart from './chart/pieChart';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import TotalRes from './TotalRese';
+
+import LocalTaxiIcon from '@material-ui/icons/LocalTaxi';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import BeachAccessIcon from '@material-ui/icons/BeachAccess';
+import LocalHotelIcon from '@material-ui/icons/LocalHotel';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -90,7 +100,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   fixedHeight: {
-    height: 240,
+    height: 190,
   },
 }));
 
@@ -103,23 +113,23 @@ function Dashboard(props) {
 
 
   useEffect(() => {
-      fetch(
-          `https://alphax-api.azurewebsites.net/api/users/${userId}` //`https://alphax-api.azurewebsites.net/api/eventplannerservicereservations/${userId}`
-      )
+    fetch(
+      `https://alphax-api.azurewebsites.net/api/users/${userId}` //`https://alphax-api.azurewebsites.net/api/eventplannerservicereservations/${userId}`
+    )
 
-          .then((response) => {
-              return response.json();
-          })
-          .then((responseData) => {
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseData) => {
 
-              //  setEvent(responseData)
-            
-              setUsers(responseData);
-              console.log(responseData)
-             
+        //  setEvent(responseData)
+
+        setUsers(responseData);
+        console.log(responseData)
 
 
-          });
+
+      });
   }, []);
   const classes = useStyles();
 
@@ -129,40 +139,147 @@ function Dashboard(props) {
 
 
     <div>
+      <center> <Typography component="p" variant="h3">
+                 {users.firstName}  {users.lastName}
+      </Typography>
+</center>
 
 
       <div className="row">
-      <div className="col-1">
+      
+{/*     
+        <div className="col-2">
+          <Image src={users.imgURL} alt="img1" style={{ width: "255px", height: "225px" }} roundedCircle></Image>
+        </div> */}
+           <div className="col-1"></div>
+           <div className="col-1">
+         
+           <Image src={users.imgURL} alt="img1" style={{ width: "255px", height: "225px" }} roundedCircle></Image>
+           </div>
+        <div className="col-2">
+
+         
+        </div>
+      
+        <Grid item xs={9} md={4} lg={3} >
+          <Paper className={fixedHeightPaper}style={{backgroundColor: '#FFDC2E',height:'300px'}}>
+            <center>
+              <ShoppingCartIcon></ShoppingCartIcon>
+              <Typography component="p" variant="h5">
+                  Total Reservations
+               
+                  
+      </Typography>
+      <TotalRes/>
+
+            </center>
           
-        </div>
-        <div className="col-3">
-          <Image src={users.imgURL} alt="img1" style={{ width: "255px", height: "225px" }}roundedCircle></Image>
-        </div>
-        <div className="col-4">
-       <h2>{users.firstName}  {users.lastName}</h2>   
-        </div>
+          </Paper>
+        </Grid>
+        <div className="col-1"></div>
 
-        <div className="col-3">
-          <PieChart myId={props.myId}/>
-     <center>My Posts Summary</center>     
-    
-        </div>
+        <Grid item xs={9} md={4} lg={3}>
+          <Paper className={fixedHeightPaper}style={{backgroundColor: '#9DE6F5',color:'white',height: '300px'}}>
+            <center>
+            <Typography component="p" variant="h5">
+     
+      </Typography>
+            </center>
+          
+            <PieChart myId={props.myId} />
+          </Paper>
+          <center>My Posts Summary</center>
 
+        </Grid>
+      
         
-      </div>
-      <br>
-      </br>
-      <br>
-      </br>
-      <div className="row">
+
+  
+        </div>
+       
+
+    
+      <hr></hr>
+      <Container maxWidth="lg" className={classes.container} >
+        <Grid container spacing={4} style={{
+          justifyContent: "center"
+        }}>
+          <Grid item xs={6} md={4} lg={2}>
+            <Link to="/event" style={{ color: 'black' }}>
+              <Paper className={fixedHeightPaper} style={{ backgroundColor: '#49DE94', height: '100' }}>
+                <center>
+                  <BeachAccessIcon />
+                  <br></br>
+
+                  <Typography component="p" variant="h5">
+                    Event Posts
+      </Typography>
+                </center>
+
+
+              </Paper>
+            </Link>
+          </Grid>
+
+          <Grid item xs={6} md={4} lg={2}>
+            <Link to="/trans" style={{ color: 'black' }}>
+              <Paper className={fixedHeightPaper} style={{ backgroundColor: '#49DE94', height: '150' }}>
+<center>
+<LocalTaxiIcon />   
+ <Typography component="p" variant="h5">
+                  Transport Posts
+      </Typography>
+
+</center>
+
+               
+
+              </Paper>
+            </Link>
+          </Grid>
+          <Grid item xs={6} md={4} lg={2}>
+            <Link to="/guide" style={{ color: 'black' }}>
+              <Paper className={fixedHeightPaper} style={{ backgroundColor: '#49DE94', height: '150' }}>
+                <center>
+                <SupervisorAccountIcon />    <Typography component="p" variant="h5">
+                  Guide Posts
+      </Typography>
+
+                </center>
+
+           
+
+              </Paper>
+            </Link>
+          </Grid>
+          <Grid item xs={6} md={4} lg={2}>
+            <Link to="/hotel" style={{ color: 'black' }}>
+              <Paper className={fixedHeightPaper} style={{ backgroundColor: '#49DE94', height: '150' }}>
+                <center>
+                  
+                <LocalHotelIcon />    <Typography component="p" variant="h5">
+                  Hotel Posts
+      </Typography>
+
+
+                </center>
+
+
+              </Paper>
+            </Link>
+          </Grid>
+        </Grid>
+      </Container>
+      {/* <div className="row">
       <div className="col-1"></div>
         <div className="col-2">
           <Link to="/event"  style={{ color: 'black' }}>
-        
-            <Button variant="success">Event Posts</Button>
+     
+            <Button variant="success">    <BeachAccessIcon />Event Posts</Button>
           </Link>
 
         </div>
+      
 
         <div className="col-2">
           <Link to="/trans" style={{ color: 'black' }}>
@@ -185,7 +302,7 @@ function Dashboard(props) {
           </Link>
         </div>
 
-      </div>
+      </div> */}
     </div>
 
 

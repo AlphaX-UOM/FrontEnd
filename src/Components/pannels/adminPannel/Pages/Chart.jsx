@@ -44,21 +44,6 @@ function BarChart() {
   const [hotel, sethotels] = useState([]);
   const [totalTransport, setTotalTransport] = useState(null);
   const [transport, setTransport] = useState([]);
-  // axios
-  //   .get(
-  //     "https://alphax-api.azurewebsites.net/api/tourguideservicereservations"
-  //   )
-  //   /*  .then((response) => {
-  //       return response.json();
-  //     })*/
-  //   .then((responseData) => {
-  //     console.log(responseData);
-
-  //     setTouGuide(responseData.data);
-  //     setTotalGuide(responseData.data.reduce((total, pay) => total + 1, 0));
-
-  //     setLoading(false);
-  //   });
 
 
     useEffect(() => {
@@ -75,21 +60,6 @@ function BarChart() {
     }, []);
 
 
-  // axios
-  //   .get(
-  //     "https://alphax-api.azurewebsites.net/api/eventplannerservicereservations"
-  //   )
-  //   /*  .then((response) => {
-  //       return response.json();
-  //     })*/
-  //   .then((responseData) => {
-  //     console.log(responseData);
-
-  //     setEvent(responseData.data);
-  //     setEventTotal(responseData.data.reduce((total, pay) => total + 1, 0));
-
-  //     setLoading(false);
-  //   });
 
 
     useEffect(() => {
@@ -106,20 +76,6 @@ function BarChart() {
     }, []);
 
 
-  // axios
-  //   .get("https://alphax-api.azurewebsites.net/api/hotelsservicereservations")
-  //   /*  .then((response) => {
-  //       return response.json();
-  //     })*/
-  //   .then((responseData) => {
-  //     console.log(responseData);
-
-  //     setTransport(responseData.data);
-  //     setTotalHote(responseData.data.reduce((total, pay) => total + 1, 0));
-
-  //     setLoading(false);
-  //   });
-
 
     useEffect(() => {
       fetch(
@@ -134,22 +90,6 @@ function BarChart() {
         });
     }, []);
 
-
-  // axios
-  //   .get(
-  //     "https://alphax-api.azurewebsites.net/api/transportservicereservations"
-  //   )
-  //   /*  .then((response) => {
-  //       return response.json();
-  //     })*/
-  //   .then((responseData) => {
-  //     console.log(responseData);
-
-  //     sethotels(responseData.data);
-  //     setTotalTransport(responseData.data.reduce((total, pay) => total + 1, 0));
-
-  //     setLoading(false);
-  //   });
 
     useEffect(() => {
       fetch(

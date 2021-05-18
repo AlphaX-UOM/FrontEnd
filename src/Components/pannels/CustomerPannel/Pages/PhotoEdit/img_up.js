@@ -81,8 +81,8 @@ class img_up extends Component {
 
                 <hr/>
                 {/*{this.state.url}*/}
-                <img src={this.state.url || "http://via.placeholder.com/300"} alt="firebase-image"
-                     className="imgsize" required/>
+                {/* <img src={this.state.url || "http://via.placeholder.com/300"} alt="firebase-image"
+                     className="imgsize" required/> */}
 
 
                 <br/>

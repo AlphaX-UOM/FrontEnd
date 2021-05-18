@@ -57,7 +57,7 @@ const Events = (props) => {
 
 
                         <Box borderRadius="30px">
-                            <Card style={{ border: '3px solid black', borderRadius: '5px!important', height: "150px" }}>
+                            <Card style={{ border: '3px solid black', borderRadius: '5px!important', height: "200px" }}>
 
                                 <CardContent style={{ height: "50hv" }}>
                                     <Typography gutterBottom variant="headline" component="h5">
