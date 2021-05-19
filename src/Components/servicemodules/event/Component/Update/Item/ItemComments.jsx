@@ -7,6 +7,8 @@ import Comment from "./ItemOneComment";
 import { connect } from "react-redux";
 import axios from "axios";
 import { Card } from "react-bootstrap";
+import Button from 'react-bootstrap/Button'
+import Link from '@material-ui/core/Link';
 
 const Comments = (props) => {
   const [commentList, setCommentList] = useState();
@@ -367,7 +369,10 @@ useEffect(() => {
               </p>
 
               </div>
-             : <p>login to Rating</p> }
+             : <p>
+              
+              <Button variant="outline-success" id="register" type="Button" margin="10px" href="/signin">Login to Rate</Button>
+               </p> }
                   </center>
             
                 </li>
@@ -447,7 +452,7 @@ useEffect(() => {
 
                 {commentListComponent()}
                 {/* comment end here */}
-                {props.userid!==null&& ordered ? commentInput()  : <p>login to comment</p> }
+                {props.userid!==null&& ordered ? commentInput()  : <p><Button variant="outline-success" id="register" type="Button" margin="10px" href="/signin">Login to Comment</Button></p> }
         
                 
               </div>

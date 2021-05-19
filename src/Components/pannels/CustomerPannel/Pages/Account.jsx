@@ -190,16 +190,28 @@ setShow(false);
             <center>
                 <div className="row">
                    
-                    <div class="col-sm-2" >
+                    <div class="col-sm-3" >
 
 
                         <div className="row" >
                             <div>
+                                <center>
+                                    <h3>
+                                    {users.firstName}   {users.lastName}
+                                    </h3>
+                              
+                                </center>
+                                <hr></hr>
+                                
+                            </div>
+                            <div>
                                 <Image src={users.imgURL} alt="img1" style={{ width: "255px", height: "225px" }} roundedCircle></Image>
+                                <hr></hr>
                                 <div>
                                     <Container triggerText={triggerText} onSubmit={onSubmit} data={props.myId} />
 
                                 </div>
+                          
 
 
 
@@ -292,7 +304,7 @@ setShow(false);
                             <div class="col-sm-5"></div>
                             <div class="col-sm-4"></div>
                             <div class="col-sm-3">
-                                <button className="btn btn-danger " type='submit'>Update</button>
+                                <button className="btn btn-danger " type='submit'>Update Your Details</button>
                             </div>
                         </div>
 
@@ -309,69 +321,7 @@ setShow(false);
                 <br>
                 </br>
 
-                {/* <div className="row">
-
-                    <div className="col-3">
-                        <Card>
-                            <CardContent>
-                                <div >
-                                    <InputLabel>Events Reservations</InputLabel>
-                                    <InputLabel>{eventTotal}</InputLabel>
-
-                                </div>
-
-
-                            </CardContent>
-                        </Card>
-
-                    </div>
-
-                    <div className="col-3">
-                        <Card>
-                            <CardContent>
-                                <div >
-                                    <InputLabel>Transport Reservations</InputLabel>
-                                    {transTotal}
-
-                                </div>
-
-
-                            </CardContent>
-                        </Card>
-
-                    </div>
-
-                    <div className="col-3">
-                        <Card>
-                            <CardContent>
-                                <div >
-                                    <InputLabel>Guide Reservations</InputLabel>
-                                    {guideTotal}
-
-                                </div>
-
-
-                            </CardContent>
-                        </Card>
-
-                    </div>
-
-                    <div className="col-3">
-                        <Card>
-                            <CardContent>
-                                <div >
-                                    <InputLabel>Hotels Reservations</InputLabel>
-                                    {hotelTotal}
-                                </div>
-
-
-                            </CardContent>
-                        </Card>
-
-                    </div>
-
-
-                </div> */}
+              
                 <br></br>
 
                 <div className="row">

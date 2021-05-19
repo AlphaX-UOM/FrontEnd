@@ -4,14 +4,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
-import { Alert } from '@material-ui/lab';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { saveCart } from '../../../../store/lib/actions'
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -205,18 +197,7 @@ const Upgrade = (props) => {
         }
         
         break;
-        // case "account":
-        //   if (!validAccountRegex.test(value)) {
-        //     errors.account = "Account Number is not valid!";
-        //   } else {
-        //     errors.account = "";
-        //     setstate({
-        //       ...state,
-        //       account: value,
-        //     });
-        //   }
-          
-        //   break;
+      
 
         case "id":
         if (!validIdRegex.test(value)) {
