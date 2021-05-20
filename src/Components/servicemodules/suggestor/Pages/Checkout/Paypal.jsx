@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import Thank from "../ThankYou/Thank";
 import { connect } from "react-redux";
@@ -8,6 +9,11 @@ import { useDispatch } from 'react-redux'
 import { resetCart } from '../../../../../store/lib/actions'
 
 function Paypal(props) {
+
+  let history = useHistory();
+  if(props.total<1){
+    history.push("/shoppingcart");
+  }
   let displayTotal = props.total;
 
   const [paidFor, setPaidFor] = useState(false);
@@ -220,6 +226,7 @@ function Paypal(props) {
                   let eventData = {
                     eventPlannerServiceID: props.items[i].add_id,
                     numOfTravellers: props.items[i].no_travellers,
+                    adultTikets:props.items[i].no_travellers,
                     checkIn: checkin,
                     checkOut: checkout,
                     price: props.items[i].total_price,

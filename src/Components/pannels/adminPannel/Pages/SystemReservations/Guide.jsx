@@ -117,11 +117,12 @@ export default function Event() {
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Name</StyledTableCell>
+            <StyledTableCell>Guide Name</StyledTableCell>
             <StyledTableCell align="right">Language</StyledTableCell>
+            <StyledTableCell align="right">Customer ID</StyledTableCell>
             <StyledTableCell align="right">CheckIn</StyledTableCell>
-            <StyledTableCell align="right">PricePerDay</StyledTableCell>
-            <StyledTableCell align="right"></StyledTableCell>
+            <StyledTableCell align="right">Total Price</StyledTableCell>
+            <StyledTableCell align="right">Payment ID</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -131,8 +132,10 @@ export default function Event() {
                 {row.tourGuideService.name}
               </StyledTableCell>
               <StyledTableCell align="right">{row.tourGuideService.language}</StyledTableCell>
+              <StyledTableCell align="right">{row.userID}$</StyledTableCell>
               <StyledTableCell align="right">{row.checkIn}</StyledTableCell>
-              <StyledTableCell align="right">{row.tourGuideService.costPerDay}$</StyledTableCell>
+              <StyledTableCell align="right">{row.price}$</StyledTableCell>
+              <StyledTableCell align="right">{row.paymentID}</StyledTableCell>
               
             </StyledTableRow>
           ))}

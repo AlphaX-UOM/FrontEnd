@@ -67,7 +67,7 @@ export default function Event() {
       .then((responseData) => {
         responseData = responseData.filter(item => item.cancellation == null);
             setEventList(responseData);
-            console.log("response data->"+responseData);
+            console.log(responseData);
       });
   }, [userId]);
 
@@ -114,15 +114,12 @@ export default function Event() {
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>Name</StyledTableCell>
-              <StyledTableCell align="right">CustomerName</StyledTableCell>
-            <StyledTableCell align="right">CustomerID</StyledTableCell>
-            <StyledTableCell align="right">Reservation</StyledTableCell>
-            <StyledTableCell align="right">Payment</StyledTableCell>
+              <StyledTableCell>Event Name</StyledTableCell>
+            <StyledTableCell align="right">Customer ID</StyledTableCell>
               <StyledTableCell align="right">Venue</StyledTableCell>
               <StyledTableCell align="right">Date</StyledTableCell>
-              <StyledTableCell align="right">Price</StyledTableCell>
-              <StyledTableCell align="right"></StyledTableCell>
+              <StyledTableCell align="right">Total Price</StyledTableCell>
+              <StyledTableCell align="right">Payment ID</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -131,18 +128,16 @@ export default function Event() {
                 <StyledTableCell component="th" scope="row">
                   {row.eventPlannerService.name}
                 </StyledTableCell>
-                <StyledTableCell align="right">Sanath Jayasuriya</StyledTableCell>
-              <StyledTableCell align="right">sanath@gmail.com</StyledTableCell>
-              <StyledTableCell align="right">{row.eventPlannerService.id}</StyledTableCell>
-              <StyledTableCell align="right">{row.eventPlannerService.paymentID}</StyledTableCell>
+              <StyledTableCell align="right">{row.userID}</StyledTableCell>
+              <StyledTableCell align="right">{row.eventPlannerService.venue}</StyledTableCell>
                 <StyledTableCell align="right">
-                  {row.eventPlannerService.venue}
+                  {row.checkIn}
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  {row.eventPlannerService.date}
+                  {row.price}$
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  {row.eventPlannerService.price}$
+                  {row.paymentID}
                 </StyledTableCell>
                 
               </StyledTableRow>

@@ -102,7 +102,7 @@ export default function Transport(props) {
             <StyledTableCell align="right">PickUp Date & Time</StyledTableCell>
             <StyledTableCell align="right">PickUp Location</StyledTableCell>
             <StyledTableCell align="right">PricePerDay</StyledTableCell>
-            <StyledTableCell align="right"></StyledTableCell>
+            <StyledTableCell align="right">Refunded</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -115,6 +115,7 @@ export default function Transport(props) {
               <StyledTableCell align="right">{row.pickUpTime}</StyledTableCell>
               <StyledTableCell align="right">{row.pickUpLocation}</StyledTableCell>
               <StyledTableCell align="right">{row.price}$</StyledTableCell>
+              <StyledTableCell align="right">{(row.cancellation.isApproved).toString()}</StyledTableCell>
               
             </StyledTableRow>
           ))}

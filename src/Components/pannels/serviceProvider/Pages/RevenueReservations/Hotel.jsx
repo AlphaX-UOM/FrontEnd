@@ -103,7 +103,7 @@ export default function Event(props) {
               <StyledTableCell align="right">{row.noOfRooms}</StyledTableCell>
               <StyledTableCell align="right">{row.checkIn}</StyledTableCell>
               <StyledTableCell align="right">{row.checkOut}</StyledTableCell>
-              <StyledTableCell align="right">{row.hotelsService.venue}</StyledTableCell>
+              <StyledTableCell align="right">{row.hotelsService.district}</StyledTableCell>
               <StyledTableCell align="right">{row.price}$</StyledTableCell>
               
             </StyledTableRow>

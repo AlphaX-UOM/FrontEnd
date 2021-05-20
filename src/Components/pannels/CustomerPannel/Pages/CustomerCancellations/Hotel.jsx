@@ -68,7 +68,7 @@ export default function Event(props) {
         .then((responseData) => {
           responseData = responseData.filter(item => item.cancellation != null);
           setEventList(responseData);
-          console.log("response data->"+responseData);
+          console.log(responseData);
         });
     }, [userId]);
 
@@ -98,7 +98,7 @@ export default function Event(props) {
             <StyledTableCell align="right">Check Out</StyledTableCell>
             <StyledTableCell align="right">Venue</StyledTableCell>
             <StyledTableCell align="right">Total Price</StyledTableCell>
-            <StyledTableCell align="right"></StyledTableCell>
+            <StyledTableCell align="right">Refunded</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -111,8 +111,9 @@ export default function Event(props) {
               <StyledTableCell align="right">{row.noOfRooms}</StyledTableCell>
               <StyledTableCell align="right">{row.checkIn}</StyledTableCell>
               <StyledTableCell align="right">{row.checkOut}</StyledTableCell>
-              <StyledTableCell align="right">{row.hotelsService.venue}</StyledTableCell>
+              <StyledTableCell align="right">{row.hotelsService.district}</StyledTableCell>
               <StyledTableCell align="right">{row.price}$</StyledTableCell>
+              <StyledTableCell align="right">{(row.cancellation.isApproved).toString()}</StyledTableCell>
               
             </StyledTableRow>
           ))}

@@ -95,7 +95,7 @@ export default function Event(props) {
             <StyledTableCell align="right">Language</StyledTableCell>
             <StyledTableCell align="right">CheckIn</StyledTableCell>
             <StyledTableCell align="right">PricePerDay</StyledTableCell>
-            <StyledTableCell align="right"></StyledTableCell>
+            <StyledTableCell align="right">Refunded</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -106,7 +106,8 @@ export default function Event(props) {
               </StyledTableCell>
               <StyledTableCell align="right">{row.tourGuideService.language}</StyledTableCell>
               <StyledTableCell align="right">{row.checkIn}</StyledTableCell>
-              <StyledTableCell align="right">{row.tourGuideService.costPerDay}$</StyledTableCell>
+              <StyledTableCell align="right">{row.price}$</StyledTableCell>
+              <StyledTableCell align="right">{(row.cancellation.isApproved).toString()}</StyledTableCell>
               
             </StyledTableRow>
           ))}

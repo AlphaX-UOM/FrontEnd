@@ -108,6 +108,13 @@ export default function Transport(props) {
     reservationID: can,
   };
 
+  function dateDifference(reservedDate) {
+    var reserved = new Date(reservedDate);
+    var today = new Date();
+    var Difference_In_Time = reserved.getTime() - today.getTime();
+    return (Difference_In_Time / (1000 * 3600 * 24));
+  }
+
   return (
     <div>
       <TableContainer component={Paper}>
@@ -141,7 +148,14 @@ export default function Transport(props) {
                 </StyledTableCell>
                 <StyledTableCell align="right">{row.price}$</StyledTableCell>
                 <StyledTableCell align="right">
-                  <Button
+                  {dateDifference(row.pickUpTime)<=1?<Button
+                    variant="contained"
+                    color="secondary"
+                    disabled
+                  >
+                    <HighlightOffIcon />
+                    Unable to cancel
+                  </Button>:<Button
                     variant="contained"
                     color="secondary"
                     onClick={() => {
@@ -150,7 +164,7 @@ export default function Transport(props) {
                   >
                     <HighlightOffIcon />
                     Cancellation
-                  </Button>
+                  </Button>}
                 </StyledTableCell>
               </StyledTableRow>
             ))}

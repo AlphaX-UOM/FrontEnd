@@ -85,36 +85,39 @@ const CartPage = (props) => {
           </div>
           <div className="col-sm-3 order-summary">
             <ul className="list-group">
-              <li className="list-group-item"><p className="font-weight-bold">Order Summary</p></li>
+              <li className="list-group-item"><p className="font-weight-bold"><center>Order Summary</center></p></li>
 
               <li className="list-group-item">
                 <ul className="list-group flex">
                   <li className="text-left"><p className="font-weight-bold">Subtotal</p></li>
-                  <li className="text-right">${subTotal.toFixed(2)}</li>
+                  <li className="text-right">{subTotal.toFixed(2)}$</li>
                 </ul>
-                {/*<ul className="list-group flex">*/}
-                {/*<li className="text-left">charges</li>*/}
-                {/*<li className="text-right">${shipping.toFixed(2)}</li>*/}
-                {/*</ul>*/}
-                {/*<ul className="list-group flex">*/}
-                {/*<li className="coupon crimson">*/}
-                {/*<small>Add Coupon Code</small>*/}
-                {/*</li>*/}
-                {/*</ul>*/}
               </li>
+
+              {subTotal<=1?null:<li className="list-group-item">
+                <ul className="list-group flex">
+                  <li className="text-left"><p className="font-weight-bold">Service Charge</p></li>
+                  <li className="text-right">20.00$</li>
+                </ul>
+              </li>}
+              
 
               <li className="list-group-item ">
                 <ul className="list-group flex">
                   <li className="text-left"><p className="font-weight-bold">Total</p></li>
-                  <li className="text-right">${subTotal === 0.00 ? "0.00" : total.toFixed(2)}</li>
+                  <li className="text-right">{subTotal === 0.00 ? "0.00" : (total+20).toFixed(2)}$</li>
                 </ul>
               </li>
+
+
             </ul>
             <br />
             <br />
-            <p><center><button class="btn btn-warning" onClick={handleFormData}>
+            <p><center>{subTotal<=1?<button class="btn btn-warning disabled">
+              Your Cart is Empty
+                </button>:<button class="btn btn-warning" onClick={handleFormData}>
               Proceed to Checkout
-                </button>
+                </button>}
             </center>
             </p>
           </div>

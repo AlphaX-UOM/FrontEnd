@@ -19,10 +19,17 @@ function RefundDetails(props) {
 
   const [amount,setAmount] = useState(null);
   const [ note, setNote] = useState(null);
+  const [ disable, setDisable] = useState(false);
 
 
   const handleChange = (event) => {
-    setAmount(event.target.value);
+    if(event.target.value>paymentAmount){
+      setDisable(true);
+    }else{
+      setDisable(false);
+      setAmount(event.target.value);
+    }
+    
   };
 
   const handleTextChange = (event) => {
@@ -75,10 +82,12 @@ function RefundDetails(props) {
         />
         <br/>
         <br/>
-        <br/>
-        <Button variant="contained" color="secondary" onClick={handleSaveChange}>
+        <br/>{(disable.toString()==="true")?<Button variant="contained" color="secondary"  disabled="true" >
+        Invalid Refund Value
+      </Button>:<Button variant="contained" color="secondary" onClick={handleSaveChange}>
         SAVE
-      </Button>
+      </Button>}
+        
       <br/>
       </Container>
     </div>
