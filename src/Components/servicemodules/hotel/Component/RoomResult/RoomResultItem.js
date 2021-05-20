@@ -18,6 +18,8 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import CheckIcon from '@material-ui/icons/Check';
 
+import connect from "react-redux/es/connect/connect";
+import * as actions from '../../../../../store/actions/index';
 
 
 const RoomResultItem = (props) => {
@@ -25,6 +27,8 @@ const RoomResultItem = (props) => {
 
     const [numofRooms, setNumofRooms] = useState();
     const [bookings, setBookings] = useState([]);
+
+    const { room_numofrooms_selected } = props;
 
 
     // useEffect(() => {
@@ -143,16 +147,16 @@ const RoomResultItem = (props) => {
     });
 
 
-    let data = {
-        id: props.id,
-        name: props.name,
-        roomType: props.roomType,
-        pricePerDay: props.pricePerDay,
-        numofRooms: numofRooms,
-        checkIn: props.checkIn,
-        checkOut: props.checkOut,
-        imgURL: props.roomImgURL01,
-    }
+    // let data = {
+    //     id: props.id,
+    //     name: props.name,
+    //     roomType: props.roomType,
+    //     pricePerDay: props.pricePerDay,
+    //     numofRooms: numofRooms,
+    //     checkIn: props.checkIn,
+    //     checkOut: props.checkOut,
+    //     imgURL: props.roomImgURL01,
+    // }
 
 
     return (
@@ -241,10 +245,11 @@ const RoomResultItem = (props) => {
 
                                 <br />
                                 <div>
-                                    <Link to={{ pathname: path, data: data }}>
+                                    <Link to={{ pathname: path}}>
                                         <Button variant="outlined" color="green"
                                             onClick={() => {
                                                 handleClickOpen();
+                                                room_numofrooms_selected(props.id, props.name, props.roomType, props.pricePerDay, numofRooms, props.checkIn, props.checkOut, props.roomImgURL01);
                                             }}>
                                             Reserve Rooms
                                         </Button>
@@ -282,4 +287,20 @@ const RoomResultItem = (props) => {
     );
 }
 
-export default RoomResultItem;
+
+const mapStateToProps = (state) => {
+    return {
+        //
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        room_numofrooms_selected: (id, selected_room_name, roomtype, pricePerDay, numofRooms, selected_room_checkIn, selected_room_checkOut, imgURL) => {
+            dispatch(actions.get_hotel_numofrooms_selected(id, selected_room_name, roomtype, pricePerDay, numofRooms, selected_room_checkIn, selected_room_checkOut, imgURL));
+        },
+    };
+};
+
+
+export default  connect(mapStateToProps, mapDispatchToProps)(RoomResultItem);

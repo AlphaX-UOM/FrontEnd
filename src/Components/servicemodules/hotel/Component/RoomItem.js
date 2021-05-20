@@ -20,12 +20,16 @@ import StarRoundedIcon from '@material-ui/icons/StarRounded';
 import PeopleOutlineOutlinedIcon from '@material-ui/icons/PeopleOutlineOutlined';
 import AttachMoneyOutlinedIcon from '@material-ui/icons/AttachMoneyOutlined';
 
+import connect from "react-redux/es/connect/connect";
+import * as actions from '../../../../store/actions/index';
 
 const RoomItem = (props) => {
 
-    let data = {
-        id: props.id,
-    }
+    // let data = {
+    //     id: props.id,
+    // }
+
+    const { room_item_selected } = props;
 
     return (
         <div>
@@ -75,8 +79,13 @@ const RoomItem = (props) => {
                     </CardContent>
                 </CardActionArea>
                 <CardActions style={{backgroundColor:"#ACDFCA"}}>
-                    <Link to={{pathname: "./roomResult", data:data}}>
-                    <Button size="small" color="primary" >
+                    <Link to={{pathname: "./roomResult"}}>
+                    <Button size="small" color="primary" 
+                    onClick={() => {
+                        room_item_selected(props.id);
+                        
+                    }}>
+                    >
                             View More Details
                         </Button>
                     </Link>
@@ -87,4 +96,18 @@ const RoomItem = (props) => {
     );
 }
 
-export default RoomItem
+const mapStateToProps = (state) => {
+    return {
+        // items: state.onlineStoreApp.items
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        room_item_selected: (id) => {
+            dispatch(actions.get_room_item_selected(id));
+        },
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RoomItem);

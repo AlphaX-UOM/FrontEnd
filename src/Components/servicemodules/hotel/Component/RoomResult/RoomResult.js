@@ -23,11 +23,11 @@ import { connect } from 'react-redux';
 
 const RoomResult = (props) => {
 
-    const { check_in, check_out } = props;
+    const { check_in, check_out, id } = props;
 
-    let passedId = props.location.data.id;
+    // let passedId = props.location.data.id;
 
-    console.log(passedId);
+    // console.log(passedId);
 
 
     const [roomResult, setRoomResult] = useState([]);
@@ -37,7 +37,7 @@ const RoomResult = (props) => {
     useEffect(() => {
         setloading(true);
         Axios
-            .get('https://alphax-api.azurewebsites.net/api/hotelsservices/' + passedId)
+            .get('https://alphax-api.azurewebsites.net/api/hotelsservices/' + id)
             .then((responseData) => {
                 console.log(responseData);
                 setRoomResult(responseData.data);
@@ -308,7 +308,7 @@ const mapStateToProps = (state) => {
 
         check_in: state.hotel_input_reducer.check_in,
         check_out: state.hotel_input_reducer.check_out,
-
+        id: state.hotel_input_reducer.selected_roomid,
 
     };
 };

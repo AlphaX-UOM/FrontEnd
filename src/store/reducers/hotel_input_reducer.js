@@ -97,7 +97,7 @@ const get_hotel_listitem_selected = (state, action) => {
 };
 
 const get_room_item_selected = (state, action) => {
-    console.log("reducerroom" + action.name);
+    console.log("reducerroom" + action.selected_roomid);
 
     return updateObject(state, {
         selected_roomid: action.selected_roomid,

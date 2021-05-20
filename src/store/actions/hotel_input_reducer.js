@@ -81,7 +81,7 @@ export const get_room_item_selected = (id) => {
     console.log(id);
     return {
         type: actionTypes.GET_ROOM_ITEM_SELECTED,
-        id: id,
+        selected_roomid: id,
     };
 };
 
