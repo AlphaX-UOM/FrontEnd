@@ -45,7 +45,7 @@ function Listitemdetails(props) {
                                 </div>
                                 <div className="row">
                                     <Link onClick={handlecarClik} >
-                                        <div className="col txtcolorx rev-col "><small className="iconpad"> Reviews</small><ChatBubbleOutlineIcon fontSize="small" />
+                                        <div className="col txtcolorx rev-col "><small className="iconpad"> Comments</small><ChatBubbleOutlineIcon fontSize="small" />
                                         </div>
                                     </Link>
                                 </div>

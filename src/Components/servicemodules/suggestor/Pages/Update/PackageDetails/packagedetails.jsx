@@ -4,7 +4,7 @@ import { useSpring, animated } from "react-spring";
 import ReactParticles from "react-particles-js";
 import particlesConfig from "./particles-config.js";
 import "./packageDetailsStyles.scss";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import Spinner from "../../ResultList/Spinner";
 import { addToCart } from "../../../../../../store/lib/actions";
@@ -47,6 +47,10 @@ function PackageDetails(props) {
   var today = new Date();
   var date =
     today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  
+  let history = useHistory();
+
+  
 
   let tranId = props.selectId.transportId;
   let guideId = props.selectId.guidePlanId;
@@ -68,7 +72,11 @@ function PackageDetails(props) {
         return response.json();
       })
       .then((responseData) => {
-        setmyTransportList(responseData);
+        if(responseData.name === undefined){
+          history.push("/");
+        }else{
+          setmyTransportList(responseData);
+        }
       });
   }, [tranId]);
 
@@ -154,7 +162,7 @@ function PackageDetails(props) {
     {
       title: "Click Below To Get Started",
       description: myevent02List.otherDetails,
-      image: "https://6jlvz1j5q3.csb.app/undraw_static_assets.svg",
+      image: "https://s3-us-west-2.amazonaws.com/lndr-landorcom-assets-prd/app/uploads/2019/04/10172530/Screen-Shot-2019-03-04-at-12.02.04-PM.png",
       imageRatio: 730 / 1030,
       item:myevent02List,
       type:"Transport Service"
