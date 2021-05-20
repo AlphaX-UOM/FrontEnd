@@ -118,13 +118,14 @@ export default function Event() {
         <TableHead>
           <TableRow>
             <StyledTableCell>Name</StyledTableCell>
+            <StyledTableCell>Customer ID</StyledTableCell>
             <StyledTableCell align="right">Room Type</StyledTableCell>
             <StyledTableCell align="right">No.Of Rooms</StyledTableCell>
             <StyledTableCell align="right">Check In</StyledTableCell>
             <StyledTableCell align="right">Check Out</StyledTableCell>
             <StyledTableCell align="right">Venue</StyledTableCell>
             <StyledTableCell align="right">Total Price</StyledTableCell>
-            <StyledTableCell align="right"></StyledTableCell>
+            <StyledTableCell align="right">Payment ID</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -133,12 +134,14 @@ export default function Event() {
               <StyledTableCell component="th" scope="row">
                 {row.hotelsService.name}
               </StyledTableCell>
+              <StyledTableCell align="right">{row.userID}</StyledTableCell>
               <StyledTableCell align="right">{row.roomType}</StyledTableCell>
               <StyledTableCell align="right">{row.noOfRooms}</StyledTableCell>
               <StyledTableCell align="right">{row.checkIn}</StyledTableCell>
               <StyledTableCell align="right">{row.checkOut}</StyledTableCell>
-              <StyledTableCell align="right">{row.hotelsService.venue}</StyledTableCell>
+              <StyledTableCell align="right">{row.hotelsService.district}</StyledTableCell>
               <StyledTableCell align="right">{row.price}$</StyledTableCell>
+              <StyledTableCell align="right">{row.paymentID}</StyledTableCell>
               
             </StyledTableRow>
           ))}

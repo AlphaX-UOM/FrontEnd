@@ -88,7 +88,10 @@ function ItemCheck1(props) {
       };
 
 
-    
+function dateConversion(normalDate){
+  var temp = new Date(normalDate);
+  return (temp.getFullYear() + '-' + (temp.getMonth() + 1) + '-' + temp.getDate());
+}    
      
 
     var today = new Date();
@@ -347,10 +350,10 @@ minDate={new Date()}
                   {(nameList.adultTickets-adultTot)===0 ?<p> Tickets Not Available   <MoodBadIcon/></p>  : 
                   (quantity===0 && kidquantity===0) ? "" : <Link to="/shoppingcart">
                   <button type="button" class="btn btn-success" onClick={()=>nameList.audience==="All"?
-                  kidquantity===0? add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date,"EventService",(quantity*nameList.price),quantity):
-                  quantity===0? add_to_cart(nameList.name,nameList.pricePerKid,nameList.id,kidquantity,date,"EventService",(kidquantity*nameList.pricePerKid),kidquantity):
-                 add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date,"EventService",(quantity*nameList.price),quantity)&add_to_cart(nameList.name,nameList.pricePerKid,nameList.id,kidquantity,date,"EventService",(kidquantity*nameList.pricePerKid),kidquantity):
-                add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date,"EventService",(quantity*nameList.price),quantity)
+                  kidquantity===0? add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date,"EventService",(quantity*nameList.price),quantity,dateConversion(startDate),null,null,dateConversion(startDate),null,null):
+                  quantity===0? add_to_cart(nameList.name,nameList.pricePerKid,nameList.id,kidquantity,date,"EventService",(kidquantity*nameList.pricePerKid),kidquantity,dateConversion(startDate),null,null,dateConversion(startDate),null,null):
+                 add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date,"EventService",(quantity*nameList.price),quantity,dateConversion(startDate),null,null,dateConversion(startDate),null,null)&add_to_cart(nameList.name,nameList.pricePerKid,nameList.id,kidquantity,date,"EventService",(kidquantity*nameList.pricePerKid),kidquantity,dateConversion(startDate),null,null,dateConversion(startDate),null,null):
+                add_to_cart(nameList.name,nameList.price,nameList.id,quantity,date,"EventService",(quantity*nameList.price),quantity,dateConversion(startDate),null,null,dateConversion(startDate),null,null)
 
               }>
                   <AddShoppingCartIcon />
@@ -387,7 +390,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
       
-        add_to_cart:(item,cost,add_id,no_travellers,date,type,tot,unit) => dispatch(addToCart(item,cost,add_id,no_travellers,date,type,tot,unit))
+        add_to_cart:(item,cost,add_id,no_travellers,date,type,tot,unit,checkin_date,checkin_time,checkin_location,checkout_date,checkout_time,checkout_location) => dispatch(addToCart(item,cost,add_id,no_travellers,date,type,tot,unit,checkin_date,checkin_time,checkin_location, checkout_date,checkout_time,checkout_location))
     }
 }
 

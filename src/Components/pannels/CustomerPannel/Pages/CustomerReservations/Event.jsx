@@ -68,7 +68,7 @@ export default function Event(props) {
       .then((responseData) => {
         responseData = responseData.filter(item => item.cancellation == null);
             setEventList(responseData);
-            console.log("response data->"+responseData);
+            console.log(responseData);
       });
   }, [userId,loadning]);
 
@@ -114,6 +114,13 @@ export default function Event(props) {
     reservationID: can,
   };
 
+  function dateDifference(reservedDate) {
+    var reserved = new Date(reservedDate);
+    var today = new Date();
+    var Difference_In_Time = reserved.getTime() - today.getTime();
+    return Difference_In_Time / (1000 * 3600 * 24);
+  }
+
   return (
     <div>
       <TableContainer component={Paper}>
@@ -123,7 +130,9 @@ export default function Event(props) {
               <StyledTableCell>Name</StyledTableCell>
               <StyledTableCell align="right">Venue</StyledTableCell>
               <StyledTableCell align="right">Date</StyledTableCell>
-              <StyledTableCell align="right">Price</StyledTableCell>
+              <StyledTableCell align="right">Adult Tickets</StyledTableCell>
+            <StyledTableCell align="right">Child Tickets</StyledTableCell>
+              <StyledTableCell align="right">Total Price</StyledTableCell>
               <StyledTableCell align="right"></StyledTableCell>
             </TableRow>
           </TableHead>
@@ -137,22 +146,31 @@ export default function Event(props) {
                   {row.eventPlannerService.venue}
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  {row.eventPlannerService.date}
+                  {row.checkIn}
+                </StyledTableCell>
+                {((row.adultTikets===0) && (row.kidTikets===0))?<StyledTableCell align="right">{row.numOfTravellers}</StyledTableCell>:<StyledTableCell align="right">{row.adultTikets}</StyledTableCell>}
+              <StyledTableCell align="right">{row.kidTikets}</StyledTableCell>
+                <StyledTableCell align="right">
+                  {row.price}$
                 </StyledTableCell>
                 <StyledTableCell align="right">
-                  {row.eventPlannerService.price}$
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  <Button
+                {dateDifference(row.checkIn)<=1?<Button
+                    variant="contained"
+                    color="secondary"
+                    disabled
+                  >
+                    <HighlightOffIcon />
+                    Unable to cancel
+                  </Button>:<Button
                     variant="contained"
                     color="secondary"
                     onClick={() => {
-                        handleClickOpen(row);
-                      }}
+                      handleClickOpen(row);
+                    }}
                   >
                     <HighlightOffIcon />
                     Cancellation
-                  </Button>
+                  </Button>}
                 </StyledTableCell>
               </StyledTableRow>
             ))}

@@ -92,7 +92,7 @@ export default function Transport() {
       .then((responseData) => {
         responseData = responseData.filter(item => item.cancellation == null);
         setEventList(responseData);
-        console.log("response data->"+responseData);
+        console.log(responseData);
       });
   }, [userId]);
 
@@ -111,14 +111,15 @@ export default function Transport() {
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>Name</StyledTableCell>
+              <StyledTableCell>Service Name</StyledTableCell>
               <StyledTableCell align="right">Vehicle</StyledTableCell>
+              <StyledTableCell align="right">Customer ID</StyledTableCell>
               <StyledTableCell align="right">
                 PickUp Date & Time
               </StyledTableCell>
               <StyledTableCell align="right">PickUp Location</StyledTableCell>
-              <StyledTableCell align="right">PricePerDay</StyledTableCell>
-              <StyledTableCell align="right"></StyledTableCell>
+              <StyledTableCell align="right">Total Price</StyledTableCell>
+              <StyledTableCell align="right">Payment ID</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -131,12 +132,16 @@ export default function Transport() {
                   {row.vehicleType}
                 </StyledTableCell>
                 <StyledTableCell align="right">
+                  {row.userID}
+                </StyledTableCell>
+                <StyledTableCell align="right">
                   {row.pickUpTime}
                 </StyledTableCell>
                 <StyledTableCell align="right">
                   {row.pickUpLocation}
                 </StyledTableCell>
                 <StyledTableCell align="right">{row.price}$</StyledTableCell>
+                <StyledTableCell align="right">{row.paymentID}</StyledTableCell>
                 
               </StyledTableRow>
             ))}

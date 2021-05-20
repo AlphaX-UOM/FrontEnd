@@ -98,7 +98,7 @@ export default function Event(props) {
                   {row.eventPlannerService.name}
                 </StyledTableCell>
                 <StyledTableCell align="right">{row.userID}</StyledTableCell>
-              <StyledTableCell align="right">{row.adultTikets}</StyledTableCell>
+                {((row.adultTikets===0) && (row.kidTikets===0))?<StyledTableCell align="right">{row.numOfTravellers}</StyledTableCell>:<StyledTableCell align="right">{row.adultTikets}</StyledTableCell>}
               <StyledTableCell align="right">{row.kidTikets}</StyledTableCell>
               <StyledTableCell align="right">{row.checkIn}</StyledTableCell>
                 <StyledTableCell align="right">

@@ -94,8 +94,10 @@ export default function Event(props) {
             <StyledTableCell>Name</StyledTableCell>
             <StyledTableCell align="right">Venue</StyledTableCell>
             <StyledTableCell align="right">Date</StyledTableCell>
-            <StyledTableCell align="right">Price</StyledTableCell>
-            <StyledTableCell align="right"></StyledTableCell>
+            <StyledTableCell align="right">Adult Tickets</StyledTableCell>
+            <StyledTableCell align="right">Child Tickets</StyledTableCell>
+            <StyledTableCell align="right">Total Price</StyledTableCell>
+            <StyledTableCell align="right">Refunded</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -105,8 +107,11 @@ export default function Event(props) {
                 {row.eventPlannerService.name}
               </StyledTableCell>
               <StyledTableCell align="right">{row.eventPlannerService.venue}</StyledTableCell>
-              <StyledTableCell align="right">{row.eventPlannerService.date}</StyledTableCell>
-              <StyledTableCell align="right">{row.eventPlannerService.price}$</StyledTableCell>
+              <StyledTableCell align="right">{row.checkIn}</StyledTableCell>
+              {((row.adultTikets===0) && (row.kidTikets===0))?<StyledTableCell align="right">{row.numOfTravellers}</StyledTableCell>:<StyledTableCell align="right">{row.adultTikets}</StyledTableCell>}
+              <StyledTableCell align="right">{row.kidTikets}</StyledTableCell>
+              <StyledTableCell align="right">{row.price}$</StyledTableCell>
+              <StyledTableCell align="right">{(row.cancellation.isApproved).toString()}</StyledTableCell>
               
             </StyledTableRow>
           ))}
