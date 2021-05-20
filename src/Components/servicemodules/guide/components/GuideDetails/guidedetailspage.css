@@ -1,0 +1,235 @@
+.debackcolor{
+  background-color: rgba(198, 198, 198, 0.26);
+  min-height: 60vh;
+}
+.depad{
+  padding: 20px;
+
+}
+.btn-res{
+  border-radius: 10px;
+}
+.imgcolor{
+  background-color: white;
+}
+.txtcolorx{
+  color: #00A680;
+}
+.txtboldx{
+  font-weight: bold;
+}
+
+.iconpad{
+  padding-right: 10px;
+}
+
+.border-3px-downy {
+  border: 3px solid var(--downy);
+}
+.gudeex27 {
+  background-color: var(--baby-powder);
+  border-radius: 10px;
+  height: 413px;
+  left: 48px;
+  position: absolute;
+  top: 32px;
+  width: 1100px;
+}
+.gudemain {
+  align-items: flex-start;
+  display: flex;
+  height: 478px;
+  width: 1200px;
+}
+.gudex1 {
+  background-color: black;
+  height: 247px;
+  left: 77px;
+  pointer-events: auto;
+  position: absolute;
+  top: 93px;
+  transition: all 0.2s ease;
+  width: 265px;
+}
+.gudex19 {
+  left: 31px;
+  letter-spacing: 0px;
+  position: absolute;
+  top: 17px;
+}
+.gudex1:hover {
+  transform: scale(1.1);
+}
+.gudex26 {
+  letter-spacing: 0px;
+  margin-bottom: -3px;
+  margin-left: 16px;
+  min-height: 21px;
+  min-width: 301px;
+}
+.gudidex23 {
+  left: 600px;
+  letter-spacing: 0px;
+  position: absolute;
+  top: 175px;
+}
+.gudidex5 {
+  left: 728px;
+  letter-spacing: 0px;
+  position: absolute;
+  top: 143px;
+}
+.gudidex51 {
+  left: 728px;
+  letter-spacing: 0px;
+  position: absolute;
+  top: 205px;
+}
+.gudix21 {
+  left: 728px;
+  letter-spacing: 0px;
+  position: absolute;
+  top: 178px;
+}
+.guidex10 {
+  left: 600px;
+  letter-spacing: 0px;
+  position: absolute;
+  top: 103px;
+}
+.guidex11 {
+  left: 728px;
+  letter-spacing: 0px;
+  position: absolute;
+  top: 67px;
+}
+.guidex13 {
+  left: 600px;
+  letter-spacing: 0px;
+  position: absolute;
+  top: 67px;
+}
+.guidex14 {
+  left: 72px;
+  letter-spacing: 0px;
+  position: absolute;
+  top: 34px;
+}
+.guidex15 {
+  left: 72px;
+  letter-spacing: 0px;
+  pointer-events: auto;
+  position: absolute;
+  top: 363px;
+  transition: all 0.2s ease;
+}
+.guidex15:hover {
+  transform: translate(0, -5px);
+}
+.guidex16 {
+  background-color: var(--downy);
+  border-radius: 6px;
+  height: 258px;
+  left: 72px;
+  position: absolute;
+  top: 88px;
+  width: 276px;
+}
+.guidex17 {
+  background-color: var(--downy);
+  border-radius: 12px;
+  height: 55px;
+  left: 990px;
+  pointer-events: auto;
+  position: absolute;
+  top: 378px;
+  transition: all 0.2s ease;
+  width: 145px;
+}
+.guidex17:hover {
+  transform: rotate(15deg);
+}
+.guidex2 {
+  height: 11px;
+  left: 161px;
+  position: absolute;
+  top: 370px;
+  width: 14px;
+}
+.guidex24 {
+  align-items: flex-end;
+  display: flex;
+  height: 18px;
+  left: 600px;
+  min-width: 337px;
+  position: absolute;
+  top: 260px;
+}
+.guidex25 {
+  letter-spacing: 0px;
+  margin-bottom: -3px;
+  min-height: 21px;
+  min-width: 109px;
+}
+.guidex4 {
+  left: 650px;
+  letter-spacing: 0px;
+  position: absolute;
+  top: 378px;
+}
+.guidex71 {
+  left: 600px;
+  letter-spacing: 0px;
+  position: absolute;
+  top: 205px;
+}
+
+.guidex7 {
+  left: 600px;
+  letter-spacing: 0px;
+  position: absolute;
+  top: 139px;
+}
+.guidex8 {
+  left: 728px;
+  letter-spacing: 0px;
+  position: absolute;
+  top: 107px;
+}
+.overlap-group {
+  height: 445px;
+  position: relative;
+  width: 1339px;
+}
+.roboto-bold-black-18px {
+  color: black;
+  font-family: "Roboto-Bold", Helvetica;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+}
+.roboto-bold-downy-18px {
+  color: var(--downy);
+  font-family: "Roboto-Bold", Helvetica;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+}
+.roboto-bold-downy-24px {
+  color: var(--downy);
+  font-family: "Roboto-Bold", Helvetica;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+}
+.roboto-bold-white-18px {
+  color: white;
+  font-family: "Roboto-Bold", Helvetica;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+}
+:root {
+  --baby-powder: rgba(252, 252, 252, 1);
+  --downy: rgba(105, 198, 186, 1);
+}

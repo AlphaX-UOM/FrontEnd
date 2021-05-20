@@ -1,0 +1,38 @@
+.hotelcart_root{
+    display: flex;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-right: 10%;
+    padding-left: 10%;
+}
+
+.hotelcart_title{
+    align-content: center;
+}
+
+.hotelcart_detail{
+    display: 'flex';
+    flex-direction: column;
+    width: 50%;
+}
+
+.hotelcart_content{
+    flex: '1 0 auto';
+
+}
+
+.hotelcart_cover{
+    width: 50%;
+}
+
+.hotelcart_icon{
+    height: 38;
+    width: 38;
+}
+
+.hotelcart_control{
+    display: 'flex';
+    align-items: center;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}

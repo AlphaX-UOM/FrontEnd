@@ -1,0 +1,24 @@
+.form-input-g {
+    display: block;
+    padding-left: 10px;
+    outline: none;
+    border-radius: 2px;
+    height: 30px;
+    width: 100%;
+    border: none;
+    font-size:  10px;
+  }
+
+  .form-input-btn-g1 {
+    width: 50%;
+    height: 30px;
+    margin-top: 10px;
+    border-radius: 15px;
+    background: #69C6BA;
+    outline: none;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+  }
+  
+  
