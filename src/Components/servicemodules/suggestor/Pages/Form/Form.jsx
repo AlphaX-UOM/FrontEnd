@@ -54,6 +54,8 @@ function Form(props) {
   console.log(today);
   if (endDate != null) {
     var maximum = endDate;
+  } else {
+    var maximum = yyyy + 1 + "-" + mm + "-" + dd;
   }
 
   if (startDate != null) {
@@ -89,7 +91,11 @@ function Form(props) {
   };
 
   const handleFormData = () => {
-    props.addFormData(formdata);
+    if (noOdDates <= 0 || noOdDates > 366 || travellers < 1 || budget < 1) {
+      window.location.reload();
+    } else {
+      props.addFormData(formdata);
+    }
   };
   // console.log(noOdDates);
   return (
@@ -137,7 +143,7 @@ function Form(props) {
                       />
                     </div>
                     <div className="form-group tm-form-group tm-form-group-pad tm-form-group-2">
-                      <label htmlFor="inputAdult">Budget</label>
+                      <label htmlFor="inputAdult">Budget ($)</label>
                       <input
                         name="check-out"
                         type="number"

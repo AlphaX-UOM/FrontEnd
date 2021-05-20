@@ -108,179 +108,182 @@ function Paypal(props) {
             )
             .then(function(response) {
               console.log(response);
+
+              for (var i = 0; i < props.items.length; i++) {
+                if (props.items[i].type === "Transport") {
+                  const fireResId = uuidv4();
+                  const apiUrl = `https://vvisit-d6347-default-rtdb.firebaseio.com/reservations/${fireResId}.json`;
+                  const fireTrans = {
+                    custId: props.userCred.id,
+                    custName:
+                      props.userCred.firstName + " " + props.userCred.lastName,
+                    serId: props.items[i].add_id,
+                    serName: props.items[i].details,
+                    bookedDate: checkin,
+                    createdDate: new Date(),
+                    custRead: "no",
+                    serRead: "no",
+                    resId: fireResId,
+                  };
+    
+                  axios.put(apiUrl, fireTrans).then((response) => {
+                    if (response.status === 200) {
+                      console.log("Transport reservation to firebase");
+                    }
+                  });
+    
+                  let TransData = {
+                    pickUpTime: checkin,
+                    pickUpLocation: props.items[i].checkin_location,
+                    dropOffTime: checkout,
+                    dropOffLocation: props.items[i].checkout_location,
+                    vehicleType: props.items[i].details,
+                    transportServiceID: props.items[i].add_id,
+                    numOfTravellers: props.items[i].no_travellers,
+                    checkIn: checkin,
+                    checkOut: checkout,
+                    price: props.items[i].total_price,
+                    userID: props.userCred.id,
+                    paymentID: GUID,
+                  };
+    
+                  axios
+                    .post(
+                      "https://alphax-api.azurewebsites.net/api/transportservicereservations",
+                      TransData
+                    )
+                    .then(function(response) {
+                      console.log(response);
+                    });
+                } else if (props.items[i].type === "GuideService") {
+                  const fireResIdg = uuidv4();
+                  const apiUrlg = `https://vvisit-d6347-default-rtdb.firebaseio.com/reservations/${fireResIdg}.json`;
+                  const fireGuide = {
+                    custId: props.userCred.id,
+                    custName:
+                      props.userCred.firstName + " " + props.userCred.lastName,
+                    serId: props.items[i].add_id,
+                    serName: props.items[i].details,
+                    bookedDate: checkin,
+                    createdDate: new Date(),
+                    custRead: "no",
+                    serRead: "no",
+                    resId: fireResIdg,
+                  };
+    
+                  axios.put(apiUrlg, fireGuide).then((response) => {
+                    if (response.status === 200) {
+                      console.log("Guide reservation to firebase");
+                    }
+                  });
+    
+                  let guideData = {
+                    tourGuideServiceID: props.items[i].add_id,
+                    numOfTravellers: props.items[i].no_travellers,
+                    checkIn: checkin,
+                    checkOut: checkout,
+                    price: props.items[i].total_price,
+                    userID: props.userCred.id,
+                    paymentID: GUID,
+                  };
+    
+                  axios
+                    .post(
+                      "https://alphax-api.azurewebsites.net/api/tourguideservicereservations",
+                      guideData
+                    )
+                    .then(function(response) {
+                      console.log(response);
+                    });
+                } else if (props.items[i].type === "EventService") {
+                  const fireResIde01 = uuidv4();
+                  const apiUrle01 = `https://vvisit-d6347-default-rtdb.firebaseio.com/reservations/${fireResIde01}.json`;
+                  const fireEvent01 = {
+                    custId: props.userCred.id,
+                    custName:
+                      props.userCred.firstName + " " + props.userCred.lastName,
+                    serId: props.items[i].add_id,
+                    serName: props.items[i].details,
+                    bookedDate: checkin,
+                    createdDate: new Date(),
+                    custRead: "no",
+                    serRead: "no",
+                    resId: fireResIde01,
+                  };
+    
+                  axios.put(apiUrle01, fireEvent01).then((response) => {
+                    if (response.status === 200) {
+                      console.log("Event reservation to firebase");
+                    }
+                  });
+    
+                  let eventData = {
+                    eventPlannerServiceID: props.items[i].add_id,
+                    numOfTravellers: props.items[i].no_travellers,
+                    checkIn: checkin,
+                    checkOut: checkout,
+                    price: props.items[i].total_price,
+                    userID: props.userCred.id,
+                    paymentID: GUID,
+                  };
+    
+                  axios
+                    .post(
+                      "https://alphax-api.azurewebsites.net/api/eventplannerservicereservations",
+                      eventData
+                    )
+                    .then(function(response) {
+                      console.log(response);
+                    });
+                } else if (props.items[i].type === "HotelService") {
+                  const fireResIdh = uuidv4();
+                  const apiUrlh = `https://vvisit-d6347-default-rtdb.firebaseio.com/reservations/${fireResIdh}.json`;
+                  const fireHotel = {
+                    custId: props.userCred.id,
+                    custName:
+                      props.userCred.firstName + " " + props.userCred.lastName,
+                    serId: props.items[i].add_id,
+                    serName: props.items[i].details,
+                    bookedDate: checkin,
+                    createdDate: new Date(),
+                    custRead: "no",
+                    serRead: "no",
+                    resId: fireResIdh,
+                  };
+    
+                  axios.put(apiUrlh, fireHotel).then((response) => {
+                    if (response.status === 200) {
+                      console.log("Hotel reservation to firebase");
+                    }
+                  });
+    
+                  let hotelData = {
+                    noOfRooms: Math.round(props.items[i].no_travellers / 2),
+                    hotelsServiceID: props.items[i].add_id,
+                    numOfTravellers: props.items[i].no_travellers,
+                    checkIn: checkin,
+                    checkOut: checkout,
+                    price: props.items[i].total_price,
+                    userID: props.userCred.id,
+                    paymentID: GUID,
+                  };
+    
+                  axios
+                    .post(
+                      "https://alphax-api.azurewebsites.net/api/hotelsservicereservations",
+                      hotelData
+                    )
+                    .then(function(response) {
+                      console.log(response);
+                    });
+                }
+              }
+              
             });
 
           //looping starts here
 
-          for (var i = 0; i < props.items.length; i++) {
-            if (props.items[i].type === "Transport") {
-              const fireResId = uuidv4();
-              const apiUrl = `https://vvisit-d6347-default-rtdb.firebaseio.com/reservations/${fireResId}.json`;
-              const fireTrans = {
-                custId: props.userCred.id,
-                custName:
-                  props.userCred.firstName + " " + props.userCred.lastName,
-                serId: props.items[i].add_id,
-                serName: props.items[i].details,
-                bookedDate: checkin,
-                createdDate: new Date(),
-                custRead: "no",
-                serRead: "no",
-                resId: fireResId,
-              };
-
-              axios.put(apiUrl, fireTrans).then((response) => {
-                if (response.status === 200) {
-                  console.log("Transport reservation to firebase");
-                }
-              });
-
-              let TransData = {
-                pickUpTime: checkin,
-                pickUpLocation: props.items[i].checkin_location,
-                dropOffTime: checkout,
-                dropOffLocation: props.items[i].checkout_location,
-                vehicleType: props.items[i].details,
-                transportServiceID: props.items[i].add_id,
-                numOfTravellers: props.items[i].no_travellers,
-                checkIn: checkin,
-                checkOut: checkout,
-                price: props.items[i].total_price,
-                userID: props.userCred.id,
-                paymentID: GUID,
-              };
-
-              axios
-                .post(
-                  "https://alphax-api.azurewebsites.net/api/transportservicereservations",
-                  TransData
-                )
-                .then(function(response) {
-                  console.log(response);
-                });
-            } else if (props.items[i].type === "GuideService") {
-              const fireResIdg = uuidv4();
-              const apiUrlg = `https://vvisit-d6347-default-rtdb.firebaseio.com/reservations/${fireResIdg}.json`;
-              const fireGuide = {
-                custId: props.userCred.id,
-                custName:
-                  props.userCred.firstName + " " + props.userCred.lastName,
-                serId: props.items[i].add_id,
-                serName: props.items[i].details,
-                bookedDate: checkin,
-                createdDate: new Date(),
-                custRead: "no",
-                serRead: "no",
-                resId: fireResIdg,
-              };
-
-              axios.put(apiUrlg, fireGuide).then((response) => {
-                if (response.status === 200) {
-                  console.log("Guide reservation to firebase");
-                }
-              });
-
-              let guideData = {
-                tourGuideServiceID: props.items[i].add_id,
-                numOfTravellers: props.items[i].no_travellers,
-                checkIn: checkin,
-                checkOut: checkout,
-                price: props.items[i].total_price,
-                userID: props.userCred.id,
-                paymentID: GUID,
-              };
-
-              axios
-                .post(
-                  "https://alphax-api.azurewebsites.net/api/tourguideservicereservations",
-                  guideData
-                )
-                .then(function(response) {
-                  console.log(response);
-                });
-            } else if (props.items[i].type === "EventService") {
-              const fireResIde01 = uuidv4();
-              const apiUrle01 = `https://vvisit-d6347-default-rtdb.firebaseio.com/reservations/${fireResIde01}.json`;
-              const fireEvent01 = {
-                custId: props.userCred.id,
-                custName:
-                  props.userCred.firstName + " " + props.userCred.lastName,
-                serId: props.items[i].add_id,
-                serName: props.items[i].details,
-                bookedDate: checkin,
-                createdDate: new Date(),
-                custRead: "no",
-                serRead: "no",
-                resId: fireResIde01,
-              };
-
-              axios.put(apiUrle01, fireEvent01).then((response) => {
-                if (response.status === 200) {
-                  console.log("Event reservation to firebase");
-                }
-              });
-
-              let eventData = {
-                eventPlannerServiceID: props.items[i].add_id,
-                numOfTravellers: props.items[i].no_travellers,
-                checkIn: checkin,
-                checkOut: checkout,
-                price: props.items[i].total_price,
-                userID: props.userCred.id,
-                paymentID: GUID,
-              };
-
-              axios
-                .post(
-                  "https://alphax-api.azurewebsites.net/api/eventplannerservicereservations",
-                  eventData
-                )
-                .then(function(response) {
-                  console.log(response);
-                });
-            } else if (props.items[i].type === "HotelService") {
-              const fireResIdh = uuidv4();
-              const apiUrlh = `https://vvisit-d6347-default-rtdb.firebaseio.com/reservations/${fireResIdh}.json`;
-              const fireHotel = {
-                custId: props.userCred.id,
-                custName:
-                  props.userCred.firstName + " " + props.userCred.lastName,
-                serId: props.items[i].add_id,
-                serName: props.items[i].details,
-                bookedDate: checkin,
-                createdDate: new Date(),
-                custRead: "no",
-                serRead: "no",
-                resId: fireResIdh,
-              };
-
-              axios.put(apiUrlh, fireHotel).then((response) => {
-                if (response.status === 200) {
-                  console.log("Hotel reservation to firebase");
-                }
-              });
-
-              let hotelData = {
-                noOfRooms: Math.round(props.items[i].no_travellers / 2),
-                hotelsServiceID: props.items[i].add_id,
-                numOfTravellers: props.items[i].no_travellers,
-                checkIn: checkin,
-                checkOut: checkout,
-                price: props.items[i].total_price,
-                userID: props.userCred.id,
-                paymentID: GUID,
-              };
-
-              axios
-                .post(
-                  "https://alphax-api.azurewebsites.net/api/hotelsservicereservations",
-                  hotelData
-                )
-                .then(function(response) {
-                  console.log(response);
-                });
-            }
-          }
+          
           dispatch(resetCart())
         },
         onError: (err) => {

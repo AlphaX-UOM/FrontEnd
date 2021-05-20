@@ -83,7 +83,7 @@ function Ratings(props) {
   return (
     <div className={classes.root}>
       {/*<Rating name="size-small" defaultValue={2} size="small" />*/}
-      <Rating name="half-rating-read" value={value/total} precision={0.5} readOnly/> <small> {total} reviews</small>
+      <Rating name="half-rating-read" value={value/total} precision={0.5} readOnly/> <small>Based on {total} reviews</small>
       {/*<Rating name="size-large" defaultValue={2} size="large" />*/}
     </div>
   );

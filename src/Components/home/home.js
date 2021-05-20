@@ -81,9 +81,7 @@ const home=()=>{
                     <div className="row">
                         <div className="col-xs-12 mx-auto tm-about-text-wrap text-center">
                             <h2 className="text-uppercase mb-4">Your <strong>Journey</strong> is our priority</h2>
-                            <p className="mb-4">Nullam auctor, sapien sit amet lacinia euismod, lorem magna lobortis
-                                massa, in tincidunt mi metus quis lectus. Duis nec lobortis velit. Vivamus id magna
-                                vulputate, tempor ante eget, tempus augue. Maecenas ultricies neque magna.</p>
+                            <p className="mb-4">We live in a wonderful world that is full of beauty, charm and adventure. There is no end to the adventures we can have if only we seek them with our eyes open.</p>
 
                         </div>
                     </div>
@@ -129,7 +127,7 @@ const home=()=>{
 
                 <div className="tm-slideshow-description tm-slideshow-description-left tm-bg-highlight">
                     <h2 className="">Sri Lanka's most popular places</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquam commodi dignissimos ducimus enim, eveniet facilis fugit illum molestiae nam natus non odit quam repellendus sunt voluptas voluptatum. Earum, rem.
+                    <p>Take the time to put the camera away and gaze in wonder at what’s there in front of you.
                        </p>
 
                 </div>

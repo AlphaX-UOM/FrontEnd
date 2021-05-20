@@ -112,7 +112,7 @@ console.log(data)
           className="form-control"
           id="adultTickets"
           placeholder={eventList.adultTickets}
-          name="pricePerKid" value={event.adultTickets} onChange={onChange}
+          name="adultTickets" value={event.adultTickets} onChange={onChange}
         />
       </div>
       <div className="form-group">
