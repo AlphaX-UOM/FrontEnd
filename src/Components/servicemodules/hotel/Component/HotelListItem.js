@@ -18,6 +18,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import StarRoundedIcon from '@material-ui/icons/StarRounded';
+import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 
 import connect from "react-redux/es/connect/connect";
 import * as actions from '../../../../store/actions/index';
@@ -83,15 +84,15 @@ const HotelListItem = (props) => {
 
 
 
-            <div className="tab-content clearfix container">
+            <div className="tab-content clearfix container" >
 
 
                 <div className="row" >
-                    <div className="tm-recommended-place-wrap">
+                    <div className="tm-recommended-place-wrap" >
                         <div className="tm-recommended-place">
-                            <div className="hotellistitem-img">
+                            <div className="hotellistitem-img" >
 
-                                <img src={props.roomImgURL02} className="hotellistitem-hotel_img_element" alt="" />
+                                <img src={props.hotelImgURL} className="hotellistitem-hotel_img_element" alt="" />
 
 
                             </div>
@@ -108,7 +109,7 @@ const HotelListItem = (props) => {
                                 </Grid>
                                     <h3 className="hotellistitem-tm-recommended-title" >{props.name}</h3>
                                     <p><span><StarRoundedIcon color="secondary"/></span>{props.stars}<span> star</span></p>
-                                    <p>{props.addressLine01},{props.addressLine02}</p>
+                                    <p><span><LocationOnOutlinedIcon/></span>{props.addressLine01},{props.addressLine02}</p>
                                    
                                     {/*<p className="tm-text-gray"><Ratings/></p>*/}
                                     

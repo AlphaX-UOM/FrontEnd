@@ -36,7 +36,7 @@ function DisplayRatings(props) {
                                         value={value/total}
                                         precision={0.5}
                                         readOnly
-                                    /> <small> {total} reviews</small>
+                                    /> <p> {total} reviews</p>
 
         </div>
     );

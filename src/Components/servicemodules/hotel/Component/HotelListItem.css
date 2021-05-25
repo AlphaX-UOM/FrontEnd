@@ -16,7 +16,8 @@ padding-top: 20px;
 
 .hotellistitem-img{
     justify-content: center;
-    align-content: center;
+    align-content: center; 
+    position: relative;
 }
 
 .hotellistitem-tm-recommended-title{

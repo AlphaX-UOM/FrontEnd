@@ -16,12 +16,15 @@ import CheckIcon from '@material-ui/icons/Check';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Button from '@material-ui/core/Button';
+import PriorityHighRoundedIcon from '@material-ui/icons/PriorityHighRounded';
 
-
+import connect from "react-redux/es/connect/connect";
+import * as actions from '../../../../store/actions/index';
 
 
 const HotelResultItem = (props) => {
 
+    const { hotel_numofrooms_selected } = props;
 
     const [numofRooms, setNumofRooms] = useState('');
     const [bookings, setBookings] = useState([]);
@@ -78,7 +81,7 @@ const HotelResultItem = (props) => {
 
         return (
             <Dialog aria-labelledby="simple-dialog-title" open={open}>
-                <DialogContentText id="alert-dialog-description" style={{ padding: "10px" }}>
+                <DialogContentText id="alert-dialog-description" style={{ padding: "20px" }}>
                     Please enter the number of rooms you wish to reserve.
             </DialogContentText>
 
@@ -107,16 +110,16 @@ const HotelResultItem = (props) => {
         setOpen(false);
     };
 
-    let data = {
-        id: props.id,
-        name: props.name,
-        roomType: props.roomType,
-        pricePerDay: props.pricePerDay,
-        numofRooms: numofRooms,
-        checkIn: props.checkIn,
-        checkOut: props.checkOut,
-        ImgURL02: props.roomImgURL02,
-    }
+    // let data = {
+    //     id: props.id,
+    //     name: props.name,
+    //     roomType: props.roomType,
+    //     pricePerDay: props.pricePerDay,
+    //     numofRooms: numofRooms,
+    //     checkIn: props.checkIn,
+    //     checkOut: props.checkOut,
+    //     imgURL: props.roomImgURL01,
+    // }
 
     let filterBookings = bookings.filter(item=>{
         return (item.hotelsServiceID == props.id)
@@ -140,10 +143,16 @@ const HotelResultItem = (props) => {
 
     return (
         <div>
-            <Card>
+            <Card style={{borderWidth:"20px", borderColor:"#aeb0ae"}}>
                 <div className="row" style={{ padding: "20px" }}>
 
                     <div className="col-sm-5" >
+                        <br/>
+                        <div>
+                            <h4>{props.roomType}</h4>
+                        </div>
+                        <hr />
+                        <br/>
                         <Carousel className="carousel" >
                             <Carousel.Item>
                                 <img src={props.roomImgURL02}
@@ -197,12 +206,7 @@ const HotelResultItem = (props) => {
                             </div>
                         </div>
 
-                        <div>
-                            <h4>{props.roomType}</h4>
-                        </div>
-                        <hr />
-
-
+                        <br/>
                         <br />
 
 
@@ -214,7 +218,9 @@ const HotelResultItem = (props) => {
                                 </List>
                             </div>
                             <div className="col-sm-6">
-                                <p style={{ color: "red" }}>Select Number of rooms you want</p>
+                                <p style={{ color: "#2daf64", fontSize: "18px" }}><span><PriorityHighRoundedIcon style={{color:"#2daf64"}}/></span>{props.numOfRooms - count()} Rooms are now available </p>
+                                <br/>
+                                <p style={{ color: "#2daf64", fontSize: "15px" }}>Select Number of rooms you want</p>
                                 <div>
                                     <input type="number" min="0" className="hotelresultitem-form-control button-room" aria-label="Username" aria-describedby="basic-addon1"
                                         onChange={handleNumofRooms} max={props.numOfRooms - count()} />
@@ -222,10 +228,11 @@ const HotelResultItem = (props) => {
 
                                 <br />
                                 <div>
-                                    <Link to={{ pathname: path, data: data }}>
+                                    <Link to={{ pathname: path,}}>
                                         <Button variant="outlined" color="green"
                                             onClick={() => {
                                                 handleClickOpen();
+                                                hotel_numofrooms_selected(props.id, props.name, props.roomType, props.pricePerDay, numofRooms, props.checkIn, props.checkOut, props.roomImgURL01);
                                             }}>
                                             Reserve Rooms
                                     </Button>
@@ -241,42 +248,27 @@ const HotelResultItem = (props) => {
 
                     </div>
                 </div>
-
-
-
-
-
-
-
             </Card>
 
-
-
-
-
-
-
-
-
-
             <br />
-
-
-
-            <br />
-
-
-
-
-
-
 
         </div>
-
-
-
-
     );
 }
 
-export default HotelResultItem;
+const mapStateToProps = (state) => {
+    return {
+        //
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        hotel_numofrooms_selected: (id, selected_room_name, roomtype, pricePerDay, numofRooms, selected_room_checkIn, selected_room_checkOut, imgURL) => {
+            dispatch(actions.get_hotel_numofrooms_selected(id, selected_room_name, roomtype, pricePerDay, numofRooms, selected_room_checkIn, selected_room_checkOut, imgURL));
+        },
+    };
+};
+
+
+export default  connect(mapStateToProps, mapDispatchToProps)(HotelResultItem);

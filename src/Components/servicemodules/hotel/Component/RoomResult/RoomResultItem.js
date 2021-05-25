@@ -18,6 +18,8 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import CheckIcon from '@material-ui/icons/Check';
 
+import connect from "react-redux/es/connect/connect";
+import * as actions from '../../../../../store/actions/index';
 
 
 const RoomResultItem = (props) => {
@@ -26,22 +28,29 @@ const RoomResultItem = (props) => {
     const [numofRooms, setNumofRooms] = useState();
     const [bookings, setBookings] = useState([]);
 
-    // const amenity = props.amenities.split(",");
+    const { room_numofrooms_selected } = props;
 
-    // const amenitylist = amenity.map((item) =>
-    //     <ListItem style={{ padding: "1px" }}>
-    //         <ListItemAvatar>
-    //             <CheckIcon />
-    //         </ListItemAvatar>
-    //         <ListItemText style={{ fontSize: "10px" }}>
-    //             {item}
-    //         </ListItemText>
-    //     </ListItem>
+
+    // useEffect(() => {
+    //     Axios
+    //         .get('https://alphax-api.azurewebsites.net/api/hotelsservicereservations/HotelRes?arrival=' + props.checkIn + '&&departure=' + props.checkOut + '&&serveId=' + props.id)
+    //         .then((responseData) => {
+    //             console.log("booking")
+    //             console.log(responseData);
+    //             setBookings(responseData.data);
+    //         })
+    //         .catch(error => {
+    //             console.log(error)
+    //         })
+
+
+    // },
+    //     []
     // );
 
     useEffect(() => {
         Axios
-            .get('https://alphax-api.azurewebsites.net/api/hotelsservicereservations/HotelRes?arrival=' + props.checkIn + '&&departure=' + props.checkOut + '&&serveId=' + props.id)
+            .get('https://alphax-api.azurewebsites.net/api/hotelsservicereservations/ReservedRooms?arrival=' + props.checkIn + '&&departure=' + props.checkOut + '&&hotelId=d6c45f8a-c8d2-4f60-3d58-08d8f274801b')
             .then((responseData) => {
                 console.log("booking")
                 console.log(responseData);
@@ -56,13 +65,17 @@ const RoomResultItem = (props) => {
         []
     );
 
-    const totalBookings = 0;
+    let filterBookings = bookings.filter(item => {
+        return (item.hotelsServiceID == props.id)
+    })
+
+    let totalBookings = 0;
 
     const count = () => {
-        if (bookings === null) {
+        if (filterBookings === null) {
             return totalBookings;
         } else {
-            return bookings.map((booking) => {
+            return filterBookings.map((booking) => {
                 return (
                     totalBookings = totalBookings + booking.numofRooms
                 );
@@ -123,7 +136,7 @@ const RoomResultItem = (props) => {
         return (
             <ListItem>
                 <ListItemAvatar>
-                <CheckIcon />
+                    <CheckIcon />
                 </ListItemAvatar>
                 <ListItemText>
                     {value}
@@ -134,16 +147,16 @@ const RoomResultItem = (props) => {
     });
 
 
-    let data = {
-        id: props.id,
-        name: props.name,
-        roomType: props.roomType,
-        pricePerDay: props.pricePerDay,
-        numofRooms: numofRooms,
-        checkIn: props.checkIn,
-        checkOut: props.checkOut,
-        imgURL: props.imgURL,
-    }
+    // let data = {
+    //     id: props.id,
+    //     name: props.name,
+    //     roomType: props.roomType,
+    //     pricePerDay: props.pricePerDay,
+    //     numofRooms: numofRooms,
+    //     checkIn: props.checkIn,
+    //     checkOut: props.checkOut,
+    //     imgURL: props.roomImgURL01,
+    // }
 
 
     return (
@@ -152,6 +165,12 @@ const RoomResultItem = (props) => {
                 <div className="row" style={{ padding: "20px" }}>
 
                     <div className="col-sm-5" >
+                        <br/>
+                        <div>
+                            <h4>{props.roomType}</h4>
+                        </div>
+                        <hr/>
+                        <br/>
                         <Carousel className="carousel" >
                             <Carousel.Item>
                                 <img src={props.roomImgURL02}
@@ -205,24 +224,20 @@ const RoomResultItem = (props) => {
                             </div>
                         </div>
 
-                        <div>
-                            <h4>{props.roomType}</h4>
-                        </div>
-                        <hr />
-
 
                         <br />
+                        <br/>
 
 
                         <div className="row">
                             <div className="col-sm-6">
                                 Amenities:
-        <List>
+                                <List>
                                     {amenityitem}
                                 </List>
                             </div>
                             <div className="col-sm-6">
-                                <p style={{ color: "red" }}>Select Number of rooms you want</p>
+                                <p style={{ color: "#008b02", fontSize: "15px" }}>Select Number of rooms you want</p>
                                 <div>
                                     <input type="number" min="0" className="roomresultitem-form-control button-room" aria-label="Username" aria-describedby="basic-addon1"
                                         onChange={handleNumofRooms} max={props.numOfRooms - count()} />
@@ -230,13 +245,14 @@ const RoomResultItem = (props) => {
 
                                 <br />
                                 <div>
-                                    <Link to={{ pathname: path, data: data }}>
+                                    <Link to={{ pathname: path}}>
                                         <Button variant="outlined" color="green"
                                             onClick={() => {
                                                 handleClickOpen();
+                                                room_numofrooms_selected(props.id, props.name, props.roomType, props.pricePerDay, numofRooms, props.checkIn, props.checkOut, props.roomImgURL01);
                                             }}>
                                             Reserve Rooms
-                </Button>
+                                        </Button>
                                         <SimpleDialog open={open} onClose={handleClose} />
                                     </Link>
 
@@ -271,4 +287,20 @@ const RoomResultItem = (props) => {
     );
 }
 
-export default RoomResultItem;
+
+const mapStateToProps = (state) => {
+    return {
+        //
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        room_numofrooms_selected: (id, selected_room_name, roomtype, pricePerDay, numofRooms, selected_room_checkIn, selected_room_checkOut, imgURL) => {
+            dispatch(actions.get_hotel_numofrooms_selected(id, selected_room_name, roomtype, pricePerDay, numofRooms, selected_room_checkIn, selected_room_checkOut, imgURL));
+        },
+    };
+};
+
+
+export default  connect(mapStateToProps, mapDispatchToProps)(RoomResultItem);

@@ -31,9 +31,9 @@ function RoomFilter (props){
     return(
         <div>
         <div className="roomfilter_root">
-                <Grid container spacing={3} direction="column">
+                <Grid container spacing={3} direction="column" style={{alignItems:"center"}}>
                     <Grid item xs={12} >
-                        <Paper className="roomfilter_paper" style={{backgroundColor:' #69c6ba'}}>
+                        <Paper className="roomfilter_paper" style={{backgroundColor:' #69c6ba', borderStyle: "outset", width:"350px" }} >
                             <br/>
                             <FormControl component="fieldset">
                             <FormLabel component="legend"><strong>Sort by Price</strong></FormLabel>
@@ -58,8 +58,8 @@ function RoomFilter (props){
                             <br/>
                         </Paper>
                     </Grid>
-                    <Grid item xs={12}>
-                        <Paper className="roomfilter_paper" style={{backgroundColor:' #69c6ba'}}>
+                    <Grid item xs={12} >
+                        <Paper className="roomfilter_paper" style={{backgroundColor:' #69c6ba', borderStyle: "outset", width:"250px"}}>
                         <br/>
                             <FormControl component="fieldset">
                                 <FormLabel component="legend"><strong>Sort by Star</strong></FormLabel>

@@ -9,6 +9,7 @@ import './Rooms.css';
 import { SettingsSystemDaydreamSharp } from '@material-ui/icons';
 
 import connect from "react-redux/es/connect/connect";
+import { CardDeck } from 'react-bootstrap';
 
 
 const Rooms = (props) => {
@@ -92,9 +93,13 @@ const Rooms = (props) => {
     //     }
     // })
 
+    const sortAlphabeticals = filterByStars.sort(function (a,b){
+        return a.name.localeCompare(b.name);
+    })
+
 
     const roomItemComponent = () => {
-        return filterByStars.map((room) => {
+        return sortAlphabeticals.map((room) => {
             return (
                 <div>
                     <RoomItem
@@ -105,6 +110,7 @@ const Rooms = (props) => {
                         features={room.features}
                         pricePerDay={room.pricePerDay}
                         stars={room.stars}
+                        roomImgURL01={room.roomImgURL01}
                     />
                 </div>
             );
@@ -124,16 +130,16 @@ const Rooms = (props) => {
     return (
 
         <div className="container-fluid">
+            <br/>
             <div className="row">
-                <div className="col-1"></div>
                 <div className="col-3">
                     <RoomFilter></RoomFilter>
                 </div>
-                <div className="col-1"></div>
-                <div className="col-6">
+                <div className="col-9">
+                    <CardDeck style={{display: 'flex', flexDirection: 'row'}}>
                     {roomItemComponent()}
+                    </CardDeck>
                 </div>
-                <div className="col-1"></div>
             </div>
             <br/>
         </div>

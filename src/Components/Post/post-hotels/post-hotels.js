@@ -17,7 +17,10 @@ import HomeIcon from '@material-ui/icons/Home';
 import HotelIcon from '@material-ui/icons/Hotel';
 import StarRateIcon from '@material-ui/icons/StarRate';
 
-import { connect } from "react-redux";
+import HotelImgUp from './hotel_img_up';
+import RoomImgUp from './room_img_up';
+
+import connect from "react-redux/es/connect/connect";
 
 
 class PostHotelForm extends Component {
@@ -117,103 +120,104 @@ class PostHotelForm extends Component {
 
         e.preventDefault();
         console.log(this.state)
+        console.log("post" + this.props.imgurl)
 
-        const uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
-        uploadTask.on(
-            "state_changed",
-            snapshot => {
-                const progress = Math.round(
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                );
-                this.setState({ progress: progress });
-            },
-            error => {
-                console.log(error);
-            },
-            () => {
-                storage
-                    .ref(`images`)
-                    .child(this.state.image.name)
-                    .getDownloadURL()
-                    .then((url0) => {
-                        this.setState({ url: url0 });
-                        this.setState({ progressx: true });
+        // const uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
+        // uploadTask.on(
+        //     "state_changed",
+        //     snapshot => {
+        //         const progress = Math.round(
+        //             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        //         );
+        //         this.setState({ progress: progress });
+        //     },
+        //     error => {
+        //         console.log(error);
+        //     },
+        //     () => {
+        //         storage
+        //             .ref(`images`)
+        //             .child(this.state.image.name)
+        //             .getDownloadURL()
+        //             .then((url0) => {
+        //                 this.setState({ url: url0 });
+        //                 this.setState({ progressx: true });
 
-                    });
-            }
-        );
+        //             });
+        //     }
+        // );
 
-        const uploadTask1 = storage.ref(`images/${this.state.image1.name}`).put(this.state.image1);
-        uploadTask1.on(
-            "state_changed",
-            snapshot => {
-                const progress = Math.round(
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                );
-                this.setState({ progress: progress});
-            },
-            error => {
-                console.log(error);
-            },
-            () => {
-                storage
-                    .ref(`images`)
-                    .child(this.state.image1.name)
-                    .getDownloadURL()
-                    .then((url) => {
-                        this.setState({url1:url});
-                        this.setState({progressx:true});                        
-                    });                    
-            }            
-        );
+        // const uploadTask1 = storage.ref(`images/${this.state.image1.name}`).put(this.state.image1);
+        // uploadTask1.on(
+        //     "state_changed",
+        //     snapshot => {
+        //         const progress = Math.round(
+        //             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        //         );
+        //         this.setState({ progress: progress});
+        //     },
+        //     error => {
+        //         console.log(error);
+        //     },
+        //     () => {
+        //         storage
+        //             .ref(`images`)
+        //             .child(this.state.image1.name)
+        //             .getDownloadURL()
+        //             .then((url1) => {
+        //                 this.setState({url1:url1});
+        //                 this.setState({progressx:true});                        
+        //             });                    
+        //     }            
+        // );
 
-        const uploadTask2 = storage.ref(`images/${this.state.image2.name}`).put(this.state.image2);
-        uploadTask2.on(
-            "state_changed",
-            snapshot => {
-                const progress = Math.round(
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                );
-                this.setState({ progress: progress});
-            },
-            error => {
-                console.log(error);
-            },
-            () => {
-                storage
-                    .ref(`images`)
-                    .child(this.state.image2.name)
-                    .getDownloadURL()
-                    .then((url) => {
-                        this.setState({url2:url});
-                        this.setState({progressx:true});                        
-                    });                   
-            }            
-        );
+        // const uploadTask2 = storage.ref(`images/${this.state.image2.name}`).put(this.state.image2);
+        // uploadTask2.on(
+        //     "state_changed",
+        //     snapshot => {
+        //         const progress = Math.round(
+        //             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        //         );
+        //         this.setState({ progress: progress});
+        //     },
+        //     error => {
+        //         console.log(error);
+        //     },
+        //     () => {
+        //         storage
+        //             .ref(`images`)
+        //             .child(this.state.image2.name)
+        //             .getDownloadURL()
+        //             .then((url2) => {
+        //                 this.setState({url2:url2});
+        //                 this.setState({progressx:true});                        
+        //             });                   
+        //     }            
+        // );
 
-        const uploadTask3 = storage.ref(`images/${this.state.image3.name}`).put(this.state.image3);
-        uploadTask3.on(
-            "state_changed",
-            snapshot => {
-                const progress = Math.round(
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                );
-                this.setState({ progress: progress});
-            },
-            error => {
-                console.log(error);
-            },
-            () => {
-                storage
-                    .ref(`images`)
-                    .child(this.state.image3.name)
-                    .getDownloadURL()
-                    .then((url) => {
-                        this.setState({url3:url});
-                        this.setState({progressx:true});                        
-                    });                   
-            }            
-        );
+        // const uploadTask3 = storage.ref(`images/${this.state.image3.name}`).put(this.state.image3);
+        // uploadTask3.on(
+        //     "state_changed",
+        //     snapshot => {
+        //         const progress = Math.round(
+        //             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        //         );
+        //         this.setState({ progress: progress});
+        //     },
+        //     error => {
+        //         console.log(error);
+        //     },
+        //     () => {
+        //         storage
+        //             .ref(`images`)
+        //             .child(this.state.image3.name)
+        //             .getDownloadURL()
+        //             .then((url3) => {
+        //                 this.setState({url3:url3});
+        //                 this.setState({progressx:true});                        
+        //             });                   
+        //     }            
+        // );
 
         if (this.state.progressx === true) {
 
@@ -228,7 +232,7 @@ class PostHotelForm extends Component {
                     pricePerDay: parseInt(this.state.pricePerDay),
                     district: this.state.district,
                     pnumber: this.state.pnumber,
-                    contatName: this.state.contatName,
+                    contactName: this.state.contactName,
                     altPnumber: this.state.altPnumber,
                     languages: this.state.languages,
                     roomType: this.state.roomType,
@@ -239,16 +243,27 @@ class PostHotelForm extends Component {
                     features: this.state.features,
                     amenities: this.state.amenities,
                     otherDetails: this.state.otherDetails,
-                    hotelImgURL: this.state.url,
-                    roomImgURL01: this.state.url1,
-                    roomImgURL02: this.state.url2,
-                    roomImgURL03: this.state.url3,
+                    hotelImgURL: this.props.imgurl,
+                    roomImgURL01: this.props.imgurl1,
+                    roomImgURL02: this.props.imgurl2,
+                    roomImgURL03: this.props.imgurl3,
                     userID: this.props.userid,
 
                 })
                 .then(response => {
                     console.log(response)
-                    alert("ok");
+                    alert("Your Add is successfully posted");
+                    this.setState({
+                        pricePerDay: '',
+                        roomType: '',
+                        numOfRooms: '',
+                        bedType: '',
+                        capacity: '',
+                        amenities: '',
+                        image1: null,
+                        image2: null,
+                        image3: null,
+                    });
                 })
                 .catch(error => {
                     console.log(error)
@@ -256,6 +271,8 @@ class PostHotelForm extends Component {
         }.bind(this), 4000)
 
         console.log(this.props.userid)
+
+
     }
 
 
@@ -382,7 +399,7 @@ class PostHotelForm extends Component {
                             <div className="col-sm-6">
                                 <label htmlFor="addressLine01">Address Line 1</label>
                                 <input type="text" className="form-control" id="addressLine01" name="addressLine01"
-                                    value={this.state.addressLine01} onChange={this.Changehandler} required/>
+                                    value={this.state.addressLine01} onChange={this.Changehandler} required />
                             </div>
                             <div className="col-sm-4"></div>
                         </div>
@@ -392,7 +409,7 @@ class PostHotelForm extends Component {
                             <div className="col-sm-6">
                                 <label htmlFor="addressLine02">Address Line 2</label>
                                 <input type="text" className="form-control" id="addressLine02" name="addressLine02"
-                                    value={this.state.addressLine02} onChange={this.Changehandler} required/>
+                                    value={this.state.addressLine02} onChange={this.Changehandler} required />
                             </div>
                             <div className="col-sm-4"></div>
                         </div>
@@ -448,7 +465,7 @@ class PostHotelForm extends Component {
                             <div className="col-sm-6">
                                 <label htmlFor="contactName">Contact Name</label>
                                 <input type="text" name="contactName" className="form-control" id="contactName"
-                                    value={this.state.contactname} onChange={this.Changehandler} required/>
+                                    value={this.state.contactName} onChange={this.Changehandler} required />
                             </div>
                             <div className="col-sm-4"></div>
                         </div>
@@ -469,7 +486,7 @@ class PostHotelForm extends Component {
                             <div className="col-sm-6">
                                 <label htmlFor="altPnumber">Alternative Contact Number</label>
                                 <input type="text" name="altPnumber" className="form-control" id="altPnumber"
-                                    value={this.state.altPnumber} onChange={this.Changehandler} required/>
+                                    value={this.state.altPnumber} onChange={this.Changehandler} required />
                             </div>
                             <div className="col-sm-4"></div>
                         </div>
@@ -494,7 +511,7 @@ class PostHotelForm extends Component {
                             <div className="col-sm-7 ">
                                 <label htmlFor="languages">Languages spoken</label>
                                 <input type="Text" className="form-control" id="languages" name="languages" style={{ fontSize: "medium" }}
-                                    value={this.state.languages} onChange={this.Changehandler} placeholder="Languages your staff can speak ex:English,Chinese,Sinhala" required/>
+                                    value={this.state.languages} onChange={this.Changehandler} placeholder="Languages your staff can speak ex:English,Chinese,Sinhala" required />
                             </div>
                             <div className="col-sm-4"></div>
                         </div>
@@ -506,31 +523,32 @@ class PostHotelForm extends Component {
                             <div className="col-sm-7 ">
                                 <label htmlFor="facilities">Facilities</label>
                                 <input type="Text" className="form-control" id="features" name="features" style={{ fontSize: "medium" }}
-                                    value={this.state.features} onChange={this.Changehandler} required/>
+                                    value={this.state.features} onChange={this.Changehandler} required />
                             </div>
                             <div className="col-sm-4"></div>
                         </div>
 
                         <br />
 
-                        <div className="row formmarge">
-                            <div className="col-sm-1"></div>
-                            <div className="col-sm-7">
+                        {/* <div className="row formmarge"> */}
+                        {/* <div className="col-sm-1"></div> */}
+                        {/* <div className="col-sm-7"> */}
 
-                                <label htmlFor="image">Upload image of the Hotel</label>
+                        {/* <label htmlFor="image">Upload image of the Hotel</label> */}
 
-                                <br />
-                                <input type="file" onChange={this.handleChange} required/>
-                                {/*<button onClick={this.handleUpload}>Upload</button>*/}
+                        {/* <br />
+                                <input type="file" onChange={this.handleChange} required/> */}
+                        {/*<button onClick={this.handleUpload}>Upload</button>*/}
 
-                                <br />
-                                <hr />
-                                {/*{this.state.url}*/}
-                                <img src={this.state.url || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" />
+                        {/* <br />
+                                <hr /> */}
+                        {/*{this.state.url}*/}
+                        {/* <img src={this.state.url || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" />
                             </div>
                             <div className="col-sm-4"></div>
-                        </div>
+                        </div> */}
 
+                        <HotelImgUp />
 
 
 
@@ -559,127 +577,129 @@ class PostHotelForm extends Component {
                             <div className="col-sm-7">
                                 <label htmlFor="roomType">Room type</label>
                                 <input type="text" className="form-control" id="roomType" name="roomType"
-                                    value={this.state.roomType} onChange={this.Changehandler} required/>
+                                    value={this.state.roomType} onChange={this.Changehandler} required />
                             </div>
                             <div className="col-sm-4"></div>
                         </div>
 
-                        <br/>
+                        <br />
 
                         <div className="row formmarge">
                             <div className="col-sm-1"></div>
                             <div className="col-sm-7">
                                 <label htmlFor="numOfRooms">Number of rooms</label>
                                 <input type="text" className="form-control" id="numOfRooms" name="numOfRooms"
-                                    value={this.state.numOfRooms} onChange={this.Changehandler} placeholder="of the above type" required/>
+                                    value={this.state.numOfRooms} onChange={this.Changehandler} placeholder="of the above type" required />
                             </div>
                             <div className="col-sm-4"></div>
                         </div>
 
-                        <br/>
+                        <br />
 
                         <div className="row formmarge">
                             <div className="col-sm-1"></div>
                             <div className="col-sm-7">
                                 <label htmlFor="bedType">Kind of beds available in this room type</label>
                                 <input type="text" className="form-control" name="bedType" id="bedType"
-                                    value={this.state.bedType} onChange={this.Changehandler} required/>
+                                    value={this.state.bedType} onChange={this.Changehandler} required />
                             </div>
                             <div className="col-sm-4"></div>
                         </div>
 
-                        <br/>
+                        <br />
 
                         <div className="row formmarge">
                             <div className="col-sm-1"></div>
                             <div className="col-sm-7">
                                 <label htmlFor="capacity">Number of guest can stay in this room type</label>
                                 <input type="text" className="form-control" name="capacity" id="capacity"
-                                    value={this.state.capacity} onChange={this.Changehandler} placeholder="capacity of a room" required/>
+                                    value={this.state.capacity} onChange={this.Changehandler} placeholder="capacity of a room" required />
                             </div>
                             <div className="col-sm-4"></div>
-                        </div>                        
+                        </div>
 
-                        <br/>
+                        <br />
 
                         <div className="row formmarge">
                             <div className="col-sm-1"></div>
                             <div className="col-sm-7">
                                 <label htmlFor="pricePerDay">Base price per day</label>
                                 <input type="text" className="form-control" name="pricePerDay" id="pricePerDay"
-                                    value={this.state.pricePerDay} onChange={this.Changehandler} required/>
+                                    value={this.state.pricePerDay} onChange={this.Changehandler} required />
                             </div>
                             <div className="col-sm-4"></div>
                         </div>
 
-                        <br/>
+                        <br />
 
                         <div className="row formmarge">
                             <div className="col-sm-1"></div>
                             <div className="col-sm-7">
                                 <label htmlFor="amenities">Amenities</label>
                                 <input type="text" className="form-control" id="amenities" name="amenities"
-                                    value={this.state.amenities} onChange={this.Changehandler} required/>
+                                    value={this.state.amenities} onChange={this.Changehandler} required />
                             </div>
                             <div className="col-sm-4"></div>
                         </div>
 
-                        <div className="row formmarge">
+                        {/* <div className="row formmarge">
                             <div className="col-sm-2"></div>
                             <div className="col-sm-6">
 
                                 <label htmlFor="image1">Upload image 1 of the Room</label>
 
                                 <br />
-                                <input type="file" onChange={this.handleChange1} required/>
-                                {/*<button onClick={this.handleUpload}>Upload</button>*/}
+                                <input type="file" onChange={this.handleChange1} required/> */}
+                        {/*<button onClick={this.handleUpload}>Upload</button>*/}
 
-                                <br />
-                                <hr />
-                                {/*{this.state.url}*/}
-                                <img src={this.state.url1 || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" />
-                            </div>
+                        {/* <br />
+                                <hr /> */}
+                        {/*{this.state.url}*/}
+                        {/* <img src={this.state.url1 || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" /> */}
+                        {/* </div>
                             <div className="col-sm-4"></div>
-                        </div>
+                        </div> */}
 
-                        <div className="row formmarge">
+                        {/* <div className="row formmarge">
                             <div className="col-sm-2"></div>
                             <div className="col-sm-6">
 
                                 <label htmlFor="image2">Upload image 2 of the Room</label>
 
                                 <br />
-                                <input type="file" onChange={this.handleChange2} required/>
-                                {/*<button onClick={this.handleUpload}>Upload</button>*/}
+                                <input type="file" onChange={this.handleChange2} required/> */}
+                        {/*<button onClick={this.handleUpload}>Upload</button>*/}
 
-                                <br />
-                                <hr />
-                                {/*{this.state.url}*/}
-                                <img src={this.state.url2 || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" />
-                            </div>
+                        {/* <br />
+                                <hr /> */}
+                        {/*{this.state.url}*/}
+                        {/* <img src={this.state.url2 || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" /> */}
+                        {/* </div>
                             <div className="col-sm-4"></div>
-                        </div>
+                        </div> */}
 
-                        <div className="row formmarge">
+                        {/* <div className="row formmarge">
                             <div className="col-sm-2"></div>
                             <div className="col-sm-6">
 
                                 <label htmlFor="image3">Upload image 3 of the Room</label>
 
                                 <br />
-                                <input type="file" onChange={this.handleChange3} required/>
-                                {/*<button onClick={this.handleUpload}>Upload</button>*/}
+                                <input type="file" onChange={this.handleChange3} required/> */}
+                        {/*<button onClick={this.handleUpload}>Upload</button>*/}
 
-                                <br />
-                                <hr />
-                                {/*{this.state.url}*/}
-                                <img src={this.state.url3 || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" />
-                            </div>
+                        {/* <br />
+                                <hr /> */}
+                        {/*{this.state.url}*/}
+                        {/* <img src={this.state.url3 || "http://via.placeholder.com/300"} alt="firebase-image" className="imgsize" /> */}
+                        {/* </div>
                             <div className="col-sm-4"></div>
-                        </div>
+                        </div> */}
 
 
                         <hr />
+
+                        <RoomImgUp />
 
 
 
@@ -694,10 +714,18 @@ class PostHotelForm extends Component {
                                 <button className="btn btn-primary" type="submit">Post ad</button>
                             </div>
                         </div>
-                        <hr />
 
+                        <div className="row formmarge">
+                            <div className="col-sm-2">
 
+                            </div>
+                            <div className="col-sm-5">
 
+                            </div>
+                            <div className="col-sm-5-center">
+                                <p style={{ fontSize: "12px" }}>(Please wait for the confirmation message, it will take sometime)</p>
+                            </div>
+                        </div>
 
 
                     </form>
@@ -710,8 +738,11 @@ class PostHotelForm extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        userid:state.auth.userId,
-   
+        userid: state.auth.userId,
+        imgurl: state.hotel_input_reducer.hotel_post_imgUrl,
+        imgurl1: state.hotel_input_reducer.hotel_post_imgUrl1,
+        imgurl2: state.hotel_input_reducer.hotel_post_imgUrl2,
+        imgurl3: state.hotel_input_reducer.hotel_post_imgUrl3,
     };
 };
 

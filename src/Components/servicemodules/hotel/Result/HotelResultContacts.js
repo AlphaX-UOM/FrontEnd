@@ -1,7 +1,7 @@
 import React from 'react';
 import CallRoundedIcon from '@material-ui/icons/CallRounded';
 import PhoneInTalkRoundedIcon from '@material-ui/icons/PhoneInTalkRounded';
-import AlternateEmailRoundedIcon from '@material-ui/icons/AlternateEmailRounded';
+
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -19,9 +19,10 @@ const HotelResultContacts = (props) => {
                         <PhoneInTalkRoundedIcon/>
                     </ListItemAvatar>
                     <ListItemText>
-                        {props.contactName}
-                        <br/>
                         {props.pnumber}
+                    </ListItemText>
+                    <ListItemText>
+                        {props.contactName}
                     </ListItemText>
                 </ListItem>
 
@@ -31,15 +32,6 @@ const HotelResultContacts = (props) => {
                     </ListItemAvatar>
                     <ListItemText>
                         {props.altPnumber}
-                    </ListItemText>
-                </ListItem>
-
-                <ListItem>
-                    <ListItemAvatar>
-                        <AlternateEmailRoundedIcon/>
-                    </ListItemAvatar>
-                    <ListItemText>
-                        email Address
                     </ListItemText>
                 </ListItem>
 

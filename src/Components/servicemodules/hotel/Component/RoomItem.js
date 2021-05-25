@@ -17,24 +17,42 @@ import ReviewIcon from '@material-ui/icons/FavoriteBorder';
 import { CheckOutlined, FormatAlignCenter, PinDropSharp } from '@material-ui/icons';
 import Result from '../Result/HotelResult';
 import StarRoundedIcon from '@material-ui/icons/StarRounded';
+import PeopleOutlineOutlinedIcon from '@material-ui/icons/PeopleOutlineOutlined';
+import AttachMoneyOutlinedIcon from '@material-ui/icons/AttachMoneyOutlined';
 
+import connect from "react-redux/es/connect/connect";
+import * as actions from '../../../../store/actions/index';
 
 const RoomItem = (props) => {
 
-    let data = {
-        id: props.id,
-    }
+    // let data = {
+    //     id: props.id,
+    // }
+
+    const { room_item_selected } = props;
 
     return (
         <div>
-            <Card className="roomitem-c1" style={{  alignItems: 'center' }}>
-                <CardContent>
+            <Card className="roomitem-c1" 
+            style={{  
+                alignItems: 'center', 
+                flex: "2", 
+                marginRight:"20px",
+                marginLeft:"20px", 
+                width:"650px", 
+                marginTop:"40px", 
+                minHeight:"450px",
+                borderStyle: "groove",
+                
+            }}
+            >
+                <CardContent style={{minHeight:"130px"}}>
                 <Grid container justify="flex-end">
                                     <Grid item>                                        
                                     <Typography variant="subtitle1" className="roomitem_stars" ><StarRoundedIcon color="secondary"/>{props.stars}<span> stars</span></Typography>
                                     </Grid>
                                 </Grid>
-                    <Typography gutterBottom variant="h5" component="h2">
+                    <Typography gutterBottom variant="h5" component="h2" style={{color:"#3a7c61"}}>
                         {props.name} - {props.roomType}
                                 </Typography>
                 </CardContent>
@@ -42,27 +60,32 @@ const RoomItem = (props) => {
                     <CardMedia
                         component="img"
                         alt="Contemplative Reptile"
-                        height="140"
-                        image={image1}
+                        height="170"
+                        image={props.roomImgURL01}
                         title="Contemplative Reptile"
                     />
-                    <CardContent>
+                    <CardContent style={{backgroundColor:"#ACDFCA"}}>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            <p><span className="text-body">Number of Guests:</span>{props.capacity}</p>
+                            <p><PeopleOutlineOutlinedIcon/><span className="text-body">     Number of Guests:     </span>{props.capacity}</p>
                             <Grid container spacing={3}>
                                 <Grid item xs={6}>
                                     {/* <p><span className="text-body"><ReviewIcon />Reviews</span> </p> */}
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <p><span className="text-body">Price per day:</span>{props.pricePerDay}</p>
+                                    <p><AttachMoneyOutlinedIcon/><span className="text-body">     Price per day:     </span>{props.pricePerDay}</p>
                                 </Grid>
                             </Grid>
                         </Typography>
                     </CardContent>
                 </CardActionArea>
-                <CardActions>
-                    <Link to={{pathname: "./roomResult", data:data}}>
-                    <Button size="small" color="primary" >
+                <CardActions style={{backgroundColor:"#ACDFCA"}}>
+                    <Link to={{pathname: "./roomResult"}}>
+                    <Button size="small" color="primary" 
+                    onClick={() => {
+                        room_item_selected(props.id);
+                        
+                    }}>
+                    >
                             View More Details
                         </Button>
                     </Link>
@@ -73,4 +96,18 @@ const RoomItem = (props) => {
     );
 }
 
-export default RoomItem
+const mapStateToProps = (state) => {
+    return {
+        // items: state.onlineStoreApp.items
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        room_item_selected: (id) => {
+            dispatch(actions.get_room_item_selected(id));
+        },
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RoomItem);

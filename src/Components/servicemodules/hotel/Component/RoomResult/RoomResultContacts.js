@@ -1,7 +1,7 @@
 import React from 'react';
 import CallRoundedIcon from '@material-ui/icons/CallRounded';
 import PhoneInTalkRoundedIcon from '@material-ui/icons/PhoneInTalkRounded';
-import AlternateEmailRoundedIcon from '@material-ui/icons/AlternateEmailRounded';
+
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';

@@ -13,6 +13,19 @@ import * as actions from '../../../../store/actions/index';
 
 const HotelForm = (props) => {
     const { hotel_input_form } = props;
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+        dd = "0" + dd;
+    }
+    if (mm < 10) {
+        mm = "0" + mm;
+    }
+
+    today = yyyy + "-" + mm + "-" + dd;
     
     const [district, setDistrict] = useState('x');
     const [checkIn, setCheckIn] = useState('');
@@ -139,6 +152,7 @@ const HotelForm = (props) => {
                                             id="inputCheckIn"
                                             placeholder="Check In"
                                             onChange={handleCheckin}
+                                            min={today}
                                             required
                                         />
                                     </div>

@@ -35,4 +35,10 @@ export {
   set_hotel_pricerange_filter,
   set_hotel_stars_filter,
   get_hotel_listitem_selected,
+  get_hotel_numofrooms_selected,
+  get_room_item_selected,
+  get_hotel_post_img_url,
+  get_hotel_post_img_url1,
+  get_hotel_post_img_url2,
+  get_hotel_post_img_url3,
 } from "./hotel_input_reducer";

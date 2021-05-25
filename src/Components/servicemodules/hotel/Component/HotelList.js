@@ -14,6 +14,22 @@ const HotelList = (props) => {
     //https://alphax-api.azurewebsites.net/api/hotelsservices/Res?arrival=2020-01-01&&departure=2020-01-01&&capacity=2
     //https://alphax-api.azurewebsites.net/api/hotelsservices/Res?arrival=${arrival}&&departure=${departure}&&capacity=${capacity}
 
+    
+
+    var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd = "0" + dd;
+        }
+        if (mm < 10) {
+            mm = "0" + mm;
+        }
+
+        today = yyyy + "-" + mm + "-" + dd;
+
+
     const { district_filter, star_filter } = props;
 
     const [hotels, setHotels] = useState([]);
@@ -39,6 +55,7 @@ const HotelList = (props) => {
     },
         []
     );
+
 
     let pp = hotels.filter((ele, ind) => ind === hotels.findIndex(elem => elem.name === ele.name))
 
@@ -153,7 +170,7 @@ const HotelList = (props) => {
                                     id="inputCheckIn"
                                     placeholder="Check In"
                                     onChange={handleCheckin}
-
+                                    min={today}
                                 />
                             </div>
 

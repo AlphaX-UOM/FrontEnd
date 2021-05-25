@@ -3,33 +3,31 @@ import './RoomResult.css';
 import RoomResultItem from './RoomResultItem';
 import RoomResultContacts from './RoomResultContacts';
 import RoomResultFeatures from './RoomResultFeatures';
+import RoomResultLanguages from './RoomResultLanguages';
 import Axios from 'axios';
 import { Link } from 'react-router-dom';
 import _ from "lodash";
 import RoomRating from './RoomResultRating';
 
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
 import Navbar from 'react-bootstrap/Navbar';
 import Card from 'react-bootstrap/Card';
+import CardContent from '@material-ui/core/CardContent';
 import Accordion from 'react-bootstrap/Accordion';
 import BedIcon from '@material-ui/icons/KingBed';
 import RoomServiceIcon from '@material-ui/icons/RoomService';
 import ContactIcon from '@material-ui/icons/Contacts';
-import CheckIcon from '@material-ui/icons/Check';
+import TranslateIcon from '@material-ui/icons/Translate';
 import { connect } from 'react-redux';
 
 
 
 const RoomResult = (props) => {
 
-    const { check_in, check_out } = props;
+    const { check_in, check_out, id } = props;
 
-    let passedId = props.location.data.id;
+    // let passedId = props.location.data.id;
 
-    console.log(passedId);
+    // console.log(passedId);
 
 
     const [roomResult, setRoomResult] = useState([]);
@@ -39,7 +37,7 @@ const RoomResult = (props) => {
     useEffect(() => {
         setloading(true);
         Axios
-            .get('https://alphax-api.azurewebsites.net/api/hotelsservices/' + passedId)
+            .get('https://alphax-api.azurewebsites.net/api/hotelsservices/' + id)
             .then((responseData) => {
                 console.log(responseData);
                 setRoomResult(responseData.data);
@@ -80,14 +78,14 @@ const RoomResult = (props) => {
 
     }
 
-    const roomResultFeatures = () => {       
-            return(
-                <div>
-                    <RoomResultFeatures
-                        roomfeatures={roomResult.features}
-                    />                      
-                </div>
-            );     
+    const roomResultFeatures = () => {
+        return (
+            <div>
+                <RoomResultFeatures
+                    roomfeatures={roomResult.features}
+                />
+            </div>
+        );
     }
 
     const roomResultContacts = () => {
@@ -102,26 +100,56 @@ const RoomResult = (props) => {
         );
     }
 
-  
+    const roomResultLanguages = () => {
+        return (
+            <div>
+                <RoomResultLanguages
+                    languages={roomResult.languages}
+                />
+            </div>
+        );
+    }
+
+    var sectionStyle = {
+        backgroundImage: "url(" + roomResult.hotelImgURL + ")",
+        backgroundSize: "cover",
+        position: "relative",
+        height: "250px",
+    };
+
+    var text = {
+        backgroundColor: "rgb(0,0,0)",
+        backgroundColor: "rgba(0,0,0, 0.4)",
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center",
+    }
+
+
 
 
     return (
-        <div>
 
-            <div className="container">
+        <div className="container-flex" >
+            <br />
+            <div className="container" style={sectionStyle}>
                 <br />
-                <h2>{roomResult.name} - {roomResult.roomType}</h2>
-                <br />
+                <div className="container" style={text}>
+                    <div className="container" >
+                        <br />
+                        <h2>{roomResult.name} - {roomResult.roomType}</h2>
+                        <br />
+                    </div>
+
+                    <div className="container" >
+                        <br />
+                        <RoomRating
+                            id={roomResult.id}
+                        />
+                        <br />
+                    </div>
+                </div>
             </div>
-
-<div className="container">
-                <br />
-                <RoomRating
-                id={roomResult.id}
-                />
-                <br />
-            </div>
-
 
 
 
@@ -130,7 +158,7 @@ const RoomResult = (props) => {
 
                 <Accordion defaultActiveKey="0">
                     <Card>
-                        <Card.Header>
+                        <Card.Header className="roomresult-cardheader">
                             <Accordion.Toggle as={Navbar} variant="light" eventKey="0">
                                 <div className="col-1"><BedIcon /></div>
                                   Select number of rooms you want!
@@ -154,41 +182,116 @@ const RoomResult = (props) => {
                     </Card>
                 </Accordion>
                 <br />
-                <Accordion>
-                    <Card>
-                        <Card.Header>
-                            <Accordion.Toggle as={Navbar} variant="light" eventKey="1">
-                                <div className="col-1"><RoomServiceIcon /></div>
-                                Facilities
-                            </Accordion.Toggle>
-                        </Card.Header>
-                        <Accordion.Collapse eventKey="1">
-                            <Card.Body>
-                                <div>
-                                <List>
+
+
+                <div className="container">
+                    <div className="row">
+                        <div className="col-6">
+                            <Card>
+                                <Card.Header className="roomresult-cardheader">
+                                    <div className="row">
+                                        <div className="col-1">
+                                            <RoomServiceIcon />
+                                        </div>
+                                        <div className="col-1">
+                                        </div>
+                                        <div className="col-10">
+                                            Features
+                                            </div>
+                                    </div>
+                                </Card.Header>
+                                <CardContent>
                                     {roomResultFeatures()}
-                                </List>
-                                </div>                               
-                            </Card.Body>
-                        </Accordion.Collapse>
-                    </Card>
-                </Accordion>
-                <br />
-                <Accordion>
-                    <Card>
-                        <Card.Header>
-                            <Accordion.Toggle as={Navbar} variant="light" eventKey="2">
-                                <div className="col-1"><ContactIcon /></div>
-                                Contact
-                            </Accordion.Toggle>
-                        </Card.Header>
-                        <Accordion.Collapse eventKey="2">
-                            <Card.Body>
-                                {roomResultContacts()}
-                            </Card.Body>
-                        </Accordion.Collapse>
-                    </Card>
-                </Accordion>
+                                </CardContent>
+                            </Card>
+                        </div>
+                        <div className="col-6">
+                            <Card>
+                                <Card.Header className="roomresult-cardheader">
+                                    <div className="row">
+                                        <div className="col-1">
+                                            <ContactIcon />
+                                        </div>
+                                        <div className="col-1">
+                                        </div>
+                                        <div className="col-10">
+                                            Contacts
+                                            </div>
+                                    </div>
+                                </Card.Header>
+                                <CardContent>
+                                    {roomResultContacts()}
+                                </CardContent>
+                            </Card>
+                            <br />
+                            <Card>
+                                <Card.Header className="roomresult-cardheader">
+                                    <div className="row">
+                                        <div className="col-1">
+                                            <TranslateIcon />
+                                        </div>
+                                        <div className="col-1">
+                                        </div>
+                                        <div className="col-10">
+                                            We Communicate In
+                                            </div>
+                                    </div>
+                                </Card.Header>
+                                <CardContent>
+                                    {roomResultLanguages()}
+                                </CardContent>
+                            </Card>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                {/* <div className="container">
+                    <div className="row">
+                        <div className="col-6">
+                            <Card>
+                                <Card.Header>
+                                    <div className="row">
+                                        <div className="col-1">
+                                            <RoomServiceIcon style={{ color: "#FFFFFF" }} />
+                                        </div>
+                                        <div className="col-1">
+                                        </div>
+                                        <div className="col-10">
+                                            Features
+                                            </div>
+                                    </div>
+                                </Card.Header>
+                                <CardContent>
+                                    {roomResultFeatures()}
+                                </CardContent>
+                            </Card>
+                        </div>
+                        <div className="col-6">
+                            <Card>
+                                <Card.Header>
+                                    <div className="row">
+                                        <div className="col-1">
+                                            <ContactIcon style={{ color: "#FFFFFF" }} />
+                                        </div>
+                                        <div className="col-1">
+                                        </div>
+                                        <div className="col-10">
+                                            Contacts
+                                            </div>
+                                    </div>
+                                </Card.Header>
+                                <CardContent>
+                                    {roomResultContacts()}
+                                </CardContent>
+                            </Card>
+                        </div>
+                    </div>
+                </div> */}
+
+
 
                 <br />
 
@@ -205,7 +308,7 @@ const mapStateToProps = (state) => {
 
         check_in: state.hotel_input_reducer.check_in,
         check_out: state.hotel_input_reducer.check_out,
-
+        id: state.hotel_input_reducer.selected_roomid,
 
     };
 };
